@@ -15,21 +15,28 @@ class KeyboardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        controller.add(text);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(
-              color: MyColors.bleu,
-              width: 3,
-            )),
-        child: Center(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.titleLarge,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(100),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            controller.add(text);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                  color: MyColors.bleu,
+                  width: 3,
+                )),
+            child: Center(
+              child: Text(
+                text,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
           ),
         ),
       ),

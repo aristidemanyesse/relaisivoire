@@ -93,28 +93,57 @@ class _LoginNumberState extends State<LoginNumber> {
                 children: [
                   Row(
                     children: [
+                      const Icon(
+                        Icons.phone_android,
+                        size: 30,
+                      ),
+                      const SizedBox(width: Tools.PADDING),
                       Expanded(
                         child: Obx(() {
+                          List tab = [2, 6];
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: List.generate(10, (index) {
                               if (index <=
                                   _keyBoradController.value.string.length - 1) {
-                                return Text(
-                                    "${_keyBoradController.value.toString()[index]}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayLarge);
+                                if (tab.contains(index)) {
+                                  return Container(
+                                      padding: EdgeInsets.only(
+                                          left: Tools.PADDING / 2),
+                                      child: Text(
+                                          "${_keyBoradController.value.toString()[index]}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge));
+                                } else {
+                                  return Text(
+                                      "${_keyBoradController.value.toString()[index]}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge);
+                                }
                               } else {
-                                return Text("_",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayLarge);
+                                if (tab.contains(index)) {
+                                  return Container(
+                                    padding: EdgeInsets.only(
+                                        left: Tools.PADDING / 2),
+                                    child: Text("_",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge),
+                                  );
+                                } else {
+                                  return Text("_",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge);
+                                }
                               }
                             }),
                           );
                         }),
                       ),
+                      const SizedBox(width: Tools.PADDING),
                     ],
                   ),
                   const Spacer(),
