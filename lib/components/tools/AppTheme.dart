@@ -7,8 +7,7 @@ class AppTheme {
     primaryColor: MyColors.vert,
     scaffoldBackgroundColor: MyColors.beige,
     appBarTheme: const AppBarTheme(
-      backgroundColor: MyColors.beige,
-    ),
+        backgroundColor: MyColors.bleu, foregroundColor: MyColors.beige),
     colorScheme: ColorScheme.fromSeed(seedColor: MyColors.vert),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -16,36 +15,41 @@ class AppTheme {
           foregroundColor: MyColors.white,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: MyColors.bleu,
+      foregroundColor: MyColors.white,
+    ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
           fontSize: 35.0,
           fontWeight: FontWeight.bold,
           fontFamily: 'comat',
-          color: MyColors.bleunuit),
-      titleLarge: TextStyle(
-          fontSize: 25.0,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'comat',
-          color: MyColors.bleunuit),
+          color: MyColors.bleu),
+      titleLarge:
+          TextStyle(fontSize: 25.0, fontFamily: 'comat', color: MyColors.bleu),
+      titleMedium:
+          TextStyle(fontSize: 23.0, fontFamily: 'comat', color: MyColors.bleu),
+      titleSmall:
+          TextStyle(fontSize: 20.0, fontFamily: 'comat', color: MyColors.bleu),
       labelLarge: TextStyle(
           fontSize: 18.0,
           letterSpacing: 1.8,
           fontWeight: FontWeight.normal,
           fontFamily: 'comat',
-          color: MyColors.bleunuit),
-      bodyLarge: TextStyle(
-          fontSize: 16, fontFamily: 'comat', color: MyColors.bleunuit),
-      bodyMedium: TextStyle(
-          fontSize: 14, fontFamily: 'comat', color: MyColors.bleunuit),
-      bodySmall: TextStyle(
-          fontSize: 12, fontFamily: 'comat', color: MyColors.bleunuit),
+          color: MyColors.bleu),
+      bodyLarge:
+          TextStyle(fontSize: 16, fontFamily: 'comat', color: MyColors.bleu),
+      bodyMedium:
+          TextStyle(fontSize: 14, fontFamily: 'comat', color: MyColors.bleu),
+      bodySmall:
+          TextStyle(fontSize: 12, fontFamily: 'comat', color: MyColors.bleu),
     ),
   );
 
   static final darkTheme = ThemeData(
     useMaterial3: true,
     primaryColor: MyColors.bleu,
-    scaffoldBackgroundColor: MyColors.bleunuit,
+    scaffoldBackgroundColor: MyColors.bleu,
     colorScheme: ColorScheme.fromSeed(seedColor: MyColors.vert),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

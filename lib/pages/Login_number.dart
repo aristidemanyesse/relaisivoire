@@ -6,8 +6,9 @@ import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/key_board_number.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/pages/prefix.dart';
-import 'package:lpr/pages/wave.dart';
+import 'package:lpr/pages/Login_name.dart';
+import 'package:lpr/components/elements/prefix.dart';
+import 'package:lpr/components/widgets/wave.dart';
 
 class LoginNumber extends StatefulWidget {
   const LoginNumber({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _LoginNumberState extends State<LoginNumber> {
       child: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               width: Get.size.width,
@@ -38,41 +39,34 @@ class _LoginNumberState extends State<LoginNumber> {
                       horizontal: BorderSide.none, vertical: BorderSide.none)),
               child: SafeArea(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const SizedBox(height: Tools.PADDING),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              "CONNEXION",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge!
-                                  .copyWith(color: MyColors.beige),
-                            ),
-                            const SizedBox(
-                              height: Tools.PADDING,
-                            ),
-                            Text(
-                              "Entrez votre numéro de téléphone",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: MyColors.beige),
-                            ),
-                            Text(
-                              "(+225)",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: MyColors.beige),
-                            ),
-                          ],
-                        )
-                      ],
+                    const SizedBox(height: Tools.PADDING / 2),
+                    Container(
+                      height: 70,
+                      width: 70,
+                      color: Colors.grey,
+                    ),
+                    Text(
+                      "CONNEXION",
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayLarge!
+                          .copyWith(color: MyColors.beige),
+                    ),
+                    Text(
+                      "Entrez votre numéro de téléphone",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: MyColors.beige),
+                    ),
+                    Text(
+                      "(+225)",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: MyColors.beige),
                     ),
                   ],
                 ),
@@ -81,7 +75,7 @@ class _LoginNumberState extends State<LoginNumber> {
           ),
           const Expanded(flex: 1, child: Wave()),
           Expanded(
-            flex: 5,
+            flex: 6,
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(
@@ -151,7 +145,11 @@ class _LoginNumberState extends State<LoginNumber> {
                   const Spacer(
                     flex: 2,
                   ),
-                  MainButtonInverse(title: "Valider", onPressed: () {}),
+                  MainButtonInverse(
+                      title: "Valider",
+                      onPressed: () {
+                        Get.to(LoginName());
+                      }),
                   const Spacer(),
                 ],
               ),

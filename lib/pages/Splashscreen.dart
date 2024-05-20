@@ -9,7 +9,7 @@ import 'package:lpr/components/widgets/intro2.dart';
 import 'package:lpr/components/widgets/intro3.dart';
 import 'package:lpr/components/widgets/intro4.dart';
 import 'package:lpr/pages/Login_number.dart';
-import 'package:lpr/pages/wave_inverse.dart';
+import 'package:lpr/components/widgets/wave_inverse.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({Key? key}) : super(key: key);
