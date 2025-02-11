@@ -31,14 +31,28 @@ class OpenQRCode extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              "LPR - 458 965 230",
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall!
+                  .copyWith(fontWeight: FontWeight.bold, color: MyColors.bleu),
+            ),
+            SizedBox(height: Tools.PADDING * 2),
             Hero(
               tag: "qr_code",
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(Tools.PADDING),
+                borderRadius: BorderRadius.circular(Tools.PADDING / 2),
                 child: Container(
-                  width: Get.width * 0.8,
-                  height: Get.width * 0.8,
-                  color: Colors.grey,
+                  padding: const EdgeInsets.all(Tools.PADDING),
+                  color: Colors.white,
+                  child: Image.asset(
+                    "assets/images/qrcode.png",
+                    fit: BoxFit.contain,
+                    height: Get.width * 0.75,
+                    width: Get.width * 0.75,
+                  ),
                 ),
               ),
             ),

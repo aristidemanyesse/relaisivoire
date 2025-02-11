@@ -1,18 +1,13 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/pages/commander.dart';
-import 'package:lpr/pages/parametre_page.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ProfilPage extends StatefulWidget {
-  const ProfilPage({Key? key}) : super(key: key);
+  const ProfilPage({super.key});
 
   @override
   State<ProfilPage> createState() => _ProfilPageState();

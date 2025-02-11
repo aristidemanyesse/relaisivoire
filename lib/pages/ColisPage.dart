@@ -5,11 +5,12 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/step_process.dart';
 import 'package:lpr/components/widgets/step_recap.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/pages/Index_page.dart';
 import 'package:lpr/pages/open_q_r_code.dart';
 import 'package:lpr/pages/search_lpr.dart';
 
 class ColisPage extends StatefulWidget {
-  const ColisPage({Key? key}) : super(key: key);
+  const ColisPage({super.key});
 
   @override
   State<ColisPage> createState() => _ColisPageState();
@@ -24,18 +25,23 @@ class _ColisPageState extends State<ColisPage> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Get.back();
+              Get.off(IndexPage());
             },
             icon: const Icon(
               Icons.arrow_back,
             )),
-        title: Text(
-          "LPR - 458 965 230",
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "LPR - 458 965 230",
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -71,16 +77,21 @@ class _ColisPageState extends State<ColisPage> {
                               tag: "qr_code",
                               child: ClipRRect(
                                 borderRadius:
-                                    BorderRadius.circular(Tools.PADDING),
+                                    BorderRadius.circular(Tools.PADDING / 2),
                                 child: Material(
                                   child: InkWell(
                                     onTap: () {
                                       Get.to(const OpenQRCode());
                                     },
                                     child: Container(
-                                      height: 200,
-                                      width: 200,
-                                      color: Colors.grey,
+                                      padding: const EdgeInsets.all(
+                                          Tools.PADDING / 2),
+                                      child: Image.asset(
+                                        "assets/images/qrcode.png",
+                                        fit: BoxFit.contain,
+                                        height: 180,
+                                        width: 180,
+                                      ),
                                     ),
                                   ),
                                 ),

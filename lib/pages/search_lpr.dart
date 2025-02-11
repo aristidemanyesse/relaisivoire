@@ -54,7 +54,7 @@ class SearchLPR extends StatelessWidget {
                                     child: Icon(
                                       Icons.location_pin,
                                       size: 27,
-                                      color: MyColors.rouge,
+                                      color: MyColors.danger,
                                     ),
                                   ),
                                 )).toList(),
@@ -66,10 +66,6 @@ class SearchLPR extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
               ],
             ),
           ),
@@ -79,6 +75,9 @@ class SearchLPR extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: Tools.PADDING / 2),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: Tools.PADDING / 2,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -94,7 +93,7 @@ class SearchLPR extends StatelessWidget {
                       const Expanded(
                         child: TextField(
                           style: TextStyle(fontSize: 15.0),
-                          scrollPadding: const EdgeInsets.symmetric(
+                          scrollPadding: EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 20.0),
                           decoration: InputDecoration(
                             filled: true,
@@ -123,7 +122,7 @@ class SearchLPR extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: Tools.PADDING,
+                    height: Tools.PADDING / 2,
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(

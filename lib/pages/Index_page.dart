@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
 import 'package:lpr/pages/commander.dart';
 import 'package:lpr/pages/parametre_page.dart';
@@ -12,7 +13,7 @@ import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class IndexPage extends StatefulWidget {
-  const IndexPage({Key? key}) : super(key: key);
+  const IndexPage({super.key});
 
   @override
   State<IndexPage> createState() => _IndexPageState();
@@ -51,6 +52,12 @@ class _IndexPageState extends State<IndexPage> {
               },
               icon: const Icon(Icons.menu)),
           actions: [
+            IconButton(
+                onPressed: () {
+                  Get.to(const HistoriquePage());
+                },
+                icon: const Icon(Icons.search)),
+            SizedBox(width: Tools.PADDING / 3),
             IconButton(
                 onPressed: () {
                   Get.to(const NotificationsPage());
@@ -98,20 +105,11 @@ class _IndexPageState extends State<IndexPage> {
                   ),
                 ),
               ),
-              const Expanded(flex: 1, child: Wave()),
-              // Container(
-              //   margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-              //   child: Row(
-              //     children: [
-              //       Text("Liste des colis (2)",
-              //           style: Theme.of(context).textTheme.titleLarge),
-              //     ],
-              //   ),
-              // ),
+              const SizedBox(height: 50, child: Wave()),
               SizedBox(height: Tools.PADDING),
               Expanded(
                 flex: 10,
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   child: ListView(children: [
                     ItemBloc(

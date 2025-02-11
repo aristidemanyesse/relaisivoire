@@ -11,7 +11,7 @@ import 'package:lpr/pages/Index_page.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class OPTPage extends StatefulWidget {
-  const OPTPage({Key? key}) : super(key: key);
+  const OPTPage({super.key});
 
   @override
   State<OPTPage> createState() => _OPTPageState();

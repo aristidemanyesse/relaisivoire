@@ -1,19 +1,13 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/Tip.dart';
-import 'package:lpr/pages/commander.dart';
-import 'package:lpr/pages/distance_map.dart';
-import 'package:lpr/pages/parametre_page.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/widgets/wave.dart';
 
 class HistoriquePage extends StatefulWidget {
-  const HistoriquePage({Key? key}) : super(key: key);
+  const HistoriquePage({super.key});
 
   @override
   State<HistoriquePage> createState() => _HistoriquePageState();
@@ -96,7 +90,7 @@ class _HistoriquePageState extends State<HistoriquePage> {
             ),
             Expanded(
               flex: 10,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: ListView(children: [
                   ItemBloc(

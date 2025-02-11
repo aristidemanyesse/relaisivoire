@@ -60,15 +60,18 @@ class Commander3 extends StatelessWidget {
                       children: [
                         EmballageBloc(
                           title: "Oui, j'ai bien emballé.",
-                          subtitle: "oui parfaitement emballé, bien scéllé",
+                          subtitle: "oui parfaitement emballé, bien scéllé.",
+                          icon: Icons.redeem,
                         ),
                         EmballageBloc(
                           title: "Euuh, un peu ...",
-                          subtitle: "C'est pas vraiment emballé mais ça va ",
+                          subtitle: "C'est pas vraiment emballé mais ça va.",
+                          icon: Icons.inventory_2_outlined,
                         ),
                         EmballageBloc(
                           title: "Non, pas du tout !",
-                          subtitle: "Y'a rien dessus, juste le colis",
+                          subtitle: "Y'a rien dessus, juste le colis.",
+                          icon: Icons.layers_outlined,
                         ),
                       ]),
                 ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/elements/circle_indicator.dart';
-import 'package:lpr/components/elements/barre.dart';
+import 'package:lpr/pages/PleaseWait.dart';
 import 'package:lpr/pages/commander1.dart';
 import 'package:lpr/pages/commander2.dart';
 import 'package:lpr/pages/commander3.dart';
@@ -12,14 +13,24 @@ import 'package:lpr/pages/commander5.dart';
 import 'package:lpr/pages/commander6.dart';
 
 class CommanderPage extends StatefulWidget {
-  const CommanderPage({Key? key}) : super(key: key);
+  const CommanderPage({super.key});
 
   @override
   State<CommanderPage> createState() => _CommanderPageState();
 }
 
-class _CommanderPageState extends State<CommanderPage> {
-  final PageController _controller = PageController();
+class _CommanderPageState extends State<CommanderPage>
+    with SingleTickerProviderStateMixin {
+  final PageController _pageController = PageController();
+  int _currentPageIndex = 0;
+
+  List<Widget> pages = const [
+    Commander1(),
+    Commander3(),
+    Commander4(),
+    Commander5(),
+    Commander6(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,59 +43,138 @@ class _CommanderPageState extends State<CommanderPage> {
             icon: const Icon(
               Icons.arrow_back,
             )),
+        title: Container(
+          padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
+          decoration: const BoxDecoration(
+            color: MyColors.bleu,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.vertical_split_sharp,
+                    size: 20,
+                  ),
+                  Spacer(),
+                  Icon(
+                    Icons.check,
+                    size: 20,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 10,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: MyColors.beige.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      if (_currentPageIndex > 0)
+                        Expanded(
+                          flex: _currentPageIndex,
+                          child: Container(
+                            height: 9,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: MyColors.beige, width: 0.5),
+                              color: MyColors.bleu.withOpacity(0.9),
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                        ).animate().moveX(duration: 400.ms),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Icon(
+                        Icons.inventory,
+                        size: 20,
+                      ),
+                      if (_currentPageIndex != pages.length)
+                        Spacer(
+                          flex: pages.length - _currentPageIndex,
+                        )
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+          // child: const Row(
+          //   children: [
+          //     CircleIndicator(text: "1"),
+          //     Barre(),
+          //     CircleIndicator(text: "2"),
+          //     Barre(),
+          //     CircleIndicator(text: "3"),
+          //     Barre(),
+          //     CircleIndicator(text: "4"),
+          //     Barre(),
+          //     CircleIndicator(text: "5"),
+          //     Barre(),
+          //     CircleIndicator(text: "6"),
+          //   ],
+          // ),
+        ),
       ),
       body: SizedBox(
         height: Get.size.height,
         width: Get.size.width,
         child: Column(
           children: [
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
-              decoration: const BoxDecoration(
-                color: MyColors.bleu,
-              ),
-              child: const Row(
-                children: [
-                  CircleIndicator(text: "1"),
-                  Barre(),
-                  CircleIndicator(text: "2"),
-                  Barre(),
-                  CircleIndicator(text: "3"),
-                  Barre(),
-                  CircleIndicator(text: "4"),
-                  Barre(),
-                  CircleIndicator(text: "5"),
-                  Barre(),
-                  CircleIndicator(text: "6"),
-                ],
-              ),
-            ),
             Expanded(
               child: PageView(
-                controller: _controller,
-                children: const [
-                  Commander1(),
-                  Commander2(),
-                  Commander3(),
-                  Commander4(),
-                  Commander5(),
-                  Commander6(),
-                ],
-              ),
+                  controller: _pageController,
+                  physics: NeverScrollableScrollPhysics(),
+                  onPageChanged: (int index) {
+                    setState(() {
+                      _currentPageIndex = index;
+                    });
+                  },
+                  children: pages),
             ),
             SizedBox(
               height: Get.height / 10,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  MainButtonInverse(
+                  if (_currentPageIndex > 0)
+                    MainButton(
+                        title: "Retour",
+                        onPressed: () {
+                          _pageController.previousPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeOut);
+                        }),
+                  if (_currentPageIndex == pages.length - 1)
+                    MainButtonInverse(
+                      title: "Confirmer le colis",
+                      onPressed: () {
+                        Get.dialog(
+                          const PleaseWait(),
+                        );
+                      },
+                    ).animate().fadeIn(duration: 1000.ms)
+                  else
+                    MainButtonInverse(
                       title: "Suivant",
                       onPressed: () {
-                        _controller.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOutBack);
-                      })
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.ease,
+                        );
+                      },
+                    ).animate().fadeIn(duration: 1000.ms)
                 ],
               ),
             ),

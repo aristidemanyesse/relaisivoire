@@ -7,15 +7,13 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/key_board_number.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/pages/Index_page.dart';
-import 'package:lpr/pages/Login_name.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'dart:io';
 
 import 'package:lpr/pages/OTP_page.dart';
 
 class LoginNumber extends StatefulWidget {
-  const LoginNumber({Key? key}) : super(key: key);
+  const LoginNumber({super.key});
 
   @override
   State<LoginNumber> createState() => _LoginNumberState();

@@ -7,7 +7,7 @@ import 'package:lpr/pages/OTP_page.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class LoginName extends StatefulWidget {
-  const LoginName({Key? key}) : super(key: key);
+  const LoginName({super.key});
 
   @override
   State<LoginName> createState() => _LoginNameState();

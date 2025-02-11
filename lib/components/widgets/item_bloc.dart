@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/pages/colis_page.dart';
+import 'package:lpr/pages/ColisPage.dart';
 
 class ItemBloc extends StatelessWidget {
   final String title;

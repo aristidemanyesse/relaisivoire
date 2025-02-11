@@ -4,7 +4,7 @@ import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
 class WaveDemoHomePage extends StatefulWidget {
-  const WaveDemoHomePage({Key? key, this.title}) : super(key: key);
+  const WaveDemoHomePage({super.key, this.title});
 
   final String? title;
 

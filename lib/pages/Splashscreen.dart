@@ -12,7 +12,7 @@ import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
 
 class Splashscreen extends StatefulWidget {
-  const Splashscreen({Key? key}) : super(key: key);
+  const Splashscreen({super.key});
 
   @override
   State<Splashscreen> createState() => _SplashscreenState();
@@ -80,18 +80,19 @@ class _SplashscreenState extends State<Splashscreen>
                             .fadeIn(duration: 400.ms)
                             .moveY(duration: 400.ms, begin: -25.0, end: 0),
                         Spacer(),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _currentPageIndex = pages.length - 1;
-                              _pageController.jumpToPage(_currentPageIndex);
-                            });
-                          },
-                          child: Text(
-                            "Passer",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        )
+                        if (_currentPageIndex < pages.length - 1)
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _currentPageIndex = pages.length - 1;
+                                _pageController.jumpToPage(_currentPageIndex);
+                              });
+                            },
+                            child: Text(
+                              "Passer",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          )
                       ],
                     ),
                     const Spacer(),

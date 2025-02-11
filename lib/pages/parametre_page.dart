@@ -1,15 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/parametre_menu_item.dart';
+import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/ProfilPage.dart';
 import 'package:lpr/pages/search_lpr.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ParametrePage extends StatefulWidget {
-  const ParametrePage({Key? key}) : super(key: key);
+  const ParametrePage({super.key});
 
   @override
   State<ParametrePage> createState() => _ParametrePageState();
@@ -22,10 +27,13 @@ class _ParametrePageState extends State<ParametrePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyColors.beige,
+        backgroundColor: MyColors.bleu,
         title: Text(
           "Paramètres",
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
             onPressed: () {
@@ -33,11 +41,15 @@ class _ParametrePageState extends State<ParametrePage> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: MyColors.bleu,
+              color: MyColors.beige,
             )),
       ),
       body: Column(
         children: [
+          SizedBox(height: 30, child: const Wave()),
+          SizedBox(
+            height: Tools.PADDING,
+          ),
           Expanded(
             child: Container(
                 width: Get.size.width,
@@ -47,6 +59,7 @@ class _ParametrePageState extends State<ParametrePage> {
                 child: ListView(
                   children: [
                     ParametreMenuItem(
+                      icon: Icons.person,
                       title: "Mon Profil",
                       subtitle: "Toutes mes activités",
                       ontap: () {
@@ -55,6 +68,7 @@ class _ParametrePageState extends State<ParametrePage> {
                     ),
                     Divider(),
                     ParametreMenuItem(
+                      icon: Icons.history,
                       title: "Historique",
                       subtitle: "Toutes mes activités",
                       ontap: () {
@@ -62,6 +76,7 @@ class _ParametrePageState extends State<ParametrePage> {
                       },
                     ),
                     ParametreMenuItem(
+                      icon: Icons.search,
                       title: "Rechercher un point relais",
                       subtitle: "Toutes mes activités",
                       ontap: () {
@@ -70,24 +85,67 @@ class _ParametrePageState extends State<ParametrePage> {
                     ),
                     Divider(),
                     ParametreMenuItem(
+                      icon: Icons.help,
                       title: "Assistance",
                       subtitle: "Toutes mes activités",
                       ontap: () {
-                        Get.to(HistoriquePage());
+                        showMaterialModalBottomSheet(
+                          context: context,
+                          backgroundColor: MyColors.beige,
+                          builder: (context) => Container(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                    title: Text('Appel téléphonique'),
+                                    leading: const Icon(Icons.phone),
+                                    onTap: () {}),
+                                ListTile(
+                                    title: Text('Assistance Whatsapp'),
+                                    leading: const Icon(Icons.whatshot),
+                                    onTap: () {}),
+                                ListTile(
+                                  title: Text('Assistance Télégram'),
+                                  leading: const Icon(Icons.telegram),
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     ),
                     Divider(),
                     ParametreMenuItem(
+                      icon: Icons.logout,
                       title: "Se déconnecter",
                       subtitle: "Toutes mes activités",
                       ontap: () {
-                        Get.to(HistoriquePage());
+                        Get.to(
+                          Get.dialog(
+                            ConfirmDialog(
+                              title: "Déconnexion",
+                              message:
+                                  "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
+                              testOk: "Déconnexion",
+                              testCancel: "Non",
+                              functionOk: () {
+                                exit(0);
+                              },
+                              functionCancel: () {
+                                Get.back();
+                              },
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ],
                 )),
           ),
-          Container(height: 50, child: const WaveInverse()),
+          SizedBox(height: 50, child: const WaveInverse()),
           Container(
             color: MyColors.bleu,
             padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),

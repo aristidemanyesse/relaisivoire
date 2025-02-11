@@ -42,6 +42,7 @@ class MainButtonInverse extends StatelessWidget {
             children: [
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: MyColors.beige,

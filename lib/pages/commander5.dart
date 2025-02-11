@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/PontRelaisBloc.dart';
+import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class Commander5 extends StatelessWidget {
@@ -39,107 +41,79 @@ class Commander5 extends StatelessWidget {
                       .bodySmall!
                       .copyWith(color: MyColors.beige),
                 ),
+                SizedBox(
+                  height: Tools.PADDING,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Expanded(
+                      child: TextField(
+                        style: TextStyle(fontSize: 15.0),
+                        scrollPadding: EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 20.0),
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'Rechercher un lieu',
+                          hintStyle: TextStyle(
+                              fontSize:
+                                  15.0), // Taille de la police du hint text réduite
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 20.0),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyColors.bleu, width: 1.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyColors.bleu, width: 1.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             )),
-        const Expanded(flex: 1, child: Wave()),
+        const SizedBox(height: 40, child: Wave()),
+        SizedBox(height: Tools.PADDING / 2),
         Expanded(
-          flex: 10,
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
-              horizontal: Tools.PADDING,
+              horizontal: Tools.PADDING / 2,
             ),
             child: Column(
               children: [
-                const SizedBox(
-                  height: Tools.PADDING,
-                ),
-                Expanded(
+                SizedBox(
+                  width: double.infinity,
                   child: Column(children: [
-                    const Spacer(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              const Icon(
-                                Icons.map_outlined,
-                                size: 30,
-                              ),
-                              Text("Commune",
-                                  style: Theme.of(context).textTheme.bodySmall!)
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: Tools.PADDING),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              MainButton(title: "Choisir", onPressed: () {})
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: Tools.PADDING),
-                      ],
+                    PontRelaisBloc(
+                      title: "Boutique de Banbara ",
+                      subtitle: "Port-bouët Abattoir",
+                      received: false,
                     ),
-                    const Spacer(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              const Icon(
-                                Icons.location_city,
-                                size: 30,
-                              ),
-                              Text("Zone",
-                                  style: Theme.of(context).textTheme.bodySmall!)
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: Tools.PADDING),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              MainButton(title: "Choisir", onPressed: () {})
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: Tools.PADDING),
-                      ],
-                    ),
-                    const Spacer(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              const Icon(
-                                Icons.location_on_sharp,
-                                size: 30,
-                              ),
-                              Text("Point Relais",
-                                  style: Theme.of(context).textTheme.bodySmall!)
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: Tools.PADDING),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              MainButton(title: "Choisir", onPressed: () {})
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: Tools.PADDING),
-                      ],
-                    ),
-                    const Spacer(
-                      flex: 2,
-                    ),
+                    PontRelaisBloc(
+                        title: "Boutique Aly",
+                        subtitle: "Marcory Anoumabo",
+                        received: true),
+                    PontRelaisBloc(
+                        title: "Boutique Aly",
+                        subtitle: "Marcory sans fil",
+                        received: true),
+                    PontRelaisBloc(
+                        title: "Gallerie du parc",
+                        subtitle: "Angré II Plateaux vallon",
+                        received: true),
+                    PontRelaisBloc(
+                        title: "ANK Service",
+                        subtitle: "Port-bouët Vridi",
+                        received: false),
                   ]),
                 ),
               ],

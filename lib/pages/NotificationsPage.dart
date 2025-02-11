@@ -1,19 +1,13 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/NotificationItem.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
-import 'package:lpr/pages/commander.dart';
-import 'package:lpr/pages/parametre_page.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/widgets/wave.dart';
 
 class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({Key? key}) : super(key: key);
+  const NotificationsPage({super.key});
 
   @override
   State<NotificationsPage> createState() => _NotificationsPageState();
@@ -59,7 +53,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
               color: MyColors.beige,
               height: 10,
             ),
-            Container(height: 50, child: const WaveInverse()),
+            SizedBox(height: 50, child: const WaveInverse()),
             Container(
               color: MyColors.bleu,
               padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/type_colis_item.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class Commander1 extends StatelessWidget {
@@ -46,7 +48,7 @@ class Commander1 extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
-              horizontal: Tools.PADDING,
+              horizontal: Tools.PADDING / 2,
             ),
             child: Column(
               children: [
@@ -58,33 +60,37 @@ class Commander1 extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       horizontal: Tools.PADDING,
                     ),
-                    child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    child: GridView(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: Tools.PADDING * 2.5,
                         crossAxisSpacing: Tools.PADDING * 1.5,
                       ),
-                      itemCount: 9,
-                      itemBuilder: (context, int index) => Container(
-                        decoration: BoxDecoration(
-                            color: MyColors.beige.withAlpha(200),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1)),
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text("il y a 2 heures",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                      ),
+                      children: [
+                        TypeColisItem(title: "Ultra léger", icon: "​🗂️"),
+                        TypeColisItem(title: "Petit sac, sachet", icon: "🛍️"),
+                        TypeColisItem(title: "Boite", icon: "​🗃️​"),
+                        TypeColisItem(title: "Carton moyen", icon: "📦​​​"),
+                        TypeColisItem(title: "Gros cartons", icon: "🗄️"),
+                        TypeColisItem(title: "Valise", icon: "🧳"),
+                        TypeColisItem(title: "Petit meuble", icon: "🪑"),
+                        TypeColisItem(title: "Electroménager", icon: "📺"),
+                        TypeColisItem(title: "Spécial, fragile", icon: "💎"),
+                      ],
                     ),
                   ),
                 ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                  child: Text(
+                      " * Veuillez choisir le format le plus adapté à votre colis au risque que votre colis ne soit accepté par le point relais.",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: MyColors.danger,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold)),
+                )
               ],
             ),
           ),

@@ -56,32 +56,56 @@ class Commander4 extends StatelessWidget {
                 Expanded(
                   child: Column(children: [
                     const Spacer(),
-                    const Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          size: 30,
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "Nom du destinataire...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        filled: true,
+                        fillColor: Colors.transparent, // Fond transparent
+                        prefixIcon: Icon(Icons.person, color: MyColors.bleu),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(15), // Bords arrondis
+                          borderSide: BorderSide(
+                              color: MyColors.bleu, width: 1.5), // Contour
                         ),
-                        SizedBox(width: Tools.PADDING),
-                        Expanded(
-                          child: TextField(),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide:
+                              BorderSide(color: MyColors.bleu, width: 2),
                         ),
-                        SizedBox(width: Tools.PADDING),
-                      ],
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const Spacer(),
-                    const Row(
-                      children: [
-                        Icon(
-                          Icons.phone_android,
-                          size: 30,
+                    SizedBox(height: Tools.PADDING * 2),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "Contact du destinataire...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        filled: true,
+                        fillColor: Colors.transparent, // Fond transparent
+                        prefixIcon: Icon(Icons.phone, color: MyColors.bleu),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: Tools.PADDING / 3),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(15), // Bords arrondis
+                          borderSide: BorderSide(
+                              color: MyColors.bleu, width: 1.5), // Contour
                         ),
-                        SizedBox(width: Tools.PADDING),
-                        Expanded(
-                          child: TextField(),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide:
+                              BorderSide(color: MyColors.bleu, width: 2),
                         ),
-                        SizedBox(width: Tools.PADDING),
-                      ],
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(
                       flex: 2,
@@ -96,12 +120,13 @@ class Commander4 extends StatelessWidget {
                                 const Icon(
                                   Icons.contact_phone,
                                   color: MyColors.bleu,
-                                  size: 30,
+                                  size: 40,
                                 ),
                                 const SizedBox(
                                   width: Tools.PADDING / 2,
                                 ),
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text("Choisir parmis mes",
                                         textAlign: TextAlign.center,
