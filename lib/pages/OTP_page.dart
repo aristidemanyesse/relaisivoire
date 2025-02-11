@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/circle.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
@@ -8,8 +8,6 @@ import 'package:lpr/components/elements/key_board_number.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/pages/Index_page.dart';
-import 'package:lpr/pages/Login_name.dart';
-import 'package:lpr/components/elements/prefix.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class OPTPage extends StatefulWidget {
@@ -31,7 +29,7 @@ class _OPTPageState extends State<OPTPage> {
       child: Column(
         children: [
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               width: Get.size.width,
@@ -41,14 +39,9 @@ class _OPTPageState extends State<OPTPage> {
                       horizontal: BorderSide.none, vertical: BorderSide.none)),
               child: SafeArea(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: Tools.PADDING / 2),
-                    Container(
-                      height: 70,
-                      width: 70,
-                      color: Colors.grey,
-                    ),
                     Text(
                       "Vérification OTP",
                       style: Theme.of(context)
@@ -56,17 +49,19 @@ class _OPTPageState extends State<OPTPage> {
                           .displayLarge!
                           .copyWith(color: MyColors.beige),
                     ),
+                    const SizedBox(height: Tools.PADDING / 3),
                     Text(
-                      "Nous vous avons envoyé un code par SMS sur \n +222 0404444040404",
-                      textAlign: TextAlign.center,
+                      "Nous vous avons envoyé un code par SMS sur \n+222 0404444040404",
                       style: Theme.of(context)
                           .textTheme
-                          .bodyMedium!
+                          .bodyLarge!
                           .copyWith(color: MyColors.beige, height: 2),
                     ),
-                    const SizedBox(height: Tools.PADDING),
                   ],
-                ),
+                )
+                    .animate()
+                    .fadeIn(duration: 800.ms)
+                    .moveX(duration: 800.ms, begin: 1000.0, end: 0),
               ),
             ),
           ),
@@ -87,6 +82,7 @@ class _OPTPageState extends State<OPTPage> {
                         horizontal: Tools.PADDING,
                       ),
                       child: MyInputNumber(
+                          nb_places: 4,
                           keyBoradController: _keyBoradController)),
                   const Spacer(),
                   Container(
@@ -98,15 +94,15 @@ class _OPTPageState extends State<OPTPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MainButtonInverse(
-                          title: "",
+                      MainButton(
+                          title: "Retour",
                           onPressed: () {
                             Get.back();
                           }),
                       MainButtonInverse(
-                          title: "Valider",
+                          title: "Confirmer OTP",
                           onPressed: () {
-                            Get.to(IndexPage());
+                            Get.to(const IndexPage());
                           }),
                     ],
                   ),

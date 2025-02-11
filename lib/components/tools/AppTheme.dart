@@ -15,13 +15,13 @@ class AppTheme {
           foregroundColor: MyColors.white,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: MyColors.bleu,
       foregroundColor: MyColors.white,
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
-          fontSize: 35.0,
+          fontSize: 40.0,
           fontWeight: FontWeight.bold,
           fontFamily: 'comat',
           color: MyColors.bleu),
@@ -42,6 +42,8 @@ class AppTheme {
       bodyMedium:
           TextStyle(fontSize: 14, fontFamily: 'comat', color: MyColors.bleu),
       bodySmall:
+          TextStyle(fontSize: 12, fontFamily: 'comat', color: MyColors.bleu),
+      labelSmall:
           TextStyle(fontSize: 12, fontFamily: 'comat', color: MyColors.bleu),
     ),
   );

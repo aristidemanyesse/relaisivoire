@@ -65,23 +65,33 @@ class _SplashscreenState extends State<Splashscreen>
                     const SizedBox(height: Tools.PADDING),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "BONJOUR",
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                            Text(
                               "Le Point Relais",
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ],
                         )
                             .animate()
                             .fadeIn(duration: 400.ms)
                             .moveY(duration: 400.ms, begin: -25.0, end: 0),
+                        Spacer(),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _currentPageIndex = pages.length - 1;
+                              _pageController.jumpToPage(_currentPageIndex);
+                            });
+                          },
+                          child: Text(
+                            "Passer",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        )
                       ],
                     ),
                     const Spacer(),
@@ -133,11 +143,11 @@ class _SplashscreenState extends State<Splashscreen>
                         return MainButton(
                           title: "Commencer",
                           onPressed: () {
-                            Get.to(
+                            Get.off(
                               const LoginNumber(),
                               duration: const Duration(milliseconds: 700),
                               curve: Curves.easeOut,
-                              transition: Transition.downToUp,
+                              transition: Transition.rightToLeft,
                             );
                           },
                         ).animate().fadeIn(duration: 1000.ms);

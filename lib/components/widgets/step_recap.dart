@@ -22,7 +22,7 @@ class StepRecap extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Container(
@@ -32,7 +32,7 @@ class StepRecap extends StatelessWidget {
                     color: MyColors.bleu.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(100)),
               ),
-              Container(
+              SizedBox(
                 width: 16,
                 child: Center(
                   child: Container(
@@ -44,10 +44,10 @@ class StepRecap extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: Tools.PADDING,
           ),
-          Container(
+          SizedBox(
             height: 60,
             child: Expanded(
               child: Column(
@@ -56,14 +56,14 @@ class StepRecap extends StatelessWidget {
                 children: [
                   Text(title,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodySmall),
+                      style: Theme.of(context).textTheme.bodyMedium),
                   Text(subtitle,
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
-                          .bodyLarge!
+                          .titleSmall!
                           .copyWith(fontWeight: FontWeight.bold)),
-                  SizedBox(
+                  const SizedBox(
                     width: Tools.PADDING / 2,
                   ),
                 ],

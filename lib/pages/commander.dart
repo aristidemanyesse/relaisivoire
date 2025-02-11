@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/circle.dart';
-import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/elements/key_board_number.dart';
-import 'package:lpr/components/widgets/my_input_number.dart';
 import 'package:lpr/components/elements/circle_indicator.dart';
 import 'package:lpr/components/elements/barre.dart';
 import 'package:lpr/pages/commander1.dart';
@@ -14,12 +10,6 @@ import 'package:lpr/pages/commander3.dart';
 import 'package:lpr/pages/commander4.dart';
 import 'package:lpr/pages/commander5.dart';
 import 'package:lpr/pages/commander6.dart';
-import 'package:lpr/pages/parametre_page.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/pages/Login_name.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/elements/prefix.dart';
-import 'package:lpr/components/widgets/wave.dart';
 
 class CommanderPage extends StatefulWidget {
   const CommanderPage({Key? key}) : super(key: key);
@@ -39,7 +29,7 @@ class _CommanderPageState extends State<CommanderPage> {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
             )),
       ),
@@ -54,7 +44,7 @@ class _CommanderPageState extends State<CommanderPage> {
               decoration: const BoxDecoration(
                 color: MyColors.bleu,
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   CircleIndicator(text: "1"),
                   Barre(),
@@ -73,7 +63,7 @@ class _CommanderPageState extends State<CommanderPage> {
             Expanded(
               child: PageView(
                 controller: _controller,
-                children: [
+                children: const [
                   Commander1(),
                   Commander2(),
                   Commander3(),
@@ -83,7 +73,7 @@ class _CommanderPageState extends State<CommanderPage> {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               height: Get.height / 10,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +82,7 @@ class _CommanderPageState extends State<CommanderPage> {
                       title: "Suivant",
                       onPressed: () {
                         _controller.nextPage(
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             curve: Curves.easeInOutBack);
                       })
                 ],

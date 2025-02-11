@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/emballage_bloc.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/widgets/poids_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class Commander3 extends StatelessWidget {
@@ -51,7 +49,7 @@ class Commander3 extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: Tools.PADDING,
             ),
-            child: Column(
+            child: const Column(
               children: [
                 SizedBox(
                   height: Tools.PADDING,

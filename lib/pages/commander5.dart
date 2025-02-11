@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/emballage_bloc.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/widgets/poids_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class Commander5 extends StatelessWidget {
@@ -54,12 +51,12 @@ class Commander5 extends StatelessWidget {
             ),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: Tools.PADDING,
                 ),
                 Expanded(
                   child: Column(children: [
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Expanded(
@@ -86,7 +83,7 @@ class Commander5 extends StatelessWidget {
                         const SizedBox(width: Tools.PADDING),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Expanded(
@@ -113,7 +110,7 @@ class Commander5 extends StatelessWidget {
                         const SizedBox(width: Tools.PADDING),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Expanded(
@@ -140,7 +137,7 @@ class Commander5 extends StatelessWidget {
                         const SizedBox(width: Tools.PADDING),
                       ],
                     ),
-                    Spacer(
+                    const Spacer(
                       flex: 2,
                     ),
                   ]),

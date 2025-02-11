@@ -15,11 +15,11 @@ class EmballageBloc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: Tools.PADDING),
+      margin: const EdgeInsets.only(bottom: Tools.PADDING),
       child: Card(
         elevation: 1,
         child: Container(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Tools.PADDING,
             vertical: Tools.PADDING / 4,
           ),
@@ -36,7 +36,7 @@ class EmballageBloc extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.bold,
                       )),
-              SizedBox(
+              const SizedBox(
                 width: Tools.PADDING / 2,
               ),
               Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),

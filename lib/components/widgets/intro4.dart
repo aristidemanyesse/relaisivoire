@@ -25,15 +25,15 @@ class Intro4 extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             Text(
-              "récupère ton colis",
-              style: Theme.of(context).textTheme.titleLarge,
+              "Récupère ton colis.",
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             const SizedBox(height: Tools.PADDING / 2),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Text(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
             ),

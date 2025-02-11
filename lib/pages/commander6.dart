@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/emballage_bloc.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/widgets/poids_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/components/widgets/step_recap.dart';
 
@@ -57,23 +53,23 @@ class Commander6 extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Spacer(),
-                  StepRecap(
+                  const Spacer(),
+                  const StepRecap(
                       title: "Type de colis",
                       subtitle: "Enveloppe - Porte-document"),
-                  StepRecap(
+                  const StepRecap(
                       title: "Poids du colis", subtitle: "entre 2Kg et 5Kg"),
-                  StepRecap(
+                  const StepRecap(
                       title: "NIveau d'emballage",
                       subtitle: "Oui bien emballé"),
-                  StepRecap(
+                  const StepRecap(
                       title: "Coordonnées du destinataire",
                       subtitle: "Koumba Yacine - 07 859 569 20"),
-                  StepRecap(
+                  const StepRecap(
                       title: "Lieu de livraison",
-                      subtitle: "Aly le bon - Marcory - Vridi"),
-                  StepRecap(title: "Total à payer", subtitle: "1 200 Fcfa"),
-                  Spacer(),
+                      subtitle: "Aly le bon - Marcory - Anoumabo"),
+                  const StepRecap(title: "Total à payer", subtitle: "1 200 Fcfa"),
+                  const Spacer(),
                   Text(
                       " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
                       textAlign: TextAlign.center,

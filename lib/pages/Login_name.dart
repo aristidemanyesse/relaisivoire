@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/circle.dart';
-import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/elements/key_board_number.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/pages/OTP_page.dart';
-import 'package:lpr/components/elements/prefix.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class LoginName extends StatefulWidget {
@@ -76,18 +72,18 @@ class _LoginNameState extends State<LoginName> {
                   color: MyColors.beige, border: Border(top: BorderSide.none)),
               child: Column(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.person,
                           size: 30,
                         ),
-                        const SizedBox(width: Tools.PADDING),
+                        SizedBox(width: Tools.PADDING),
                         Expanded(
                           child: TextField(),
                         ),
-                        const SizedBox(width: Tools.PADDING),
+                        SizedBox(width: Tools.PADDING),
                       ],
                     ),
                   ),
@@ -103,7 +99,7 @@ class _LoginNameState extends State<LoginName> {
                       MainButtonInverse(
                           title: "Valider",
                           onPressed: () {
-                            Get.to(OPTPage());
+                            Get.to(const OPTPage());
                           }),
                     ],
                   ),

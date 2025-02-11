@@ -9,13 +9,13 @@ class KeyBoardNumber extends StatelessWidget {
     super.key,
   });
 
-  KeyBoradController _keyBoradController = Get.find();
+  final KeyBoradController _keyBoradController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.size.height * 0.4,
-      padding: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+      height: 430,
+      padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,

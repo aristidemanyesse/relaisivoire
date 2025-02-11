@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/colis_page.dart';
 
-class ItemBloc extends StatelessWidget {
+class NotificationItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final String created;
   final bool received;
 
-  const ItemBloc({
+  const NotificationItem({
     super.key,
     required this.title,
     required this.subtitle,

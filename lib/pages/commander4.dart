@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/emballage_bloc.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
-import 'package:lpr/components/widgets/poids_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class Commander4 extends StatelessWidget {
@@ -53,40 +50,40 @@ class Commander4 extends StatelessWidget {
             ),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: Tools.PADDING,
                 ),
                 Expanded(
                   child: Column(children: [
-                    Spacer(),
-                    Row(
+                    const Spacer(),
+                    const Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.person,
                           size: 30,
                         ),
-                        const SizedBox(width: Tools.PADDING),
+                        SizedBox(width: Tools.PADDING),
                         Expanded(
                           child: TextField(),
                         ),
-                        const SizedBox(width: Tools.PADDING),
+                        SizedBox(width: Tools.PADDING),
                       ],
                     ),
-                    Spacer(),
-                    Row(
+                    const Spacer(),
+                    const Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.phone_android,
                           size: 30,
                         ),
-                        const SizedBox(width: Tools.PADDING),
+                        SizedBox(width: Tools.PADDING),
                         Expanded(
                           child: TextField(),
                         ),
-                        const SizedBox(width: Tools.PADDING),
+                        SizedBox(width: Tools.PADDING),
                       ],
                     ),
-                    Spacer(
+                    const Spacer(
                       flex: 2,
                     ),
                     Row(
@@ -96,12 +93,12 @@ class Commander4 extends StatelessWidget {
                             onPressed: () {},
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.contact_phone,
                                   color: MyColors.bleu,
                                   size: 30,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: Tools.PADDING / 2,
                                 ),
                                 Column(
@@ -122,7 +119,7 @@ class Commander4 extends StatelessWidget {
                             )),
                       ],
                     ),
-                    Spacer(
+                    const Spacer(
                       flex: 2,
                     ),
                   ]),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/poids_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
@@ -52,7 +51,7 @@ class Commander2 extends StatelessWidget {
             ),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: Tools.PADDING,
                 ),
                 Expanded(
@@ -61,7 +60,7 @@ class Commander2 extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           5,
-                          (index) => PoidsBloc(),
+                          (index) => const PoidsBloc(),
                         )),
                   ),
                 ),

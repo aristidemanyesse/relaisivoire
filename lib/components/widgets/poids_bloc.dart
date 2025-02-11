@@ -9,11 +9,11 @@ class PoidsBloc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: Tools.PADDING / 2),
+      margin: const EdgeInsets.only(bottom: Tools.PADDING / 2),
       child: Card(
         elevation: 1,
         child: Container(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Tools.PADDING,
             vertical: Tools.PADDING / 4,
           ),
@@ -30,18 +30,18 @@ class PoidsBloc extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text("Entre", style: Theme.of(context).textTheme.bodyLarge),
-                  SizedBox(
+                  const SizedBox(
                     width: Tools.PADDING / 2,
                   ),
                   Text("2 Kg",
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             fontWeight: FontWeight.bold,
                           )),
-                  SizedBox(
+                  const SizedBox(
                     width: Tools.PADDING / 2,
                   ),
                   Text("et", style: Theme.of(context).textTheme.bodyLarge),
-                  SizedBox(
+                  const SizedBox(
                     width: Tools.PADDING / 2,
                   ),
                   Text("8 Kg ",

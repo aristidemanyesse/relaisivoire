@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:lpr/components/tools/tools.dart';
+
+class MapButton extends StatelessWidget {
+  final Widget widget;
+
+  const MapButton({
+    super.key,
+    required this.widget,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Container(
+        height: 45,
+        width: 45,
+        decoration: BoxDecoration(
+            color: MyColors.white, borderRadius: BorderRadius.circular(100)),
+        child: Center(child: widget),
+      ),
+    );
+  }
+}
