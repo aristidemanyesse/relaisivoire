@@ -23,7 +23,11 @@ class ParametreMenuItem extends StatelessWidget {
       onTap: () {
         ontap();
       },
-      title: Text(title, style: Theme.of(context).textTheme.titleSmall),
+      title: Text(title,
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge!
+              .copyWith(fontWeight: FontWeight.bold)),
       subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
     );
   }

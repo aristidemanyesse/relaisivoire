@@ -143,6 +143,7 @@ class _SplashscreenState extends State<Splashscreen>
                       } else if (_currentPageIndex == pages.length - 1) {
                         return MainButton(
                           title: "Commencer",
+                          icon: Icons.check,
                           onPressed: () {
                             Get.off(
                               const LoginNumber(),

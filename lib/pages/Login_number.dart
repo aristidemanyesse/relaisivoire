@@ -49,47 +49,43 @@ class _LoginNumberState extends State<LoginNumber> {
         width: Get.size.width,
         child: Column(
           children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                width: Get.size.width,
-                decoration: const BoxDecoration(
-                    color: MyColors.bleu,
-                    border: Border.symmetric(
-                        horizontal: BorderSide.none,
-                        vertical: BorderSide.none)),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "CONNEXION",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge!
-                            .copyWith(color: MyColors.beige),
-                      ),
-                      const SizedBox(height: Tools.PADDING / 3),
-                      Text(
-                        "Entrez votre numéro de téléphone",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: MyColors.beige),
-                      ),
-                    ],
-                  )
-                      .animate()
-                      .fadeIn(duration: 800.ms)
-                      .moveX(duration: 800.ms, begin: 1000.0, end: 0),
-                ),
+            Container(
+              height: 200,
+              padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+              width: Get.size.width,
+              decoration: const BoxDecoration(
+                  color: MyColors.bleu,
+                  border: Border.symmetric(
+                      horizontal: BorderSide.none, vertical: BorderSide.none)),
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "CONNEXION",
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayLarge!
+                          .copyWith(color: MyColors.beige),
+                    ),
+                    const SizedBox(height: Tools.PADDING / 3),
+                    Text(
+                      "Entrez votre numéro de téléphone",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: MyColors.beige),
+                    ),
+                  ],
+                )
+                    .animate()
+                    .fadeIn(duration: 800.ms)
+                    .moveX(duration: 800.ms, begin: 1000.0, end: 0),
               ),
             ),
-            const Expanded(flex: 1, child: Wave()),
+            const SizedBox(height: 30, child: Wave()),
             Expanded(
-              flex: 6,
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
@@ -100,6 +96,9 @@ class _LoginNumberState extends State<LoginNumber> {
                     border: Border(top: BorderSide.none)),
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: Tools.PADDING * 2,
+                    ),
                     MyInputNumber(
                         nb_places: 10, keyBoradController: _keyBoradController),
                     const Spacer(),
@@ -110,12 +109,13 @@ class _LoginNumberState extends State<LoginNumber> {
                     const Spacer(),
                     MainButtonInverse(
                         title: "Valider",
+                        icon: Icons.check,
                         onPressed: () {
                           Get.dialog(
                             ConfirmDialog(
                               title: "Confirmation",
                               message:
-                                  "Vous confirmez que le ${_keyBoradController.value} est vraiment votre numero? \n Un SMS sera envoyé à cette adresse.",
+                                  "Vous confirmez que le ${_keyBoradController.value} est vraiment votre numero? Un SMS sera envoyé sur celui-ci.",
                               testOk: "Je confirme",
                               testCancel: "Non",
                               functionOk: () {

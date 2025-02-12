@@ -49,6 +49,8 @@ dependencies:
   lottie: ^3.2.0
   blur: ^4.0.0
   flutter_contacts: ^1.1.9+2
+  flutter_native_splash: ^2.4.4
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +79,7 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/lotties/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -103,3 +106,26 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#FBE4D8"
+  image: assets/icons/logo.png
+  # branding: assets/branding-production.png
+  # branding_bottom_padding: 24
+  color_dark: "#FBE4D8"
+  image_dark: assets/icons/logo.png
+  # branding_dark: assets/branding-production.png
+
+  android_12:
+    image: assets/icons/logo.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/icons/logo.png
+    icon_background_color_dark: "#FBE4D8"
+
+  web: false
+
+
+# dart run flutter_native_splash:create
+# dart run rename_app:main all="Le Point Relais"
+# dart run flutter_launcher_icons:generate
+# dart run flutter_launcher_icons:main

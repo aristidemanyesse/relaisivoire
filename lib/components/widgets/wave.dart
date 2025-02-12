@@ -12,6 +12,7 @@ class Wave extends StatelessWidget {
       decoration: BoxDecoration(
           color: MyColors.bleu,
           border: Border(
+              top: BorderSide(width: 0, color: MyColors.bleu),
               bottom: BorderSide(
                   color: MyColors.beige.withOpacity(0.5), width: 10))),
       height: double.infinity,

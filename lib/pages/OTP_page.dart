@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -7,7 +9,7 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/key_board_number.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
 import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/pages/Index_page.dart';
+import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class OPTPage extends StatefulWidget {
@@ -20,6 +22,45 @@ class OPTPage extends StatefulWidget {
 class _OPTPageState extends State<OPTPage> {
   final KeyBoradController _keyBoradController = Get.find();
 
+  int _counter = 120; // Durée du timer (secondes)
+  late Timer _timer;
+  bool _isButtonDisabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _isButtonDisabled = true;
+    _counter = 120;
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_counter > 0) {
+        setState(() {
+          _counter--;
+        });
+      } else {
+        setState(() {
+          _isButtonDisabled = false;
+        });
+        _timer.cancel();
+      }
+    });
+  }
+
+  void _resendOtp() {
+    // Logique pour renvoyer l'OTP ici
+    _startTimer(); // Redémarrer le timer
+    print("OTP renvoyé !");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,46 +69,43 @@ class _OPTPageState extends State<OPTPage> {
       width: Get.size.width,
       child: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-              width: Get.size.width,
-              decoration: const BoxDecoration(
-                  color: MyColors.bleu,
-                  border: Border.symmetric(
-                      horizontal: BorderSide.none, vertical: BorderSide.none)),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Vérification OTP",
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge!
-                          .copyWith(color: MyColors.beige),
-                    ),
-                    const SizedBox(height: Tools.PADDING / 3),
-                    Text(
-                      "Nous vous avons envoyé un code par SMS sur \n+222 0404444040404",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: MyColors.beige, height: 2),
-                    ),
-                  ],
-                )
-                    .animate()
-                    .fadeIn(duration: 800.ms)
-                    .moveX(duration: 800.ms, begin: 1000.0, end: 0),
-              ),
+          Container(
+            height: 200,
+            padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+            width: Get.size.width,
+            decoration: const BoxDecoration(
+                color: MyColors.bleu,
+                border: Border.symmetric(
+                    horizontal: BorderSide.none, vertical: BorderSide.none)),
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Vérification OTP",
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge!
+                        .copyWith(color: MyColors.beige),
+                  ),
+                  const SizedBox(height: Tools.PADDING / 3),
+                  Text(
+                    "Nous vous avons envoyé un code par SMS sur \n+222 0404444040404",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(color: MyColors.beige, height: 2),
+                  ),
+                ],
+              )
+                  .animate()
+                  .fadeIn(duration: 800.ms)
+                  .moveX(duration: 800.ms, begin: 1000.0, end: 0),
             ),
           ),
-          const Expanded(flex: 1, child: Wave()),
+          const SizedBox(height: 30, child: Wave()),
           Expanded(
-            flex: 6,
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(
@@ -77,6 +115,7 @@ class _OPTPageState extends State<OPTPage> {
                   color: MyColors.beige, border: Border(top: BorderSide.none)),
               child: Column(
                 children: [
+                  SizedBox(height: Tools.PADDING * 2),
                   Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Tools.PADDING,
@@ -91,22 +130,50 @@ class _OPTPageState extends State<OPTPage> {
                       ),
                       child: KeyBoardNumber()),
                   const Spacer(),
+                  if (_isButtonDisabled)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Renvoyer le code dans ",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        Text("$_counter s",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  else
+                    TextButton(
+                      onPressed: _isButtonDisabled ? null : _resendOtp,
+                      child: Text("Renvoyer le code OTP",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                    ),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       MainButton(
                           title: "Retour",
+                          forward: false,
+                          icon: Icons.chevron_left,
                           onPressed: () {
                             Get.back();
                           }),
                       MainButtonInverse(
                           title: "Confirmer OTP",
+                          icon: Icons.check,
                           onPressed: () {
-                            Get.to(const IndexPage());
+                            Get.to(const ListeColisPage());
                           }),
                     ],
                   ),
-                  const Spacer(),
+                  SizedBox(
+                    height: Tools.PADDING * 2,
+                  ),
                 ],
               ),
             ),

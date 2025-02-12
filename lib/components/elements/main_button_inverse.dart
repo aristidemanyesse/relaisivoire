@@ -4,13 +4,14 @@ import 'package:lpr/components/tools/tools.dart';
 
 class MainButtonInverse extends StatelessWidget {
   final String title;
-
+  final IconData icon;
   final Function onPressed;
 
   const MainButtonInverse({
     super.key,
     required this.title,
     required this.onPressed,
+    this.icon = Icons.chevron_right,
   });
 
   @override
@@ -29,7 +30,7 @@ class MainButtonInverse extends StatelessWidget {
             elevation: 10,
             shadowColor: MyColors.bleu.withOpacity(0.2),
             padding: const EdgeInsets.symmetric(
-                horizontal: Tools.PADDING * 1.5, vertical: Tools.PADDING / 2),
+                horizontal: Tools.PADDING, vertical: Tools.PADDING / 1.5),
             backgroundColor: MyColors.bleu,
             foregroundColor: MyColors.beige,
           ),
@@ -51,8 +52,8 @@ class MainButtonInverse extends StatelessWidget {
               const SizedBox(
                 width: Tools.PADDING / 2,
               ),
-              const Icon(
-                Icons.chevron_right,
+              Icon(
+                icon,
                 color: MyColors.beige,
               ).animate().fade(duration: 500.ms).scale()
             ],

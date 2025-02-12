@@ -6,7 +6,6 @@ import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/PleaseWait.dart';
 import 'package:lpr/pages/commander1.dart';
-import 'package:lpr/pages/commander2.dart';
 import 'package:lpr/pages/commander3.dart';
 import 'package:lpr/pages/commander4.dart';
 import 'package:lpr/pages/commander5.dart';
@@ -110,26 +109,13 @@ class _CommanderPageState extends State<CommanderPage>
               )
             ],
           ),
-          // child: const Row(
-          //   children: [
-          //     CircleIndicator(text: "1"),
-          //     Barre(),
-          //     CircleIndicator(text: "2"),
-          //     Barre(),
-          //     CircleIndicator(text: "3"),
-          //     Barre(),
-          //     CircleIndicator(text: "4"),
-          //     Barre(),
-          //     CircleIndicator(text: "5"),
-          //     Barre(),
-          //     CircleIndicator(text: "6"),
-          //   ],
-          // ),
         ),
       ),
-      body: SizedBox(
+      body: Container(
         height: Get.size.height,
         width: Get.size.width,
+        decoration: BoxDecoration(
+            border: Border(top: BorderSide(width: 0, color: MyColors.bleu))),
         child: Column(
           children: [
             Expanded(
@@ -143,14 +129,19 @@ class _CommanderPageState extends State<CommanderPage>
                   },
                   children: pages),
             ),
-            SizedBox(
-              height: Get.height / 10,
+            Container(
+              height: 100,
+              margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: (_currentPageIndex > 0)
+                    ? MainAxisAlignment.spaceBetween
+                    : MainAxisAlignment.spaceAround,
                 children: [
                   if (_currentPageIndex > 0)
                     MainButton(
                         title: "Retour",
+                        icon: Icons.chevron_left,
+                        forward: false,
                         onPressed: () {
                           _pageController.previousPage(
                               duration: const Duration(milliseconds: 500),
@@ -159,6 +150,7 @@ class _CommanderPageState extends State<CommanderPage>
                   if (_currentPageIndex == pages.length - 1)
                     MainButtonInverse(
                       title: "Confirmer le colis",
+                      icon: Icons.check,
                       onPressed: () {
                         Get.dialog(
                           const PleaseWait(),
@@ -178,6 +170,7 @@ class _CommanderPageState extends State<CommanderPage>
                 ],
               ),
             ),
+            SizedBox(height: Tools.PADDING),
           ],
         ),
       ),

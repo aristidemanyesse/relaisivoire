@@ -26,7 +26,10 @@ class Intro3 extends StatelessWidget {
           children: [
             Text(
               "On livre ton colis...",
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.bleu),
             ),
             const SizedBox(height: Tools.PADDING / 2),
             Container(

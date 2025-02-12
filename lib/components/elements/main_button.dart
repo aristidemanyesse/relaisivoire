@@ -4,13 +4,16 @@ import 'package:lpr/components/tools/tools.dart';
 
 class MainButton extends StatelessWidget {
   final String title;
-
+  final IconData icon;
   final Function onPressed;
+  final bool forward;
 
   const MainButton({
     super.key,
     required this.title,
     required this.onPressed,
+    this.icon = Icons.chevron_right,
+    this.forward = true,
   });
 
   @override
@@ -27,9 +30,9 @@ class MainButton extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 10,
-            shadowColor: MyColors.beige.withOpacity(0.2),
+            shadowColor: Colors.grey.withOpacity(0.7),
             padding: const EdgeInsets.symmetric(
-                horizontal: Tools.PADDING * 1.5, vertical: Tools.PADDING / 2),
+                horizontal: Tools.PADDING, vertical: Tools.PADDING / 1.5),
             backgroundColor: MyColors.beige,
             foregroundColor: MyColors.bleu,
           ),
@@ -40,6 +43,12 @@ class MainButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              if (!forward) ...{
+                Icon(icon).animate().fade(duration: 500.ms).scale(),
+                const SizedBox(
+                  width: Tools.PADDING / 2,
+                ),
+              },
               Text(
                 title,
                 style: Theme.of(context)
@@ -47,10 +56,12 @@ class MainButton extends StatelessWidget {
                     .bodyLarge!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
-                width: Tools.PADDING / 2,
-              ),
-              const Icon(Icons.chevron_right).animate().fade(duration: 500.ms).scale()
+              if (forward) ...{
+                const SizedBox(
+                  width: Tools.PADDING / 2,
+                ),
+                Icon(icon).animate().fade(duration: 500.ms).scale()
+              }
             ],
           ),
         ),

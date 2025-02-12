@@ -63,11 +63,11 @@ class StepProcess extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .titleSmall!
+                        .bodyLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 Text(subtitle,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge),
+                    style: Theme.of(context).textTheme.bodyMedium),
                 const SizedBox(
                   width: Tools.PADDING / 2,
                 ),

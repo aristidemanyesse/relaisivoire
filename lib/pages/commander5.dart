@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/PontRelaisBloc.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class Commander5 extends StatelessWidget {
@@ -16,7 +14,7 @@ class Commander5 extends StatelessWidget {
     return Column(
       children: [
         Container(
-            height: Get.height * 0.15,
+            height: 140,
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
@@ -25,20 +23,19 @@ class Commander5 extends StatelessWidget {
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Où doit-il récuperer le colis ?",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: MyColors.beige),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: MyColors.beige, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Lieu de récupe",
                   style: Theme.of(context)
                       .textTheme
-                      .bodySmall!
+                      .bodyMedium!
                       .copyWith(color: MyColors.beige),
                 ),
                 SizedBox(
@@ -55,7 +52,7 @@ class Commander5 extends StatelessWidget {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Rechercher un lieu',
+                          hintText: 'Rechercher un lieu, une zone...',
                           hintStyle: TextStyle(
                               fontSize:
                                   15.0), // Taille de la police du hint text réduite
@@ -80,8 +77,8 @@ class Commander5 extends StatelessWidget {
                 ),
               ],
             )),
-        const SizedBox(height: 40, child: Wave()),
-        SizedBox(height: Tools.PADDING / 2),
+        const SizedBox(height: 20, child: Wave()),
+        SizedBox(height: Tools.PADDING),
         Expanded(
           child: Container(
             width: double.infinity,

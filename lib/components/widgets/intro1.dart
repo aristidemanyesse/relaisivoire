@@ -26,7 +26,10 @@ class Intro1 extends StatelessWidget {
           children: [
             Text(
               "Enregistre ton colis ...",
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.bleu),
             ),
             const SizedBox(height: Tools.PADDING),
             Container(

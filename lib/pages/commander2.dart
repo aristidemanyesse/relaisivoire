@@ -14,7 +14,7 @@ class Commander2 extends StatelessWidget {
     return Column(
       children: [
         Container(
-            height: Get.height * 0.15,
+            height: 150,
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(

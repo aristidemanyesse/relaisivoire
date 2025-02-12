@@ -1,0 +1,149 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:lpr/components/tools/tools.dart';
+
+class FormulaireContactDestinataire extends StatefulWidget {
+  const FormulaireContactDestinataire({
+    super.key,
+  });
+
+  @override
+  State<FormulaireContactDestinataire> createState() =>
+      _FormulaireContactDestinataireState();
+}
+
+class _FormulaireContactDestinataireState
+    extends State<FormulaireContactDestinataire> {
+  final TextEditingController _nameController = TextEditingController(text: "");
+  final TextEditingController _contactController =
+      TextEditingController(text: "");
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void getContact() async {
+    if (await FlutterContacts.requestPermission()) {
+      final contact = await FlutterContacts.openExternalPick();
+      setState(() {
+        _nameController.text = contact?.displayName ?? "";
+        _contactController.text = contact?.phones.first.normalizedNumber ?? "";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Tools.PADDING,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    getContact();
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.contact_phone,
+                        color: MyColors.bleu,
+                        size: 40,
+                      ),
+                      const SizedBox(
+                        width: Tools.PADDING / 2,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Choisir parmis mes",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text("contacts téléphoniques",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
+                    ],
+                  )),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(child: Divider()),
+              Container(
+                  margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                  child: Text("Ou")),
+              Expanded(child: Divider()),
+            ],
+          ),
+          Column(
+            children: [
+              TextField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  hintText: "Nom du destinataire...",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.transparent, // Fond transparent
+                  prefixIcon: Icon(Icons.person, color: MyColors.bleu),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15), // Bords arrondis
+                    borderSide:
+                        BorderSide(color: MyColors.bleu, width: 1.5), // Contour
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(color: MyColors.bleu, width: 2),
+                  ),
+                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: Tools.PADDING * 1.5,
+              ),
+              TextField(
+                controller: _contactController,
+                decoration: InputDecoration(
+                  hintText: "Contact du destinataire...",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.transparent, // Fond transparent
+                  prefixIcon: Icon(Icons.phone, color: MyColors.bleu),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15), // Bords arrondis
+                    borderSide:
+                        BorderSide(color: MyColors.bleu, width: 1.5), // Contour
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(color: MyColors.bleu, width: 2),
+                  ),
+                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

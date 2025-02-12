@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
@@ -55,9 +54,12 @@ class _ProfilPageState extends State<ProfilPage> {
       ),
       body: Stack(
         children: [
-          SizedBox(
+          Container(
             height: Get.size.height,
             width: Get.size.width,
+            decoration: BoxDecoration(
+                border:
+                    Border(top: BorderSide(width: 0, color: MyColors.bleu))),
             child: Column(
               children: [
                 Container(

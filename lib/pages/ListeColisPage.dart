@@ -12,14 +12,14 @@ import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
-class IndexPage extends StatefulWidget {
-  const IndexPage({super.key});
+class ListeColisPage extends StatefulWidget {
+  const ListeColisPage({super.key});
 
   @override
-  State<IndexPage> createState() => _IndexPageState();
+  State<ListeColisPage> createState() => _ListeColisPageState();
 }
 
-class _IndexPageState extends State<IndexPage> {
+class _ListeColisPageState extends State<ListeColisPage> {
   final KeyBoradController _keyBoradController = Get.find();
 
   @override
@@ -65,50 +65,45 @@ class _IndexPageState extends State<IndexPage> {
                 icon: const Icon(Icons.notifications)),
           ],
         ),
-        body: SizedBox(
+        body: Container(
           height: Get.size.height,
           width: Get.size.width,
+          decoration: BoxDecoration(
+              border: Border(top: BorderSide(width: 0, color: MyColors.bleu))),
           child: Column(
             children: [
               Container(
-                height: 70,
+                width: Get.width,
                 padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                width: Get.size.width,
-                decoration: const BoxDecoration(
-                    color: MyColors.bleu,
-                    border: Border.symmetric(
-                        horizontal: BorderSide.none,
-                        vertical: BorderSide.none)),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Bonjour,",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: MyColors.beige),
-                      ),
-                      Text(
-                        "Jacques Amessan",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: MyColors.beige, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [],
-                      ),
-                      SizedBox(height: Tools.PADDING),
-                    ],
-                  ),
+                decoration: BoxDecoration(
+                  border:
+                      Border(top: BorderSide(width: 0, color: MyColors.bleu)),
+                  color: MyColors.bleu,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Bonjour,",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: MyColors.beige),
+                    ),
+                    Text(
+                      "Jacques Amessan",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: MyColors.beige, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: Tools.PADDING),
+                  ],
                 ),
               ),
-              const SizedBox(height: 50, child: Wave()),
+              const SizedBox(height: 30, child: Wave()),
               SizedBox(height: Tools.PADDING),
               Expanded(
-                flex: 10,
                 child: SizedBox(
                   width: double.infinity,
                   child: ListView(children: [

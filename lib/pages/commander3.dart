@@ -14,7 +14,7 @@ class Commander3 extends StatelessWidget {
     return Column(
       children: [
         Container(
-            height: Get.height * 0.15,
+            height: 120,
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
@@ -23,62 +23,55 @@ class Commander3 extends StatelessWidget {
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Votre colis est-il bien emballé ?",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: MyColors.beige),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: MyColors.beige, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Etat du colis",
                   style: Theme.of(context)
                       .textTheme
-                      .bodySmall!
+                      .bodyMedium!
                       .copyWith(color: MyColors.beige),
                 ),
               ],
             )),
-        const Expanded(flex: 1, child: Wave()),
-        Expanded(
-          flex: 10,
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(
-              horizontal: Tools.PADDING,
-            ),
-            child: const Column(
-              children: [
-                SizedBox(
-                  height: Tools.PADDING,
-                ),
-                Expanded(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        EmballageBloc(
-                          title: "Oui, j'ai bien emballé.",
-                          subtitle: "oui parfaitement emballé, bien scéllé.",
-                          icon: Icons.redeem,
-                        ),
-                        EmballageBloc(
-                          title: "Euuh, un peu ...",
-                          subtitle: "C'est pas vraiment emballé mais ça va.",
-                          icon: Icons.inventory_2_outlined,
-                        ),
-                        EmballageBloc(
-                          title: "Non, pas du tout !",
-                          subtitle: "Y'a rien dessus, juste le colis.",
-                          icon: Icons.layers_outlined,
-                        ),
-                      ]),
-                ),
-              ],
-            ),
-          ),
+        const SizedBox(height: 20, child: Wave()),
+        SizedBox(
+          height: Tools.PADDING,
         ),
+        Spacer(),
+        Container(
+          height: 300,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(
+            horizontal: Tools.PADDING,
+          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                EmballageBloc(
+                  title: "Oui, j'ai bien emballé.",
+                  subtitle: "oui parfaitement emballé, bien scéllé.",
+                  icon: Icons.redeem,
+                ),
+                EmballageBloc(
+                  title: "Euuh, un peu ...",
+                  subtitle: "C'est pas vraiment emballé mais ça va.",
+                  icon: Icons.inventory_2_outlined,
+                ),
+                EmballageBloc(
+                  title: "Non, pas du tout !",
+                  subtitle: "Y'a rien dessus, juste le colis.",
+                  icon: Icons.layers_outlined,
+                ),
+              ]),
+        ),
+        Spacer(),
       ],
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/type_colis_item.dart';
 import 'package:lpr/components/widgets/wave.dart';
@@ -15,7 +14,7 @@ class Commander1 extends StatelessWidget {
     return Column(
       children: [
         Container(
-            height: Get.height * 0.15,
+            height: 120,
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
@@ -24,61 +23,59 @@ class Commander1 extends StatelessWidget {
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Que voulez-vous faire livrer ?",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: MyColors.beige),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: MyColors.beige, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Type de colis",
                   style: Theme.of(context)
                       .textTheme
-                      .bodySmall!
+                      .bodyMedium!
                       .copyWith(color: MyColors.beige),
                 ),
               ],
             )),
-        const Expanded(flex: 1, child: Wave()),
+        const SizedBox(height: 20, child: Wave()),
         Expanded(
-          flex: 10,
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
               horizontal: Tools.PADDING / 2,
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 const SizedBox(
                   height: Tools.PADDING * 2,
                 ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Tools.PADDING,
+                Container(
+                  height: 500,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Tools.PADDING,
+                  ),
+                  child: GridView(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: Tools.PADDING * 2.5,
+                      crossAxisSpacing: Tools.PADDING * 1.5,
                     ),
-                    child: GridView(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: Tools.PADDING * 2.5,
-                        crossAxisSpacing: Tools.PADDING * 1.5,
-                      ),
-                      children: [
-                        TypeColisItem(title: "Ultra léger", icon: "​🗂️"),
-                        TypeColisItem(title: "Petit sac, sachet", icon: "🛍️"),
-                        TypeColisItem(title: "Boite", icon: "​🗃️​"),
-                        TypeColisItem(title: "Carton moyen", icon: "📦​​​"),
-                        TypeColisItem(title: "Gros cartons", icon: "🗄️"),
-                        TypeColisItem(title: "Valise", icon: "🧳"),
-                        TypeColisItem(title: "Petit meuble", icon: "🪑"),
-                        TypeColisItem(title: "Electroménager", icon: "📺"),
-                        TypeColisItem(title: "Spécial, fragile", icon: "💎"),
-                      ],
-                    ),
+                    children: [
+                      TypeColisItem(title: "Ultra léger", icon: "​🗂️"),
+                      TypeColisItem(title: "Petit sac, sachet", icon: "🛍️"),
+                      TypeColisItem(title: "Boite", icon: "​🗃️​"),
+                      TypeColisItem(title: "Carton moyen", icon: "📦​​​"),
+                      TypeColisItem(title: "Gros cartons", icon: "🗄️"),
+                      TypeColisItem(title: "Valise", icon: "🧳"),
+                      TypeColisItem(title: "Petit meuble", icon: "🪑"),
+                      TypeColisItem(title: "Electroménager", icon: "📺"),
+                      TypeColisItem(title: "Spécial, fragile", icon: "💎"),
+                    ],
                   ),
                 ),
                 Container(
@@ -90,7 +87,10 @@ class Commander1 extends StatelessWidget {
                           color: MyColors.danger,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold)),
-                )
+                ),
+                const SizedBox(
+                  height: Tools.PADDING,
+                ),
               ],
             ),
           ),

@@ -37,27 +37,25 @@ class NotificationItem extends StatelessWidget {
                 border: Border.all(
                     width: 0.5, color: MyColors.bleu.withOpacity(0.6))),
             width: double.infinity,
-            height: 75,
             child: Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         title,
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.w600,
                             color: (received ? MyColors.bleu : MyColors.bleu)),
                       ),
-                      const Spacer(),
                       Text(
                         subtitle,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: (received ? MyColors.bleu : MyColors.bleu),
                             ),
                       ),
-                      const Spacer(),
                       Text(
                         created,
                         style: Theme.of(context)
@@ -68,16 +66,7 @@ class NotificationItem extends StatelessWidget {
                                 color:
                                     (received ? MyColors.bleu : MyColors.bleu)),
                       ),
-                      const Spacer(),
                     ],
-                  ),
-                ),
-                Center(
-                  child: Hero(
-                    tag: "qr_code",
-                    child: Icon(
-                        received ? Icons.local_shipping : Icons.inventory_2,
-                        color: received ? MyColors.vert : MyColors.bleu),
                   ),
                 ),
               ],

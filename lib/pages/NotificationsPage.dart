@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
@@ -21,9 +20,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Notifications (22)",
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: MyColors.beige,
-                )),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold)),
       ),
       body: SizedBox(
         height: Get.size.height,

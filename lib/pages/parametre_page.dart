@@ -32,7 +32,7 @@ class _ParametrePageState extends State<ParametrePage> {
           "Paramètres",
           style: Theme.of(context)
               .textTheme
-              .titleLarge!
+              .titleMedium!
               .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
@@ -44,156 +44,157 @@ class _ParametrePageState extends State<ParametrePage> {
               color: MyColors.beige,
             )),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 30, child: const Wave()),
-          SizedBox(
-            height: Tools.PADDING,
-          ),
-          Expanded(
-            child: Container(
-                width: Get.size.width,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Tools.PADDING,
-                ),
-                child: ListView(
-                  children: [
-                    ParametreMenuItem(
-                      icon: Icons.person,
-                      title: "Mon Profil",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(ProfilPage());
-                      },
-                    ),
-                    Divider(),
-                    ParametreMenuItem(
-                      icon: Icons.history,
-                      title: "Historique",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(HistoriquePage());
-                      },
-                    ),
-                    ParametreMenuItem(
-                      icon: Icons.search,
-                      title: "Rechercher un point relais",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(SearchLPR());
-                      },
-                    ),
-                    Divider(),
-                    ParametreMenuItem(
-                      icon: Icons.help,
-                      title: "Assistance",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        showMaterialModalBottomSheet(
-                          context: context,
-                          backgroundColor: MyColors.beige,
-                          builder: (context) => Container(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ListTile(
-                                    title: Text('Appel téléphonique'),
-                                    leading: const Icon(Icons.phone),
-                                    onTap: () {}),
-                                ListTile(
-                                    title: Text('Assistance Whatsapp'),
-                                    leading: const Icon(Icons.whatshot),
-                                    onTap: () {}),
-                                ListTile(
-                                  title: Text('Assistance Télégram'),
-                                  leading: const Icon(Icons.telegram),
-                                  onTap: () {},
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    Divider(),
-                    ParametreMenuItem(
-                      icon: Icons.logout,
-                      title: "Se déconnecter",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(
-                          Get.dialog(
-                            ConfirmDialog(
-                              title: "Déconnexion",
-                              message:
-                                  "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
-                              testOk: "Déconnexion",
-                              testCancel: "Non",
-                              functionOk: () {
-                                exit(0);
-                              },
-                              functionCancel: () {
-                                Get.back();
-                              },
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                )),
-          ),
-          SizedBox(height: 50, child: const WaveInverse()),
-          Container(
-            color: MyColors.bleu,
-            padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: Tools.PADDING / 3),
-                Text("Le Point Relais",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: MyColors.beige)),
-                SizedBox(height: Tools.PADDING / 3),
-                Text("Version 1.0.0.1502",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: MyColors.beige)),
-                SizedBox(height: Tools.PADDING / 3),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Conditons générales",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: MyColors.beige)),
-                    SizedBox(
-                      width: Tools.PADDING,
-                      child: Center(
-                          child: Text("|",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(color: MyColors.beige))),
-                    ),
-                    Text("Politique d'utilisation",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: MyColors.beige)),
-                  ],
-                ),
-              ],
+      body: Container(
+        decoration: BoxDecoration(
+            border: Border(top: BorderSide(width: 0, color: MyColors.bleu))),
+        child: Column(
+          children: [
+            SizedBox(height: 30, child: const Wave()),
+            SizedBox(
+              height: Tools.PADDING,
             ),
-          )
-        ],
+            Expanded(
+              child: SizedBox(
+                  width: Get.size.width,
+                  child: ListView(
+                    children: [
+                      ParametreMenuItem(
+                        icon: Icons.person,
+                        title: "Mon Profil",
+                        subtitle: "Toutes mes activités",
+                        ontap: () {
+                          Get.to(ProfilPage());
+                        },
+                      ),
+                      Divider(),
+                      ParametreMenuItem(
+                        icon: Icons.history,
+                        title: "Historique",
+                        subtitle: "Toutes mes activités",
+                        ontap: () {
+                          Get.to(HistoriquePage());
+                        },
+                      ),
+                      ParametreMenuItem(
+                        icon: Icons.search,
+                        title: "Rechercher un point relais",
+                        subtitle: "Toutes mes activités",
+                        ontap: () {
+                          Get.to(SearchLPR());
+                        },
+                      ),
+                      Divider(),
+                      ParametreMenuItem(
+                        icon: Icons.help,
+                        title: "Assistance",
+                        subtitle: "Toutes mes activités",
+                        ontap: () {
+                          showMaterialModalBottomSheet(
+                            context: context,
+                            backgroundColor: MyColors.beige,
+                            builder: (context) => Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                      title: Text('Appel téléphonique'),
+                                      leading: const Icon(Icons.phone),
+                                      onTap: () {}),
+                                  ListTile(
+                                      title: Text('Assistance Whatsapp'),
+                                      leading: const Icon(Icons.whatshot),
+                                      onTap: () {}),
+                                  ListTile(
+                                    title: Text('Assistance Télégram'),
+                                    leading: const Icon(Icons.telegram),
+                                    onTap: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Divider(),
+                      ParametreMenuItem(
+                        icon: Icons.logout,
+                        title: "Se déconnecter",
+                        subtitle: "Toutes mes activités",
+                        ontap: () {
+                          Get.to(
+                            Get.dialog(
+                              ConfirmDialog(
+                                title: "Déconnexion",
+                                message:
+                                    "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
+                                testOk: "Déconnexion",
+                                testCancel: "Non",
+                                functionOk: () {
+                                  exit(0);
+                                },
+                                functionCancel: () {
+                                  Get.back();
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  )),
+            ),
+            SizedBox(height: 50, child: const WaveInverse()),
+            Container(
+              color: MyColors.bleu,
+              padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: Tools.PADDING / 3),
+                  Text("Le Point Relais",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: MyColors.beige)),
+                  SizedBox(height: Tools.PADDING / 3),
+                  Text("Version 1.0.0.1502",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: MyColors.beige)),
+                  SizedBox(height: Tools.PADDING / 3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Conditons générales",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: MyColors.beige)),
+                      SizedBox(
+                        width: Tools.PADDING,
+                        child: Center(
+                            child: Text("|",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(color: MyColors.beige))),
+                      ),
+                      Text("Politique d'utilisation",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(color: MyColors.beige)),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

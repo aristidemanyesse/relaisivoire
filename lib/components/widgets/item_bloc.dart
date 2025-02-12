@@ -37,11 +37,11 @@ class ItemBloc extends StatelessWidget {
                 border: Border.all(
                     width: 0.5, color: MyColors.bleu.withOpacity(0.6))),
             width: double.infinity,
-            height: 75,
             child: Row(
               children: [
                 Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -50,35 +50,28 @@ class ItemBloc extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: (received ? MyColors.bleu : MyColors.bleu)),
                       ),
-                      const Spacer(),
                       Text(
                         subtitle,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: (received ? MyColors.bleu : MyColors.bleu),
                             ),
                       ),
-                      const Spacer(),
                       Text(
                         created,
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
                             .copyWith(
-                                fontWeight: FontWeight.w300,
                                 color:
                                     (received ? MyColors.bleu : MyColors.bleu)),
                       ),
-                      const Spacer(),
                     ],
                   ),
                 ),
                 Center(
-                  child: Hero(
-                    tag: "qr_code",
-                    child: Icon(
-                        received ? Icons.local_shipping : Icons.inventory_2,
-                        color: received ? MyColors.vert : MyColors.bleu),
-                  ),
+                  child: Icon(
+                      received ? Icons.local_shipping : Icons.inventory_2,
+                      color: received ? MyColors.vert : MyColors.bleu),
                 ),
               ],
             ),

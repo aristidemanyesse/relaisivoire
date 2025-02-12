@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/keyboard_controller.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String title;
@@ -38,11 +39,11 @@ class ConfirmDialog extends StatelessWidget {
                       color: MyColors.bleu,
                       height: 50,
                       alignment: Alignment.center,
-                      child: Text(title,
+                      child: Text(title.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyLarge!
+                              .titleSmall!
                               .copyWith(color: Colors.white)),
                     ),
                     const SizedBox(
@@ -54,14 +55,13 @@ class ConfirmDialog extends StatelessWidget {
                       child: Text(
                         message,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 15, height: 1.5, color: Colors.black),
+                        style: Theme.of(context).textTheme.bodyLarge!,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: Tools.PADDING,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
@@ -76,6 +76,7 @@ class ConfirmDialog extends StatelessWidget {
                           ),
                           child: MainButtonInverse(
                               title: testOk,
+                              icon: Icons.check,
                               onPressed: () {
                                 functionOk();
                               })),
@@ -90,12 +91,13 @@ class ConfirmDialog extends StatelessWidget {
                               functionCancel();
                             },
                             title: testCancel,
+                            icon: Icons.close,
                           ))
                     ],
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: Tools.PADDING,
                 ),
               ],
             ),

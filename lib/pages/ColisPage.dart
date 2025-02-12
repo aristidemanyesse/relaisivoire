@@ -5,7 +5,7 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/step_process.dart';
 import 'package:lpr/components/widgets/step_recap.dart';
 import 'package:lpr/components/widgets/wave.dart';
-import 'package:lpr/pages/Index_page.dart';
+import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/open_q_r_code.dart';
 import 'package:lpr/pages/search_lpr.dart';
 
@@ -25,7 +25,7 @@ class _ColisPageState extends State<ColisPage> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Get.off(IndexPage());
+              Get.off(ListeColisPage());
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -108,9 +108,8 @@ class _ColisPageState extends State<ColisPage> {
                           ],
                         ),
                       )),
-                  const Expanded(flex: 1, child: Wave()),
+                  const SizedBox(height: 30, child: Wave()),
                   Expanded(
-                    flex: 10,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Tools.PADDING * 2,
@@ -226,6 +225,9 @@ class _ColisPageState extends State<ColisPage> {
                                     borderRadius: BorderRadius.circular(100)),
                               )
                             ],
+                          ),
+                          SizedBox(
+                            height: Tools.PADDING,
                           )
                         ],
                       ),
@@ -241,6 +243,7 @@ class _ColisPageState extends State<ColisPage> {
                 children: [
                   MainButtonInverse(
                       title: "Me guider vers un point relais",
+                      icon: Icons.location_on_sharp,
                       onPressed: () {
                         Get.to(SearchLPR());
                       })
