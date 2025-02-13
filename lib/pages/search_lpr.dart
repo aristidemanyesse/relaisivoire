@@ -84,7 +84,7 @@ class SearchLPR extends StatelessWidget {
                       IconButton(
                         icon: const Icon(
                           Icons.arrow_back,
-                          color: MyColors.black,
+                          color: Colors.black,
                         ),
                         onPressed: () {
                           Get.back();
@@ -105,14 +105,14 @@ class SearchLPR extends StatelessWidget {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 0, horizontal: 20.0),
                             enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyColors.bleu, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: MyColors.primary, width: 1.0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30.0)),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyColors.bleu, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: MyColors.primary, width: 1.0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30.0)),
                             ),
@@ -139,7 +139,7 @@ class SearchLPR extends StatelessWidget {
                             height: 35,
                             width: 35,
                             decoration: BoxDecoration(
-                                color: MyColors.white,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(100)),
                             child: Center(child: Icon(Icons.list)),
                           ),

@@ -55,7 +55,7 @@ class _FormulaireContactDestinataireState
                     children: [
                       const Icon(
                         Icons.contact_phone,
-                        color: MyColors.bleu,
+                        color: MyColors.primary,
                         size: 40,
                       ),
                       const SizedBox(
@@ -91,58 +91,50 @@ class _FormulaireContactDestinataireState
           Column(
             children: [
               TextField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  hintText: "Nom du destinataire...",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.transparent, // Fond transparent
-                  prefixIcon: Icon(Icons.person, color: MyColors.bleu),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15), // Bords arrondis
-                    borderSide:
-                        BorderSide(color: MyColors.bleu, width: 1.5), // Contour
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    hintText: "Nom du destinataire...",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.transparent, // Fond transparent
+                    prefixIcon: Icon(Icons.person, color: MyColors.primary),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15), // Bords arrondis
+                      borderSide: BorderSide(
+                          color: MyColors.primary, width: 1.5), // Contour
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(color: MyColors.primary, width: 2),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(color: MyColors.bleu, width: 2),
-                  ),
-                ),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
+                  style: Theme.of(context).textTheme.titleSmall!),
               const SizedBox(
                 height: Tools.PADDING * 1.5,
               ),
               TextField(
-                controller: _contactController,
-                decoration: InputDecoration(
-                  hintText: "Contact du destinataire...",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.transparent, // Fond transparent
-                  prefixIcon: Icon(Icons.phone, color: MyColors.bleu),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15), // Bords arrondis
-                    borderSide:
-                        BorderSide(color: MyColors.bleu, width: 1.5), // Contour
+                  controller: _contactController,
+                  decoration: InputDecoration(
+                    hintText: "Contact du destinataire...",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.transparent, // Fond transparent
+                    prefixIcon: Icon(Icons.phone, color: MyColors.primary),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15), // Bords arrondis
+                      borderSide: BorderSide(
+                          color: MyColors.primary, width: 1.5), // Contour
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(color: MyColors.primary, width: 2),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(color: MyColors.bleu, width: 2),
-                  ),
-                ),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
+                  style: Theme.of(context).textTheme.titleSmall!),
             ],
           ),
         ],

@@ -21,7 +21,7 @@ class _ProfilPageState extends State<ProfilPage> {
               onPressed: () {
                 showMaterialModalBottomSheet(
                   context: context,
-                  backgroundColor: MyColors.beige,
+                  backgroundColor: MyColors.secondary,
                   builder: (context) => Container(
                     padding: const EdgeInsets.all(10),
                     child: Column(
@@ -56,7 +56,7 @@ class _ProfilPageState extends State<ProfilPage> {
             width: Get.size.width,
             decoration: BoxDecoration(
                 border:
-                    Border(top: BorderSide(width: 0, color: MyColors.bleu))),
+                    Border(top: BorderSide(width: 0, color: MyColors.primary))),
             child: Column(
               children: [
                 Container(
@@ -65,7 +65,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                   width: Get.size.width,
                   decoration: const BoxDecoration(
-                      color: MyColors.bleu,
+                      color: MyColors.primary,
                       border: Border.symmetric(
                           horizontal: BorderSide.none,
                           vertical: BorderSide.none)),
@@ -75,7 +75,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   flex: 10,
                 ),
                 Container(
-                  color: MyColors.beige,
+                  color: MyColors.secondary,
                   height: Get.height / 10,
                 ),
               ],
@@ -93,7 +93,8 @@ class _ProfilPageState extends State<ProfilPage> {
                     child: Text(
                       "Mon profil",
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          color: MyColors.beige, fontWeight: FontWeight.bold),
+                          color: MyColors.secondary,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -103,9 +104,9 @@ class _ProfilPageState extends State<ProfilPage> {
                     width: 185,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: MyColors.beige,
+                      color: MyColors.secondary,
                       borderRadius: BorderRadius.circular(100),
-                      border: Border.all(color: MyColors.bleu, width: 7),
+                      border: Border.all(color: MyColors.primary, width: 7),
                     ),
                     child: Center(
                       child: Image.asset(
@@ -145,7 +146,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   padding: EdgeInsets.symmetric(
                       horizontal: Tools.PADDING, vertical: Tools.PADDING),
                   decoration: BoxDecoration(
-                      color: MyColors.bleu.withOpacity(0.2),
+                      color: MyColors.primary.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [

@@ -29,7 +29,7 @@ class Intro3 extends StatelessWidget {
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: MyColors.bleu),
+                  color: MyColors.primary),
             ),
             const SizedBox(height: Tools.PADDING / 2),
             Container(

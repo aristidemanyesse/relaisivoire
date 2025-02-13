@@ -26,7 +26,7 @@ class StepProcess extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: MyColors.bleu),
+                  border: Border.all(width: 1, color: MyColors.primary),
                   borderRadius: BorderRadius.circular(100)),
               child: Center(
                   child: Text(
@@ -43,7 +43,7 @@ class StepProcess extends StatelessWidget {
                 child: Container(
                   height: 35,
                   width: 3,
-                  color: MyColors.bleu.withOpacity(0.7),
+                  color: MyColors.primary.withOpacity(0.7),
                 ),
               ),
             ),

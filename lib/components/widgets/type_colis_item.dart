@@ -36,7 +36,7 @@ class TypeColisItem extends StatelessWidget {
       child: Obx(() {
         return Material(
           color: _controller.typeColis.value == id
-              ? MyColors.bleu
+              ? MyColors.primary
               : Colors.transparent,
           child: InkWell(
             onTap: () {
@@ -47,10 +47,10 @@ class TypeColisItem extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: MyColors.beige.withAlpha(200),
+                  color: MyColors.secondary.withAlpha(200),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                      width: 0.5, color: MyColors.bleu.withOpacity(0.6))),
+                      width: 0.5, color: MyColors.primary.withOpacity(0.6))),
               padding: EdgeInsets.symmetric(horizontal: Tools.PADDING / 4),
               width: double.infinity,
               child: Stack(
@@ -68,7 +68,7 @@ class TypeColisItem extends StatelessWidget {
                             child: Icon(
                               Icons.info,
                               size: 20,
-                              color: MyColors.bleu,
+                              color: MyColors.primary,
                             ))),
                   ),
                   Column(

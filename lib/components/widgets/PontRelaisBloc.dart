@@ -46,11 +46,11 @@ class PontRelaisBloc extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                     color: _controller.pointRelais.value == id
-                        ? MyColors.bleu
-                        : MyColors.beige.withAlpha(200),
+                        ? MyColors.primary
+                        : MyColors.secondary.withAlpha(200),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                        width: 0.5, color: MyColors.bleu.withOpacity(0.6))),
+                        width: 0.5, color: MyColors.primary.withOpacity(0.6))),
                 width: double.infinity,
                 child: Row(
                   children: [
@@ -58,8 +58,8 @@ class PontRelaisBloc extends StatelessWidget {
                       child: Icon(Icons.location_on_sharp,
                           size: 35,
                           color: _controller.pointRelais.value == id
-                              ? MyColors.beige
-                              : MyColors.bleu),
+                              ? MyColors.secondary
+                              : MyColors.primary),
                     ),
                     SizedBox(width: Tools.PADDING / 2),
                     Expanded(
@@ -76,8 +76,8 @@ class PontRelaisBloc extends StatelessWidget {
                                 .copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: _controller.pointRelais.value == id
-                                        ? MyColors.beige
-                                        : MyColors.bleu),
+                                        ? MyColors.secondary
+                                        : MyColors.primary),
                           ),
                           Text(
                             subtitle,
@@ -86,8 +86,8 @@ class PontRelaisBloc extends StatelessWidget {
                                 .bodySmall!
                                 .copyWith(
                                     color: _controller.pointRelais.value == id
-                                        ? MyColors.beige
-                                        : MyColors.bleu),
+                                        ? MyColors.secondary
+                                        : MyColors.primary),
                           ),
                         ],
                       ),

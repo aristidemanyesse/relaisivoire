@@ -31,7 +31,7 @@ class KeyboardButton extends StatelessWidget {
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(
-                  color: MyColors.bleu,
+                  color: MyColors.primary,
                   width: 3,
                 )),
             child: Center(

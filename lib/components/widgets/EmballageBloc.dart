@@ -40,8 +40,8 @@ class EmballageBloc extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                     color: _controller.typeEmballage.value == id
-                        ? MyColors.bleu
-                        : MyColors.beige.withAlpha(200),
+                        ? MyColors.primary
+                        : MyColors.secondary.withAlpha(200),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(width: 0.5)),
                 width: double.infinity,
@@ -51,8 +51,8 @@ class EmballageBloc extends StatelessWidget {
                     Icon(icon,
                         size: 45,
                         color: _controller.typeEmballage.value == id
-                            ? MyColors.beige
-                            : MyColors.bleu),
+                            ? MyColors.secondary
+                            : MyColors.primary),
                     const SizedBox(
                       width: Tools.PADDING,
                     ),
@@ -68,8 +68,8 @@ class EmballageBloc extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       color:
                                           _controller.typeEmballage.value == id
-                                              ? MyColors.beige
-                                              : MyColors.bleu)),
+                                              ? MyColors.secondary
+                                              : MyColors.primary)),
                           const SizedBox(
                             width: Tools.PADDING / 2,
                           ),
@@ -80,8 +80,8 @@ class EmballageBloc extends StatelessWidget {
                                   .copyWith(
                                       color:
                                           _controller.typeEmballage.value == id
-                                              ? MyColors.beige
-                                              : MyColors.bleu)),
+                                              ? MyColors.secondary
+                                              : MyColors.primary)),
                         ],
                       ),
                     ),

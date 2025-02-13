@@ -18,7 +18,7 @@ class PoidsBloc extends StatelessWidget {
             vertical: Tools.PADDING / 4,
           ),
           decoration: BoxDecoration(
-              color: MyColors.beige.withAlpha(200),
+              color: MyColors.secondary.withAlpha(200),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(width: 1)),
           width: double.infinity,

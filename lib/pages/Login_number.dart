@@ -61,7 +61,7 @@ class _LoginNumberState extends State<LoginNumber> {
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               width: Get.size.width,
               decoration: const BoxDecoration(
-                  color: MyColors.bleu,
+                  color: MyColors.primary,
                   border: Border.symmetric(
                       horizontal: BorderSide.none, vertical: BorderSide.none)),
               child: SafeArea(
@@ -74,7 +74,7 @@ class _LoginNumberState extends State<LoginNumber> {
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge!
-                          .copyWith(color: MyColors.beige),
+                          .copyWith(color: MyColors.secondary),
                     ),
                     const SizedBox(height: Tools.PADDING / 3),
                     Text(
@@ -82,7 +82,7 @@ class _LoginNumberState extends State<LoginNumber> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
-                          .copyWith(color: MyColors.beige),
+                          .copyWith(color: MyColors.secondary),
                     ),
                   ],
                 )
@@ -99,7 +99,7 @@ class _LoginNumberState extends State<LoginNumber> {
                   horizontal: Tools.PADDING * 3,
                 ),
                 decoration: const BoxDecoration(
-                    color: MyColors.beige,
+                    color: MyColors.secondary,
                     border: Border(top: BorderSide.none)),
                 child: Column(
                   children: [

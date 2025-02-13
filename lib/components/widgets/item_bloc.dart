@@ -34,9 +34,9 @@ class ItemBloc extends StatelessWidget {
               vertical: Tools.PADDING / 4,
             ),
             decoration: BoxDecoration(
-                color: MyColors.beige.withAlpha(200),
+                color: MyColors.secondary.withAlpha(200),
                 border: Border.all(
-                    width: 0.5, color: MyColors.bleu.withOpacity(0.6))),
+                    width: 0.5, color: MyColors.primary.withOpacity(0.6))),
             width: double.infinity,
             child: Row(
               children: [
@@ -49,12 +49,16 @@ class ItemBloc extends StatelessWidget {
                         title,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: (received ? MyColors.bleu : MyColors.bleu)),
+                            color: (received
+                                ? MyColors.primary
+                                : MyColors.primary)),
                       ),
                       Text(
                         subtitle,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: (received ? MyColors.bleu : MyColors.bleu),
+                              color: (received
+                                  ? MyColors.primary
+                                  : MyColors.primary),
                             ),
                       ),
                       Text(
@@ -63,8 +67,9 @@ class ItemBloc extends StatelessWidget {
                             .textTheme
                             .labelMedium!
                             .copyWith(
-                                color:
-                                    (received ? MyColors.bleu : MyColors.bleu)),
+                                color: (received
+                                    ? MyColors.primary
+                                    : MyColors.primary)),
                       ),
                     ],
                   ),
@@ -72,7 +77,7 @@ class ItemBloc extends StatelessWidget {
                 Center(
                   child: Icon(
                       received ? Icons.inventory_2 : Icons.watch_later_outlined,
-                      color: received ? MyColors.vert : MyColors.bleu),
+                      color: received ? MyColors.success : MyColors.primary),
                 ),
               ],
             ),

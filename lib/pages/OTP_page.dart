@@ -84,7 +84,7 @@ class _OPTPageState extends State<OPTPage> {
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             width: Get.size.width,
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: SafeArea(
@@ -97,7 +97,7 @@ class _OPTPageState extends State<OPTPage> {
                     style: Theme.of(context)
                         .textTheme
                         .displayLarge!
-                        .copyWith(color: MyColors.beige),
+                        .copyWith(color: MyColors.secondary),
                   ),
                   const SizedBox(height: Tools.PADDING / 3),
                   Text(
@@ -105,7 +105,7 @@ class _OPTPageState extends State<OPTPage> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(color: MyColors.beige, height: 2),
+                        .copyWith(color: MyColors.secondary, height: 2),
                   ),
                 ],
               )
@@ -122,7 +122,8 @@ class _OPTPageState extends State<OPTPage> {
                 horizontal: Tools.PADDING * 2,
               ),
               decoration: const BoxDecoration(
-                  color: MyColors.beige, border: Border(top: BorderSide.none)),
+                  color: MyColors.secondary,
+                  border: Border(top: BorderSide.none)),
               child: Column(
                 children: [
                   SizedBox(height: Tools.PADDING * 2),

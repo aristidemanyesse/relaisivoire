@@ -12,7 +12,7 @@ class Prefix extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MyColors.bleu.withOpacity(0.1),
+      color: MyColors.primary.withOpacity(0.1),
       padding: const EdgeInsets.symmetric(
           horizontal: Tools.PADDING / 2, vertical: Tools.PADDING / 2),
       child: Text(text, style: Theme.of(context).textTheme.titleMedium),

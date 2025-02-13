@@ -21,7 +21,7 @@ class Commander1 extends StatelessWidget {
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
@@ -32,14 +32,14 @@ class Commander1 extends StatelessWidget {
                   "Que voulez-vous faire livrer ?",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.beige, fontWeight: FontWeight.bold),
+                      color: MyColors.secondary, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Type de colis",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
               ],
             )),

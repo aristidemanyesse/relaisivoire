@@ -27,7 +27,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         height: 550,
-        color: MyColors.beige,
+        color: MyColors.secondary,
         width: double.infinity,
         child: Column(
           children: [
@@ -80,7 +80,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
                   Icon(
                     Icons.location_on_sharp,
                     size: 80,
-                    color: MyColors.bleu,
+                    color: MyColors.primary,
                   ),
                   SizedBox(width: Tools.PADDING / 2),
                   Expanded(

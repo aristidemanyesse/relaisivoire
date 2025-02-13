@@ -40,10 +40,8 @@ class _ColisPageState extends State<ColisPage> {
             Text(
               "LPR - 458 965 230",
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: MyColors.secondary, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -53,7 +51,7 @@ class _ColisPageState extends State<ColisPage> {
                 onPressed: () {
                   showMaterialModalBottomSheet(
                     context: context,
-                    backgroundColor: MyColors.beige,
+                    backgroundColor: MyColors.secondary,
                     builder: (context) => Container(
                       padding: const EdgeInsets.all(10),
                       child: Column(
@@ -116,7 +114,7 @@ class _ColisPageState extends State<ColisPage> {
                       height: 280,
                       width: Get.size.width,
                       decoration: const BoxDecoration(
-                          color: MyColors.bleu,
+                          color: MyColors.primary,
                           border: Border.symmetric(
                               horizontal: BorderSide.none,
                               vertical: BorderSide.none)),
@@ -155,7 +153,7 @@ class _ColisPageState extends State<ColisPage> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
-                                    .copyWith(color: MyColors.beige)),
+                                    .copyWith(color: MyColors.secondary)),
                           ],
                         ),
                       )),
@@ -210,7 +208,8 @@ class _ColisPageState extends State<ColisPage> {
                                         width: 20,
                                         margin: EdgeInsets.only(
                                             top: Tools.PADDING / 4),
-                                        color: MyColors.bleu.withOpacity(0.5),
+                                        color:
+                                            MyColors.primary.withOpacity(0.5),
                                       ),
                                       Spacer(
                                         flex: 2,
@@ -264,7 +263,7 @@ class _ColisPageState extends State<ColisPage> {
                                               width: 40,
                                               margin: EdgeInsets.only(
                                                   top: Tools.PADDING / 4),
-                                              color: MyColors.bleu
+                                              color: MyColors.primary
                                                   .withOpacity(0.5),
                                             ),
                                             Spacer(
@@ -286,7 +285,7 @@ class _ColisPageState extends State<ColisPage> {
                                   height: 7,
                                   width: 7,
                                   decoration: BoxDecoration(
-                                      color: MyColors.bleu.withOpacity(0.3),
+                                      color: MyColors.primary.withOpacity(0.3),
                                       borderRadius: BorderRadius.circular(100)),
                                 ),
                                 const SizedBox(
@@ -296,7 +295,7 @@ class _ColisPageState extends State<ColisPage> {
                                   height: 7,
                                   width: 7,
                                   decoration: BoxDecoration(
-                                      color: MyColors.bleu.withOpacity(1),
+                                      color: MyColors.primary.withOpacity(1),
                                       borderRadius: BorderRadius.circular(100)),
                                 )
                               ],

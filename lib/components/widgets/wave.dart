@@ -10,18 +10,18 @@ class Wave extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: MyColors.bleu,
+          color: MyColors.primary,
           border: Border(
-              top: BorderSide(width: 0, color: MyColors.bleu),
+              top: BorderSide(width: 0, color: MyColors.primary),
               bottom: BorderSide(
-                  color: MyColors.beige.withOpacity(0.5), width: 10))),
+                  color: MyColors.secondary.withOpacity(0.5), width: 10))),
       height: double.infinity,
       width: double.infinity,
       // child: WaveWidget(
       //   config: CustomConfig(
       //     gradients: [
-      //       [MyColors.beige, MyColors.beige],
-      //       [MyColors.beige.withOpacity(0.5), MyColors.beige.withOpacity(0.5)],
+      //       [MyColors.secondary, MyColors.secondary],
+      //       [MyColors.secondary.withOpacity(0.5), MyColors.secondary.withOpacity(0.5)],
       //     ],
       //     durations: [30000, 35000],
       //     heightPercentages: [0.4, 0.23],
@@ -29,7 +29,7 @@ class Wave extends StatelessWidget {
       //     gradientEnd: Alignment.topCenter,
       //   ),
       //   waveAmplitude: 0,
-      //   backgroundColor: MyColors.bleu,
+      //   backgroundColor: MyColors.primary,
       //   size: const Size(double.infinity, double.infinity),
       // ),
     );
