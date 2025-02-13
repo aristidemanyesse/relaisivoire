@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/NotificationItem.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -13,8 +12,6 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

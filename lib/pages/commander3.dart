@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/emballage_bloc.dart';
+import 'package:lpr/components/widgets/EmballageBloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 
 class Commander3 extends StatelessWidget {
-  const Commander3({
+  Commander3({
     super.key,
   });
 
@@ -55,16 +56,19 @@ class Commander3 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 EmballageBloc(
+                  id: "1",
                   title: "Oui, j'ai bien emballé.",
                   subtitle: "oui parfaitement emballé, bien scéllé.",
                   icon: Icons.redeem,
                 ),
                 EmballageBloc(
+                  id: "2",
                   title: "Euuh, un peu ...",
                   subtitle: "C'est pas vraiment emballé mais ça va.",
                   icon: Icons.inventory_2_outlined,
                 ),
                 EmballageBloc(
+                  id: "3",
                   title: "Non, pas du tout !",
                   subtitle: "Y'a rien dessus, juste le colis.",
                   icon: Icons.layers_outlined,

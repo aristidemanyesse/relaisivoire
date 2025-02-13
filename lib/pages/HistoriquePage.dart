@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/Tip.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
 
 class HistoriquePage extends StatefulWidget {
@@ -14,8 +12,6 @@ class HistoriquePage extends StatefulWidget {
 }
 
 class _HistoriquePageState extends State<HistoriquePage> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

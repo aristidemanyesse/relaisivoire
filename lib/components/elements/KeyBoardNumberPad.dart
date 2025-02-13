@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/keyboard_button.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 
-class KeyBoardNumber extends StatelessWidget {
-  KeyBoardNumber({
+class KeyBoardNumberPad extends StatelessWidget {
+  final int limit;
+  KeyBoardNumberPad({
+    required this.limit,
     super.key,
   });
 
-  final KeyBoradController _keyBoradController = Get.find();
+  KeyBoardController keyBoardController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,11 @@ class KeyBoardNumber extends StatelessWidget {
         itemCount: 12,
         itemBuilder: (BuildContext context, int index) {
           if (index == 10) {
-            return KeyboardButton(text: "0");
+            return KeyboardButton(
+              text: "0",
+              limit: limit,
+              controller: keyBoardController,
+            );
           } else if (index == 9) {
             return Container();
           } else if (index == 11) {
@@ -36,11 +42,14 @@ class KeyBoardNumber extends StatelessWidget {
                 color: MyColors.bleu,
               ),
               onPressed: () {
-                _keyBoradController.remove();
+                keyBoardController.remove();
               },
             );
           } else {
-            return KeyboardButton(text: "${index + 1}");
+            return KeyboardButton(
+                limit: limit,
+                controller: keyBoardController,
+                text: "${index + 1}");
           }
         },
       ),

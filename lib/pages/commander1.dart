@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/type_colis_item.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 
 class Commander1 extends StatelessWidget {
-  const Commander1({
+  Commander1({
     super.key,
   });
+
+  CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +69,21 @@ class Commander1 extends StatelessWidget {
                       crossAxisSpacing: Tools.PADDING * 1.5,
                     ),
                     children: [
-                      TypeColisItem(title: "Ultra léger", icon: "​🗂️"),
-                      TypeColisItem(title: "Petit sac, sachet", icon: "🛍️"),
-                      TypeColisItem(title: "Boite", icon: "​🗃️​"),
-                      TypeColisItem(title: "Carton moyen", icon: "📦​​​"),
-                      TypeColisItem(title: "Gros cartons", icon: "🗄️"),
-                      TypeColisItem(title: "Valise", icon: "🧳"),
-                      TypeColisItem(title: "Petit meuble", icon: "🪑"),
-                      TypeColisItem(title: "Electroménager", icon: "📺"),
-                      TypeColisItem(title: "Spécial, fragile", icon: "💎"),
+                      TypeColisItem(
+                          id: "1", title: "Ultra léger", icon: "​🗂️"),
+                      TypeColisItem(
+                          id: "2", title: "Petit sac, sachet", icon: "🛍️"),
+                      TypeColisItem(id: "3", title: "Boite", icon: "​🗃️​"),
+                      TypeColisItem(
+                          id: "4", title: "Carton moyen", icon: "📦​​​"),
+                      TypeColisItem(
+                          id: "5", title: "Gros cartons", icon: "🗄️"),
+                      TypeColisItem(id: "6", title: "Valise", icon: "🧳"),
+                      TypeColisItem(id: "7", title: "Petit meuble", icon: "🪑"),
+                      TypeColisItem(
+                          id: "8", title: "Electroménager", icon: "📺"),
+                      TypeColisItem(
+                          id: "9", title: "Spécial, fragile", icon: "💎"),
                     ],
                   ),
                 ),

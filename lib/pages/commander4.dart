@@ -3,14 +3,16 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/TypeDestinataireBloc.dart';
-import 'package:lpr/components/widgets/emballage_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/pages/FormulaireContactDestinataire.dart';
 
 class Commander4 extends StatelessWidget {
-  const Commander4({
+  Commander4({
     super.key,
   });
+
+  CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +60,13 @@ class Commander4 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TypeDestinataireBloc(
+                  id: "1",
                   title: "Moi-même",
                   subtitle: "oui parfaitement emballé, bien scéllé.",
                   icon: Icons.person,
                 ),
                 TypeDestinataireBloc(
+                  id: "2",
                   title: "Quelqu'un d'autre",
                   subtitle: "C'est pas vraiment emballé mais ça va.",
                   icon: Icons.person_2_outlined,
@@ -70,13 +74,22 @@ class Commander4 extends StatelessWidget {
               ]),
         ),
         Spacer(),
-        Visibility(
-                visible: false,
-                child: SizedBox(
-                    height: 300, child: FormulaireContactDestinataire()))
-            .animate()
-            .fadeIn(duration: 400.ms)
-            .moveY(duration: 400.ms, begin: -25.0, end: 0),
+        Obx(() {
+          return Visibility(
+                  visible: _controller.typeDestinataire.value == "2",
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Divider(),
+                      SizedBox(height: Tools.PADDING),
+                      SizedBox(
+                          height: 300, child: FormulaireContactDestinataire()),
+                    ],
+                  ))
+              .animate()
+              .fadeIn(duration: 400.ms)
+              .moveY(duration: 400.ms, begin: -25.0, end: 0);
+        }),
         const SizedBox(
           height: Tools.PADDING * 2,
         ),

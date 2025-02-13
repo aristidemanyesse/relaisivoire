@@ -5,16 +5,21 @@ import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/ScheduleItem.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 
 class PointRelaisDetailPopup extends StatelessWidget {
-  const PointRelaisDetailPopup({
+  PointRelaisDetailPopup({
     super.key,
+    required this.id,
     required this.title,
     required this.subtitle,
   });
 
+  final String id;
   final String title;
   final String subtitle;
+
+  CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +146,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
                     title: "Choisir ce point relais ",
                     icon: Icons.check,
                     onPressed: () {
+                      _controller.pointRelais.value = id;
                       Get.back();
                     })),
             Spacer(),

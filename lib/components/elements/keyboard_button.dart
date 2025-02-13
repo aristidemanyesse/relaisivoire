@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 
 class KeyboardButton extends StatelessWidget {
   final String text;
+  final KeyBoardController controller;
+  final int limit;
 
-  KeyboardButton({
+  const KeyboardButton({
     super.key,
+    required this.limit,
     required this.text,
+    required this.controller,
   });
-
-  KeyBoradController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,9 @@ class KeyboardButton extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            controller.add(text);
+            if (controller.value.value.length < limit) {
+              controller.add(text);
+            }
           },
           child: Container(
             decoration: BoxDecoration(

@@ -4,12 +4,16 @@ import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/HandlePayementPopup.dart';
+import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/pages/PleaseWait.dart';
+import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:lpr/pages/commander1.dart';
 import 'package:lpr/pages/commander3.dart';
 import 'package:lpr/pages/commander4.dart';
 import 'package:lpr/pages/commander5.dart';
 import 'package:lpr/pages/commander6.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CommanderPage extends StatefulWidget {
   const CommanderPage({super.key});
@@ -23,7 +27,7 @@ class _CommanderPageState extends State<CommanderPage>
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
 
-  List<Widget> pages = const [
+  List<Widget> pages = [
     Commander1(),
     Commander3(),
     Commander4(),
@@ -149,11 +153,13 @@ class _CommanderPageState extends State<CommanderPage>
                         }),
                   if (_currentPageIndex == pages.length - 1)
                     MainButtonInverse(
-                      title: "Confirmer le colis",
+                      title: "Payer pour confirmer",
                       icon: Icons.check,
                       onPressed: () {
-                        Get.dialog(
-                          const PleaseWait(),
+                        showMaterialModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => HandlePayementPopup(),
                         );
                       },
                     ).animate().fadeIn(duration: 1000.ms)

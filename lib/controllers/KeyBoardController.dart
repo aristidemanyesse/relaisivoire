@@ -1,7 +1,13 @@
 import 'package:get/get.dart';
 
-class KeyBoradController extends GetxController {
+class KeyBoardController extends GetxController {
   RxString value = ''.obs;
+
+  @override
+  void onInit() {
+    value.value = "";
+    super.onInit();
+  }
 
   void add(String text) {
     value.value = value.value + text;

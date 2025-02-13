@@ -22,7 +22,8 @@ class ItemBloc extends StatelessWidget {
     return Material(
       child: InkWell(
         onTap: () {
-          Get.to(const ColisPage(), transition: Transition.topLevel);
+          Get.to(ColisPage(received: received),
+              transition: Transition.topLevel);
         },
         child: Card(
           margin: EdgeInsets.zero,
@@ -70,7 +71,7 @@ class ItemBloc extends StatelessWidget {
                 ),
                 Center(
                   child: Icon(
-                      received ? Icons.local_shipping : Icons.inventory_2,
+                      received ? Icons.inventory_2 : Icons.watch_later_outlined,
                       color: received ? MyColors.vert : MyColors.bleu),
                 ),
               ],

@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/elements/key_board_number.dart';
+import 'package:lpr/components/elements/KeyBoardNumberPad.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'dart:io';
 
@@ -20,7 +20,14 @@ class LoginNumber extends StatefulWidget {
 }
 
 class _LoginNumberState extends State<LoginNumber> {
-  final KeyBoradController _keyBoradController = Get.find();
+  KeyBoardController keyBoardController = Get.find();
+  String _number = "";
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   keyBoardController.value.value = "";
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,34 +106,43 @@ class _LoginNumberState extends State<LoginNumber> {
                     SizedBox(
                       height: Tools.PADDING * 2,
                     ),
-                    MyInputNumber(
-                        nb_places: 10, keyBoradController: _keyBoradController),
+                    Obx(() {
+                      _number = keyBoardController.value.value;
+                      return MyInputNumber(nbPlaces: 10, value: _number);
+                    }),
                     const Spacer(),
-                    KeyBoardNumber(),
+                    KeyBoardNumberPad(
+                      limit: 10,
+                    ),
                     SizedBox(
                       height: Tools.PADDING * 2,
                     ),
                     const Spacer(),
-                    MainButtonInverse(
-                        title: "Valider",
-                        icon: Icons.check,
-                        onPressed: () {
-                          Get.dialog(
-                            ConfirmDialog(
-                              title: "Confirmation",
-                              message:
-                                  "Vous confirmez que le ${_keyBoradController.value} est vraiment votre numero? Un SMS sera envoyé sur celui-ci.",
-                              testOk: "Je confirme",
-                              testCancel: "Non",
-                              functionOk: () {
-                                Get.off(const OPTPage());
-                              },
-                              functionCancel: () {
-                                Get.back();
-                              },
-                            ),
-                          );
-                        }),
+                    Obx(() {
+                      return (keyBoardController.value.value.length == 10)
+                          ? MainButtonInverse(
+                              title: "Valider",
+                              icon: Icons.check,
+                              onPressed: () {
+                                Get.dialog(
+                                  ConfirmDialog(
+                                    title: "Confirmation",
+                                    message:
+                                        "Vous confirmez que le $_number est vraiment votre numero? Un SMS sera envoyé sur celui-ci.",
+                                    testOk: "Je confirme",
+                                    testCancel: "Non",
+                                    functionOk: () {
+                                      keyBoardController.value.value = "";
+                                      Get.off(OPTPage(number: _number));
+                                    },
+                                    functionCancel: () {
+                                      Get.back();
+                                    },
+                                  ),
+                                );
+                              })
+                          : Container();
+                    }),
                     SizedBox(
                       height: Tools.PADDING * 2,
                     ),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
-import 'package:lpr/pages/OTP_page.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
 class LoginName extends StatefulWidget {
@@ -14,8 +12,6 @@ class LoginName extends StatefulWidget {
 }
 
 class _LoginNameState extends State<LoginName> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +95,7 @@ class _LoginNameState extends State<LoginName> {
                       MainButtonInverse(
                           title: "Valider",
                           onPressed: () {
-                            Get.to(const OPTPage());
+                            // Get.to(const OPTPage());
                           }),
                     ],
                   ),

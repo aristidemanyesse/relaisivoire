@@ -76,14 +76,17 @@ class _FormulaireContactDestinataireState
                   )),
             ],
           ),
-          Row(
-            children: [
-              Expanded(child: Divider()),
-              Container(
-                  margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                  child: Text("Ou")),
-              Expanded(child: Divider()),
-            ],
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: Tools.PADDING * 3),
+            child: Row(
+              children: [
+                Expanded(child: Divider()),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                    child: Text("Ou")),
+                Expanded(child: Divider()),
+              ],
+            ),
           ),
           Column(
             children: [

@@ -6,23 +6,27 @@ import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/elements/key_board_number.dart';
+import 'package:lpr/components/elements/KeyBoardNumberPad.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/pages/PleaseWait.dart';
+import 'package:lpr/pages/PleaseWait2.dart';
 
 class OPTPage extends StatefulWidget {
-  const OPTPage({super.key});
+  final String number;
+  const OPTPage({super.key, required this.number});
 
   @override
   State<OPTPage> createState() => _OPTPageState();
 }
 
 class _OPTPageState extends State<OPTPage> {
-  final KeyBoradController _keyBoradController = Get.find();
+  KeyBoardController keyBoardController = Get.find();
+  String _otp = "";
 
-  int _counter = 120; // Durée du timer (secondes)
+  int _counter = 60; // Durée du timer (secondes)
   late Timer _timer;
   bool _isButtonDisabled = true;
 
@@ -40,7 +44,7 @@ class _OPTPageState extends State<OPTPage> {
 
   void _startTimer() {
     _isButtonDisabled = true;
-    _counter = 120;
+    _counter = 60;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_counter > 0) {
         setState(() {
@@ -58,7 +62,13 @@ class _OPTPageState extends State<OPTPage> {
   void _resendOtp() {
     // Logique pour renvoyer l'OTP ici
     _startTimer(); // Redémarrer le timer
-    print("OTP renvoyé !");
+  }
+
+  void checkOtp() {
+    Get.dialog(PleaseWait2());
+    Future.delayed(Duration(seconds: 3), () {
+      Get.to(const ListeColisPage());
+    });
   }
 
   @override
@@ -91,7 +101,7 @@ class _OPTPageState extends State<OPTPage> {
                   ),
                   const SizedBox(height: Tools.PADDING / 3),
                   Text(
-                    "Nous vous avons envoyé un code par SMS sur \n+222 0404444040404",
+                    "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.number}",
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -120,15 +130,16 @@ class _OPTPageState extends State<OPTPage> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: Tools.PADDING,
                       ),
-                      child: MyInputNumber(
-                          nb_places: 4,
-                          keyBoradController: _keyBoradController)),
+                      child: Obx(() {
+                        _otp = keyBoardController.value.value;
+                        return MyInputNumber(nbPlaces: 4, value: _otp);
+                      })),
                   const Spacer(),
                   Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Tools.PADDING,
                       ),
-                      child: KeyBoardNumber()),
+                      child: KeyBoardNumberPad(limit: 4)),
                   const Spacer(),
                   if (_isButtonDisabled)
                     Row(
@@ -153,24 +164,30 @@ class _OPTPageState extends State<OPTPage> {
                               .copyWith(fontWeight: FontWeight.bold)),
                     ),
                   const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MainButton(
-                          title: "Retour",
-                          forward: false,
-                          icon: Icons.chevron_left,
-                          onPressed: () {
-                            Get.back();
-                          }),
-                      MainButtonInverse(
-                          title: "Confirmer OTP",
-                          icon: Icons.check,
-                          onPressed: () {
-                            Get.to(const ListeColisPage());
-                          }),
-                    ],
-                  ),
+                  Obx(() {
+                    return Row(
+                      mainAxisAlignment:
+                          (keyBoardController.value.value.length == 4)
+                              ? MainAxisAlignment.spaceBetween
+                              : MainAxisAlignment.center,
+                      children: [
+                        MainButton(
+                            title: "Retour",
+                            forward: false,
+                            icon: Icons.chevron_left,
+                            onPressed: () {
+                              Get.back();
+                            }),
+                        if (keyBoardController.value.value.length == 4)
+                          MainButtonInverse(
+                              title: "Confirmer OTP",
+                              icon: Icons.check,
+                              onPressed: () {
+                                checkOtp();
+                              }),
+                      ],
+                    );
+                  }),
                   SizedBox(
                     height: Tools.PADDING * 2,
                   ),

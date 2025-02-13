@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
 
 class CommandeProcessController extends GetxController {
-  RxString value = ''.obs;
+  RxString typeColis = ''.obs;
+  RxString typeEmballage = ''.obs;
+  RxString typeDestinataire = ''.obs;
+  RxString nomDestinataire = ''.obs;
+  RxString contactDestinataire = ''.obs;
+  RxString pointRelais = ''.obs;
 
-  void add(String text) {
-    value.value = value.value + text;
-  }
-
-  void remove() {
-    if (value.value.isNotEmpty) {
-      value.value = value.value.substring(0, value.value.length - 1);
-    }
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
   }
 }

@@ -91,23 +91,28 @@ class Commander5 extends StatelessWidget {
                   width: double.infinity,
                   child: Column(children: [
                     PontRelaisBloc(
+                      id: "1",
                       title: "Boutique de Banbara ",
                       subtitle: "Port-bouët Abattoir",
                       received: false,
                     ),
                     PontRelaisBloc(
+                        id: "2",
                         title: "Boutique Aly",
                         subtitle: "Marcory Anoumabo",
                         received: true),
                     PontRelaisBloc(
+                        id: "3",
                         title: "Boutique Aly",
                         subtitle: "Marcory sans fil",
                         received: true),
                     PontRelaisBloc(
+                        id: "4",
                         title: "Gallerie du parc",
                         subtitle: "Angré II Plateaux vallon",
                         received: true),
                     PontRelaisBloc(
+                        id: "5",
                         title: "ANK Service",
                         subtitle: "Port-bouët Vridi",
                         received: false),

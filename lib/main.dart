@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/AppTheme.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/Splashscreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Get.put(KeyBoradController());
+  Get.put(CommandeProcessController());
+  Get.put(KeyBoardController());
 
   runApp(const MyApp());
 }

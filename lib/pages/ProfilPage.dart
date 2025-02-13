@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -13,8 +12,6 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,10 +101,18 @@ class _ProfilPageState extends State<ProfilPage> {
                   child: Container(
                     height: 185,
                     width: 185,
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: MyColors.bleu, width: 7)),
+                      color: MyColors.beige,
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(color: MyColors.bleu, width: 7),
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        "assets/images/logo.png",
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ),
                 Spacer(),

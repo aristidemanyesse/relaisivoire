@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/poids_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 
 class Commander2 extends StatelessWidget {
-  const Commander2({
+  Commander2({
     super.key,
   });
+
+  CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,6 @@ import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
 import 'package:lpr/pages/commander.dart';
 import 'package:lpr/pages/parametre_page.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
 
@@ -20,8 +19,6 @@ class ListeColisPage extends StatefulWidget {
 }
 
 class _ListeColisPageState extends State<ListeColisPage> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return PopScope(

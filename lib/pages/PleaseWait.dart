@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/ColisPage.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
 
 class PleaseWait extends StatefulWidget {
   const PleaseWait({super.key});
@@ -13,12 +12,12 @@ class PleaseWait extends StatefulWidget {
 }
 
 class _PleaseWaitState extends State<PleaseWait> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5), () {
-      Get.offAll(const ColisPage());
+      Get.offAll(const ColisPage(
+        received: false,
+      ));
     });
     super.initState();
   }
@@ -35,9 +34,13 @@ class _PleaseWaitState extends State<PleaseWait> {
           children: [
             Lottie.asset('assets/lotties/wait.json', width: Get.width * 0.7),
             SizedBox(height: Tools.PADDING),
-            Text("Veuillez patienter...",
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: MyColors.bleu, fontWeight: FontWeight.bold))
+            Text(
+              "Veuillez patienter...",
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: MyColors.bleu,
+                    fontWeight: FontWeight.bold,
+                  ),
+            )
           ],
         ),
       ),

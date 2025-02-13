@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String title;

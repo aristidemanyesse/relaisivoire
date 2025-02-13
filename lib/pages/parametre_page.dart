@@ -7,8 +7,9 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/parametre_menu_item.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
-import 'package:lpr/controllers/keyboard_controller.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
+import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/pages/ProfilPage.dart';
 import 'package:lpr/pages/search_lpr.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -21,8 +22,6 @@ class ParametrePage extends StatefulWidget {
 }
 
 class _ParametrePageState extends State<ParametrePage> {
-  final KeyBoradController _keyBoradController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,100 +50,106 @@ class _ParametrePageState extends State<ParametrePage> {
           children: [
             SizedBox(height: 30, child: const Wave()),
             SizedBox(
-              height: Tools.PADDING,
+              height: Tools.PADDING * 2,
             ),
             Expanded(
               child: SizedBox(
-                  width: Get.size.width,
-                  child: ListView(
-                    children: [
-                      ParametreMenuItem(
-                        icon: Icons.person,
-                        title: "Mon Profil",
-                        subtitle: "Toutes mes activités",
-                        ontap: () {
-                          Get.to(ProfilPage());
-                        },
-                      ),
-                      Divider(),
-                      ParametreMenuItem(
-                        icon: Icons.history,
-                        title: "Historique",
-                        subtitle: "Toutes mes activités",
-                        ontap: () {
-                          Get.to(HistoriquePage());
-                        },
-                      ),
-                      ParametreMenuItem(
-                        icon: Icons.search,
-                        title: "Rechercher un point relais",
-                        subtitle: "Toutes mes activités",
-                        ontap: () {
-                          Get.to(SearchLPR());
-                        },
-                      ),
-                      Divider(),
-                      ParametreMenuItem(
-                        icon: Icons.help,
-                        title: "Assistance",
-                        subtitle: "Toutes mes activités",
-                        ontap: () {
-                          showMaterialModalBottomSheet(
-                            context: context,
-                            backgroundColor: MyColors.beige,
-                            builder: (context) => Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ListTile(
-                                      title: Text('Appel téléphonique'),
-                                      leading: const Icon(Icons.phone),
-                                      onTap: () {}),
-                                  ListTile(
-                                      title: Text('Assistance Whatsapp'),
-                                      leading: const Icon(Icons.whatshot),
-                                      onTap: () {}),
-                                  ListTile(
-                                    title: Text('Assistance Télégram'),
-                                    leading: const Icon(Icons.telegram),
-                                    onTap: () {},
-                                  ),
-                                ],
-                              ),
+                width: Get.size.width,
+                child: ListView(
+                  children: [
+                    ParametreMenuItem(
+                      icon: Icons.person,
+                      title: "Mon Profil",
+                      subtitle: "Toutes mes activités",
+                      ontap: () {
+                        Get.to(ProfilPage());
+                      },
+                    ),
+                    Divider(),
+                    ParametreMenuItem(
+                      icon: Icons.history,
+                      title: "Historique",
+                      subtitle: "Toutes mes activités",
+                      ontap: () {
+                        Get.to(HistoriquePage());
+                      },
+                    ),
+                    ParametreMenuItem(
+                      icon: Icons.search,
+                      title: "Rechercher un point relais",
+                      subtitle: "Toutes mes activités",
+                      ontap: () {
+                        Get.to(SearchLPR());
+                      },
+                    ),
+                    Divider(),
+                    ParametreMenuItem(
+                      icon: Icons.help,
+                      title: "Assistance",
+                      subtitle: "Toutes mes activités",
+                      ontap: () {
+                        showMaterialModalBottomSheet(
+                          context: context,
+                          backgroundColor: MyColors.beige,
+                          builder: (context) => Container(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                    title: Text('Appel téléphonique'),
+                                    leading: const Icon(Icons.phone),
+                                    onTap: () {}),
+                                ListTile(
+                                    title: Text('Assistance Whatsapp'),
+                                    leading: const Icon(Icons.whatshot),
+                                    onTap: () {}),
+                                ListTile(
+                                  title: Text('Assistance Télégram'),
+                                  leading: const Icon(Icons.telegram),
+                                  onTap: () {},
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                      ),
-                      Divider(),
-                      ParametreMenuItem(
-                        icon: Icons.logout,
-                        title: "Se déconnecter",
-                        subtitle: "Toutes mes activités",
-                        ontap: () {
-                          Get.to(
-                            Get.dialog(
-                              ConfirmDialog(
-                                title: "Déconnexion",
-                                message:
-                                    "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
-                                testOk: "Déconnexion",
-                                testCancel: "Non",
-                                functionOk: () {
-                                  exit(0);
-                                },
-                                functionCancel: () {
-                                  Get.back();
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  )),
+                          ),
+                        );
+                      },
+                    ),
+                    Divider(),
+                    ParametreMenuItem(
+                      icon: Icons.logout,
+                      title: "Se déconnecter",
+                      subtitle: "Toutes mes activités",
+                      ontap: () {
+                        Get.dialog(ConfirmDialog(
+                          title: "Déconnexion",
+                          message:
+                              "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
+                          testOk: "Déconnexion",
+                          testCancel: "Non",
+                          functionOk: () {
+                            KeyBoardController keyBoardController = Get.find();
+                            keyBoardController.onInit();
+                            Get.offAll(LoginNumber());
+                          },
+                          functionCancel: () {
+                            Get.back();
+                          },
+                        ));
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
+            Expanded(
+                child: Center(
+              child: Image.asset(
+                "assets/images/logo.png",
+                height: 150,
+              ),
+            )),
             SizedBox(height: 50, child: const WaveInverse()),
             Container(
               color: MyColors.bleu,
@@ -180,7 +185,7 @@ class _ParametrePageState extends State<ParametrePage> {
                             child: Text("|",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .bodyLarge!
+                                    .bodySmall!
                                     .copyWith(color: MyColors.beige))),
                       ),
                       Text("Politique d'utilisation",
