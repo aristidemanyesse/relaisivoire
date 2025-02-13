@@ -60,6 +60,21 @@ class _ColisPageState extends State<ColisPage> {
                         children: [
                           ListTile(
                               title: Text(
+                                'Voir le réçu de payement',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      color: MyColors.textprimary,
+                                    ),
+                              ),
+                              leading: const Icon(
+                                Icons.receipt_long,
+                                color: MyColors.textprimary,
+                              ),
+                              onTap: () {}),
+                          ListTile(
+                              title: Text(
                                 'Supprimer le colis',
                                 style: Theme.of(context)
                                     .textTheme
@@ -111,7 +126,7 @@ class _ColisPageState extends State<ColisPage> {
               child: Column(
                 children: [
                   Container(
-                      height: 280,
+                      height: 250,
                       width: Get.size.width,
                       decoration: const BoxDecoration(
                           color: MyColors.primary,
@@ -138,8 +153,8 @@ class _ColisPageState extends State<ColisPage> {
                                       child: Image.asset(
                                         "assets/images/qrcode.png",
                                         fit: BoxFit.contain,
-                                        height: 180,
-                                        width: 180,
+                                        height: 150,
+                                        width: 150,
                                       ),
                                     ),
                                   ),
@@ -173,103 +188,92 @@ class _ColisPageState extends State<ColisPage> {
                               scrollDirection: Axis.horizontal,
                               children: [
                                 SizedBox(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Spacer(),
-                                      StepRecap(
-                                          title: "Type de colis",
-                                          subtitle:
-                                              "Enveloppe - Porte-document"),
-                                      StepRecap(
-                                          title: "Poids du colis",
-                                          subtitle: "entre 2Kg et 5Kg"),
-                                      StepRecap(
-                                          title: "NIveau d'emballage",
-                                          subtitle: "Oui bien emballé"),
-                                      if (!widget.received)
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
                                         StepRecap(
-                                            title:
-                                                "Coordonnées du destinataire",
+                                            title: "Type de colis",
                                             subtitle:
-                                                "Koumba Yacine - 07 859 569 20"),
-                                      StepRecap(
-                                          title: "Lieu de livraison",
-                                          subtitle:
-                                              "Aly le bon - Marcory - Anoumabo"),
-                                      if (!widget.received)
+                                                "Enveloppe - Porte-document"),
                                         StepRecap(
-                                            title: "Total à payer",
-                                            subtitle: "1 200 Fcfa"),
-                                      Container(
-                                        height: 3,
-                                        width: 20,
-                                        margin: EdgeInsets.only(
-                                            top: Tools.PADDING / 4),
-                                        color:
-                                            MyColors.primary.withOpacity(0.5),
-                                      ),
-                                      Spacer(
-                                        flex: 2,
-                                      ),
-                                    ],
+                                            title: "Poids du colis",
+                                            subtitle: "entre 2Kg et 5Kg"),
+                                        StepRecap(
+                                            title: "NIveau d'emballage",
+                                            subtitle: "Oui bien emballé"),
+                                        if (!widget.received)
+                                          StepRecap(
+                                              title:
+                                                  "Coordonnées du destinataire",
+                                              subtitle:
+                                                  "Koumba Yacine - 07 859 569 20"),
+                                        StepRecap(
+                                            title: "Lieu de livraison",
+                                            subtitle:
+                                                "Aly le bon - Marcory - Anoumabo"),
+                                        if (!widget.received)
+                                          StepRecap(
+                                              title: "Total à payer",
+                                              subtitle: "1 200 Fcfa"),
+                                        Container(
+                                          height: 3,
+                                          width: 20,
+                                          margin: EdgeInsets.only(
+                                              top: Tools.PADDING / 4),
+                                          color:
+                                              MyColors.primary.withOpacity(0.5),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 if (widget.received)
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: Tools.PADDING),
-                                    child: Row(
+                                  SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Spacer(),
-                                            StepProcess(
-                                                text: "1",
-                                                title: "Colis renseigné",
-                                                subtitle:
-                                                    "En attende de dépôt"),
-                                            StepProcess(
-                                                text: "2",
-                                                title:
-                                                    "Colis déposé pour livraison",
-                                                subtitle:
-                                                    "En attende d'un livreur"),
-                                            StepProcess(
-                                                text: "3",
-                                                title:
-                                                    "Colis en cours de livraison",
-                                                subtitle:
-                                                    "Un de nos livreur est route pour livrer le colis"),
-                                            StepProcess(
-                                                text: "4",
-                                                title:
-                                                    "Colis disponible, on vous attend..",
-                                                subtitle:
-                                                    "Vous pouvez venir chercher votre colis"),
-                                            StepProcess(
-                                                text: "5",
-                                                title:
-                                                    "Colis récupé par le destinataire",
-                                                subtitle:
-                                                    "Koné moussa a récupéré le colis"),
-                                            Container(
-                                              height: 3,
-                                              width: 40,
-                                              margin: EdgeInsets.only(
-                                                  top: Tools.PADDING / 4),
-                                              color: MyColors.primary
-                                                  .withOpacity(0.5),
-                                            ),
-                                            Spacer(
-                                              flex: 2,
-                                            )
-                                          ],
+                                        StepProcess(
+                                            text: "1",
+                                            title: "Colis renseigné",
+                                            subtitle: "En attende de dépôt"),
+                                        StepProcess(
+                                            text: "2",
+                                            title:
+                                                "Colis déposé pour livraison",
+                                            subtitle:
+                                                "En attende d'un livreur"),
+                                        StepProcess(
+                                            text: "3",
+                                            title:
+                                                "Colis en cours de livraison",
+                                            subtitle:
+                                                "Un de nos livreur est route pour livrer le colis"),
+                                        StepProcess(
+                                            text: "4",
+                                            title:
+                                                "Colis disponible, on vous attend..",
+                                            subtitle:
+                                                "Vous pouvez venir chercher votre colis"),
+                                        StepProcess(
+                                            text: "5",
+                                            title:
+                                                "Colis récupé par le destinataire",
+                                            subtitle:
+                                                "Koné moussa a récupéré le colis"),
+                                        Container(
+                                          height: 3,
+                                          width: 40,
+                                          margin: EdgeInsets.only(
+                                              top: Tools.PADDING / 4),
+                                          color:
+                                              MyColors.primary.withOpacity(0.5),
                                         ),
                                       ],
                                     ),
@@ -277,7 +281,7 @@ class _ColisPageState extends State<ColisPage> {
                               ],
                             ),
                           ),
-                          if (widget.received)
+                          if (widget.received) ...{
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -300,9 +304,10 @@ class _ColisPageState extends State<ColisPage> {
                                 )
                               ],
                             ),
-                          SizedBox(
-                            height: Tools.PADDING,
-                          )
+                            SizedBox(
+                              height: Tools.PADDING,
+                            )
+                          }
                         ],
                       ),
                     ),
@@ -310,28 +315,30 @@ class _ColisPageState extends State<ColisPage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: Tools.PADDING,
-            ),
-            if (!widget.received)
-              Text(
-                " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontStyle: FontStyle.italic),
+            if (!widget.received) ...{
+              SizedBox(
+                height: Tools.PADDING,
               ),
-            SizedBox(
-              height: Tools.PADDING,
-            ),
-            if (!widget.received)
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                child: Text(
+                  " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontStyle: FontStyle.italic),
+                ),
+              ),
+              SizedBox(
+                height: Tools.PADDING,
+              ),
               SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     MainButtonInverse(
-                        title: "Me guider vers un point relais",
+                        title: "Trouver un point relais",
                         icon: Icons.location_on_sharp,
                         onPressed: () {
                           Get.to(SearchLPR());
@@ -339,8 +346,15 @@ class _ColisPageState extends State<ColisPage> {
                   ],
                 ),
               ),
+            } else
+              MainButtonInverse(
+                  title: "Me guider vers le point relais",
+                  icon: Icons.location_on_sharp,
+                  onPressed: () {
+                    Get.to(SearchLPR());
+                  }),
             SizedBox(
-              height: Tools.PADDING * 2,
+              height: Tools.PADDING,
             ),
           ],
         ),

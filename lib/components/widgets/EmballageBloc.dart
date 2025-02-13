@@ -17,7 +17,7 @@ class EmballageBloc extends StatelessWidget {
     required this.icon,
   });
 
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -43,7 +43,7 @@ class Commander6 extends StatelessWidget {
         const SizedBox(height: 20, child: Wave()),
         Spacer(),
         Container(
-          height: 550,
+          height: 500,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: Tools.PADDING * 2,

@@ -10,7 +10,7 @@ class Commander2 extends StatelessWidget {
     super.key,
   });
 
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

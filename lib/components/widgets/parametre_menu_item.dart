@@ -18,7 +18,7 @@ class ParametreMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: MyColors.primary, size: 30),
+      leading: Icon(icon, color: MyColors.textprimary, size: 30),
       dense: true,
       onTap: () {
         ontap();

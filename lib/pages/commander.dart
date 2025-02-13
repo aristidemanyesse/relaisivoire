@@ -5,9 +5,6 @@ import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/HandlePayementPopup.dart';
-import 'package:lpr/components/widgets/wave.dart';
-import 'package:lpr/pages/PleaseWait.dart';
-import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:lpr/pages/commander1.dart';
 import 'package:lpr/pages/commander3.dart';
 import 'package:lpr/pages/commander4.dart';
@@ -133,8 +130,8 @@ class _CommanderPageState extends State<CommanderPage>
                   },
                   children: pages),
             ),
+            SizedBox(height: Tools.PADDING),
             Container(
-              height: 100,
               margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Row(
                 mainAxisAlignment: (_currentPageIndex > 0)

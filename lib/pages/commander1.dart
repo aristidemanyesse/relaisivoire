@@ -10,7 +10,7 @@ class Commander1 extends StatelessWidget {
     super.key,
   });
 
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +53,9 @@ class Commander1 extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(
-                  height: Tools.PADDING * 2,
-                ),
+                Spacer(),
                 Container(
-                  height: 500,
+                  height: 450,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Tools.PADDING,
                   ),
@@ -71,8 +69,7 @@ class Commander1 extends StatelessWidget {
                     children: [
                       TypeColisItem(
                           id: "1", title: "Ultra léger", icon: "​🗂️"),
-                      TypeColisItem(
-                          id: "2", title: "Petit sac, sachet", icon: "🛍️"),
+                      TypeColisItem(id: "2", title: "Petit sac", icon: "🛍️"),
                       TypeColisItem(id: "3", title: "Boite", icon: "​🗃️​"),
                       TypeColisItem(
                           id: "4", title: "Carton moyen", icon: "📦​​​"),
@@ -87,6 +84,7 @@ class Commander1 extends StatelessWidget {
                     ],
                   ),
                 ),
+                Spacer(),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                   child: Text(

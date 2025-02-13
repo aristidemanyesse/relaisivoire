@@ -12,7 +12,7 @@ class Commander4 extends StatelessWidget {
     super.key,
   });
 
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -51,19 +51,22 @@ class Commander4 extends StatelessWidget {
         ),
         Spacer(),
         Container(
-          height: 200,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: Tools.PADDING,
           ),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 TypeDestinataireBloc(
                   id: "1",
                   title: "Moi-même",
                   subtitle: "oui parfaitement emballé, bien scéllé.",
                   icon: Icons.person,
+                ),
+                SizedBox(
+                  height: Tools.PADDING,
                 ),
                 TypeDestinataireBloc(
                   id: "2",
@@ -81,17 +84,20 @@ class Commander4 extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Divider(),
-                      SizedBox(height: Tools.PADDING),
-                      SizedBox(
-                          height: 300, child: FormulaireContactDestinataire()),
+                      SizedBox(child: FormulaireContactDestinataire()),
                     ],
                   ))
               .animate()
               .fadeIn(duration: 400.ms)
               .moveY(duration: 400.ms, begin: -25.0, end: 0);
         }),
+        Obx(() {
+          return _controller.typeDestinataire.value == "2"
+              ? Spacer()
+              : Container();
+        }),
         const SizedBox(
-          height: Tools.PADDING * 2,
+          height: Tools.PADDING,
         ),
       ],
     );

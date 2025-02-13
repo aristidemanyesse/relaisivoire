@@ -104,8 +104,9 @@ class _LoginNumberState extends State<LoginNumber> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: Tools.PADDING * 2,
+                      height: Tools.PADDING,
                     ),
+                    const Spacer(),
                     Obx(() {
                       _number = keyBoardController.value.value;
                       return MyInputNumber(nbPlaces: 10, value: _number);
@@ -113,9 +114,6 @@ class _LoginNumberState extends State<LoginNumber> {
                     const Spacer(),
                     KeyBoardNumberPad(
                       limit: 10,
-                    ),
-                    SizedBox(
-                      height: Tools.PADDING * 2,
                     ),
                     const Spacer(),
                     Obx(() {
@@ -143,8 +141,9 @@ class _LoginNumberState extends State<LoginNumber> {
                               })
                           : Container();
                     }),
+                    const Spacer(),
                     SizedBox(
-                      height: Tools.PADDING * 2,
+                      height: Tools.PADDING,
                     ),
                   ],
                 ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lpr/components/tools/tools.dart';
 
 class MapButton extends StatelessWidget {
   final Widget widget;

@@ -90,7 +90,10 @@ class _SplashscreenState extends State<Splashscreen>
                             },
                             child: Text(
                               "Passer",
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(color: MyColors.primary),
                             ),
                           )
                       ],

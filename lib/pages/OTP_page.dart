@@ -11,7 +11,6 @@ import 'package:lpr/components/widgets/my_input_number.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/components/widgets/wave.dart';
-import 'package:lpr/pages/PleaseWait.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 
 class OPTPage extends StatefulWidget {
@@ -126,7 +125,8 @@ class _OPTPageState extends State<OPTPage> {
                   border: Border(top: BorderSide.none)),
               child: Column(
                 children: [
-                  SizedBox(height: Tools.PADDING * 2),
+                  const SizedBox(height: Tools.PADDING / 3),
+                  const Spacer(),
                   Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Tools.PADDING,
@@ -189,8 +189,9 @@ class _OPTPageState extends State<OPTPage> {
                       ],
                     );
                   }),
+                  const Spacer(),
                   SizedBox(
-                    height: Tools.PADDING * 2,
+                    height: Tools.PADDING,
                   ),
                 ],
               ),

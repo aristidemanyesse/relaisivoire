@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,7 +49,7 @@ class _ParametrePageState extends State<ParametrePage> {
           children: [
             SizedBox(height: 30, child: const Wave()),
             SizedBox(
-              height: Tools.PADDING * 2,
+              height: Tools.PADDING,
             ),
             Expanded(
               child: SizedBox(

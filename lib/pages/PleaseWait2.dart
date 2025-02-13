@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/pages/ColisPage.dart';
 
 class PleaseWait2 extends StatefulWidget {
   const PleaseWait2({super.key});
@@ -31,7 +30,7 @@ class _PleaseWait2State extends State<PleaseWait2> {
             SizedBox(height: Tools.PADDING),
             Text("Veuillez patienter...",
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: MyColors.primary, fontWeight: FontWeight.bold))
+                    color: MyColors.textprimary, fontWeight: FontWeight.bold))
           ],
         ),
       ),

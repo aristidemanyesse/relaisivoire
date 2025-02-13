@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/EmballageBloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
-import 'package:lpr/controllers/CommandeProcessController.dart';
 
 class Commander3 extends StatelessWidget {
-  Commander3({
+  const Commander3({
     super.key,
   });
 

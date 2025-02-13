@@ -62,20 +62,23 @@ class _HistoriquePageState extends State<HistoriquePage> {
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: Tools.PADDING / 2),
-              child: Row(
-                children: [
-                  Tip(
-                    text: "Envoyés",
-                    icon: Icons.inventory_2,
-                    checked: true,
-                  ),
-                  Tip(text: "Réçus", icon: Icons.local_shipping),
-                  Tip(
-                    text: "En cours",
-                    icon: Icons.refresh,
-                  ),
-                  Tip(text: "Terminés", icon: Icons.check),
-                ],
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Tip(
+                      text: "Envoyés",
+                      icon: Icons.inventory_2,
+                      checked: true,
+                    ),
+                    Tip(text: "Réçus", icon: Icons.local_shipping),
+                    Tip(
+                      text: "En cours",
+                      icon: Icons.refresh,
+                    ),
+                    Tip(text: "Terminés", icon: Icons.check),
+                  ],
+                ),
               ),
             ),
             const SizedBox(

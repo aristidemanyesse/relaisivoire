@@ -19,7 +19,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

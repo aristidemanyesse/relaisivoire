@@ -19,7 +19,7 @@ class TypeColisItem extends StatelessWidget {
     this.description = "",
   });
 
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   void showPopup(BuildContext context) {
     showMaterialModalBottomSheet(

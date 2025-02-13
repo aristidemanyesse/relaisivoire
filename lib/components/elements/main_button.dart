@@ -34,7 +34,7 @@ class MainButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: Tools.PADDING, vertical: Tools.PADDING / 1.5),
             backgroundColor: MyColors.secondary,
-            foregroundColor: MyColors.primary,
+            foregroundColor: MyColors.textprimary,
           ),
           onPressed: () {
             onPressed();
@@ -51,10 +51,8 @@ class MainButton extends StatelessWidget {
               },
               Text(
                 title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.bold, color: MyColors.textprimary),
               ),
               if (forward) ...{
                 const SizedBox(

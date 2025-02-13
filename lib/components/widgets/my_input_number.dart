@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 
 class MyInputNumber extends StatelessWidget {
@@ -48,7 +47,6 @@ class MyInputNumber extends StatelessWidget {
             }),
           ),
         ),
-        const SizedBox(width: Tools.PADDING),
       ],
     );
   }
