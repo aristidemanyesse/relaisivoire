@@ -35,7 +35,7 @@ class ConfirmDialog extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                      color: MyColors.bleu,
+                      color: MyColors.primary,
                       height: 50,
                       alignment: Alignment.center,
                       child: Text(title.toUpperCase(),

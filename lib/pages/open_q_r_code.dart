@@ -24,7 +24,7 @@ class OpenQRCode extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .titleLarge!
-              .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
+              .copyWith(color: MyColors.secondary, fontWeight: FontWeight.bold),
         ),
       ),
       body: Center(
@@ -34,10 +34,8 @@ class OpenQRCode extends StatelessWidget {
             Text(
               "LPR - 458 965 230",
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .displaySmall!
-                  .copyWith(fontWeight: FontWeight.bold, color: MyColors.bleu),
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  fontWeight: FontWeight.bold, color: MyColors.primary),
             ),
             SizedBox(height: Tools.PADDING * 2),
             Hero(

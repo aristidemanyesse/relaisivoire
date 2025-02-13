@@ -15,8 +15,8 @@ class CircleIndicator extends StatelessWidget {
       height: 40,
       width: 40,
       decoration: BoxDecoration(
-          border: Border.all(color: MyColors.bleu),
-          color: MyColors.beige,
+          border: Border.all(color: MyColors.primary),
+          color: MyColors.secondary,
           borderRadius: BorderRadius.circular(100)),
       child: Center(
           child: Text(

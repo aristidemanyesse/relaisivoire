@@ -12,7 +12,7 @@ class Barre extends StatelessWidget {
       child: Container(
         height: 5,
         width: double.infinity,
-        color: MyColors.beige,
+        color: MyColors.secondary,
       ),
     );
   }
@@ -28,7 +28,7 @@ class BarreVerticale extends StatelessWidget {
     return Expanded(
       child: Container(
         width: 5,
-        color: MyColors.bleu,
+        color: MyColors.primary,
       ),
     );
   }

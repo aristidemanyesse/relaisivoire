@@ -18,7 +18,7 @@ class Commander6 extends StatelessWidget {
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
@@ -29,21 +29,21 @@ class Commander6 extends StatelessWidget {
                   "On fait une dernière vérification",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.beige, fontWeight: FontWeight.bold),
+                      color: MyColors.secondary, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Récapitulatif...",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
               ],
             )),
         const SizedBox(height: 20, child: Wave()),
         Spacer(),
         Container(
-          height: 550,
+          height: 500,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: Tools.PADDING * 2,

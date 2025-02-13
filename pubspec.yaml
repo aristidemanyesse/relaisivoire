@@ -108,11 +108,11 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  color: "#FBE4D8"
+  color: "#FFFFFF"
   image: assets/icons/logo.png
   # branding: assets/branding-production.png
   # branding_bottom_padding: 24
-  color_dark: "#FBE4D8"
+  color_dark: "#FFFFFF"
   image_dark: assets/icons/logo.png
   # branding_dark: assets/branding-production.png
 
@@ -120,7 +120,7 @@ flutter_native_splash:
     image: assets/icons/logo.png
     icon_background_color: "#ffffff"
     image_dark: assets/icons/logo.png
-    icon_background_color_dark: "#FBE4D8"
+    icon_background_color_dark: "#FFFFFF"
 
   web: false
 

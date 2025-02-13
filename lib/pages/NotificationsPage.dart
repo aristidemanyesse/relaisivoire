@@ -17,10 +17,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Notifications (22)",
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold)),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: MyColors.secondary, fontWeight: FontWeight.bold)),
       ),
       body: SizedBox(
         height: Get.size.height,
@@ -29,7 +27,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           children: [
             Container(
               height: 10,
-              color: MyColors.bleu,
+              color: MyColors.primary,
             ),
             Expanded(
               flex: 10,
@@ -47,12 +45,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
               ),
             ),
             Container(
-              color: MyColors.beige,
+              color: MyColors.secondary,
               height: 10,
             ),
             SizedBox(height: 50, child: const WaveInverse()),
             Container(
-              color: MyColors.bleu,
+              color: MyColors.primary,
               padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),
             ),
           ],

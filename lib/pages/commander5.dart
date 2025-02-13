@@ -18,7 +18,7 @@ class Commander5 extends StatelessWidget {
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
@@ -29,14 +29,14 @@ class Commander5 extends StatelessWidget {
                   "Où doit-il récuperer le colis ?",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.beige, fontWeight: FontWeight.bold),
+                      color: MyColors.secondary, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Lieu de récupe",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
                 SizedBox(
                   height: Tools.PADDING,
@@ -60,13 +60,13 @@ class Commander5 extends StatelessWidget {
                               vertical: 0, horizontal: 20.0),
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: MyColors.bleu, width: 1.0),
+                                BorderSide(color: MyColors.primary, width: 1.0),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(30.0)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: MyColors.bleu, width: 1.0),
+                                BorderSide(color: MyColors.primary, width: 1.0),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(30.0)),
                           ),
@@ -85,40 +85,35 @@ class Commander5 extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: Tools.PADDING / 2,
             ),
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Column(children: [
-                    PontRelaisBloc(
-                      id: "1",
-                      title: "Boutique de Banbara ",
-                      subtitle: "Port-bouët Abattoir",
-                      received: false,
-                    ),
-                    PontRelaisBloc(
-                        id: "2",
-                        title: "Boutique Aly",
-                        subtitle: "Marcory Anoumabo",
-                        received: true),
-                    PontRelaisBloc(
-                        id: "3",
-                        title: "Boutique Aly",
-                        subtitle: "Marcory sans fil",
-                        received: true),
-                    PontRelaisBloc(
-                        id: "4",
-                        title: "Gallerie du parc",
-                        subtitle: "Angré II Plateaux vallon",
-                        received: true),
-                    PontRelaisBloc(
-                        id: "5",
-                        title: "ANK Service",
-                        subtitle: "Port-bouët Vridi",
-                        received: false),
-                  ]),
+            child: SingleChildScrollView(
+              child: Column(children: [
+                PontRelaisBloc(
+                  id: "1",
+                  title: "Boutique de Banbara ",
+                  subtitle: "Port-bouët Abattoir",
+                  received: false,
                 ),
-              ],
+                PontRelaisBloc(
+                    id: "2",
+                    title: "Boutique Aly",
+                    subtitle: "Marcory Anoumabo",
+                    received: true),
+                PontRelaisBloc(
+                    id: "3",
+                    title: "Boutique Aly",
+                    subtitle: "Marcory sans fil",
+                    received: true),
+                PontRelaisBloc(
+                    id: "4",
+                    title: "Gallerie du parc",
+                    subtitle: "Angré II Plateaux vallon",
+                    received: true),
+                PontRelaisBloc(
+                    id: "5",
+                    title: "ANK Service",
+                    subtitle: "Port-bouët Vridi",
+                    received: false),
+              ]),
             ),
           ),
         ),

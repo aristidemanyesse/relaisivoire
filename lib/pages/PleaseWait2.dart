@@ -20,7 +20,7 @@ class _PleaseWait2State extends State<PleaseWait2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.beige.withOpacity(0.9),
+      backgroundColor: MyColors.secondary.withOpacity(0.9),
       body: SizedBox(
         height: Get.size.height,
         width: Get.size.width,
@@ -31,7 +31,7 @@ class _PleaseWait2State extends State<PleaseWait2> {
             SizedBox(height: Tools.PADDING),
             Text("Veuillez patienter...",
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: MyColors.bleu, fontWeight: FontWeight.bold))
+                    color: MyColors.textprimary, fontWeight: FontWeight.bold))
           ],
         ),
       ),

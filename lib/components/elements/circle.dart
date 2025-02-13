@@ -12,7 +12,7 @@ class Circle extends StatelessWidget {
       width: 15,
       height: 15,
       decoration: BoxDecoration(
-          color: MyColors.beige, borderRadius: BorderRadius.circular(100)),
+          color: MyColors.secondary, borderRadius: BorderRadius.circular(100)),
     );
   }
 }
@@ -28,7 +28,7 @@ class CircleInverse extends StatelessWidget {
       width: 15,
       height: 15,
       decoration: BoxDecoration(
-          color: MyColors.bleu, borderRadius: BorderRadius.circular(100)),
+          color: MyColors.primary, borderRadius: BorderRadius.circular(100)),
     );
   }
 }

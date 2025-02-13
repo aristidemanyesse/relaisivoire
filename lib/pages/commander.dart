@@ -49,7 +49,7 @@ class _CommanderPageState extends State<CommanderPage>
         title: Container(
           padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
           decoration: const BoxDecoration(
-            color: MyColors.bleu,
+            color: MyColors.primary,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +77,7 @@ class _CommanderPageState extends State<CommanderPage>
                     height: 10,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: MyColors.beige.withOpacity(0.7),
+                      color: MyColors.secondary.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
@@ -89,9 +89,9 @@ class _CommanderPageState extends State<CommanderPage>
                           child: Container(
                             height: 9,
                             decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: MyColors.beige, width: 0.5),
-                              color: MyColors.bleu.withOpacity(0.9),
+                              border: Border.all(
+                                  color: MyColors.secondary, width: 0.5),
+                              color: MyColors.primary.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(100),
                             ),
                           ),
@@ -119,7 +119,7 @@ class _CommanderPageState extends State<CommanderPage>
         height: Get.size.height,
         width: Get.size.width,
         decoration: BoxDecoration(
-            border: Border(top: BorderSide(width: 0, color: MyColors.bleu))),
+            border: Border(top: BorderSide(width: 0, color: MyColors.primary))),
         child: Column(
           children: [
             Expanded(
@@ -133,8 +133,8 @@ class _CommanderPageState extends State<CommanderPage>
                   },
                   children: pages),
             ),
+            SizedBox(height: Tools.PADDING),
             Container(
-              height: 100,
               margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Row(
                 mainAxisAlignment: (_currentPageIndex > 0)

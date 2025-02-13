@@ -18,7 +18,7 @@ class TypeColisDetailPopup extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        color: MyColors.beige,
+        color: MyColors.secondary,
         height: 230,
         child: Column(
           children: [

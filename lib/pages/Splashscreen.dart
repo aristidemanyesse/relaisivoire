@@ -48,8 +48,8 @@ class _SplashscreenState extends State<Splashscreen>
                     center: Alignment.center,
                     radius: 0.5,
                     colors: [
-                      MyColors.white.withOpacity(0.15),
-                      MyColors.beige, // Couleur extérieure (beige)
+                      Colors.white.withOpacity(0.15),
+                      MyColors.secondary, // Couleur extérieure (beige)
                     ],
                     stops: const [
                       0.3,
@@ -90,7 +90,10 @@ class _SplashscreenState extends State<Splashscreen>
                             },
                             child: Text(
                               "Passer",
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(color: MyColors.primary),
                             ),
                           )
                       ],
@@ -121,7 +124,8 @@ class _SplashscreenState extends State<Splashscreen>
             flex: 2,
             child: Container(
               decoration: const BoxDecoration(
-                  color: MyColors.bleu, border: Border(top: BorderSide.none)),
+                  color: MyColors.primary,
+                  border: Border(top: BorderSide.none)),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),

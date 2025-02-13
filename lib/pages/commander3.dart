@@ -19,7 +19,7 @@ class Commander3 extends StatelessWidget {
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
@@ -30,14 +30,14 @@ class Commander3 extends StatelessWidget {
                   "Votre colis est-il bien emballé ?",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.beige, fontWeight: FontWeight.bold),
+                      color: MyColors.secondary, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Etat du colis",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
               ],
             )),

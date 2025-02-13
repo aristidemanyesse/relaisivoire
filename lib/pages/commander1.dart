@@ -21,7 +21,7 @@ class Commander1 extends StatelessWidget {
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
@@ -32,14 +32,14 @@ class Commander1 extends StatelessWidget {
                   "Que voulez-vous faire livrer ?",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.beige, fontWeight: FontWeight.bold),
+                      color: MyColors.secondary, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Type de colis",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
               ],
             )),
@@ -53,11 +53,9 @@ class Commander1 extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(
-                  height: Tools.PADDING * 2,
-                ),
+                Spacer(),
                 Container(
-                  height: 500,
+                  height: 450,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Tools.PADDING,
                   ),
@@ -71,8 +69,7 @@ class Commander1 extends StatelessWidget {
                     children: [
                       TypeColisItem(
                           id: "1", title: "Ultra léger", icon: "​🗂️"),
-                      TypeColisItem(
-                          id: "2", title: "Petit sac, sachet", icon: "🛍️"),
+                      TypeColisItem(id: "2", title: "Petit sac", icon: "🛍️"),
                       TypeColisItem(id: "3", title: "Boite", icon: "​🗃️​"),
                       TypeColisItem(
                           id: "4", title: "Carton moyen", icon: "📦​​​"),
@@ -87,6 +84,7 @@ class Commander1 extends StatelessWidget {
                     ],
                   ),
                 ),
+                Spacer(),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                   child: Text(

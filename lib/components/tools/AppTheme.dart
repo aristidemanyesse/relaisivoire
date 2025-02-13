@@ -4,85 +4,85 @@ import 'package:lpr/components/tools/tools.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     useMaterial3: true,
-    primaryColor: MyColors.vert,
-    scaffoldBackgroundColor: MyColors.beige,
+    primaryColor: MyColors.success,
+    scaffoldBackgroundColor: MyColors.secondary,
     appBarTheme: const AppBarTheme(
-        backgroundColor: MyColors.bleu, foregroundColor: MyColors.beige),
-    colorScheme: ColorScheme.fromSeed(seedColor: MyColors.vert),
+        backgroundColor: MyColors.primary, foregroundColor: MyColors.secondary),
+    colorScheme: ColorScheme.fromSeed(seedColor: MyColors.success),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.bleu,
-          foregroundColor: MyColors.white,
+          backgroundColor: MyColors.textprimary,
+          foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: MyColors.bleu,
-      foregroundColor: MyColors.white,
+      backgroundColor: MyColors.textprimary,
+      foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
           fontSize: 40.0,
           fontWeight: FontWeight.bold,
           fontFamily: 'comat',
-          color: MyColors.bleu),
-      titleLarge:
-          TextStyle(fontSize: 25.0, fontFamily: 'comat', color: MyColors.bleu),
-      titleMedium:
-          TextStyle(fontSize: 23.0, fontFamily: 'comat', color: MyColors.bleu),
-      titleSmall:
-          TextStyle(fontSize: 20.0, fontFamily: 'comat', color: MyColors.bleu),
+          color: MyColors.textprimary),
+      titleLarge: TextStyle(
+          fontSize: 25.0, fontFamily: 'comat', color: MyColors.textprimary),
+      titleMedium: TextStyle(
+          fontSize: 23.0, fontFamily: 'comat', color: MyColors.textprimary),
+      titleSmall: TextStyle(
+          fontSize: 20.0, fontFamily: 'comat', color: MyColors.textprimary),
       labelLarge: TextStyle(
           fontSize: 18.0,
           letterSpacing: 1.8,
           fontWeight: FontWeight.normal,
           fontFamily: 'comat',
-          color: MyColors.bleu),
-      bodyLarge:
-          TextStyle(fontSize: 16, fontFamily: 'comat', color: MyColors.bleu),
-      bodyMedium:
-          TextStyle(fontSize: 14, fontFamily: 'comat', color: MyColors.bleu),
-      bodySmall:
-          TextStyle(fontSize: 12, fontFamily: 'comat', color: MyColors.bleu),
-      labelSmall:
-          TextStyle(fontSize: 12, fontFamily: 'comat', color: MyColors.bleu),
+          color: MyColors.textprimary),
+      bodyLarge: TextStyle(
+          fontSize: 16, fontFamily: 'comat', color: MyColors.textprimary),
+      bodyMedium: TextStyle(
+          fontSize: 14, fontFamily: 'comat', color: MyColors.textprimary),
+      bodySmall: TextStyle(
+          fontSize: 12, fontFamily: 'comat', color: MyColors.textprimary),
+      labelSmall: TextStyle(
+          fontSize: 12, fontFamily: 'comat', color: MyColors.textprimary),
     ),
   );
 
   static final darkTheme = ThemeData(
     useMaterial3: true,
-    primaryColor: MyColors.bleu,
-    scaffoldBackgroundColor: MyColors.bleu,
-    colorScheme: ColorScheme.fromSeed(seedColor: MyColors.vert),
+    primaryColor: MyColors.textprimary,
+    scaffoldBackgroundColor: MyColors.textprimary,
+    colorScheme: ColorScheme.fromSeed(seedColor: MyColors.success),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.vert,
-          foregroundColor: MyColors.beige,
+          backgroundColor: MyColors.success,
+          foregroundColor: MyColors.secondary,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
     ),
-    shadowColor: MyColors.white,
+    shadowColor: Colors.white,
     textTheme: const TextTheme(
       titleLarge: TextStyle(
           fontSize: 25.0,
           fontWeight: FontWeight.normal,
           fontFamily: 'comat',
-          color: MyColors.white),
+          color: Colors.white),
       labelLarge: TextStyle(
           fontSize: 18.0,
           letterSpacing: 1.8,
           fontWeight: FontWeight.normal,
           fontFamily: 'comat',
-          color: MyColors.white),
+          color: Colors.white),
       bodyLarge:
-          TextStyle(fontSize: 25, fontFamily: 'comat', color: MyColors.white),
+          TextStyle(fontSize: 25, fontFamily: 'comat', color: Colors.white),
       bodyMedium:
-          TextStyle(fontSize: 20, fontFamily: 'comat', color: MyColors.white),
+          TextStyle(fontSize: 20, fontFamily: 'comat', color: Colors.white),
       bodySmall:
-          TextStyle(fontSize: 18, fontFamily: 'comat', color: MyColors.white),
+          TextStyle(fontSize: 18, fontFamily: 'comat', color: Colors.white),
       labelSmall: TextStyle(
           fontSize: 16,
           letterSpacing: 4,
           fontFamily: 'comat',
-          color: MyColors.beige),
+          color: MyColors.secondary),
     ),
   );
 }

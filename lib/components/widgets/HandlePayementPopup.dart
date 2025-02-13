@@ -17,7 +17,7 @@ class HandlePayementPopup extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         height: 350,
-        color: MyColors.beige,
+        color: MyColors.secondary,
         width: double.infinity,
         child: Column(
           children: [

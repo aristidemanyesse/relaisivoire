@@ -16,7 +16,7 @@ class MapButton extends StatelessWidget {
         height: 45,
         width: 45,
         decoration: BoxDecoration(
-            color: MyColors.white, borderRadius: BorderRadius.circular(100)),
+            color: Colors.white, borderRadius: BorderRadius.circular(100)),
         child: Center(child: widget),
       ),
     );

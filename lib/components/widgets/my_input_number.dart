@@ -48,7 +48,6 @@ class MyInputNumber extends StatelessWidget {
             }),
           ),
         ),
-        const SizedBox(width: Tools.PADDING),
       ],
     );
   }

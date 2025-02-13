@@ -26,13 +26,13 @@ class _ParametrePageState extends State<ParametrePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyColors.bleu,
+        backgroundColor: MyColors.primary,
         title: Text(
           "Paramètres",
           style: Theme.of(context)
               .textTheme
               .titleMedium!
-              .copyWith(color: MyColors.beige, fontWeight: FontWeight.bold),
+              .copyWith(color: MyColors.secondary, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
             onPressed: () {
@@ -40,17 +40,17 @@ class _ParametrePageState extends State<ParametrePage> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: MyColors.beige,
+              color: MyColors.secondary,
             )),
       ),
       body: Container(
         decoration: BoxDecoration(
-            border: Border(top: BorderSide(width: 0, color: MyColors.bleu))),
+            border: Border(top: BorderSide(width: 0, color: MyColors.primary))),
         child: Column(
           children: [
             SizedBox(height: 30, child: const Wave()),
             SizedBox(
-              height: Tools.PADDING * 2,
+              height: Tools.PADDING,
             ),
             Expanded(
               child: SizedBox(
@@ -90,7 +90,7 @@ class _ParametrePageState extends State<ParametrePage> {
                       ontap: () {
                         showMaterialModalBottomSheet(
                           context: context,
-                          backgroundColor: MyColors.beige,
+                          backgroundColor: MyColors.secondary,
                           builder: (context) => Container(
                             padding: const EdgeInsets.all(10),
                             child: Column(
@@ -152,7 +152,7 @@ class _ParametrePageState extends State<ParametrePage> {
             )),
             SizedBox(height: 50, child: const WaveInverse()),
             Container(
-              color: MyColors.bleu,
+              color: MyColors.primary,
               padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -163,13 +163,13 @@ class _ParametrePageState extends State<ParametrePage> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
-                          .copyWith(color: MyColors.beige)),
+                          .copyWith(color: MyColors.secondary)),
                   SizedBox(height: Tools.PADDING / 3),
                   Text("Version 1.0.0.1502",
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
-                          .copyWith(color: MyColors.beige)),
+                          .copyWith(color: MyColors.secondary)),
                   SizedBox(height: Tools.PADDING / 3),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +178,7 @@ class _ParametrePageState extends State<ParametrePage> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
-                              .copyWith(color: MyColors.beige)),
+                              .copyWith(color: MyColors.secondary)),
                       SizedBox(
                         width: Tools.PADDING,
                         child: Center(
@@ -186,13 +186,13 @@ class _ParametrePageState extends State<ParametrePage> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
-                                    .copyWith(color: MyColors.beige))),
+                                    .copyWith(color: MyColors.secondary))),
                       ),
                       Text("Politique d'utilisation",
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!
-                              .copyWith(color: MyColors.beige)),
+                              .copyWith(color: MyColors.secondary)),
                     ],
                   ),
                 ],

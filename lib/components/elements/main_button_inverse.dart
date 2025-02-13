@@ -20,7 +20,7 @@ class MainButtonInverse extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-            color: MyColors.bleu.withOpacity(0.5),
+            color: MyColors.primary.withOpacity(0.5),
             blurRadius: 30,
             offset: const Offset(0, 5),
           ),
@@ -28,11 +28,11 @@ class MainButtonInverse extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 10,
-            shadowColor: MyColors.bleu.withOpacity(0.2),
+            shadowColor: MyColors.primary.withOpacity(0.2),
             padding: const EdgeInsets.symmetric(
                 horizontal: Tools.PADDING, vertical: Tools.PADDING / 1.5),
-            backgroundColor: MyColors.bleu,
-            foregroundColor: MyColors.beige,
+            backgroundColor: MyColors.primary,
+            foregroundColor: MyColors.secondary,
           ),
           onPressed: () {
             onPressed();
@@ -46,7 +46,7 @@ class MainButtonInverse extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: MyColors.beige,
+                      color: MyColors.secondary,
                     ),
               ),
               const SizedBox(
@@ -54,7 +54,7 @@ class MainButtonInverse extends StatelessWidget {
               ),
               Icon(
                 icon,
-                color: MyColors.beige,
+                color: MyColors.secondary,
               ).animate().fade(duration: 500.ms).scale()
             ],
           ),

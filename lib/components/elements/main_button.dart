@@ -22,7 +22,7 @@ class MainButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-            color: MyColors.beige.withOpacity(0.5),
+            color: MyColors.secondary.withOpacity(0.5),
             blurRadius: 30,
             offset: const Offset(0, 5),
           ),
@@ -33,8 +33,8 @@ class MainButton extends StatelessWidget {
             shadowColor: Colors.grey.withOpacity(0.7),
             padding: const EdgeInsets.symmetric(
                 horizontal: Tools.PADDING, vertical: Tools.PADDING / 1.5),
-            backgroundColor: MyColors.beige,
-            foregroundColor: MyColors.bleu,
+            backgroundColor: MyColors.secondary,
+            foregroundColor: MyColors.textprimary,
           ),
           onPressed: () {
             onPressed();
@@ -51,10 +51,8 @@ class MainButton extends StatelessWidget {
               },
               Text(
                 title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.bold, color: MyColors.textprimary),
               ),
               if (forward) ...{
                 const SizedBox(

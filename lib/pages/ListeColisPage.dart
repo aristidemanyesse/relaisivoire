@@ -66,16 +66,17 @@ class _ListeColisPageState extends State<ListeColisPage> {
           height: Get.size.height,
           width: Get.size.width,
           decoration: BoxDecoration(
-              border: Border(top: BorderSide(width: 0, color: MyColors.bleu))),
+              border:
+                  Border(top: BorderSide(width: 0, color: MyColors.primary))),
           child: Column(
             children: [
               Container(
                 width: Get.width,
                 padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                 decoration: BoxDecoration(
-                  border:
-                      Border(top: BorderSide(width: 0, color: MyColors.bleu)),
-                  color: MyColors.bleu,
+                  border: Border(
+                      top: BorderSide(width: 0, color: MyColors.primary)),
+                  color: MyColors.primary,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -86,13 +87,14 @@ class _ListeColisPageState extends State<ListeColisPage> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
-                          .copyWith(color: MyColors.beige),
+                          .copyWith(color: MyColors.secondary),
                     ),
                     Text(
                       "Jacques Amessan",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: MyColors.beige, fontWeight: FontWeight.bold),
+                          color: MyColors.secondary,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: Tools.PADDING),
                   ],
@@ -111,17 +113,17 @@ class _ListeColisPageState extends State<ListeColisPage> {
                       received: false,
                     ),
                     ItemBloc(
-                        title: "Valise gros colis",
+                        title: "Petit sac, sachet",
                         subtitle: "Boutique Aly - Marcory Anoumabo",
                         created: "il y a 1 heures",
                         received: true),
                     ItemBloc(
-                        title: "Valise gros colis",
-                        subtitle: "Boutique Aly - Marcory Anoumabo",
-                        created: "il y a 1 heures",
+                        title: "Spécial, fragile",
+                        subtitle: "Boutique Méféré - Cocody danga",
+                        created: "il y a 1 jour",
                         received: true),
                     ItemBloc(
-                        title: "Valise gros colis",
+                        title: "Valise",
                         subtitle: "Boutique Aly - Marcory Anoumabo",
                         created: "il y a 1 heures",
                         received: true),
@@ -134,13 +136,14 @@ class _ListeColisPageState extends State<ListeColisPage> {
                 ),
               ),
               Container(
-                color: MyColors.beige,
+                color: MyColors.secondary,
                 height: Get.height / 10,
               ),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: MyColors.primary,
           onPressed: () {
             Get.to(const CommanderPage());
           },
@@ -149,7 +152,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
               width: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: MyColors.bleu,
+                color: MyColors.primary,
               ),
               child: const Icon(Icons.add)),
         ),

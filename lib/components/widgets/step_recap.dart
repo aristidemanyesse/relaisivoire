@@ -28,7 +28,7 @@ class StepRecap extends StatelessWidget {
               height: 16,
               width: 16,
               decoration: BoxDecoration(
-                  color: MyColors.bleu.withOpacity(0.5),
+                  color: MyColors.primary.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(100)),
             ),
             SizedBox(
@@ -37,7 +37,7 @@ class StepRecap extends StatelessWidget {
                 child: Container(
                   height: 45,
                   width: 2,
-                  color: MyColors.bleu.withOpacity(0.5),
+                  color: MyColors.primary.withOpacity(0.5),
                 ),
               ),
             ),

@@ -21,7 +21,7 @@ class Commander2 extends StatelessWidget {
             width: Get.size.width,
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
             decoration: const BoxDecoration(
-                color: MyColors.bleu,
+                color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
             child: Column(
@@ -33,14 +33,14 @@ class Commander2 extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
                 Text(
                   "Poids de colis",
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
-                      .copyWith(color: MyColors.beige),
+                      .copyWith(color: MyColors.secondary),
                 ),
               ],
             )),

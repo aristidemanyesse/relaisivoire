@@ -20,6 +20,7 @@ class ItemBloc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: () {
           Get.to(ColisPage(received: received),
@@ -27,6 +28,7 @@ class ItemBloc extends StatelessWidget {
         },
         child: Card(
           margin: EdgeInsets.zero,
+          color: Colors.transparent,
           elevation: 0,
           child: Container(
             padding: const EdgeInsets.symmetric(
@@ -34,9 +36,9 @@ class ItemBloc extends StatelessWidget {
               vertical: Tools.PADDING / 4,
             ),
             decoration: BoxDecoration(
-                color: MyColors.beige.withAlpha(200),
+                color: MyColors.secondary.withAlpha(200),
                 border: Border.all(
-                    width: 0.5, color: MyColors.bleu.withOpacity(0.6))),
+                    width: 0.5, color: MyColors.textprimary.withOpacity(0.6))),
             width: double.infinity,
             child: Row(
               children: [
@@ -47,14 +49,18 @@ class ItemBloc extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: (received ? MyColors.bleu : MyColors.bleu)),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: (received
+                                ? MyColors.textprimary
+                                : MyColors.textprimary)),
                       ),
                       Text(
                         subtitle,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: (received ? MyColors.bleu : MyColors.bleu),
+                              color: (received
+                                  ? MyColors.textprimary
+                                  : MyColors.textprimary),
                             ),
                       ),
                       Text(
@@ -63,8 +69,9 @@ class ItemBloc extends StatelessWidget {
                             .textTheme
                             .labelMedium!
                             .copyWith(
-                                color:
-                                    (received ? MyColors.bleu : MyColors.bleu)),
+                                color: (received
+                                    ? MyColors.textprimary
+                                    : MyColors.textprimary)),
                       ),
                     ],
                   ),
@@ -72,7 +79,8 @@ class ItemBloc extends StatelessWidget {
                 Center(
                   child: Icon(
                       received ? Icons.inventory_2 : Icons.watch_later_outlined,
-                      color: received ? MyColors.vert : MyColors.bleu),
+                      color:
+                          received ? MyColors.success : MyColors.textprimary),
                 ),
               ],
             ),
