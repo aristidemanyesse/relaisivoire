@@ -151,12 +151,12 @@ class _ProfilPageState extends State<ProfilPage> {
                   child: Column(
                     children: [
                       Text("Niveau 4",
-                          style: Theme.of(context).textTheme.bodyMedium!),
+                          style: Theme.of(context).textTheme.bodySmall!),
                       Text(
                         "Pigeon voyageur",
                         style: Theme.of(context)
                             .textTheme
-                            .titleMedium!
+                            .bodyLarge!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: Tools.PADDING / 3),
@@ -165,7 +165,7 @@ class _ProfilPageState extends State<ProfilPage> {
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyLarge!
+                              .bodyMedium!
                               .copyWith(fontStyle: FontStyle.italic)),
                     ],
                   ),

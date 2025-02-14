@@ -55,7 +55,7 @@ class Commander1 extends StatelessWidget {
               children: [
                 Spacer(),
                 Container(
-                  height: 450,
+                  height: 430,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Tools.PADDING,
                   ),
@@ -91,12 +91,35 @@ class Commander1 extends StatelessWidget {
                       " * Veuillez choisir le format le plus adapté à votre colis au risque que votre colis ne soit accepté par le point relais.",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color: MyColors.danger,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold)),
+                          color: MyColors.danger, fontStyle: FontStyle.italic)),
                 ),
                 const SizedBox(
-                  height: Tools.PADDING,
+                  height: Tools.PADDING / 2,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                  padding: EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                      color: MyColors.danger.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.delete_forever_outlined,
+                        size: 15,
+                        color: MyColors.danger,
+                      ),
+                      Text(" Voir la liste des produits prohibés ",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: MyColors.danger,
+                                  fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
               ],
             ),

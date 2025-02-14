@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
+import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
@@ -101,38 +102,93 @@ class _ListeColisPageState extends State<ListeColisPage> {
                 ),
               ),
               const SizedBox(height: 30, child: Wave()),
-              SizedBox(height: Tools.PADDING),
+              SizedBox(height: Tools.PADDING / 2),
               Expanded(
                 child: SizedBox(
-                  width: double.infinity,
-                  child: ListView(children: [
-                    ItemBloc(
-                      title: "Enveloppe / Porte-document",
-                      subtitle: "Boutique de Banbara - Port-bouët Abattoir",
-                      created: "il y a 2 min",
-                      received: false,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              Container(
+                                color: MyColors.primary.withOpacity(0.5),
+                                width: double.infinity,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Tools.PADDING, vertical: 5),
+                                child: Text("Nouveaux colis à récupérer (2)",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(fontWeight: FontWeight.bold)),
+                              ),
+                              Column(
+                                children: [
+                                  ItemBloc(
+                                      title: "Petit sac, sachet",
+                                      subtitle:
+                                          "Boutique Aly - Marcory Anoumabo",
+                                      created: "il y a 1 heures",
+                                      received: true),
+                                  ItemBloc(
+                                      title: "Spécial, fragile",
+                                      subtitle:
+                                          "Boutique Méféré - Cocody danga",
+                                      created: "il y a 1 jour",
+                                      received: true),
+                                  ItemBloc(
+                                      title: "Valise",
+                                      subtitle:
+                                          "Boutique Aly - Marcory Anoumabo",
+                                      created: "il y a 1 heures",
+                                      received: true),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: Tools.PADDING * 1.5,
+                        ),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                color: MyColors.primary.withOpacity(0.2),
+                                width: double.infinity,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Tools.PADDING, vertical: 5),
+                                child: Text("Colis à déposer (2)",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(fontWeight: FontWeight.bold)),
+                              ),
+                              Column(
+                                children: [
+                                  ItemBloc(
+                                    title: "Enveloppe / Porte-document",
+                                    subtitle:
+                                        "Boutique de Banbara - Port-bouët Abattoir",
+                                    created: "il y a 2 min",
+                                    received: false,
+                                  ),
+                                  ItemBloc(
+                                      title: "Carton moyen",
+                                      subtitle:
+                                          "ANK Service - Port-bouët Vridi",
+                                      created: "il y a 2 heures",
+                                      received: false),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    ItemBloc(
-                        title: "Petit sac, sachet",
-                        subtitle: "Boutique Aly - Marcory Anoumabo",
-                        created: "il y a 1 heures",
-                        received: true),
-                    ItemBloc(
-                        title: "Spécial, fragile",
-                        subtitle: "Boutique Méféré - Cocody danga",
-                        created: "il y a 1 jour",
-                        received: true),
-                    ItemBloc(
-                        title: "Valise",
-                        subtitle: "Boutique Aly - Marcory Anoumabo",
-                        created: "il y a 1 heures",
-                        received: true),
-                    ItemBloc(
-                        title: "Carton moyen",
-                        subtitle: "ANK Service - Port-bouët Vridi",
-                        created: "il y a 2 heures",
-                        received: false),
-                  ]),
+                  ),
                 ),
               ),
               Container(
@@ -142,19 +198,18 @@ class _ListeColisPageState extends State<ListeColisPage> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: MyColors.primary,
-          onPressed: () {
-            Get.to(const CommanderPage());
-          },
-          child: Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: MyColors.primary,
-              ),
-              child: const Icon(Icons.add)),
+        floatingActionButton: Row(
+          children: [
+            Spacer(),
+            MainButtonInverse(
+              onPressed: () {
+                Get.to(const CommanderPage());
+              },
+              title: "Nouveau colis",
+              icon: Icons.add,
+            ),
+            Spacer(),
+          ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),

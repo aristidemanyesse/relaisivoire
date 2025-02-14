@@ -126,7 +126,7 @@ class _ColisPageState extends State<ColisPage> {
               child: Column(
                 children: [
                   Container(
-                      height: 250,
+                      height: 200,
                       width: Get.size.width,
                       decoration: const BoxDecoration(
                           color: MyColors.primary,
@@ -162,8 +162,7 @@ class _ColisPageState extends State<ColisPage> {
                               ),
                             ),
                             SizedBox(height: Tools.PADDING / 2),
-                            Text(
-                                "* Faites scaner le QR code par l'agent \ndans le point relais",
+                            Text("* Scannez le QRcode dans le point relais",
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -216,7 +215,7 @@ class _ColisPageState extends State<ColisPage> {
                                                 "Aly le bon - Marcory - Anoumabo"),
                                         if (!widget.received)
                                           StepRecap(
-                                              title: "Total à payer",
+                                              title: "Total à payer au dépôt",
                                               subtitle: "1 200 Fcfa"),
                                         Container(
                                           height: 3,

@@ -65,7 +65,8 @@ class Commander6 extends StatelessWidget {
               const StepRecap(
                   title: "Lieu de livraison",
                   subtitle: "Aly le bon - Marcory - Anoumabo"),
-              const StepRecap(title: "Total à payer", subtitle: "1 200 Fcfa"),
+              const StepRecap(
+                  title: "Total à payer au dépôt", subtitle: "1 200 Fcfa"),
               const Spacer(),
               Text(
                   " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",

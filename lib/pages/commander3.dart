@@ -46,7 +46,7 @@ class Commander3 extends StatelessWidget {
         ),
         Spacer(),
         Container(
-          height: 300,
+          height: 200,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: Tools.PADDING,
@@ -62,14 +62,8 @@ class Commander3 extends StatelessWidget {
                 ),
                 EmballageBloc(
                   id: "2",
-                  title: "Euuh, un peu ...",
-                  subtitle: "C'est pas vraiment emballé mais ça va.",
-                  icon: Icons.inventory_2_outlined,
-                ),
-                EmballageBloc(
-                  id: "3",
-                  title: "Non, pas du tout !",
-                  subtitle: "Y'a rien dessus, juste le colis.",
+                  title: "Euuh, pas vraiment ...",
+                  subtitle: "C'est pas vraiment emballé, juste le colis.",
                   icon: Icons.layers_outlined,
                 ),
               ]),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
@@ -43,6 +42,7 @@ class _ParametrePageState extends State<ParametrePage> {
             )),
       ),
       body: Container(
+        height: Get.height,
         decoration: BoxDecoration(
             border: Border(top: BorderSide(width: 0, color: MyColors.primary))),
         child: Column(
@@ -51,105 +51,105 @@ class _ParametrePageState extends State<ParametrePage> {
             SizedBox(
               height: Tools.PADDING,
             ),
-            Expanded(
-              child: SizedBox(
-                width: Get.size.width,
-                child: ListView(
-                  children: [
-                    ParametreMenuItem(
-                      icon: Icons.person,
-                      title: "Mon Profil",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(ProfilPage());
-                      },
-                    ),
-                    Divider(),
-                    ParametreMenuItem(
-                      icon: Icons.history,
-                      title: "Historique",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(HistoriquePage());
-                      },
-                    ),
-                    ParametreMenuItem(
-                      icon: Icons.search,
-                      title: "Rechercher un point relais",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.to(SearchLPR());
-                      },
-                    ),
-                    Divider(),
-                    ParametreMenuItem(
-                      icon: Icons.help,
-                      title: "Assistance",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        showMaterialModalBottomSheet(
-                          context: context,
-                          backgroundColor: MyColors.secondary,
-                          builder: (context) => Container(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ListTile(
-                                    title: Text('Appel téléphonique'),
-                                    leading: const Icon(Icons.phone),
-                                    onTap: () {}),
-                                ListTile(
-                                    title: Text('Assistance Whatsapp'),
-                                    leading: const Icon(Icons.whatshot),
-                                    onTap: () {}),
-                                ListTile(
-                                  title: Text('Assistance Télégram'),
-                                  leading: const Icon(Icons.telegram),
-                                  onTap: () {},
-                                ),
-                              ],
-                            ),
+            SizedBox(
+              width: Get.size.width,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ParametreMenuItem(
+                    icon: Icons.person,
+                    title: "Mon Profil",
+                    subtitle: "Toutes mes activités",
+                    ontap: () {
+                      Get.to(ProfilPage());
+                    },
+                  ),
+                  Divider(),
+                  ParametreMenuItem(
+                    icon: Icons.history,
+                    title: "Historique",
+                    subtitle: "Toutes mes activités",
+                    ontap: () {
+                      Get.to(HistoriquePage());
+                    },
+                  ),
+                  ParametreMenuItem(
+                    icon: Icons.search,
+                    title: "Rechercher un point relais",
+                    subtitle: "Toutes mes activités",
+                    ontap: () {
+                      Get.to(SearchLPR());
+                    },
+                  ),
+                  Divider(),
+                  ParametreMenuItem(
+                    icon: Icons.help,
+                    title: "Assistance",
+                    subtitle: "Toutes mes activités",
+                    ontap: () {
+                      showMaterialModalBottomSheet(
+                        context: context,
+                        backgroundColor: MyColors.secondary,
+                        builder: (context) => Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                  title: Text('Appel téléphonique'),
+                                  leading: const Icon(Icons.phone),
+                                  onTap: () {}),
+                              ListTile(
+                                  title: Text('Assistance Whatsapp'),
+                                  leading: const Icon(Icons.whatshot),
+                                  onTap: () {}),
+                              ListTile(
+                                title: Text('Assistance Télégram'),
+                                leading: const Icon(Icons.telegram),
+                                onTap: () {},
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                    ),
-                    Divider(),
-                    ParametreMenuItem(
-                      icon: Icons.logout,
-                      title: "Se déconnecter",
-                      subtitle: "Toutes mes activités",
-                      ontap: () {
-                        Get.dialog(ConfirmDialog(
-                          title: "Déconnexion",
-                          message:
-                              "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
-                          testOk: "Déconnexion",
-                          testCancel: "Non",
-                          functionOk: () {
-                            KeyBoardController keyBoardController = Get.find();
-                            keyBoardController.onInit();
-                            Get.offAll(LoginNumber());
-                          },
-                          functionCancel: () {
-                            Get.back();
-                          },
-                        ));
-                      },
-                    ),
-                  ],
-                ),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(),
+                  ParametreMenuItem(
+                    icon: Icons.logout,
+                    title: "Se déconnecter",
+                    subtitle: "Toutes mes activités",
+                    ontap: () {
+                      Get.dialog(ConfirmDialog(
+                        title: "Déconnexion",
+                        message:
+                            "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
+                        testOk: "Déconnexion",
+                        testCancel: "Non",
+                        functionOk: () {
+                          KeyBoardController keyBoardController = Get.find();
+                          keyBoardController.onInit();
+                          Get.offAll(LoginNumber());
+                        },
+                        functionCancel: () {
+                          Get.back();
+                        },
+                      ));
+                    },
+                  ),
+                ],
               ),
             ),
-            Expanded(
-                child: Center(
+            Spacer(),
+            Center(
               child: Image.asset(
                 "assets/images/logo.png",
-                height: 150,
+                height: 120,
               ),
-            )),
-            SizedBox(height: 50, child: const WaveInverse()),
+            ),
+            Spacer(),
+            SizedBox(height: 20, child: const WaveInverse()),
             Container(
               color: MyColors.primary,
               padding: const EdgeInsets.only(bottom: Tools.PADDING / 2),

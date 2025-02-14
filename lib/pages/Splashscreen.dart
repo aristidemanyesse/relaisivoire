@@ -33,148 +33,144 @@ class _SplashscreenState extends State<Splashscreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SizedBox(
-      height: Get.size.height,
-      width: Get.size.width,
-      child: Column(
-        children: [
-          Expanded(
-            flex: 11,
-            child: Container(
+        body: SafeArea(
+      child: SizedBox(
+        height: Get.size.height,
+        width: Get.size.width,
+        child: Column(
+          children: [
+            const SizedBox(height: Tools.PADDING),
+            Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-              width: Get.size.width,
-              decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment.center,
-                    radius: 0.5,
-                    colors: [
-                      Colors.white.withOpacity(0.15),
-                      MyColors.secondary, // Couleur extérieure (beige)
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Relais'Ivoire",
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
                     ],
-                    stops: const [
-                      0.3,
-                      1.0
-                    ], // Arrête les proportions de chaque couleur
+                  )
+                      .animate()
+                      .fadeIn(duration: 400.ms)
+                      .moveY(duration: 400.ms, begin: -25.0, end: 0),
+                  Spacer(),
+                  if (_currentPageIndex < pages.length - 1)
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _currentPageIndex = pages.length - 1;
+                          _pageController.jumpToPage(_currentPageIndex);
+                        });
+                      },
+                      child: Text(
+                        "Passer",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: MyColors.primary),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                width: Get.size.width,
+                decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      center: Alignment.center,
+                      radius: 0.5,
+                      colors: [
+                        Colors.white.withOpacity(0.15),
+                        MyColors.secondary, // Couleur extérieure (beige)
+                      ],
+                      stops: const [
+                        0.3,
+                        1.0
+                      ], // Arrête les proportions de chaque couleur
+                    ),
+                    border: const Border.symmetric(
+                        horizontal: BorderSide.none,
+                        vertical: BorderSide.none)),
+                child: Container(
+                  height: Get.size.height * 3 / 4,
+                  child: PageView(
+                    controller: _pageController,
+                    onPageChanged: (int index) {
+                      setState(() {
+                        _currentPageIndex = index;
+                      });
+                    },
+                    children: pages,
                   ),
-                  border: const Border.symmetric(
-                      horizontal: BorderSide.none, vertical: BorderSide.none)),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: Tools.PADDING),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Le Point Relais",
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                          ],
-                        )
-                            .animate()
-                            .fadeIn(duration: 400.ms)
-                            .moveY(duration: 400.ms, begin: -25.0, end: 0),
-                        Spacer(),
-                        if (_currentPageIndex < pages.length - 1)
-                          InkWell(
+                ),
+              ),
+            ),
+            const SizedBox(height: Tools.PADDING / 2),
+            Container(height: 20, child: WaveInverse()),
+            Expanded(
+              flex: 1,
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: MyColors.primary,
+                    border: Border(top: BorderSide.none)),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(
+                      pages.length,
+                      (index) {
+                        if (index != _currentPageIndex) {
+                          return GestureDetector(
                             onTap: () {
+                              _pageController.jumpToPage(index);
                               setState(() {
-                                _currentPageIndex = pages.length - 1;
-                                _pageController.jumpToPage(_currentPageIndex);
+                                _currentPageIndex = index;
                               });
                             },
-                            child: Text(
-                              "Passer",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(color: MyColors.primary),
-                            ),
-                          )
-                      ],
-                    ),
-                    const Spacer(),
-                    Container(
-                      constraints: BoxConstraints(
-                        maxHeight: Get.size.height * 3 / 5,
-                      ),
-                      child: PageView(
-                        controller: _pageController,
-                        onPageChanged: (int index) {
-                          setState(() {
-                            _currentPageIndex = index;
-                          });
-                        },
-                        children: pages,
-                      ),
-                    ),
-                    const Spacer(),
-                  ],
+                            child: const Circle(),
+                          );
+                        } else if (_currentPageIndex == pages.length - 1) {
+                          return MainButton(
+                            title: "Commencer",
+                            icon: Icons.check,
+                            onPressed: () {
+                              Get.off(
+                                const LoginNumber(),
+                                duration: const Duration(milliseconds: 700),
+                                curve: Curves.easeOut,
+                                transition: Transition.rightToLeft,
+                              );
+                            },
+                          ).animate().fadeIn(duration: 1000.ms);
+                        } else {
+                          return MainButton(
+                            title: "Suivant",
+                            onPressed: () {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.ease,
+                              );
+                            },
+                          ).animate().fadeIn(duration: 1000.ms);
+                        }
+                      },
+                    ).toList(),
+                  ),
                 ),
               ),
             ),
-          ),
-          const Expanded(flex: 1, child: WaveInverse()),
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: MyColors.primary,
-                  border: Border(top: BorderSide.none)),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(
-                    pages.length,
-                    (index) {
-                      if (index != _currentPageIndex) {
-                        return GestureDetector(
-                          onTap: () {
-                            _pageController.jumpToPage(index);
-                            setState(() {
-                              _currentPageIndex = index;
-                            });
-                          },
-                          child: const Circle(),
-                        );
-                      } else if (_currentPageIndex == pages.length - 1) {
-                        return MainButton(
-                          title: "Commencer",
-                          icon: Icons.check,
-                          onPressed: () {
-                            Get.off(
-                              const LoginNumber(),
-                              duration: const Duration(milliseconds: 700),
-                              curve: Curves.easeOut,
-                              transition: Transition.rightToLeft,
-                            );
-                          },
-                        ).animate().fadeIn(duration: 1000.ms);
-                      } else {
-                        return MainButton(
-                          title: "Suivant",
-                          onPressed: () {
-                            _pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.ease,
-                            );
-                          },
-                        ).animate().fadeIn(duration: 1000.ms);
-                      }
-                    },
-                  ).toList(),
-                ),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     ));
   }
