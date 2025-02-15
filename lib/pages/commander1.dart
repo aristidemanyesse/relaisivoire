@@ -24,22 +24,32 @@ class Commander1 extends StatelessWidget {
                 color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Text(
-                  "Que voulez-vous faire livrer ?",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.secondary, fontWeight: FontWeight.bold),
+                Opacity(
+                  opacity: 0.15,
+                  child: Image.asset("assets/images/pattern.png",
+                      fit: BoxFit.cover, width: Get.width),
                 ),
-                Text(
-                  "Type de colis",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: MyColors.secondary),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Que voulez-vous faire livrer ?",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: MyColors.secondary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Type de colis",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: MyColors.secondary),
+                    ),
+                  ],
                 ),
               ],
             )),

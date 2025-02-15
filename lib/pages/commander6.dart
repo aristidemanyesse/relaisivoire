@@ -21,22 +21,32 @@ class Commander6 extends StatelessWidget {
                 color: MyColors.primary,
                 border: Border.symmetric(
                     horizontal: BorderSide.none, vertical: BorderSide.none)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Text(
-                  "On fait une dernière vérification",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: MyColors.secondary, fontWeight: FontWeight.bold),
+                Opacity(
+                  opacity: 0.15,
+                  child: Image.asset("assets/images/pattern.png",
+                      fit: BoxFit.cover, width: Get.width),
                 ),
-                Text(
-                  "Récapitulatif...",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: MyColors.secondary),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "On fait une dernière vérification",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: MyColors.secondary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Récapitulatif...",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: MyColors.secondary),
+                    ),
+                  ],
                 ),
               ],
             )),

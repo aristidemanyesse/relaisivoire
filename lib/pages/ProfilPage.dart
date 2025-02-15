@@ -59,16 +59,28 @@ class _ProfilPageState extends State<ProfilPage> {
                     Border(top: BorderSide(width: 0, color: MyColors.primary))),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: Get.height * 0.15,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                   width: Get.size.width,
-                  decoration: const BoxDecoration(
-                      color: MyColors.primary,
-                      border: Border.symmetric(
-                          horizontal: BorderSide.none,
-                          vertical: BorderSide.none)),
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: Get.height * 0.15,
+                        width: Get.size.width,
+                        decoration: const BoxDecoration(
+                          color: MyColors.primary,
+                          border: Border.symmetric(
+                              horizontal: BorderSide.none,
+                              vertical: BorderSide.none),
+                        ),
+                      ),
+                      Opacity(
+                        opacity: 0.15,
+                        child: Image.asset("assets/images/pattern.png",
+                            fit: BoxFit.cover, width: Get.width),
+                      ),
+                    ],
+                  ),
                 ),
                 const Expanded(flex: 1, child: Wave()),
                 Spacer(

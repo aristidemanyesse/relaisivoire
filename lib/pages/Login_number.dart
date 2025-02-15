@@ -64,31 +64,38 @@ class _LoginNumberState extends State<LoginNumber> {
                   color: MyColors.primary,
                   border: Border.symmetric(
                       horizontal: BorderSide.none, vertical: BorderSide.none)),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "CONNEXION",
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge!
-                          .copyWith(color: MyColors.secondary),
-                    ),
-                    const SizedBox(height: Tools.PADDING / 3),
-                    Text(
-                      "Entrez votre numéro de téléphone",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: MyColors.secondary),
-                    ),
-                  ],
-                )
-                    .animate()
-                    .fadeIn(duration: 800.ms)
-                    .moveX(duration: 800.ms, begin: 1000.0, end: 0),
+              child: Stack(
+                children: [
+                  Opacity(
+                    opacity: 0.15,
+                    child: Image.asset("assets/images/pattern.png",
+                        fit: BoxFit.cover, width: Get.width),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "CONNEXION",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(color: MyColors.secondary),
+                      ),
+                      const SizedBox(height: Tools.PADDING / 3),
+                      Text(
+                        "Entrez votre numéro de téléphone",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: MyColors.secondary),
+                      ),
+                    ],
+                  )
+                      .animate()
+                      .fadeIn(duration: 800.ms)
+                      .moveX(duration: 800.ms, begin: 1000.0, end: 0),
+                ],
               ),
             ),
             const SizedBox(height: 30, child: Wave()),

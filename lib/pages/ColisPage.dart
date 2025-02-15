@@ -126,50 +126,63 @@ class _ColisPageState extends State<ColisPage> {
               child: Column(
                 children: [
                   Container(
-                      height: 200,
+                      height: 220,
                       width: Get.size.width,
                       decoration: const BoxDecoration(
                           color: MyColors.primary,
                           border: Border.symmetric(
                               horizontal: BorderSide.none,
                               vertical: BorderSide.none)),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Hero(
-                              tag: "qr_code",
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(Tools.PADDING / 2),
-                                child: Material(
-                                  child: InkWell(
-                                    onTap: () {
-                                      Get.to(const OpenQRCode());
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.all(
-                                          Tools.PADDING / 2),
-                                      child: Image.asset(
-                                        "assets/images/qrcode.png",
-                                        fit: BoxFit.contain,
-                                        height: 150,
-                                        width: 150,
+                      child: Stack(
+                        children: [
+                          Opacity(
+                            opacity: 0.15,
+                            child: Image.asset("assets/images/pattern.png",
+                                fit: BoxFit.cover, width: Get.width),
+                          ),
+                          Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: Tools.PADDING / 2,
+                                ),
+                                Hero(
+                                  tag: "qr_code",
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        Tools.PADDING / 2),
+                                    child: Material(
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.to(const OpenQRCode());
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(
+                                              Tools.PADDING / 2),
+                                          child: Image.asset(
+                                            "assets/images/qrcode.png",
+                                            fit: BoxFit.contain,
+                                            height: 150,
+                                            width: 150,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
+                                SizedBox(height: Tools.PADDING / 2),
+                                Text(
+                                    "* Scannez le QR code dans le point relais",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(color: MyColors.secondary)),
+                              ],
                             ),
-                            SizedBox(height: Tools.PADDING / 2),
-                            Text("* Scannez le QRcode dans le point relais",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: MyColors.secondary)),
-                          ],
-                        ),
+                          ),
+                        ],
                       )),
                   const SizedBox(height: 30, child: Wave()),
                   SizedBox(

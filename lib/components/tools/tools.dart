@@ -7,8 +7,8 @@ class Tools {
 class MyColors {
   // static const Color primary = Color(0xFF2B124C);
   // static const Color primary = Color.fromARGB(255, 9, 150, 68);
-  static const Color primary = Color.fromARGB(255, 1, 58, 26);
-  static const Color textprimary = Color.fromARGB(255, 1, 58, 26);
+  static const Color primary = Color.fromARGB(255, 9, 106, 217);
+  static const Color textprimary = Color.fromARGB(255, 1, 36, 76);
   // static const Color secondary = Color(0xFFFBE4D8);
   static const Color secondary = Color.fromARGB(255, 241, 240, 246);
   static const Color danger = Color(0xFFCE6A6B);
