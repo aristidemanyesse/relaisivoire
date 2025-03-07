@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: "Le Relais'Ivoire",
+        title: "Relais'Ivoire",
         theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
+        // darkTheme: AppTheme.darkTheme,
+        // themeMode: ThemeMode.system,
         home: SelectableRegion(
           selectionControls: materialTextSelectionControls,
           focusNode: FocusNode(),

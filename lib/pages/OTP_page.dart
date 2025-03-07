@@ -115,8 +115,8 @@ class _OPTPageState extends State<OPTPage> {
                   ],
                 )
                     .animate()
-                    .fadeIn(duration: 800.ms)
-                    .moveX(duration: 800.ms, begin: 1000.0, end: 0),
+                    .fadeIn(duration: 300.ms)
+                    .moveX(duration: 300.ms, begin: 1000.0, end: 0),
               ],
             ),
           ),
