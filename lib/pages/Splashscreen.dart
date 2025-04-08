@@ -8,6 +8,7 @@ import 'package:lpr/components/widgets/intro1.dart';
 import 'package:lpr/components/widgets/intro2.dart';
 import 'package:lpr/components/widgets/intro3.dart';
 import 'package:lpr/components/widgets/intro4.dart';
+import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
 
@@ -22,12 +23,13 @@ class _SplashscreenState extends State<Splashscreen>
     with SingleTickerProviderStateMixin {
   int _currentPageIndex = 0;
   final PageController _pageController = PageController();
+  GeneralController controller = Get.find();
 
   List<Widget> pages = [
     const Intro1(),
     const Intro2(),
     const Intro3(),
-    const Intro4(),
+    Intro4(),
   ];
 
   @override
@@ -154,12 +156,26 @@ class _SplashscreenState extends State<Splashscreen>
                                 title: "Commencer",
                                 icon: Icons.check,
                                 onPressed: () {
-                                  Get.off(
-                                    const LoginNumber(),
-                                    duration: const Duration(milliseconds: 700),
-                                    curve: Curves.easeOut,
-                                    transition: Transition.rightToLeft,
-                                  );
+                                  if (controller.confirmCGU.value) {
+                                    Get.off(
+                                      const LoginNumber(),
+                                      duration:
+                                          const Duration(milliseconds: 700),
+                                      curve: Curves.easeOut,
+                                      transition: Transition.rightToLeft,
+                                    );
+                                  } else {
+                                    Get.snackbar(
+                                      "Vous devez accepter les CGU",
+                                      "Veuillez accepter les CGU avant de continuer",
+                                      icon: Icon(
+                                        Icons.warning,
+                                        color: MyColors.danger,
+                                      ),
+                                      colorText: MyColors.danger,
+                                      duration: const Duration(seconds: 3),
+                                    );
+                                  }
                                 },
                               ).animate().fadeIn(duration: 1000.ms);
                             } else {

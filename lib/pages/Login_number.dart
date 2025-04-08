@@ -6,8 +6,10 @@ import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/KeyBoardNumberPad.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
+import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/models/ClientApp/Client.dart';
 import 'dart:io';
 
 import 'package:lpr/pages/OTP_page.dart';
@@ -21,13 +23,15 @@ class LoginNumber extends StatefulWidget {
 
 class _LoginNumberState extends State<LoginNumber> {
   KeyBoardController keyBoardController = Get.find();
+  GeneralController controller = Get.find();
   String _number = "";
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   keyBoardController.value.value = "";
-  // }
+  @override
+  void initState() {
+    super.initState();
+    keyBoardController.value.value =
+        controller.utilisateur.value?.contact ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +140,18 @@ class _LoginNumberState extends State<LoginNumber> {
                                         "Vous confirmez que le $_number est vraiment votre numero? Un SMS sera envoyé sur celui-ci.",
                                     testOk: "Je confirme",
                                     testCancel: "Non",
-                                    functionOk: () {
+                                    functionOk: () async {
+                                      Client? client =
+                                          await Client.searchByContact(_number);
+                                      if (client != null) {
+                                        client.genereOtp();
+                                      } else {
+                                        Client client =
+                                            Client(contact: _number);
+                                        client.inscription();
+                                      }
                                       keyBoardController.value.value = "";
-                                      Get.off(OPTPage(number: _number));
+                                      Get.off(OPTPage(client: client!));
                                     },
                                     functionCancel: () {
                                       Get.back();

@@ -3,19 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/KeyBoardNumberPad.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
+import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 
 class OPTPage extends StatefulWidget {
-  final String number;
-  const OPTPage({super.key, required this.number});
+  final Client client;
+  const OPTPage({super.key, required this.client});
 
   @override
   State<OPTPage> createState() => _OPTPageState();
@@ -32,6 +34,7 @@ class _OPTPageState extends State<OPTPage> {
   @override
   void initState() {
     super.initState();
+    // keyBoardController.value.value = "";
     _startTimer();
   }
 
@@ -60,14 +63,20 @@ class _OPTPageState extends State<OPTPage> {
 
   void _resendOtp() {
     // Logique pour renvoyer l'OTP ici
+    widget.client.genereOtp();
     _startTimer(); // Redémarrer le timer
   }
 
-  void checkOtp() {
+  void checkOtp() async {
     Get.dialog(PleaseWait2());
-    Future.delayed(Duration(seconds: 3), () {
-      Get.to(const ListeColisPage());
-    });
+    bool res = await widget.client.verifyOtp(keyBoardController.value.value);
+    if (res) {
+      Get.off(const ListeColisPage());
+    } else {
+      Get.back();
+      Get.snackbar("❌ Erreur", "Votre code est invalide",
+          colorText: MyColors.danger);
+    }
   }
 
   @override
@@ -106,7 +115,7 @@ class _OPTPageState extends State<OPTPage> {
                     ),
                     const SizedBox(height: Tools.PADDING / 3),
                     Text(
-                      "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.number}",
+                      "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.client.contact}",
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!

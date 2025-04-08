@@ -1,0 +1,135 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5771063439127381654",
+      "lastPropertyId": "9:660162159130486979",
+      "name": "Client",
+      "properties": [
+        {
+          "id": "1:7248952066763326882",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3790223563815779843",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "1:937734708588133838"
+        },
+        {
+          "id": "5:8014211537744612000",
+          "name": "contact",
+          "type": 9
+        },
+        {
+          "id": "6:1811766398683889147",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "7:4461514141245376921",
+          "name": "active",
+          "type": 1
+        },
+        {
+          "id": "8:1147669443491728784",
+          "name": "typeClientId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:7009378504581188781",
+          "relationTarget": "TypeClient"
+        },
+        {
+          "id": "9:660162159130486979",
+          "name": "userId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "5:2851602042184770898",
+          "relationTarget": "CustomUser"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6491705102151008622",
+      "lastPropertyId": "4:5655375414535947178",
+      "name": "CustomUser",
+      "properties": [
+        {
+          "id": "1:1210364152626561817",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3610877587995571284",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "3:7165414412306323077"
+        },
+        {
+          "id": "3:7767288833102030863",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "4:5655375414535947178",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:7639888620761706740",
+      "lastPropertyId": "4:5199914493409409280",
+      "name": "TypeClient",
+      "properties": [
+        {
+          "id": "1:6071177071569330440",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4682769578849025609",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "4:7587553272518223579"
+        },
+        {
+          "id": "3:8471050322517988185",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:5199914493409409280",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:7639888620761706740",
+  "lastIndexId": "5:2851602042184770898",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    867977961967318551,
+    4714811330399576640
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

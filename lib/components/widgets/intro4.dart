@@ -3,11 +3,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/GeneralController.dart';
 
 class Intro4 extends StatelessWidget {
-  const Intro4({
-    super.key,
-  });
+  GeneralController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,14 @@ class Intro4 extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 2),
           child: Row(
             children: [
-              Checkbox(value: false, onChanged: (value) {}),
+              Obx(() {
+                return Checkbox(
+                    value: controller.confirmCGU.value,
+                    activeColor: MyColors.primary,
+                    onChanged: (value) {
+                      controller.confirmCGU.value = value!;
+                    });
+              }),
               Expanded(
                 child: Wrap(alignment: WrapAlignment.start, children: [
                   Text("Je confirme que j'ai lu et j'accepte les ",
