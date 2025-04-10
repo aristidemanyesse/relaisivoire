@@ -9,15 +9,17 @@ import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/KeyBoardNumberPad.dart';
 import 'package:lpr/components/widgets/my_input_number.dart';
+import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
+import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 
 class OPTPage extends StatefulWidget {
-  final Client client;
-  const OPTPage({super.key, required this.client});
+  final String number;
+  const OPTPage({super.key, required this.number});
 
   @override
   State<OPTPage> createState() => _OPTPageState();
@@ -34,8 +36,7 @@ class _OPTPageState extends State<OPTPage> {
   @override
   void initState() {
     super.initState();
-    // keyBoardController.value.value = "";
-    _startTimer();
+    _resendOtp();
   }
 
   @override
@@ -63,18 +64,30 @@ class _OPTPageState extends State<OPTPage> {
 
   void _resendOtp() {
     // Logique pour renvoyer l'OTP ici
-    widget.client.genereOtp();
+    CustomUser.genereOtp(widget.number);
     _startTimer(); // Redémarrer le timer
   }
 
   void checkOtp() async {
     Get.dialog(PleaseWait2());
-    bool res = await widget.client.verifyOtp(keyBoardController.value.value);
-    if (res) {
-      Get.off(const ListeColisPage());
+    bool response = await CustomUser.verifyOtp(
+        widget.number, keyBoardController.value.value);
+    print(response);
+    if (response) {
+      Client? client = await Client.searchByContact(widget.number);
+      if (client != null) {
+        GeneralController controller = Get.find();
+        controller.client.value = client;
+        Get.off(const ListeColisPage());
+      } else {
+        Get.back();
+        Get.snackbar("❌ Ooops", "Une erreur est survenue, veuillez réessayer !",
+            colorText: MyColors.danger);
+      }
     } else {
       Get.back();
-      Get.snackbar("❌ Erreur", "Votre code est invalide",
+      print(";mxùmcl");
+      Get.snackbar("❌ Erreur", "Votre code OTP est invalide",
           colorText: MyColors.danger);
     }
   }
@@ -115,7 +128,7 @@ class _OPTPageState extends State<OPTPage> {
                     ),
                     const SizedBox(height: Tools.PADDING / 3),
                     Text(
-                      "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.client.contact}",
+                      "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.number}",
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!

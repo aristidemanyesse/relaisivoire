@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:lpr/controllers/GeneralController.dart';
 
 class ApiService {
-  static const BASE_URL = "http://192.168.1.24:8005/";
+  static const BASE_URL = "http://192.168.1.20:8005/";
 
   static Future<Map<String, dynamic>> post(
       String path, Map<String, dynamic> params) async {
@@ -22,19 +22,18 @@ class ApiService {
     final response =
         await http.post(url, headers: headers, body: json.encode(params));
 
+    final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      final data = json.decode(response.body);
       return {
-        "status": true,
-        "message": "Ok",
-        "data": data,
+        "status": !data.containsKey('error'),
+        "message": data.containsKey('error') ? data["error"] : "",
+        "data": data.containsKey('error') ? null : data,
       };
     } else {
-      print(
-          "❌ Erreur POST API ${path}: ${response.statusCode} ${response.body}");
+      print("❌ Erreur POST ${path}: ${response.statusCode} ${response.body}");
       return {
         "status": false,
-        "message": "Erreur lors de l'éxecution de la requête",
+        "message": data["error"] ?? "Erreur inconnue",
         "data": null,
       };
     }
@@ -53,18 +52,18 @@ class ApiService {
     final url = Uri.parse('$BASE_URL$path');
     final response = await http.get(url, headers: headers);
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+    final Map<String, dynamic> data = json.decode(response.body);
+    if (response.statusCode == 200 || response.statusCode == 201) {
       return {
-        "status": true,
-        "message": "Ok",
-        "data": data,
+        "status": !data.containsKey('error'),
+        "message": data.containsKey('error') ? data["error"] : "",
+        "data": data.containsKey('error') ? null : data,
       };
     } else {
-      print("❌ Erreur GET API ${path}: ${response.statusCode}");
+      print("❌ Erreur GET ${path}: ${response.statusCode}");
       return {
         "status": false,
-        "message": "Erreur lors de l'éxecution de la requête",
+        "message": data["error"] ?? "Erreur inconnue",
         "data": null,
       };
     }

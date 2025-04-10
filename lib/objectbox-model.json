@@ -57,7 +57,7 @@
     },
     {
       "id": "2:6491705102151008622",
-      "lastPropertyId": "4:5655375414535947178",
+      "lastPropertyId": "5:2047196988073535991",
       "name": "CustomUser",
       "properties": [
         {
@@ -79,9 +79,9 @@
           "type": 9
         },
         {
-          "id": "4:5655375414535947178",
-          "name": "level",
-          "type": 6
+          "id": "5:2047196988073535991",
+          "name": "lastName",
+          "type": 9
         }
       ],
       "relations": []
@@ -116,10 +116,302 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:1876651143224537560",
+      "lastPropertyId": "13:7528193120363763651",
+      "name": "Colis",
+      "properties": [
+        {
+          "id": "1:8597160153496271203",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5191988737308574436",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "3:4271398194163639742",
+          "name": "senderId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "6:5157766246053969165",
+          "relationTarget": "Client"
+        },
+        {
+          "id": "4:1751414452947058489",
+          "name": "receiverId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "7:5451832262709860729",
+          "relationTarget": "Client"
+        },
+        {
+          "id": "5:7524757636359615052",
+          "name": "pointRelaisId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "8:7211556210725057609",
+          "relationTarget": "PointRelais"
+        },
+        {
+          "id": "6:4549858714461383214",
+          "name": "typeColisId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "9:2938207956305774832",
+          "relationTarget": "TypeColis"
+        },
+        {
+          "id": "7:2917105001801834980",
+          "name": "typeEmballageId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "10:7121439005171593846",
+          "relationTarget": "TypeEmballage"
+        },
+        {
+          "id": "8:4951959128041485218",
+          "name": "typeDestinataireId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "11:1109581263329009431",
+          "relationTarget": "TypeDestinataire"
+        },
+        {
+          "id": "9:8189497365073176585",
+          "name": "statusId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "12:3781118350424643785",
+          "relationTarget": "StatusColis"
+        },
+        {
+          "id": "10:3855739046665940532",
+          "name": "depotDate",
+          "type": 10
+        },
+        {
+          "id": "11:5909407225992279412",
+          "name": "recuperationDate",
+          "type": 10
+        },
+        {
+          "id": "12:257669092342343412",
+          "name": "livraisonDate",
+          "type": 10
+        },
+        {
+          "id": "13:7528193120363763651",
+          "name": "retraitDate",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:3521818982391662072",
+      "lastPropertyId": "6:6476214646285031564",
+      "name": "PointRelais",
+      "properties": [
+        {
+          "id": "1:5675431706962504838",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4254172955181511136",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "3:5041588391837476671",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "4:3136617623737103674",
+          "name": "latitude",
+          "type": 8
+        },
+        {
+          "id": "5:4933775409886990190",
+          "name": "longitude",
+          "type": 8
+        },
+        {
+          "id": "6:6476214646285031564",
+          "name": "typeId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "13:5477603105289265363",
+          "relationTarget": "TypePointRelais"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:235136738154272206",
+      "lastPropertyId": "4:1348941869749557070",
+      "name": "StatusColis",
+      "properties": [
+        {
+          "id": "1:7509686510336383162",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:9098717674507032381",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "14:9206358569330633656"
+        },
+        {
+          "id": "3:2177897374981461159",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:1348941869749557070",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:9005872081073509298",
+      "lastPropertyId": "4:3484892177932191742",
+      "name": "TypeColis",
+      "properties": [
+        {
+          "id": "1:2541408693255366636",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2248352278838700183",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "15:5734167306255645520"
+        },
+        {
+          "id": "3:5088240109271127845",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:3484892177932191742",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:2867645673348039882",
+      "lastPropertyId": "4:7158339524670641670",
+      "name": "TypeDestinataire",
+      "properties": [
+        {
+          "id": "1:4059090060324100328",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4180612259004393098",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "16:1226149226398444203"
+        },
+        {
+          "id": "3:2264738131434316956",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:7158339524670641670",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:3366173683586746701",
+      "lastPropertyId": "4:9070179381120543362",
+      "name": "TypeEmballage",
+      "properties": [
+        {
+          "id": "1:8426186104010747377",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:292151347338047663",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "17:4176542743773229848"
+        },
+        {
+          "id": "3:3514297496301239336",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:9070179381120543362",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:681740323007064652",
+      "lastPropertyId": "4:3660234778270319401",
+      "name": "TypePointRelais",
+      "properties": [
+        {
+          "id": "1:8553672093993567930",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7607781873417935402",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "18:1570955258538210844"
+        },
+        {
+          "id": "3:8700887512039941644",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:3660234778270319401",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:7639888620761706740",
-  "lastIndexId": "5:2851602042184770898",
+  "lastEntityId": "10:681740323007064652",
+  "lastIndexId": "18:1570955258538210844",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -128,7 +420,8 @@
   "retiredIndexUids": [],
   "retiredPropertyUids": [
     867977961967318551,
-    4714811330399576640
+    4714811330399576640,
+    5655375414535947178
   ],
   "retiredRelationUids": [],
   "version": 1

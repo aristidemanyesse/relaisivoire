@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
 import 'package:lpr/pages/commander.dart';
@@ -20,8 +22,11 @@ class ListeColisPage extends StatefulWidget {
 }
 
 class _ListeColisPageState extends State<ListeColisPage> {
+  GeneralController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
+    Client client = controller.client.value!;
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (value, element) async {
@@ -99,7 +104,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
                               .copyWith(color: MyColors.secondary),
                         ),
                         Text(
-                          "Jacques Amessan",
+                          "${client.fullName()}",
                           textAlign: TextAlign.center,
                           style:
                               Theme.of(context).textTheme.titleLarge!.copyWith(

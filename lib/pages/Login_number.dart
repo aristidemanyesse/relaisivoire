@@ -10,6 +10,7 @@ import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
+import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'dart:io';
 
 import 'package:lpr/pages/OTP_page.dart';
@@ -29,8 +30,7 @@ class _LoginNumberState extends State<LoginNumber> {
   @override
   void initState() {
     super.initState();
-    keyBoardController.value.value =
-        controller.utilisateur.value?.contact ?? "";
+    keyBoardController.value.value = "";
   }
 
   @override
@@ -141,17 +141,13 @@ class _LoginNumberState extends State<LoginNumber> {
                                     testOk: "Je confirme",
                                     testCancel: "Non",
                                     functionOk: () async {
-                                      Client? client =
-                                          await Client.searchByContact(_number);
-                                      if (client != null) {
-                                        client.genereOtp();
-                                      } else {
-                                        Client client =
-                                            Client(contact: _number);
-                                        client.inscription();
+                                      bool response =
+                                          await CustomUser.connexion(_number);
+                                      if (!response) {
+                                        await Client.inscription(_number);
                                       }
                                       keyBoardController.value.value = "";
-                                      Get.off(OPTPage(client: client!));
+                                      Get.off(OPTPage(number: _number));
                                     },
                                     functionCancel: () {
                                       Get.back();

@@ -4,7 +4,7 @@ import 'package:lpr/components/tools/tools.dart';
 
 class MainButtonInverse extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final IconData? icon;
   final Function onPressed;
 
   const MainButtonInverse({
@@ -52,10 +52,12 @@ class MainButtonInverse extends StatelessWidget {
               const SizedBox(
                 width: Tools.PADDING / 2,
               ),
-              Icon(
-                icon,
-                color: MyColors.secondary,
-              ).animate().fade(duration: 500.ms).scale()
+              icon != null
+                  ? Icon(
+                      icon,
+                      color: MyColors.secondary,
+                    ).animate().fade(duration: 500.ms).scale()
+                  : const SizedBox(),
             ],
           ),
         ),

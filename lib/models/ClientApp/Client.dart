@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
-import 'package:lpr/components/tools/apiservice.dart';
+import 'package:lpr/objectbox.g.dart';
+import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/controllers/GeneralController.dart';
-import 'package:lpr/models/ClientApp/CustomUser.dart';
+import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'package:lpr/models/ClientApp/TypeClient.dart';
+import 'package:lpr/services/StoreService.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -53,56 +55,35 @@ class Client {
         'type_client': typeClient.target?.toJson(),
       };
 
-  static Future<Client?> searchByContact(String contact) async {
-    Map<String, dynamic> response =
-        await ApiService.get('api/clients/search-by-contact/?contact=$contact');
-    if (response["status"] && response["data"].length > 0) {
-      return Client.fromJson(response["data"][0]);
-    } else {
-      return null;
-    }
-  }
-
-  void connexion() async {
-    Map<String, dynamic> datas = await ApiService.post(
-        'api/auth/login/', {'username': contact, 'password': contact});
-    if (datas.containsKey('access')) {
-      GeneralController controller = Get.find();
-      controller.token.value = datas['access'];
-      controller.refreshToken.value = datas['refresh'];
-    }
-  }
-
   // ✅ Méthode d'instance : mini résumé
-  void inscription() async {
+  static Future<bool> inscription(String contact) async {
     GeneralController controller = Get.find();
     Map<String, dynamic> response =
         await ApiService.post('api/clients/', {'user': 1, 'contact': contact});
-    if (response["status"]) {
-      Client client = Client.fromJson(response["data"]);
-      client.genereOtp();
-    }
-  }
-
-  // ✅ Méthode d'instance : mini résumé
-  void genereOtp() async {
-    Map<String, dynamic> response =
-        await ApiService.post('api/clients/genere-otp/', {"id": uid});
-  }
-
-  // ✅ Méthode d'instance : mini résumé
-  Future<bool> verifyOtp(String otp) async {
-    Map<String, dynamic> response = await ApiService.post(
-        'api/clients/verify-otp/', {"id": uid, "otp": otp});
-    if (response['status'] && response['data'] != null) {
-      connexion();
+    if (response["status"] && response["data"] != null) {
+      CustomUser.connexion(contact);
       return true;
     }
     return false;
   }
 
+  static Future<Client?> searchByContact(String contact) async {
+    Map<String, dynamic> response =
+        await ApiService.get('api/clients/search-by-contact/?contact=$contact');
+    if (response["status"] && response["data"].length > 0) {
+      final store = await getStore();
+      Client client = Client.fromJson(response["data"]);
+      final box = store.box<Client>();
+      box.put(client);
+      return client;
+    } else {
+      return null;
+    }
+  }
+
   // ✅ Méthode d'instance : affichage complet
-  // String fullName() => "$prenoms $nom";
+  String fullName() =>
+      "${user.target?.firstName ?? contact} ${user.target?.lastName ?? ''}";
 
   // // ✅ Statique : filtrer les clients par type
   // static List<Client> filterByType(List<Client> clients, String typeName) {

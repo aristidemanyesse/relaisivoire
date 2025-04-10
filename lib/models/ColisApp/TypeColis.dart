@@ -1,32 +1,32 @@
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
-class CustomUser {
+class TypeColis {
   int id = 0;
 
   @Index()
   String uid;
 
-  String firstName;
+  String libelle;
   int level;
 
-  CustomUser({
+  TypeColis({
     this.uid = "",
-    required this.firstName,
+    required this.libelle,
     required this.level,
   });
 
-  factory CustomUser.fromJson(Map<String, dynamic> json) {
-    return CustomUser(
+  factory TypeColis.fromJson(Map<String, dynamic> json) {
+    return TypeColis(
       uid: json['id'],
-      firstName: json['firstName'],
+      libelle: json['libelle'],
       level: json['level'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'firstName': firstName,
+        'id': uid,
+        'libelle': libelle,
         'level': level,
       };
 }
