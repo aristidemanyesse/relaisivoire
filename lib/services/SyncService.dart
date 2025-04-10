@@ -1,8 +1,4 @@
-import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/ClientApp/TypeClient.dart';
-import 'package:lpr/models/ColisApp/Colis.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
 import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
@@ -10,14 +6,13 @@ import 'package:lpr/models/ColisApp/TypeEmballage.dart';
 import 'package:lpr/models/PointRelaisApp/TypePointRelais.dart';
 import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/ApiService.dart';
-import 'package:lpr/services/StoreService.dart';
 
 class SyncService {
   final Store store;
 
   SyncService({required this.store});
 
-  void _putIfNotNull<T>(Box<T> box, T? obj) {
+  void putIfNotNull<T>(Box<T> box, T? obj) {
     if (obj != null) {
       box.put(obj);
     }
@@ -30,19 +25,13 @@ class SyncService {
     String? label,
   }) async {
     try {
-      final response = await ApiService.get(endpoint);
-      print(response);
-      // if (response.statusCode == 200) {
-      //   final List<dynamic> data = json.decode(response.);
-      //   final entities = data.map((e) => fromJson(e)).toList();
+      final datas = await ApiService.getAll(endpoint);
+      final entities = datas.map((e) => fromJson(e)).toList();
 
-      //   box.removeAll();
-      //   box.putMany(entities);
+      box.removeAll();
+      box.putMany(entities);
 
-      //   print("✔️ ${label ?? T.toString()}: ${entities.length} items sync");
-      // } else {
-      //   print("❌ Erreur sur $endpoint : ${response.statusCode}");
-      // }
+      print("✔️ ${label ?? T.toString()}: ${entities.length} items sync");
     } catch (e) {
       print("⚠️ Exception lors de $endpoint : $e");
     }

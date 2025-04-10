@@ -8,6 +8,8 @@ import 'package:lpr/controllers/GeneralController.dart';
 class Intro4 extends StatelessWidget {
   GeneralController controller = Get.find();
 
+  Intro4({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

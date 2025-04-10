@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
@@ -72,7 +71,6 @@ class _OPTPageState extends State<OPTPage> {
     Get.dialog(PleaseWait2());
     bool response = await CustomUser.verifyOtp(
         widget.number, keyBoardController.value.value);
-    print(response);
     if (response) {
       Client? client = await Client.searchByContact(widget.number);
       if (client != null) {

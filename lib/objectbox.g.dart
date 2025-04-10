@@ -407,11 +407,6 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(3, 8700887512039941644),
             name: 'libelle',
             type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 3660234778270319401),
-            name: 'level',
-            type: 6,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -462,7 +457,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
       retiredPropertyUids: const [
         867977961967318551,
         4714811330399576640,
-        5655375414535947178
+        5655375414535947178,
+        3660234778270319401
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -880,7 +876,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, libelleOffset);
-          fbb.addInt64(3, object.level);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -891,10 +886,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 6, '');
           final libelleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
-          final levelParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          final object = TypePointRelais(
-              uid: uidParam, libelle: libelleParam, level: levelParam)
+          final object = TypePointRelais(uid: uidParam, libelle: libelleParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -1144,8 +1136,4 @@ class TypePointRelais_ {
   /// See [TypePointRelais.libelle].
   static final libelle =
       obx.QueryStringProperty<TypePointRelais>(_entities[9].properties[2]);
-
-  /// See [TypePointRelais.level].
-  static final level =
-      obx.QueryIntegerProperty<TypePointRelais>(_entities[9].properties[3]);
 }

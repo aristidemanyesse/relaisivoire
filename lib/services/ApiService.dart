@@ -30,12 +30,33 @@ class ApiService {
         "data": data.containsKey('error') ? null : data,
       };
     } else {
-      print("❌ Erreur POST ${path}: ${response.statusCode} ${response.body}");
+      print("❌ Erreur POST $path: ${response.statusCode} ${response.body}");
       return {
         "status": false,
         "message": data["error"] ?? "Erreur inconnue",
         "data": null,
       };
+    }
+  }
+
+  static Future<List<dynamic>> getAll(String path) async {
+    GeneralController controller = Get.find();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    if (controller.token.value != "") {
+      headers['Authorization'] = 'Bearer ${controller.token.value}';
+    }
+
+    final url = Uri.parse('$BASE_URL$path');
+    final response = await http.get(url, headers: headers);
+    final List<dynamic> data = json.decode(response.body);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return data;
+    } else {
+      print("❌ Erreur GET $path: ${response.statusCode}");
+      return [];
     }
   }
 
@@ -52,6 +73,7 @@ class ApiService {
     final url = Uri.parse('$BASE_URL$path');
     final response = await http.get(url, headers: headers);
 
+    print(response.body);
     final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return {
@@ -60,7 +82,7 @@ class ApiService {
         "data": data.containsKey('error') ? null : data,
       };
     } else {
-      print("❌ Erreur GET ${path}: ${response.statusCode}");
+      print("❌ Erreur GET $path: ${response.statusCode}");
       return {
         "status": false,
         "message": data["error"] ?? "Erreur inconnue",

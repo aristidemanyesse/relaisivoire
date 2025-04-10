@@ -104,7 +104,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
                               .copyWith(color: MyColors.secondary),
                         ),
                         Text(
-                          "${client.fullName()}",
+                          client.fullName(),
                           textAlign: TextAlign.center,
                           style:
                               Theme.of(context).textTheme.titleLarge!.copyWith(

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/AdministrationApp/CustomUser.dart';
+import 'package:lpr/services/StoreService.dart';
+import 'package:lpr/services/SyncService.dart';
 
 class GeneralController extends GetxController {
   RxBool connected = false.obs;
@@ -18,11 +18,14 @@ class GeneralController extends GetxController {
     utilisateur.value = null;
     client.value = null;
 
-    // ever(client, (value) {
-    //   if (value != "") {
-    //     Map<String, dynamic> decodedToken = JwtDecoder.decode(value);
-    //   } else {}
-    // });
+    ever(client, (value) async {
+      if (value == null) return;
+      await CustomUser.connexion(value.contact);
+      final store = await getStore();
+      final sync = SyncService(store: store);
+      sync.putIfNotNull(store.box<Client>(), value);
+      await sync.syncAllData();
+    });
 
     super.onInit();
   }

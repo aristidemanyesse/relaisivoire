@@ -4,7 +4,6 @@ import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'package:lpr/models/ClientApp/TypeClient.dart';
-import 'package:lpr/services/StoreService.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -71,10 +70,7 @@ class Client {
     Map<String, dynamic> response =
         await ApiService.get('api/clients/search-by-contact/?contact=$contact');
     if (response["status"] && response["data"].length > 0) {
-      final store = await getStore();
       Client client = Client.fromJson(response["data"]);
-      final box = store.box<Client>();
-      box.put(client);
       return client;
     } else {
       return null;

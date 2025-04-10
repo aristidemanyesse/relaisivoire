@@ -1,5 +1,4 @@
 import 'package:lpr/objectbox.g.dart';
-import 'package:objectbox/objectbox.dart';
 
 Store? _store;
 

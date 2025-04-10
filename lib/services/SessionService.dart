@@ -2,7 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/services/SyncService.dart';
-import 'package:objectbox/objectbox.dart';
 
 class SessionService {
   final SyncService syncService;
