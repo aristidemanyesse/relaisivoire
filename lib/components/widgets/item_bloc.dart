@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/ColisPage.dart';
 
 class ItemBloc extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String created;
+  final Colis colis;
   final bool received;
 
   const ItemBloc({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.created,
+    required this.colis,
     required this.received,
   });
 
@@ -23,7 +20,7 @@ class ItemBloc extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Get.to(ColisPage(received: received),
+          Get.to(ColisPage(colis: colis, received: received),
               transition: Transition.topLevel);
         },
         child: Card(
@@ -48,7 +45,7 @@ class ItemBloc extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        colis.getCode(),
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: (received
@@ -56,7 +53,9 @@ class ItemBloc extends StatelessWidget {
                                 : MyColors.textprimary)),
                       ),
                       Text(
-                        subtitle,
+                        received
+                            ? colis.title()
+                            : colis.sender.target?.fullName() ?? "",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: (received
                                   ? MyColors.textprimary
@@ -64,7 +63,7 @@ class ItemBloc extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        created,
+                        colis.date_creation.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!

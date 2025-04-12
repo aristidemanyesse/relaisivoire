@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/models/ColisApp/TypeEmballage.dart';
 
 class EmballageBloc extends StatelessWidget {
   final String id;
   final String subtitle;
   final String title;
   final IconData icon;
+  final TypeEmballage typeEmballage;
 
   EmballageBloc({
     super.key,
@@ -15,6 +17,7 @@ class EmballageBloc extends StatelessWidget {
     required this.subtitle,
     required this.title,
     required this.icon,
+    required this.typeEmballage,
   });
 
   final CommandeProcessController _controller = Get.find();
@@ -31,7 +34,7 @@ class EmballageBloc extends StatelessWidget {
           child: Obx(() {
             return InkWell(
               onTap: () {
-                _controller.typeEmballage.value = id;
+                _controller.typeEmballage.value = typeEmballage;
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(
@@ -39,7 +42,7 @@ class EmballageBloc extends StatelessWidget {
                   vertical: Tools.PADDING / 4,
                 ),
                 decoration: BoxDecoration(
-                    color: _controller.typeEmballage.value == id
+                    color: _controller.typeEmballage.value == typeEmballage
                         ? MyColors.primary
                         : MyColors.secondary.withAlpha(200),
                     borderRadius: BorderRadius.circular(10),
@@ -50,7 +53,7 @@ class EmballageBloc extends StatelessWidget {
                   children: [
                     Icon(icon,
                         size: 45,
-                        color: _controller.typeEmballage.value == id
+                        color: _controller.typeEmballage.value == typeEmballage
                             ? MyColors.secondary
                             : MyColors.primary),
                     const SizedBox(
@@ -66,10 +69,10 @@ class EmballageBloc extends StatelessWidget {
                                   .titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.bold,
-                                      color:
-                                          _controller.typeEmballage.value == id
-                                              ? MyColors.secondary
-                                              : MyColors.primary)),
+                                      color: _controller.typeEmballage.value ==
+                                              typeEmballage
+                                          ? MyColors.secondary
+                                          : MyColors.primary)),
                           const SizedBox(
                             width: Tools.PADDING / 2,
                           ),
@@ -78,10 +81,10 @@ class EmballageBloc extends StatelessWidget {
                                   .textTheme
                                   .bodyMedium!
                                   .copyWith(
-                                      color:
-                                          _controller.typeEmballage.value == id
-                                              ? MyColors.secondary
-                                              : MyColors.primary)),
+                                      color: _controller.typeEmballage.value ==
+                                              typeEmballage
+                                          ? MyColors.secondary
+                                          : MyColors.primary)),
                         ],
                       ),
                     ),

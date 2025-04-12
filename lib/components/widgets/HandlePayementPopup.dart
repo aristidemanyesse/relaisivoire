@@ -1,15 +1,37 @@
+import 'dart:math';
+
+import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
+import 'package:lpr/pages/ColisPage.dart';
 import 'package:lpr/pages/PleaseWait.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 
-class HandlePayementPopup extends StatelessWidget {
+class HandlePayementPopup extends StatefulWidget {
   const HandlePayementPopup({
     super.key,
   });
+
+  @override
+  State<HandlePayementPopup> createState() => _HandlePayementPopupState();
+}
+
+class _HandlePayementPopupState extends State<HandlePayementPopup> {
+  TextEditingController amountController = TextEditingController();
+  Map<String, dynamic>? response;
+  Color? color;
+  IconData? icon;
+  String? message;
+  bool show = false;
+
+  final GeneralController generalController = Get.find();
+  CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +52,67 @@ class HandlePayementPopup extends StatelessWidget {
               child: MainButtonInverse(
                 title: "Valider le paiement",
                 icon: Icons.check,
-                onPressed: () {
-                  Get.dialog(PleaseWait2());
-                  Future.delayed(Duration(seconds: 5), () {
-                    Get.back();
-                    Get.dialog(
-                      const PleaseWait(),
-                    );
-                  });
+                onPressed: () async {
+                  int amount = 1000;
+                  if (amount < 100 || amount > 1500000) {
+                    // Mettre une alerte
+                    return;
+                  }
+
+                  final String transactionId = Random()
+                      .nextInt(100000000)
+                      .toString(); // Mettre en place un endpoint à contacter côté serveur pour générer des ID unique dans votre BD
+
+                  // await Get.to(CinetPayCheckout(
+                  //   title: 'Payment Checkout',
+                  //   titleStyle: const TextStyle(
+                  //       fontSize: 20, fontWeight: FontWeight.bold),
+                  //   titleBackgroundColor: Colors.green,
+                  //   configData: <String, dynamic>{
+                  //     'apikey': 'API_KEY',
+                  //     'site_id': 2, //int.parse("YOUR_SITE_ID"),
+                  //     'notify_url': 'YOUR_NOTIFY_URL'
+                  //   },
+                  //   paymentData: <String, dynamic>{
+                  //     'transaction_id': transactionId,
+                  //     'amount': amount.toString(),
+                  //     'currency': 'XOF',
+                  //     'channels': 'ALL',
+                  //     'description': 'Payment test',
+                  //   },
+                  //   waitResponse: (data) {
+                  //     if (mounted) {
+                  //       setState(() {
+                  //         response = data;
+                  //         print(response);
+                  //         icon = data['status'] == 'ACCEPTED'
+                  //             ? Icons.check_circle
+                  //             : Icons.mood_bad_rounded;
+                  //         color = data['status'] == 'ACCEPTED'
+                  //             ? Colors.green
+                  //             : Colors.redAccent;
+                  //         show = true;
+                  //         Get.back();
+                  //       });
+                  //     }
+                  //   },
+                  //   onError: (data) {
+                  //     if (mounted) {
+                  //       setState(() {
+                  //         response = data;
+                  //         message = response!['description'];
+                  //         print(response);
+                  //         icon = Icons.warning_rounded;
+                  //         color = Colors.yellowAccent;
+                  //         show = true;
+                  //         Get.back();
+                  //       });
+                  //     }
+                  //   },
+                  // ));
+                  // Get.dialog(PleaseWait2());
+
+                  _controller.create();
                 },
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 
 class FormulaireContactDestinataire extends StatefulWidget {
   const FormulaireContactDestinataire({
@@ -17,6 +19,8 @@ class _FormulaireContactDestinataireState
   final TextEditingController _nameController = TextEditingController(text: "");
   final TextEditingController _contactController =
       TextEditingController(text: "");
+
+  final CommandeProcessController _controller = Get.find();
 
   @override
   void initState() {
@@ -97,6 +101,7 @@ class _FormulaireContactDestinataireState
           ),
           TextField(
               controller: _nameController,
+              onChanged: (value) => _controller.nomDestinataire.value = value,
               decoration: InputDecoration(
                 hintText: "Nom du destinataire...",
                 hintStyle: TextStyle(color: Colors.grey),
@@ -115,12 +120,14 @@ class _FormulaireContactDestinataireState
                   borderSide: BorderSide(color: MyColors.primary, width: 2),
                 ),
               ),
-              style: Theme.of(context).textTheme.titleSmall!),
+              style: Theme.of(context).textTheme.labelLarge!),
           const SizedBox(
             height: Tools.PADDING * 1.5,
           ),
           TextField(
               controller: _contactController,
+              onChanged: (value) =>
+                  _controller.contactDestinataire.value = value,
               decoration: InputDecoration(
                 hintText: "Contact du destinataire...",
                 hintStyle: TextStyle(color: Colors.grey),
@@ -139,7 +146,7 @@ class _FormulaireContactDestinataireState
                   borderSide: BorderSide(color: MyColors.primary, width: 2),
                 ),
               ),
-              style: Theme.of(context).textTheme.titleSmall!),
+              style: Theme.of(context).textTheme.labelLarge!),
         ],
       ),
     );

@@ -2,20 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
 
 class TypeDestinataireBloc extends StatelessWidget {
-  final String id;
-  final String subtitle;
-  final String title;
-  final IconData icon;
+  final TypeDestinataire type;
 
-  TypeDestinataireBloc({
-    super.key,
-    required this.id,
-    required this.subtitle,
-    required this.title,
-    required this.icon,
-  });
+  TypeDestinataireBloc({super.key, required this.type});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -29,7 +21,7 @@ class TypeDestinataireBloc extends StatelessWidget {
         child: Obx(() {
           return InkWell(
             onTap: () {
-              _controller.typeDestinataire.value = id;
+              _controller.typeDestinataire.value = type;
             },
             child: Container(
               padding: const EdgeInsets.symmetric(
@@ -37,7 +29,7 @@ class TypeDestinataireBloc extends StatelessWidget {
                 vertical: Tools.PADDING / 4,
               ),
               decoration: BoxDecoration(
-                  color: _controller.typeDestinataire.value == id
+                  color: _controller.typeDestinataire.value == type
                       ? MyColors.primary
                       : MyColors.secondary.withAlpha(200),
                   borderRadius: BorderRadius.circular(10),
@@ -46,9 +38,9 @@ class TypeDestinataireBloc extends StatelessWidget {
               height: 65,
               child: Row(
                 children: [
-                  Icon(icon,
+                  Icon(type.level == 1 ? Icons.person : Icons.person_2_outlined,
                       size: 45,
-                      color: _controller.typeDestinataire.value == id
+                      color: _controller.typeDestinataire.value == type
                           ? MyColors.secondary
                           : MyColors.primary),
                   const SizedBox(
@@ -58,28 +50,28 @@ class TypeDestinataireBloc extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(title,
+                        Text(type.libelle,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.bold,
-                                    color:
-                                        _controller.typeDestinataire.value == id
-                                            ? MyColors.secondary
-                                            : MyColors.primary)),
+                                    color: _controller.typeDestinataire.value ==
+                                            type
+                                        ? MyColors.secondary
+                                        : MyColors.primary)),
                         const SizedBox(
                           width: Tools.PADDING / 2,
                         ),
-                        Text(subtitle,
+                        Text(type.description ?? "",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
                                 .copyWith(
-                                    color:
-                                        _controller.typeDestinataire.value == id
-                                            ? MyColors.secondary
-                                            : MyColors.primary)),
+                                    color: _controller.typeDestinataire.value ==
+                                            type
+                                        ? MyColors.secondary
+                                        : MyColors.primary)),
                       ],
                     ),
                   ),

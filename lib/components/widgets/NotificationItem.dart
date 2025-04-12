@@ -22,11 +22,11 @@ class NotificationItem extends StatelessWidget {
     return Material(
       child: InkWell(
         onTap: () {
-          Get.to(
-              ColisPage(
-                received: received,
-              ),
-              transition: Transition.topLevel);
+          // Get.to(
+          //     ColisPage(
+          //       received: received,
+          //     ),
+          //     transition: Transition.topLevel);
         },
         child: Card(
           margin: EdgeInsets.zero,

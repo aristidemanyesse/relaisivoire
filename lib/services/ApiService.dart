@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:lpr/controllers/GeneralController.dart';
 
 class ApiService {
-  static const BASE_URL = "http://192.168.1.20:8005/";
+  static const BASE_URL = "http://192.168.1.6:8005/";
 
   static Future<Map<String, dynamic>> post(
       String path, Map<String, dynamic> params) async {
@@ -13,6 +13,7 @@ class ApiService {
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'charset': 'utf-8',
     };
     if (controller.token.value != "") {
       headers['Authorization'] = 'Bearer ${controller.token.value}';
@@ -22,7 +23,8 @@ class ApiService {
     final response =
         await http.post(url, headers: headers, body: json.encode(params));
 
-    final Map<String, dynamic> data = json.decode(response.body);
+    final decoded = utf8.decode(response.bodyBytes); // 🔥 forcé en UTF-8
+    final Map<String, dynamic> data = json.decode(decoded);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return {
         "status": !data.containsKey('error'),
@@ -44,6 +46,7 @@ class ApiService {
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'charset': 'utf-8',
     };
     if (controller.token.value != "") {
       headers['Authorization'] = 'Bearer ${controller.token.value}';
@@ -51,7 +54,8 @@ class ApiService {
 
     final url = Uri.parse('$BASE_URL$path');
     final response = await http.get(url, headers: headers);
-    final List<dynamic> data = json.decode(response.body);
+    final decoded = utf8.decode(response.bodyBytes); // 🔥 forcé en UTF-8
+    final List<dynamic> data = json.decode(decoded);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return data;
     } else {
@@ -73,7 +77,6 @@ class ApiService {
     final url = Uri.parse('$BASE_URL$path');
     final response = await http.get(url, headers: headers);
 
-    print(response.body);
     final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return {

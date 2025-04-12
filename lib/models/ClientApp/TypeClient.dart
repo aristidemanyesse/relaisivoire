@@ -25,7 +25,6 @@ class TypeClient {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': uid,
         'libelle': libelle,
         'level': level,
       };

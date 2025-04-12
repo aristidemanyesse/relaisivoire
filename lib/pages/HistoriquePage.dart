@@ -92,32 +92,32 @@ class _HistoriquePageState extends State<HistoriquePage> {
               child: SizedBox(
                 width: double.infinity,
                 child: ListView(children: [
-                  ItemBloc(
-                    title: "Enveloppe / Porte-document",
-                    subtitle: "Boutique de Banbara - Port-bouët Abattoir",
-                    created: "il y a 2 min",
-                    received: false,
-                  ),
-                  ItemBloc(
-                      title: "Valise gros colis",
-                      subtitle: "Boutique Aly - Marcory Anoumabo",
-                      created: "il y a 1 heures",
-                      received: true),
-                  ItemBloc(
-                      title: "Valise gros colis",
-                      subtitle: "Boutique Aly - Marcory Anoumabo",
-                      created: "il y a 1 heures",
-                      received: true),
-                  ItemBloc(
-                      title: "Valise gros colis",
-                      subtitle: "Boutique Aly - Marcory Anoumabo",
-                      created: "il y a 1 heures",
-                      received: true),
-                  ItemBloc(
-                      title: "Carton moyen",
-                      subtitle: "ANK Service - Port-bouët Vridi",
-                      created: "il y a 2 heures",
-                      received: false),
+                  // ItemBloc(
+                  //   title: "Enveloppe / Porte-document",
+                  //   subtitle: "Boutique de Banbara - Port-bouët Abattoir",
+                  //   created: "il y a 2 min",
+                  //   received: false,
+                  // ),
+                  // ItemBloc(
+                  //     title: "Valise gros colis",
+                  //     subtitle: "Boutique Aly - Marcory Anoumabo",
+                  //     created: "il y a 1 heures",
+                  //     received: true),
+                  // ItemBloc(
+                  //     title: "Valise gros colis",
+                  //     subtitle: "Boutique Aly - Marcory Anoumabo",
+                  //     created: "il y a 1 heures",
+                  //     received: true),
+                  // ItemBloc(
+                  //     title: "Valise gros colis",
+                  //     subtitle: "Boutique Aly - Marcory Anoumabo",
+                  //     created: "il y a 1 heures",
+                  //     received: true),
+                  // ItemBloc(
+                  //     title: "Carton moyen",
+                  //     subtitle: "ANK Service - Port-bouët Vridi",
+                  //     created: "il y a 2 heures",
+                  //     received: false),
                 ]),
               ),
             ),

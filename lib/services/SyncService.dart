@@ -1,9 +1,17 @@
+
+import 'package:get/get.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/ClientApp/TypeClient.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
 import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
 import 'package:lpr/models/ColisApp/TypeEmballage.dart';
+import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
 import 'package:lpr/models/PointRelaisApp/TypePointRelais.dart';
+import 'package:lpr/models/PointRelaisApp/TypeService.dart';
+import 'package:lpr/models/ZoneApp/Commune.dart';
 import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/ApiService.dart';
 
@@ -12,13 +20,13 @@ class SyncService {
 
   SyncService({required this.store});
 
-  void putIfNotNull<T>(Box<T> box, T? obj) {
+  static void putIfNotNull<T>(Box<T> box, T? obj) {
     if (obj != null) {
       box.put(obj);
     }
   }
 
-  Future<void> _syncGenericList<T>({
+  Future<List<T>> _syncGenericList<T>({
     required String endpoint,
     required T Function(Map<String, dynamic>) fromJson,
     required Box<T> box,
@@ -27,36 +35,41 @@ class SyncService {
     try {
       final datas = await ApiService.getAll(endpoint);
       final entities = datas.map((e) => fromJson(e)).toList();
-
       box.removeAll();
       box.putMany(entities);
-
       print("✔️ ${label ?? T.toString()}: ${entities.length} items sync");
+      return entities;
     } catch (e) {
       print("⚠️ Exception lors de $endpoint : $e");
+      return [];
     }
   }
 
   Future<void> syncAllData() async {
     print("🔄 Démarrage de la synchronisation des types...");
+    GeneralController controller = Get.find();
+    HandleTypesController handleTypesController = Get.find();
 
-    await _syncGenericList<TypeColis>(
-        endpoint: 'api/type_colis/',
-        fromJson: (json) => TypeColis.fromJson(json),
-        box: store.box<TypeColis>(),
-        label: "TypeColis");
+    handleTypesController.listeTypeColis.value =
+        await _syncGenericList<TypeColis>(
+            endpoint: 'api/type_colis/',
+            fromJson: (json) => TypeColis.fromJson(json),
+            box: store.box<TypeColis>(),
+            label: "TypeColis");
 
-    await _syncGenericList<TypeEmballage>(
-        endpoint: 'api/type_emballage/',
-        fromJson: (json) => TypeEmballage.fromJson(json),
-        box: store.box<TypeEmballage>(),
-        label: "TypeEmballage");
+    handleTypesController.listeTypeEmballages.value =
+        await _syncGenericList<TypeEmballage>(
+            endpoint: 'api/type_emballage/',
+            fromJson: (json) => TypeEmballage.fromJson(json),
+            box: store.box<TypeEmballage>(),
+            label: "TypeEmballage");
 
-    await _syncGenericList<TypeDestinataire>(
-        endpoint: 'api/type_destinataire/',
-        fromJson: (json) => TypeDestinataire.fromJson(json),
-        box: store.box<TypeDestinataire>(),
-        label: "TypeDestinataire");
+    handleTypesController.listeTypeDestinataires.value =
+        await _syncGenericList<TypeDestinataire>(
+            endpoint: 'api/type_destinataire/',
+            fromJson: (json) => TypeDestinataire.fromJson(json),
+            box: store.box<TypeDestinataire>(),
+            label: "TypeDestinataire");
 
     await _syncGenericList<StatusColis>(
         endpoint: 'api/status_colis/',
@@ -76,35 +89,32 @@ class SyncService {
         box: store.box<TypePointRelais>(),
         label: "TypePointRelais");
 
-    store.close();
+    await _syncGenericList<Commune>(
+        endpoint: 'api/communes/',
+        fromJson: (json) => Commune.fromJson(json),
+        box: store.box<Commune>(),
+        label: "Commune");
+
+    await _syncGenericList<TypeService>(
+        endpoint: 'api/type_services/',
+        fromJson: (json) => TypeService.fromJson(json),
+        box: store.box<TypeService>(),
+        label: "TypeService");
+
+    await _syncGenericList<Colis>(
+        endpoint:
+            'api/colis/colis-for-client/?id=${controller.client.value!.uid}',
+        fromJson: (json) => Colis.fromJson(json),
+        box: store.box<Colis>(),
+        label: "Colis");
+
+    handleTypesController.listePointsRelais.value =
+        await _syncGenericList<PointRelais>(
+            endpoint: 'api/points_relais/',
+            fromJson: (json) => PointRelais.fromJson(json),
+            box: store.box<PointRelais>(),
+            label: "PointRelais");
 
     print("✅ Tous les types de base sont synchronisés.");
   }
-
-  // 🔁 Synchronisation des colis d'un client
-  // Future<void> syncColisClient(int clientId) async {
-  //   final response = await http.get(
-  //     Uri.parse('$baseUrl/colis/?client_id=$clientId'),
-  //     headers: headers,
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     final List<dynamic> data = json.decode(response.body);
-  //     final boxColis = store.box<Colis>();
-
-  //     // 🧹 Supprimer les colis existants du client
-  //     final old = boxColis.query(Colis_.sender.equals(clientId)).build().find();
-  //     boxColis.removeMany(old.map((c) => c.id).toList());
-
-  //     for (final jsonColis in data) {
-  //       final colis = Colis.fromJson(jsonColis);
-  //       boxColis.put(colis);
-  //     }
-
-  //     print("📦 ${data.length} colis rechargés pour client #$clientId");
-  //   } else {
-  //     print(
-  //         "⚠️ Erreur lors de la récupération des colis : ${response.statusCode}");
-  //   }
-  // }
 }

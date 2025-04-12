@@ -8,25 +8,28 @@ class TypeDestinataire {
   String uid;
 
   String libelle;
-  int level;
+  String? description;
+  int? level;
 
   TypeDestinataire({
     this.uid = "",
+    this.description = "",
     required this.libelle,
-    required this.level,
+    this.level = 0,
   });
 
   factory TypeDestinataire.fromJson(Map<String, dynamic> json) {
     return TypeDestinataire(
       uid: json['id'],
       libelle: json['libelle'],
+      description: json['description'],
       level: json['level'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': uid,
         'libelle': libelle,
+        'description': description,
         'level': level,
       };
 }

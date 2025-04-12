@@ -22,8 +22,12 @@ import 'models/ColisApp/StatusColis.dart';
 import 'models/ColisApp/TypeColis.dart';
 import 'models/ColisApp/TypeDestinataire.dart';
 import 'models/ColisApp/TypeEmballage.dart';
+import 'models/LivraisonApp/TypeVehicule.dart';
 import 'models/PointRelaisApp/PointRelais.dart';
+import 'models/PointRelaisApp/Schedule.dart';
 import 'models/PointRelaisApp/TypePointRelais.dart';
+import 'models/PointRelaisApp/TypeService.dart';
+import 'models/ZoneApp/Commune.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -140,7 +144,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(4, 1876651143224537560),
       name: 'Colis',
-      lastPropertyId: const obx_int.IdUid(13, 7528193120363763651),
+      lastPropertyId: const obx_int.IdUid(20, 2983330437404914798),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -167,13 +171,6 @@ final _entities = <obx_int.ModelEntity>[
             flags: 520,
             indexId: const obx_int.IdUid(7, 5451832262709860729),
             relationTarget: 'Client'),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 7524757636359615052),
-            name: 'pointRelaisId',
-            type: 11,
-            flags: 520,
-            indexId: const obx_int.IdUid(8, 7211556210725057609),
-            relationTarget: 'PointRelais'),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(6, 4549858714461383214),
             name: 'typeColisId',
@@ -221,6 +218,46 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(13, 7528193120363763651),
             name: 'retraitDate',
             type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 9182519104310729741),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(21, 1696857593942947801)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 4589762859316674640),
+            name: 'pointRelaisSenderId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(19, 822380421138146940),
+            relationTarget: 'PointRelais'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(16, 3744468017574777886),
+            name: 'pointRelaisReceiverId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(20, 5591877836353242726),
+            relationTarget: 'PointRelais'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(17, 3409996708837625571),
+            name: 'receiver_name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(18, 8415219127445349379),
+            name: 'receiver_phone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(19, 6543131581038512164),
+            name: 'total',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(20, 2983330437404914798),
+            name: 'date_creation',
+            type: 10,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -228,7 +265,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(5, 3521818982391662072),
       name: 'PointRelais',
-      lastPropertyId: const obx_int.IdUid(6, 6476214646285031564),
+      lastPropertyId: const obx_int.IdUid(9, 1692295003677643987),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -262,14 +299,41 @@ final _entities = <obx_int.ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const obx_int.IdUid(13, 5477603105289265363),
-            relationTarget: 'TypePointRelais')
+            relationTarget: 'TypePointRelais'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 2438381602336456251),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(22, 5236315847594436373)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 6987642332008262118),
+            name: 'communeId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(24, 1633894871599016377),
+            relationTarget: 'Commune'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 1692295003677643987),
+            name: 'description',
+            type: 9,
+            flags: 0)
       ],
-      relations: <obx_int.ModelRelation>[],
+      relations: <obx_int.ModelRelation>[
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(1, 9077145558285989959),
+            name: 'services',
+            targetId: const obx_int.IdUid(12, 1694752276793098208)),
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(2, 7878671734895808345),
+            name: 'schedules',
+            targetId: const obx_int.IdUid(14, 4511176965795453775))
+      ],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
       id: const obx_int.IdUid(6, 235136738154272206),
       name: 'StatusColis',
-      lastPropertyId: const obx_int.IdUid(4, 1348941869749557070),
+      lastPropertyId: const obx_int.IdUid(6, 1363879607497422457),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -292,6 +356,16 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(4, 1348941869749557070),
             name: 'level',
             type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 179384997266450375),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 1363879607497422457),
+            name: 'color',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -299,7 +373,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(7, 9005872081073509298),
       name: 'TypeColis',
-      lastPropertyId: const obx_int.IdUid(4, 3484892177932191742),
+      lastPropertyId: const obx_int.IdUid(11, 8380945111437309470),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -322,6 +396,45 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(4, 3484892177932191742),
             name: 'level',
             type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 5639671369812230944),
+            name: 'icone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 7668168243904013851),
+            name: 'poids_min',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 6884032806522746417),
+            name: 'poids_max',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 7780056266292994871),
+            name: 'price',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 5995281179692920806),
+            name: 'emballageId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(26, 1766442765075346691),
+            relationTarget: 'TypeEmballage'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 4556632336086077795),
+            name: 'vehiculeId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(27, 8326190715051547793),
+            relationTarget: 'TypeVehicule'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 8380945111437309470),
+            name: 'description',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -329,7 +442,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(8, 2867645673348039882),
       name: 'TypeDestinataire',
-      lastPropertyId: const obx_int.IdUid(4, 7158339524670641670),
+      lastPropertyId: const obx_int.IdUid(5, 7064655540982919217),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -352,6 +465,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(4, 7158339524670641670),
             name: 'level',
             type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 7064655540982919217),
+            name: 'description',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -359,7 +477,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(9, 3366173683586746701),
       name: 'TypeEmballage',
-      lastPropertyId: const obx_int.IdUid(4, 9070179381120543362),
+      lastPropertyId: const obx_int.IdUid(5, 2350266155581223749),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -381,6 +499,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(4, 9070179381120543362),
             name: 'level',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 2350266155581223749),
+            name: 'price',
             type: 6,
             flags: 0)
       ],
@@ -408,6 +531,128 @@ final _entities = <obx_int.ModelEntity>[
             name: 'libelle',
             type: 9,
             flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(11, 9164679665190520757),
+      name: 'Commune',
+      lastPropertyId: const obx_int.IdUid(3, 5850974585328357832),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 3339703389197214116),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 129671587592472604),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(23, 360062318792319106)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 5850974585328357832),
+            name: 'libelle',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(12, 1694752276793098208),
+      name: 'TypeService',
+      lastPropertyId: const obx_int.IdUid(3, 9154440430894102086),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 3317074960193450488),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 7233869181380333804),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(25, 4651581236708009680)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 9154440430894102086),
+            name: 'libelle',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(13, 1448093596920493925),
+      name: 'TypeVehicule',
+      lastPropertyId: const obx_int.IdUid(5, 8844866477374581940),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 2107572451553237530),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 2090785700884179480),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(28, 8753218984946135086)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 5178381396019682008),
+            name: 'libelle',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 7536451417387445047),
+            name: 'level',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 8844866477374581940),
+            name: 'icone',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(14, 4511176965795453775),
+      name: 'Schedule',
+      lastPropertyId: const obx_int.IdUid(7, 7616269515581326599),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 6384898447208571993),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 4616250045982813460),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(29, 3174192123020934368)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 8368392651649566797),
+            name: 'level_day',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 6175185549710909171),
+            name: 'available',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 7616269515581326599),
+            name: 'point_relaisId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(30, 4586643359383809641),
+            relationTarget: 'PointRelais')
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
@@ -448,17 +693,20 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(10, 681740323007064652),
-      lastIndexId: const obx_int.IdUid(18, 1570955258538210844),
-      lastRelationId: const obx_int.IdUid(0, 0),
+      lastEntityId: const obx_int.IdUid(14, 4511176965795453775),
+      lastIndexId: const obx_int.IdUid(30, 4586643359383809641),
+      lastRelationId: const obx_int.IdUid(2, 7878671734895808345),
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [],
+      retiredIndexUids: const [7211556210725057609],
       retiredPropertyUids: const [
         867977961967318551,
         4714811330399576640,
         5655375414535947178,
-        3660234778270319401
+        3660234778270319401,
+        7524757636359615052,
+        5767851895047342897,
+        712884433702980664
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -593,11 +841,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
         toOneRelations: (Colis object) => [
               object.sender,
               object.receiver,
-              object.pointRelais,
               object.typeColis,
               object.typeEmballage,
               object.typeDestinataire,
-              object.status
+              object.status,
+              object.pointRelaisSender,
+              object.pointRelaisReceiver
             ],
         toManyRelations: (Colis object) => {},
         getId: (Colis object) => object.id,
@@ -606,12 +855,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Colis object, fb.Builder fbb) {
           final codeOffset = fbb.writeString(object.code);
-          fbb.startTable(14);
+          final uidOffset = fbb.writeString(object.uid);
+          final receiver_nameOffset = fbb.writeString(object.receiver_name);
+          final receiver_phoneOffset = fbb.writeString(object.receiver_phone);
+          fbb.startTable(21);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, codeOffset);
           fbb.addInt64(2, object.sender.targetId);
           fbb.addInt64(3, object.receiver.targetId);
-          fbb.addInt64(4, object.pointRelais.targetId);
           fbb.addInt64(5, object.typeColis.targetId);
           fbb.addInt64(6, object.typeEmballage.targetId);
           fbb.addInt64(7, object.typeDestinataire.targetId);
@@ -620,6 +871,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(10, object.recuperationDate?.millisecondsSinceEpoch);
           fbb.addInt64(11, object.livraisonDate?.millisecondsSinceEpoch);
           fbb.addInt64(12, object.retraitDate?.millisecondsSinceEpoch);
+          fbb.addOffset(13, uidOffset);
+          fbb.addInt64(14, object.pointRelaisSender.targetId);
+          fbb.addInt64(15, object.pointRelaisReceiver.targetId);
+          fbb.addOffset(16, receiver_nameOffset);
+          fbb.addOffset(17, receiver_phoneOffset);
+          fbb.addInt64(18, object.total);
+          fbb.addInt64(19, object.date_creation?.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -634,10 +892,22 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 26);
           final retraitDateValue =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28);
+          final date_creationValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 42);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 30, '');
           final codeParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
+          final receiver_nameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 36, '');
+          final receiver_phoneParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 38, '');
+          final totalParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 40, 0);
           final depotDateParam = depotDateValue == null
               ? null
               : DateTime.fromMillisecondsSinceEpoch(depotDateValue);
@@ -650,22 +920,27 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final retraitDateParam = retraitDateValue == null
               ? null
               : DateTime.fromMillisecondsSinceEpoch(retraitDateValue);
+          final date_creationParam = date_creationValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(date_creationValue);
           final object = Colis(
               id: idParam,
+              uid: uidParam,
               code: codeParam,
+              receiver_name: receiver_nameParam,
+              receiver_phone: receiver_phoneParam,
+              total: totalParam,
               depotDate: depotDateParam,
               recuperationDate: recuperationDateParam,
               livraisonDate: livraisonDateParam,
-              retraitDate: retraitDateParam);
+              retraitDate: retraitDateParam,
+              date_creation: date_creationParam);
           object.sender.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
           object.sender.attach(store);
           object.receiver.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
           object.receiver.attach(store);
-          object.pointRelais.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
-          object.pointRelais.attach(store);
           object.typeColis.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0);
           object.typeColis.attach(store);
@@ -678,26 +953,45 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.status.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
           object.status.attach(store);
+          object.pointRelaisSender.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 32, 0);
+          object.pointRelaisSender.attach(store);
+          object.pointRelaisReceiver.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 34, 0);
+          object.pointRelaisReceiver.attach(store);
           return object;
         }),
     PointRelais: obx_int.EntityDefinition<PointRelais>(
         model: _entities[4],
-        toOneRelations: (PointRelais object) => [object.type],
-        toManyRelations: (PointRelais object) => {},
+        toOneRelations: (PointRelais object) => [object.type, object.commune],
+        toManyRelations: (PointRelais object) => {
+              obx_int.RelInfo<PointRelais>.toMany(1, object.id):
+                  object.services,
+              obx_int.RelInfo<PointRelais>.toMany(2, object.id):
+                  object.schedules
+            },
         getId: (PointRelais object) => object.id,
         setId: (PointRelais object, int id) {
           object.id = id;
         },
         objectToFB: (PointRelais object, fb.Builder fbb) {
           final libelleOffset = fbb.writeString(object.libelle);
-          final addressOffset = fbb.writeString(object.address);
-          fbb.startTable(7);
+          final addressOffset =
+              object.address == null ? null : fbb.writeString(object.address!);
+          final uidOffset = fbb.writeString(object.uid);
+          final descriptionOffset = object.description == null
+              ? null
+              : fbb.writeString(object.description!);
+          fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, libelleOffset);
           fbb.addOffset(2, addressOffset);
           fbb.addFloat64(3, object.latitude);
           fbb.addFloat64(4, object.longitude);
           fbb.addInt64(5, object.type.targetId);
+          fbb.addOffset(6, uidOffset);
+          fbb.addInt64(7, object.commune.targetId);
+          fbb.addOffset(8, descriptionOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -706,23 +1000,37 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 16, '');
           final libelleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final addressParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final latitudeParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          final longitudeParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0);
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 20);
+          final latitudeParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 10);
+          final longitudeParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 12);
           final object = PointRelais(
               id: idParam,
+              uid: uidParam,
               libelle: libelleParam,
               address: addressParam,
+              description: descriptionParam,
               latitude: latitudeParam,
               longitude: longitudeParam);
           object.type.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0);
           object.type.attach(store);
+          object.commune.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          object.commune.attach(store);
+          obx_int.InternalToManyAccess.setRelInfo<PointRelais>(object.services,
+              store, obx_int.RelInfo<PointRelais>.toMany(1, object.id));
+          obx_int.InternalToManyAccess.setRelInfo<PointRelais>(object.schedules,
+              store, obx_int.RelInfo<PointRelais>.toMany(2, object.id));
           return object;
         }),
     StatusColis: obx_int.EntityDefinition<StatusColis>(
@@ -736,11 +1044,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (StatusColis object, fb.Builder fbb) {
           final uidOffset = fbb.writeString(object.uid);
           final libelleOffset = fbb.writeString(object.libelle);
-          fbb.startTable(5);
+          final descriptionOffset = fbb.writeString(object.description);
+          final colorOffset = fbb.writeString(object.color);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, libelleOffset);
           fbb.addInt64(3, object.level);
+          fbb.addOffset(4, descriptionOffset);
+          fbb.addOffset(5, colorOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -753,15 +1065,25 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 8, '');
           final levelParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final colorParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
           final object = StatusColis(
-              uid: uidParam, libelle: libelleParam, level: levelParam)
+              uid: uidParam,
+              libelle: libelleParam,
+              level: levelParam,
+              description: descriptionParam,
+              color: colorParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
         }),
     TypeColis: obx_int.EntityDefinition<TypeColis>(
         model: _entities[6],
-        toOneRelations: (TypeColis object) => [],
+        toOneRelations: (TypeColis object) =>
+            [object.emballage, object.vehicule],
         toManyRelations: (TypeColis object) => {},
         getId: (TypeColis object) => object.id,
         setId: (TypeColis object, int id) {
@@ -770,11 +1092,20 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (TypeColis object, fb.Builder fbb) {
           final uidOffset = fbb.writeString(object.uid);
           final libelleOffset = fbb.writeString(object.libelle);
-          fbb.startTable(5);
+          final iconeOffset = fbb.writeString(object.icone);
+          final descriptionOffset = fbb.writeString(object.description);
+          fbb.startTable(12);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, libelleOffset);
           fbb.addInt64(3, object.level);
+          fbb.addOffset(4, iconeOffset);
+          fbb.addFloat64(5, object.poids_min);
+          fbb.addFloat64(6, object.poids_max);
+          fbb.addInt64(7, object.price);
+          fbb.addInt64(8, object.emballage.targetId);
+          fbb.addInt64(9, object.vehicule.targetId);
+          fbb.addOffset(10, descriptionOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -787,10 +1118,33 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 8, '');
           final levelParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 24, '');
+          final iconeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final poids_minParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 14, 0);
+          final poids_maxParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 16, 0);
+          final priceParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
           final object = TypeColis(
-              uid: uidParam, libelle: libelleParam, level: levelParam)
+              uid: uidParam,
+              libelle: libelleParam,
+              level: levelParam,
+              description: descriptionParam,
+              icone: iconeParam,
+              poids_min: poids_minParam,
+              poids_max: poids_maxParam,
+              price: priceParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-
+          object.emballage.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
+          object.emballage.attach(store);
+          object.vehicule.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0);
+          object.vehicule.attach(store);
           return object;
         }),
     TypeDestinataire: obx_int.EntityDefinition<TypeDestinataire>(
@@ -804,11 +1158,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (TypeDestinataire object, fb.Builder fbb) {
           final uidOffset = fbb.writeString(object.uid);
           final libelleOffset = fbb.writeString(object.libelle);
-          fbb.startTable(5);
+          final descriptionOffset = object.description == null
+              ? null
+              : fbb.writeString(object.description!);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, libelleOffset);
           fbb.addInt64(3, object.level);
+          fbb.addOffset(4, descriptionOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -817,12 +1175,18 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final uidParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12);
           final libelleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
           final levelParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 10);
           final object = TypeDestinataire(
-              uid: uidParam, libelle: libelleParam, level: levelParam)
+              uid: uidParam,
+              description: descriptionParam,
+              libelle: libelleParam,
+              level: levelParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -838,11 +1202,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (TypeEmballage object, fb.Builder fbb) {
           final uidOffset = fbb.writeString(object.uid);
           final libelleOffset = fbb.writeString(object.libelle);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, libelleOffset);
           fbb.addInt64(3, object.level);
+          fbb.addInt64(4, object.price);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -855,8 +1220,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 8, '');
           final levelParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final priceParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
           final object = TypeEmballage(
-              uid: uidParam, libelle: libelleParam, level: levelParam)
+              uid: uidParam,
+              libelle: libelleParam,
+              level: levelParam,
+              price: priceParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -889,6 +1259,145 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final object = TypePointRelais(uid: uidParam, libelle: libelleParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
+          return object;
+        }),
+    Commune: obx_int.EntityDefinition<Commune>(
+        model: _entities[10],
+        toOneRelations: (Commune object) => [],
+        toManyRelations: (Commune object) => {},
+        getId: (Commune object) => object.id,
+        setId: (Commune object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Commune object, fb.Builder fbb) {
+          final uidOffset = fbb.writeString(object.uid);
+          final libelleOffset = fbb.writeString(object.libelle);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, uidOffset);
+          fbb.addOffset(2, libelleOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final libelleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = Commune(uid: uidParam, libelle: libelleParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    TypeService: obx_int.EntityDefinition<TypeService>(
+        model: _entities[11],
+        toOneRelations: (TypeService object) => [],
+        toManyRelations: (TypeService object) => {},
+        getId: (TypeService object) => object.id,
+        setId: (TypeService object, int id) {
+          object.id = id;
+        },
+        objectToFB: (TypeService object, fb.Builder fbb) {
+          final uidOffset = fbb.writeString(object.uid);
+          final libelleOffset = fbb.writeString(object.libelle);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, uidOffset);
+          fbb.addOffset(2, libelleOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final libelleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = TypeService(uid: uidParam, libelle: libelleParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    TypeVehicule: obx_int.EntityDefinition<TypeVehicule>(
+        model: _entities[12],
+        toOneRelations: (TypeVehicule object) => [],
+        toManyRelations: (TypeVehicule object) => {},
+        getId: (TypeVehicule object) => object.id,
+        setId: (TypeVehicule object, int id) {
+          object.id = id;
+        },
+        objectToFB: (TypeVehicule object, fb.Builder fbb) {
+          final uidOffset = fbb.writeString(object.uid);
+          final libelleOffset = fbb.writeString(object.libelle);
+          final iconeOffset = fbb.writeString(object.icone);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, uidOffset);
+          fbb.addOffset(2, libelleOffset);
+          fbb.addInt64(3, object.level);
+          fbb.addOffset(4, iconeOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final libelleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final iconeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final levelParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final object = TypeVehicule(
+              uid: uidParam,
+              libelle: libelleParam,
+              icone: iconeParam,
+              level: levelParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    Schedule: obx_int.EntityDefinition<Schedule>(
+        model: _entities[13],
+        toOneRelations: (Schedule object) => [object.point_relais],
+        toManyRelations: (Schedule object) => {},
+        getId: (Schedule object) => object.id,
+        setId: (Schedule object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Schedule object, fb.Builder fbb) {
+          final uidOffset = fbb.writeString(object.uid);
+          fbb.startTable(8);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, uidOffset);
+          fbb.addInt64(2, object.level_day);
+          fbb.addBool(3, object.available);
+          fbb.addInt64(6, object.point_relais.targetId);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final level_dayParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final availableParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final object = Schedule(
+              uid: uidParam,
+              level_day: level_dayParam,
+              available: availableParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          object.point_relais.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
+          object.point_relais.attach(store);
           return object;
         })
   };
@@ -982,42 +1491,66 @@ class Colis_ {
   static final receiver =
       obx.QueryRelationToOne<Colis, Client>(_entities[3].properties[3]);
 
-  /// See [Colis.pointRelais].
-  static final pointRelais =
-      obx.QueryRelationToOne<Colis, PointRelais>(_entities[3].properties[4]);
-
   /// See [Colis.typeColis].
   static final typeColis =
-      obx.QueryRelationToOne<Colis, TypeColis>(_entities[3].properties[5]);
+      obx.QueryRelationToOne<Colis, TypeColis>(_entities[3].properties[4]);
 
   /// See [Colis.typeEmballage].
   static final typeEmballage =
-      obx.QueryRelationToOne<Colis, TypeEmballage>(_entities[3].properties[6]);
+      obx.QueryRelationToOne<Colis, TypeEmballage>(_entities[3].properties[5]);
 
   /// See [Colis.typeDestinataire].
   static final typeDestinataire =
       obx.QueryRelationToOne<Colis, TypeDestinataire>(
-          _entities[3].properties[7]);
+          _entities[3].properties[6]);
 
   /// See [Colis.status].
   static final status =
-      obx.QueryRelationToOne<Colis, StatusColis>(_entities[3].properties[8]);
+      obx.QueryRelationToOne<Colis, StatusColis>(_entities[3].properties[7]);
 
   /// See [Colis.depotDate].
   static final depotDate =
-      obx.QueryDateProperty<Colis>(_entities[3].properties[9]);
+      obx.QueryDateProperty<Colis>(_entities[3].properties[8]);
 
   /// See [Colis.recuperationDate].
   static final recuperationDate =
-      obx.QueryDateProperty<Colis>(_entities[3].properties[10]);
+      obx.QueryDateProperty<Colis>(_entities[3].properties[9]);
 
   /// See [Colis.livraisonDate].
   static final livraisonDate =
-      obx.QueryDateProperty<Colis>(_entities[3].properties[11]);
+      obx.QueryDateProperty<Colis>(_entities[3].properties[10]);
 
   /// See [Colis.retraitDate].
   static final retraitDate =
-      obx.QueryDateProperty<Colis>(_entities[3].properties[12]);
+      obx.QueryDateProperty<Colis>(_entities[3].properties[11]);
+
+  /// See [Colis.uid].
+  static final uid =
+      obx.QueryStringProperty<Colis>(_entities[3].properties[12]);
+
+  /// See [Colis.pointRelaisSender].
+  static final pointRelaisSender =
+      obx.QueryRelationToOne<Colis, PointRelais>(_entities[3].properties[13]);
+
+  /// See [Colis.pointRelaisReceiver].
+  static final pointRelaisReceiver =
+      obx.QueryRelationToOne<Colis, PointRelais>(_entities[3].properties[14]);
+
+  /// See [Colis.receiver_name].
+  static final receiver_name =
+      obx.QueryStringProperty<Colis>(_entities[3].properties[15]);
+
+  /// See [Colis.receiver_phone].
+  static final receiver_phone =
+      obx.QueryStringProperty<Colis>(_entities[3].properties[16]);
+
+  /// See [Colis.total].
+  static final total =
+      obx.QueryIntegerProperty<Colis>(_entities[3].properties[17]);
+
+  /// See [Colis.date_creation].
+  static final date_creation =
+      obx.QueryDateProperty<Colis>(_entities[3].properties[18]);
 }
 
 /// [PointRelais] entity fields to define ObjectBox queries.
@@ -1045,6 +1578,26 @@ class PointRelais_ {
   /// See [PointRelais.type].
   static final type = obx.QueryRelationToOne<PointRelais, TypePointRelais>(
       _entities[4].properties[5]);
+
+  /// See [PointRelais.uid].
+  static final uid =
+      obx.QueryStringProperty<PointRelais>(_entities[4].properties[6]);
+
+  /// See [PointRelais.commune].
+  static final commune =
+      obx.QueryRelationToOne<PointRelais, Commune>(_entities[4].properties[7]);
+
+  /// See [PointRelais.description].
+  static final description =
+      obx.QueryStringProperty<PointRelais>(_entities[4].properties[8]);
+
+  /// see [PointRelais.services]
+  static final services = obx.QueryRelationToMany<PointRelais, TypeService>(
+      _entities[4].relations[0]);
+
+  /// see [PointRelais.schedules]
+  static final schedules =
+      obx.QueryRelationToMany<PointRelais, Schedule>(_entities[4].relations[1]);
 }
 
 /// [StatusColis] entity fields to define ObjectBox queries.
@@ -1064,6 +1617,14 @@ class StatusColis_ {
   /// See [StatusColis.level].
   static final level =
       obx.QueryIntegerProperty<StatusColis>(_entities[5].properties[3]);
+
+  /// See [StatusColis.description].
+  static final description =
+      obx.QueryStringProperty<StatusColis>(_entities[5].properties[4]);
+
+  /// See [StatusColis.color].
+  static final color =
+      obx.QueryStringProperty<StatusColis>(_entities[5].properties[5]);
 }
 
 /// [TypeColis] entity fields to define ObjectBox queries.
@@ -1083,6 +1644,34 @@ class TypeColis_ {
   /// See [TypeColis.level].
   static final level =
       obx.QueryIntegerProperty<TypeColis>(_entities[6].properties[3]);
+
+  /// See [TypeColis.icone].
+  static final icone =
+      obx.QueryStringProperty<TypeColis>(_entities[6].properties[4]);
+
+  /// See [TypeColis.poids_min].
+  static final poids_min =
+      obx.QueryDoubleProperty<TypeColis>(_entities[6].properties[5]);
+
+  /// See [TypeColis.poids_max].
+  static final poids_max =
+      obx.QueryDoubleProperty<TypeColis>(_entities[6].properties[6]);
+
+  /// See [TypeColis.price].
+  static final price =
+      obx.QueryIntegerProperty<TypeColis>(_entities[6].properties[7]);
+
+  /// See [TypeColis.emballage].
+  static final emballage = obx.QueryRelationToOne<TypeColis, TypeEmballage>(
+      _entities[6].properties[8]);
+
+  /// See [TypeColis.vehicule].
+  static final vehicule = obx.QueryRelationToOne<TypeColis, TypeVehicule>(
+      _entities[6].properties[9]);
+
+  /// See [TypeColis.description].
+  static final description =
+      obx.QueryStringProperty<TypeColis>(_entities[6].properties[10]);
 }
 
 /// [TypeDestinataire] entity fields to define ObjectBox queries.
@@ -1102,6 +1691,10 @@ class TypeDestinataire_ {
   /// See [TypeDestinataire.level].
   static final level =
       obx.QueryIntegerProperty<TypeDestinataire>(_entities[7].properties[3]);
+
+  /// See [TypeDestinataire.description].
+  static final description =
+      obx.QueryStringProperty<TypeDestinataire>(_entities[7].properties[4]);
 }
 
 /// [TypeEmballage] entity fields to define ObjectBox queries.
@@ -1121,6 +1714,10 @@ class TypeEmballage_ {
   /// See [TypeEmballage.level].
   static final level =
       obx.QueryIntegerProperty<TypeEmballage>(_entities[8].properties[3]);
+
+  /// See [TypeEmballage.price].
+  static final price =
+      obx.QueryIntegerProperty<TypeEmballage>(_entities[8].properties[4]);
 }
 
 /// [TypePointRelais] entity fields to define ObjectBox queries.
@@ -1136,4 +1733,80 @@ class TypePointRelais_ {
   /// See [TypePointRelais.libelle].
   static final libelle =
       obx.QueryStringProperty<TypePointRelais>(_entities[9].properties[2]);
+}
+
+/// [Commune] entity fields to define ObjectBox queries.
+class Commune_ {
+  /// See [Commune.id].
+  static final id =
+      obx.QueryIntegerProperty<Commune>(_entities[10].properties[0]);
+
+  /// See [Commune.uid].
+  static final uid =
+      obx.QueryStringProperty<Commune>(_entities[10].properties[1]);
+
+  /// See [Commune.libelle].
+  static final libelle =
+      obx.QueryStringProperty<Commune>(_entities[10].properties[2]);
+}
+
+/// [TypeService] entity fields to define ObjectBox queries.
+class TypeService_ {
+  /// See [TypeService.id].
+  static final id =
+      obx.QueryIntegerProperty<TypeService>(_entities[11].properties[0]);
+
+  /// See [TypeService.uid].
+  static final uid =
+      obx.QueryStringProperty<TypeService>(_entities[11].properties[1]);
+
+  /// See [TypeService.libelle].
+  static final libelle =
+      obx.QueryStringProperty<TypeService>(_entities[11].properties[2]);
+}
+
+/// [TypeVehicule] entity fields to define ObjectBox queries.
+class TypeVehicule_ {
+  /// See [TypeVehicule.id].
+  static final id =
+      obx.QueryIntegerProperty<TypeVehicule>(_entities[12].properties[0]);
+
+  /// See [TypeVehicule.uid].
+  static final uid =
+      obx.QueryStringProperty<TypeVehicule>(_entities[12].properties[1]);
+
+  /// See [TypeVehicule.libelle].
+  static final libelle =
+      obx.QueryStringProperty<TypeVehicule>(_entities[12].properties[2]);
+
+  /// See [TypeVehicule.level].
+  static final level =
+      obx.QueryIntegerProperty<TypeVehicule>(_entities[12].properties[3]);
+
+  /// See [TypeVehicule.icone].
+  static final icone =
+      obx.QueryStringProperty<TypeVehicule>(_entities[12].properties[4]);
+}
+
+/// [Schedule] entity fields to define ObjectBox queries.
+class Schedule_ {
+  /// See [Schedule.id].
+  static final id =
+      obx.QueryIntegerProperty<Schedule>(_entities[13].properties[0]);
+
+  /// See [Schedule.uid].
+  static final uid =
+      obx.QueryStringProperty<Schedule>(_entities[13].properties[1]);
+
+  /// See [Schedule.level_day].
+  static final level_day =
+      obx.QueryIntegerProperty<Schedule>(_entities[13].properties[2]);
+
+  /// See [Schedule.available].
+  static final available =
+      obx.QueryBooleanProperty<Schedule>(_entities[13].properties[3]);
+
+  /// See [Schedule.point_relais].
+  static final point_relais = obx.QueryRelationToOne<Schedule, PointRelais>(
+      _entities[13].properties[4]);
 }

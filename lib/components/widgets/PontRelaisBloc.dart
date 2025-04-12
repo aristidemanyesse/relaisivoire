@@ -3,21 +3,15 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/PointRelaisDetailPopup.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PontRelaisBloc extends StatelessWidget {
-  final String id;
-  final String title;
-  final String subtitle;
+  final PointRelais pointRelais;
   final bool received;
 
-  PontRelaisBloc({
-    super.key,
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    required this.received,
-  });
+  PontRelaisBloc(
+      {super.key, required this.pointRelais, required this.received});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -37,8 +31,8 @@ class PontRelaisBloc extends StatelessWidget {
                   showMaterialModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
-                    builder: (context) => PointRelaisDetailPopup(
-                        title: title, subtitle: subtitle, id: id),
+                    builder: (context) =>
+                        PointRelaisDetailPopup(pointRelais: pointRelais),
                   );
                 },
                 child: Container(
@@ -47,7 +41,7 @@ class PontRelaisBloc extends StatelessWidget {
                     vertical: Tools.PADDING / 2,
                   ),
                   decoration: BoxDecoration(
-                      color: _controller.pointRelais.value == id
+                      color: _controller.pointRelais.value == pointRelais
                           ? MyColors.primary
                           : MyColors.secondary.withAlpha(200),
                       borderRadius: BorderRadius.circular(10),
@@ -60,7 +54,7 @@ class PontRelaisBloc extends StatelessWidget {
                       Center(
                         child: Icon(Icons.location_on_sharp,
                             size: 35,
-                            color: _controller.pointRelais.value == id
+                            color: _controller.pointRelais.value == pointRelais
                                 ? MyColors.secondary
                                 : MyColors.primary),
                       ),
@@ -72,23 +66,25 @@ class PontRelaisBloc extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              title,
+                              pointRelais.libelle,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
                                       fontWeight: FontWeight.w600,
-                                      color: _controller.pointRelais.value == id
+                                      color: _controller.pointRelais.value ==
+                                              pointRelais
                                           ? MyColors.secondary
                                           : MyColors.primary),
                             ),
                             Text(
-                              subtitle,
+                              pointRelais.adresse(),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
                                   .copyWith(
-                                      color: _controller.pointRelais.value == id
+                                      color: _controller.pointRelais.value ==
+                                              pointRelais
                                           ? MyColors.secondary
                                           : MyColors.primary),
                             ),

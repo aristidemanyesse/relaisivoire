@@ -8,12 +8,14 @@ class TypeEmballage {
   String uid;
 
   String libelle;
+  int price;
   int level;
 
   TypeEmballage({
     this.uid = "",
     required this.libelle,
-    required this.level,
+    this.level = 0,
+    this.price = 0,
   });
 
   factory TypeEmballage.fromJson(Map<String, dynamic> json) {
@@ -21,12 +23,13 @@ class TypeEmballage {
       uid: json['id'],
       libelle: json['libelle'],
       level: json['level'],
+      price: json['price'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': uid,
         'libelle': libelle,
         'level': level,
+        'price': price,
       };
 }

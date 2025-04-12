@@ -6,15 +6,18 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/step_process.dart';
 import 'package:lpr/components/widgets/step_recap.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:lpr/pages/open_q_r_code.dart';
 import 'package:lpr/pages/search_lpr.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ColisPage extends StatefulWidget {
+  final Colis colis;
   final bool received;
-  const ColisPage({super.key, required this.received});
+  const ColisPage({super.key, required this.colis, required this.received});
 
   @override
   State<ColisPage> createState() => _ColisPageState();
@@ -22,6 +25,12 @@ class ColisPage extends StatefulWidget {
 
 class _ColisPageState extends State<ColisPage> {
   final PageController _controller = PageController();
+
+  bool cutOff() {
+    final maintenant = DateTime.now();
+    return maintenant.hour > 11 ||
+        (maintenant.hour == 11 && maintenant.minute >= 30);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class _ColisPageState extends State<ColisPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "LPR - 458 965 230",
+              widget.colis.getCode(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: MyColors.secondary, fontWeight: FontWeight.bold),
@@ -159,13 +168,11 @@ class _ColisPageState extends State<ColisPage> {
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.all(
-                                              Tools.PADDING / 2),
-                                          child: Image.asset(
-                                            "assets/images/qrcode.png",
-                                            fit: BoxFit.contain,
-                                            height: 150,
-                                            width: 150,
-                                          ),
+                                              Tools.PADDING / 4),
+                                          child: QrImageView(
+                                              data: widget.colis.code,
+                                              version: QrVersions.auto,
+                                              size: 170),
                                         ),
                                       ),
                                     ),
@@ -209,27 +216,41 @@ class _ColisPageState extends State<ColisPage> {
                                         StepRecap(
                                             title: "Type de colis",
                                             subtitle:
-                                                "Enveloppe - Porte-document"),
+                                                "${widget.colis.typeColis.target?.libelle} ${widget.colis.typeColis.target?.icone}"),
                                         StepRecap(
                                             title: "Poids du colis",
-                                            subtitle: "entre 2Kg et 5Kg"),
-                                        StepRecap(
-                                            title: "NIveau d'emballage",
-                                            subtitle: "Oui bien emballé"),
-                                        if (!widget.received)
-                                          StepRecap(
-                                              title:
-                                                  "Coordonnées du destinataire",
-                                              subtitle:
-                                                  "Koumba Yacine - 07 859 569 20"),
-                                        StepRecap(
-                                            title: "Lieu de livraison",
                                             subtitle:
-                                                "Aly le bon - Marcory - Anoumabo"),
+                                                "entre ${widget.colis.typeColis.target?.poids_min} et ${widget.colis.typeColis.target?.poids_max} Kg"),
+                                        StepRecap(
+                                            title: "Niveau d'emballage",
+                                            subtitle: widget.colis.typeEmballage
+                                                        .target?.level ==
+                                                    1
+                                                ? "Oui bien emballé"
+                                                : "Non, c'est juste le colis"),
+                                        StepRecap(
+                                            title:
+                                                "Coordonnées du destinataire",
+                                            subtitle: widget
+                                                        .colis
+                                                        .typeDestinataire
+                                                        .target
+                                                        ?.level ==
+                                                    1
+                                                ? "Moi-même (${widget.colis.sender.target?.contact})"
+                                                : "${widget.colis.receiver_name} - ${widget.colis.receiver_phone}"),
+                                        StepRecap(
+                                          title: "Lieu de Rétrait du colis",
+                                          subtitle:
+                                              "${widget.colis.pointRelaisReceiver.target?.libelle}",
+                                          subtitle2:
+                                              "${widget.colis.pointRelaisReceiver.target?.adresse()}",
+                                        ),
                                         if (!widget.received)
                                           StepRecap(
                                               title: "Total à payer au dépôt",
-                                              subtitle: "1 200 Fcfa"),
+                                              subtitle:
+                                                  "${widget.colis.total} Fcfa"),
                                         Container(
                                           height: 3,
                                           width: 20,
@@ -331,17 +352,18 @@ class _ColisPageState extends State<ColisPage> {
               SizedBox(
                 height: Tools.PADDING,
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                child: Text(
-                  " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(fontStyle: FontStyle.italic),
+              if (!cutOff())
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                  child: Text(
+                    " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
               SizedBox(
                 height: Tools.PADDING,
               ),

@@ -3,21 +3,13 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/TypeColisDetailPopup.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/models/ColisApp/TypeColis.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class TypeColisItem extends StatelessWidget {
-  final String id;
-  final String icon;
-  final String title;
-  final String description;
+  final TypeColis type;
 
-  TypeColisItem({
-    super.key,
-    required this.id,
-    required this.icon,
-    required this.title,
-    this.description = "",
-  });
+  TypeColisItem({super.key, required this.type});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -25,7 +17,7 @@ class TypeColisItem extends StatelessWidget {
     showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => TypeColisDetailPopup(icon: icon, title: title),
+      builder: (context) => TypeColisDetailPopup(type: type),
     );
   }
 
@@ -35,12 +27,12 @@ class TypeColisItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: Obx(() {
         return Material(
-          color: _controller.typeColis.value == id
+          color: _controller.typeColis.value == type
               ? MyColors.primary
               : Colors.transparent,
           child: InkWell(
             onTap: () {
-              _controller.typeColis.value = id;
+              _controller.typeColis.value = type;
             },
             onLongPress: () {
               showPopup(context);
@@ -77,10 +69,10 @@ class TypeColisItem extends StatelessWidget {
                     children: [
                       SizedBox(height: Tools.PADDING / 2),
                       Text(
-                        icon,
+                        type.icone,
                         style: TextStyle(fontSize: 50),
                       ),
-                      Text(title,
+                      Text(type.libelle,
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme

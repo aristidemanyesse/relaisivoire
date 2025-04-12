@@ -6,18 +6,12 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/ScheduleItem.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
 
 class PointRelaisDetailPopup extends StatelessWidget {
-  PointRelaisDetailPopup({
-    super.key,
-    required this.id,
-    required this.title,
-    required this.subtitle,
-  });
+  final PointRelais pointRelais;
 
-  final String id;
-  final String title;
-  final String subtitle;
+  PointRelaisDetailPopup({super.key, required this.pointRelais});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -88,13 +82,13 @@ class PointRelaisDetailPopup extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(title,
+                        Text(pointRelais.libelle,
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(fontWeight: FontWeight.bold)),
-                        Text(subtitle,
+                        Text(pointRelais.adresse(),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -102,8 +96,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.italic)),
                         SizedBox(height: Tools.PADDING / 2),
-                        Text(
-                            "lorem ipsum dolor  In this article, we'll explore some of the best Flutter icon libraries for 2024, including Hugeicons Pro, Material Icons, Feather Icons, and more.",
+                        Text(pointRelais.description ?? "",
                             textAlign: TextAlign.justify,
                             style: Theme.of(context)
                                 .textTheme
@@ -122,21 +115,9 @@ class PointRelaisDetailPopup extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ScheduleItem(title: "Lun", horaire: "12h-18h"),
-                  Container(height: 20, width: 1, color: Colors.grey),
-                  ScheduleItem(title: "Mar", horaire: "Fermé"),
-                  Container(height: 20, width: 1, color: Colors.grey),
-                  ScheduleItem(title: "Mer", horaire: "12h-18h"),
-                  Container(height: 20, width: 1, color: Colors.grey),
-                  ScheduleItem(title: "Jeu", horaire: "12h-18h"),
-                  Container(height: 20, width: 1, color: Colors.grey),
-                  ScheduleItem(title: "Ven", horaire: "Fermé"),
-                  Container(height: 20, width: 1, color: Colors.grey),
-                  ScheduleItem(title: "Sam", horaire: "12h-18h"),
-                  Container(height: 20, width: 1, color: Colors.grey),
-                  ScheduleItem(title: "Dim", horaire: "12h-18h"),
-                ],
+                children: pointRelais.schedules.map((schedule) {
+                  return ScheduleItem(schedule: schedule);
+                }).toList(),
               ),
             ),
             Spacer(),
@@ -146,7 +127,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
                     title: "Choisir ce point relais ",
                     icon: Icons.check,
                     onPressed: () {
-                      _controller.pointRelais.value = id;
+                      _controller.pointRelais.value = pointRelais;
                       Get.back();
                     })),
             Spacer(),

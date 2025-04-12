@@ -84,7 +84,6 @@ class _OPTPageState extends State<OPTPage> {
       }
     } else {
       Get.back();
-      print(";mxùmcl");
       Get.snackbar("❌ Erreur", "Votre code OTP est invalide",
           colorText: MyColors.danger);
     }

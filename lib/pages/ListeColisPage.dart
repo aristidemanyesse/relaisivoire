@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
-import 'package:lpr/pages/commander.dart';
+import 'package:lpr/pages/commanderPage.dart';
 import 'package:lpr/pages/parametre_page.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
@@ -23,6 +24,12 @@ class ListeColisPage extends StatefulWidget {
 
 class _ListeColisPageState extends State<ListeColisPage> {
   GeneralController controller = Get.find();
+  ColisController colisController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,31 +138,24 @@ class _ListeColisPageState extends State<ListeColisPage> {
                               width: double.infinity,
                               padding: EdgeInsets.symmetric(
                                   horizontal: Tools.PADDING, vertical: 5),
-                              child: Text("Nouveaux colis à récupérer (3)",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(fontWeight: FontWeight.bold)),
+                              child: Obx(() {
+                                return Text(
+                                    "Colis en cours de traitement (${colisController.liste_en_cours.value.length})",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(fontWeight: FontWeight.bold));
+                              }),
                             ),
-                            Column(
-                              children: [
-                                ItemBloc(
-                                    title: "Petit sac, sachet",
-                                    subtitle: "Boutique Aly - Marcory Anoumabo",
-                                    created: "il y a 1 heures",
-                                    received: true),
-                                ItemBloc(
-                                    title: "Spécial, fragile",
-                                    subtitle: "Boutique Méféré - Cocody danga",
-                                    created: "il y a 1 jour",
-                                    received: true),
-                                ItemBloc(
-                                    title: "Valise",
-                                    subtitle: "Boutique Aly - Marcory Anoumabo",
-                                    created: "il y a 1 heures",
-                                    received: true),
-                              ],
-                            ),
+                            Obx(() {
+                              return Column(
+                                children: colisController.liste_en_cours.value
+                                    .map((colis) {
+                                  return ItemBloc(
+                                      colis: colis, received: false);
+                                }).toList(),
+                              );
+                            }),
                           ],
                         ),
                         SizedBox(
@@ -177,23 +177,15 @@ class _ListeColisPageState extends State<ListeColisPage> {
                                         .titleSmall!
                                         .copyWith(fontWeight: FontWeight.bold)),
                               ),
-                              Column(
-                                children: [
-                                  ItemBloc(
-                                    title: "Enveloppe / Porte-document",
-                                    subtitle:
-                                        "Boutique de Banbara - Port-bouët Abattoir",
-                                    created: "il y a 2 min",
-                                    received: false,
-                                  ),
-                                  ItemBloc(
-                                      title: "Carton moyen",
-                                      subtitle:
-                                          "ANK Service - Port-bouët Vridi",
-                                      created: "il y a 2 heures",
-                                      received: false),
-                                ],
-                              ),
+                              Obx(() {
+                                return Column(
+                                  children: colisController.liste_attentes.value
+                                      .map((colis) {
+                                    return ItemBloc(
+                                        colis: colis, received: false);
+                                  }).toList(),
+                                );
+                              }),
                             ],
                           ),
                         ),

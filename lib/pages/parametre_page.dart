@@ -10,6 +10,9 @@ import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/pages/ProfilPage.dart';
 import 'package:lpr/pages/search_lpr.dart';
+import 'package:lpr/services/SessionService.dart';
+import 'package:lpr/services/StoreService.dart';
+import 'package:lpr/services/SyncService.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ParametrePage extends StatefulWidget {
@@ -127,7 +130,11 @@ class _ParametrePageState extends State<ParametrePage> {
                             "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
                         testOk: "Déconnexion",
                         testCancel: "Non",
-                        functionOk: () {
+                        functionOk: () async {
+                          final store = await getStore();
+                          final sync = SyncService(store: store);
+                          final session = SessionService(syncService: sync);
+                          session.clearClientSession();
                           KeyBoardController keyBoardController = Get.find();
                           keyBoardController.onInit();
                           Get.offAll(LoginNumber());

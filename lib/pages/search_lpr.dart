@@ -1,23 +1,67 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/pages/distance_map.dart';
 import 'package:lpr/pages/map_button.dart';
+import 'package:lpr/services/LoactionService.dart';
 
-class SearchLPR extends StatelessWidget {
+class SearchLPR extends StatefulWidget {
   SearchLPR({
     super.key,
   });
 
+  @override
+  State<SearchLPR> createState() => _SearchLPRState();
+}
+
+class _SearchLPRState extends State<SearchLPR> {
+  HandleTypesController controller = Get.find();
+
   Random rnd = Random();
+  final Completer<GoogleMapController> _controller = Completer();
+  LatLng? _currentPosition;
+  final Set<Marker> _markers = {};
+
+  Future<void> _initMap() async {
+    final position = await LocationService.getCurrentPosition();
+    setState(() {
+      _currentPosition = LatLng(position!.latitude, position.longitude);
+    });
+
+    _loadMarkers();
+  }
+
+  void _loadMarkers() {
+    for (var relais in controller.listePointsRelais.value) {
+      final marker = Marker(
+        markerId: MarkerId("point-${relais.id}"),
+        position: LatLng(relais.latitude!, relais.longitude!),
+        infoWindow: InfoWindow(
+          title: relais.libelle,
+          snippet: relais.adresse(),
+        ),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+      );
+
+      _markers.add(marker);
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_currentPosition == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -26,45 +70,17 @@ class SearchLPR extends StatelessWidget {
             width: double.infinity,
             child: Stack(
               children: [
-                FlutterMap(
-                  options: const MapOptions(
-                    initialCenter: LatLng(5.316667, -4.033333),
-                    initialZoom: 16,
-                    minZoom: 6,
-                    maxZoom: 20,
+                GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: _currentPosition!,
+                    zoom: 13,
                   ),
-                  children: [
-                    TileLayer(
-                        urlTemplate:
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        userAgentPackageName:
-                            'dev.fleaflet.flutter_map.example',
-                        subdomains: const ['mt0', 'mt1', 'mt2', 'mt3']),
-                    PopupMarkerLayer(
-                      options: PopupMarkerLayerOptions(
-                        markers: List.generate(
-                            5,
-                            (index) => Marker(
-                                  point: LatLng(rnd.nextDouble() + 5.916667,
-                                      -rnd.nextDouble() + (-4.033333)),
-                                  width: 40,
-                                  height: 40,
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    child: Icon(
-                                      Icons.location_pin,
-                                      size: 27,
-                                      color: MyColors.danger,
-                                    ),
-                                  ),
-                                )).toList(),
-                        popupDisplayOptions: PopupDisplayOptions(
-                            builder: (BuildContext context, Marker marker) {
-                          return Container(child: const Text("."));
-                        }),
-                      ),
-                    )
-                  ],
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  markers: _markers,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
                 ),
               ],
             ),

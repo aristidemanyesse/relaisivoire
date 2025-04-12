@@ -14,11 +14,6 @@ class PleaseWait extends StatefulWidget {
 class _PleaseWaitState extends State<PleaseWait> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5), () {
-      Get.offAll(const ColisPage(
-        received: false,
-      ));
-    });
     super.initState();
   }
 

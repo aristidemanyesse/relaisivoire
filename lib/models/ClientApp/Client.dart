@@ -48,7 +48,6 @@ class Client {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': uid,
         'contact': contact,
         'address': address,
         'type_client': typeClient.target?.toJson(),

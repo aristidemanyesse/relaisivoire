@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/models/ColisApp/TypeColis.dart';
 
 class TypeColisDetailPopup extends StatelessWidget {
+  final TypeColis type;
+
   const TypeColisDetailPopup({
     super.key,
-    required this.icon,
-    required this.title,
+    required this.type,
   });
-
-  final String icon;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class TypeColisDetailPopup extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      icon,
+                      type.icone,
                       style: TextStyle(fontSize: 100),
                     ),
                     SizedBox(width: Tools.PADDING),
@@ -53,15 +52,14 @@ class TypeColisDetailPopup extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(title,
+                          Text(type.libelle,
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(fontWeight: FontWeight.bold)),
                           SizedBox(height: Tools.PADDING / 2),
-                          Text(
-                              "lorem ipsum dolor  In this article, we'll explore some of the best Flutter icon libraries for 2024, including Hugeicons Pro, Material Icons, Feather Icons, and more.",
+                          Text(type.description,
                               textAlign: TextAlign.justify,
                               style: Theme.of(context)
                                   .textTheme
@@ -69,7 +67,7 @@ class TypeColisDetailPopup extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.bold)),
                           SizedBox(height: Tools.PADDING / 2),
                           Row(children: [
-                            Text("Transport par :",
+                            Text("Transport :",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -77,7 +75,8 @@ class TypeColisDetailPopup extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.italic)),
                             SizedBox(width: Tools.PADDING / 2),
-                            Text("Moto 🛵",
+                            Text(
+                                "${type.vehicule.target?.libelle} ${type.vehicule.target?.icone}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!

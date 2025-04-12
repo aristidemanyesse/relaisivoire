@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/AdministrationApp/CustomUser.dart';
@@ -13,20 +14,37 @@ class GeneralController extends GetxController {
   Rx<Client?> client = Rx<Client?>(null);
 
   @override
-  void onInit() {
+  void onInit() async {
+    super.onInit();
+
+    ever(client, (value) async {
+      if (value != null) {
+        final store = await getStore();
+        SyncService syncService = SyncService(store: store);
+        await CustomUser.connexion(value.contact);
+        SyncService.putIfNotNull(syncService.store.box<Client>(), value);
+        final connected = await isConnected();
+        if (connected) {
+          // 🔄 Synchroniser les colis du client
+          await syncService.syncAllData();
+        }
+      }
+    });
+  }
+
+  void deconnexion() {
+    connected.value = false;
     confirmCGU.value = false;
     utilisateur.value = null;
     client.value = null;
+    token.value = "";
+    refreshToken.value = "";
+    onInit();
+  }
 
-    ever(client, (value) async {
-      if (value == null) return;
-      await CustomUser.connexion(value.contact);
-      final store = await getStore();
-      final sync = SyncService(store: store);
-      sync.putIfNotNull(store.box<Client>(), value);
-      await sync.syncAllData();
-    });
-
-    super.onInit();
+  // ✅ Vérifie s'il y a du réseau
+  Future<bool> isConnected() async {
+    final result = await Connectivity().checkConnectivity();
+    return result != ConnectivityResult.none;
   }
 }
