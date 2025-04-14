@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
 import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
 import 'package:lpr/models/ColisApp/TypeEmballage.dart';
@@ -12,6 +13,7 @@ class HandleTypesController extends GetxController {
   Rx<List<TypeDestinataire>> listeTypeDestinataires =
       Rx<List<TypeDestinataire>>([]);
   Rx<List<PointRelais>> listePointsRelais = Rx<List<PointRelais>>([]);
+  Rx<List<Colis>> historique = Rx<List<Colis>>([]);
 
   @override
   void onInit() {

@@ -168,7 +168,7 @@ class _ColisPageState extends State<ColisPage> {
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.all(
-                                              Tools.PADDING / 4),
+                                              Tools.PADDING / 5),
                                           child: QrImageView(
                                               data: widget.colis.code,
                                               version: QrVersions.auto,
@@ -238,7 +238,7 @@ class _ColisPageState extends State<ColisPage> {
                                                         ?.level ==
                                                     1
                                                 ? "Moi-même (${widget.colis.sender.target?.contact})"
-                                                : "${widget.colis.receiver_name} - ${widget.colis.receiver_phone}"),
+                                                : "${widget.colis.receiverName} - ${widget.colis.receiverPhone}"),
                                         StepRecap(
                                           title: "Lieu de Rétrait du colis",
                                           subtitle:

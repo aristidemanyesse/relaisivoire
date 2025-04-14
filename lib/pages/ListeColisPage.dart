@@ -151,8 +151,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
                               return Column(
                                 children: colisController.liste_en_cours.value
                                     .map((colis) {
-                                  return ItemBloc(
-                                      colis: colis, received: false);
+                                  return ItemBloc(colis: colis, received: true);
                                 }).toList(),
                               );
                             }),

@@ -17,8 +17,8 @@ class Colis {
   String uid;
 
   String code;
-  String receiver_name;
-  String receiver_phone;
+  String receiverName;
+  String receiverPhone;
   int total;
   final sender = ToOne<Client>();
   final receiver = ToOne<Client>();
@@ -28,7 +28,7 @@ class Colis {
   final typeEmballage = ToOne<TypeEmballage>();
   final typeDestinataire = ToOne<TypeDestinataire>();
   final status = ToOne<StatusColis>();
-  DateTime? date_creation;
+  DateTime? dateCreation;
 
   DateTime? depotDate;
   DateTime? recuperationDate;
@@ -39,24 +39,24 @@ class Colis {
       {this.id = 0,
       this.uid = "",
       this.code = "",
-      this.receiver_name = "",
-      this.receiver_phone = "",
+      this.receiverName = "",
+      this.receiverPhone = "",
       this.total = 0,
       this.depotDate,
       this.recuperationDate,
       this.livraisonDate,
       this.retraitDate,
-      this.date_creation});
+      this.dateCreation});
 
   /// Parser depuis JSON API
   factory Colis.fromJson(Map<String, dynamic> json) {
     final colis = Colis(
       uid: json['id'],
       code: json['code'],
-      receiver_name: json['receiver_name'],
-      receiver_phone: json['receiver_phone'],
+      receiverName: json['receiver_name'],
+      receiverPhone: json['receiver_phone'],
       total: json['total'] ?? 0,
-      date_creation: DateTime.tryParse(json['date_creation'] ?? ""),
+      dateCreation: DateTime.tryParse(json['date_creation'] ?? ""),
       depotDate: DateTime.tryParse(json['depot_date'] ?? ""),
       recuperationDate: DateTime.tryParse(json['recuperation_date'] ?? ""),
       livraisonDate: DateTime.tryParse(json['livraison_date'] ?? ""),
@@ -98,8 +98,8 @@ class Colis {
   /// Convertir vers JSON
   Map<String, dynamic> toJson() => {
         'code': code,
-        'receiver_name': receiver_name,
-        'receiver_phone': receiver_phone,
+        'receiver_name': receiverName,
+        'receiver_phone': receiverPhone,
         'sender': sender.target?.uid ?? "",
         'receiver': receiver.target?.uid ?? "",
         'total': total,

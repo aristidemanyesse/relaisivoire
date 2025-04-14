@@ -144,7 +144,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(4, 1876651143224537560),
       name: 'Colis',
-      lastPropertyId: const obx_int.IdUid(20, 2983330437404914798),
+      lastPropertyId: const obx_int.IdUid(23, 809801767434100617),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -240,23 +240,23 @@ final _entities = <obx_int.ModelEntity>[
             indexId: const obx_int.IdUid(20, 5591877836353242726),
             relationTarget: 'PointRelais'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(17, 3409996708837625571),
-            name: 'receiver_name',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(18, 8415219127445349379),
-            name: 'receiver_phone',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
             id: const obx_int.IdUid(19, 6543131581038512164),
             name: 'total',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(20, 2983330437404914798),
-            name: 'date_creation',
+            id: const obx_int.IdUid(21, 3341115245613766219),
+            name: 'receiverName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(22, 8450270927111662877),
+            name: 'receiverPhone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(23, 809801767434100617),
+            name: 'dateCreation',
             type: 10,
             flags: 0)
       ],
@@ -706,7 +706,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
         3660234778270319401,
         7524757636359615052,
         5767851895047342897,
-        712884433702980664
+        712884433702980664,
+        3409996708837625571,
+        8415219127445349379,
+        2983330437404914798
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -856,9 +859,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (Colis object, fb.Builder fbb) {
           final codeOffset = fbb.writeString(object.code);
           final uidOffset = fbb.writeString(object.uid);
-          final receiver_nameOffset = fbb.writeString(object.receiver_name);
-          final receiver_phoneOffset = fbb.writeString(object.receiver_phone);
-          fbb.startTable(21);
+          final receiverNameOffset = fbb.writeString(object.receiverName);
+          final receiverPhoneOffset = fbb.writeString(object.receiverPhone);
+          fbb.startTable(24);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, codeOffset);
           fbb.addInt64(2, object.sender.targetId);
@@ -874,10 +877,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addOffset(13, uidOffset);
           fbb.addInt64(14, object.pointRelaisSender.targetId);
           fbb.addInt64(15, object.pointRelaisReceiver.targetId);
-          fbb.addOffset(16, receiver_nameOffset);
-          fbb.addOffset(17, receiver_phoneOffset);
           fbb.addInt64(18, object.total);
-          fbb.addInt64(19, object.date_creation?.millisecondsSinceEpoch);
+          fbb.addOffset(20, receiverNameOffset);
+          fbb.addOffset(21, receiverPhoneOffset);
+          fbb.addInt64(22, object.dateCreation?.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -892,20 +895,20 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 26);
           final retraitDateValue =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28);
-          final date_creationValue =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 42);
+          final dateCreationValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 48);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final uidParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 30, '');
           final codeParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
-          final receiver_nameParam =
+          final receiverNameParam =
               const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 36, '');
-          final receiver_phoneParam =
+                  .vTableGet(buffer, rootOffset, 44, '');
+          final receiverPhoneParam =
               const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 38, '');
+                  .vTableGet(buffer, rootOffset, 46, '');
           final totalParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 40, 0);
           final depotDateParam = depotDateValue == null
@@ -920,21 +923,21 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final retraitDateParam = retraitDateValue == null
               ? null
               : DateTime.fromMillisecondsSinceEpoch(retraitDateValue);
-          final date_creationParam = date_creationValue == null
+          final dateCreationParam = dateCreationValue == null
               ? null
-              : DateTime.fromMillisecondsSinceEpoch(date_creationValue);
+              : DateTime.fromMillisecondsSinceEpoch(dateCreationValue);
           final object = Colis(
               id: idParam,
               uid: uidParam,
               code: codeParam,
-              receiver_name: receiver_nameParam,
-              receiver_phone: receiver_phoneParam,
+              receiverName: receiverNameParam,
+              receiverPhone: receiverPhoneParam,
               total: totalParam,
               depotDate: depotDateParam,
               recuperationDate: recuperationDateParam,
               livraisonDate: livraisonDateParam,
               retraitDate: retraitDateParam,
-              date_creation: date_creationParam);
+              dateCreation: dateCreationParam);
           object.sender.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
           object.sender.attach(store);
@@ -1536,20 +1539,20 @@ class Colis_ {
   static final pointRelaisReceiver =
       obx.QueryRelationToOne<Colis, PointRelais>(_entities[3].properties[14]);
 
-  /// See [Colis.receiver_name].
-  static final receiver_name =
-      obx.QueryStringProperty<Colis>(_entities[3].properties[15]);
-
-  /// See [Colis.receiver_phone].
-  static final receiver_phone =
-      obx.QueryStringProperty<Colis>(_entities[3].properties[16]);
-
   /// See [Colis.total].
   static final total =
-      obx.QueryIntegerProperty<Colis>(_entities[3].properties[17]);
+      obx.QueryIntegerProperty<Colis>(_entities[3].properties[15]);
 
-  /// See [Colis.date_creation].
-  static final date_creation =
+  /// See [Colis.receiverName].
+  static final receiverName =
+      obx.QueryStringProperty<Colis>(_entities[3].properties[16]);
+
+  /// See [Colis.receiverPhone].
+  static final receiverPhone =
+      obx.QueryStringProperty<Colis>(_entities[3].properties[17]);
+
+  /// See [Colis.dateCreation].
+  static final dateCreation =
       obx.QueryDateProperty<Colis>(_entities[3].properties[18]);
 }
 

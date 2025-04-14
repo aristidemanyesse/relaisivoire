@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   wave: ^0.2.2
-  url_launcher: ^6.2.6
+  url_launcher: ^6.3.1
   google_fonts: ^6.2.0
   flutter_svg: ^2.0.10+1
   gif: ^2.3.0
@@ -60,6 +60,8 @@ dependencies:
   geolocator_android: ^4.6.2
   google_maps_flutter: ^2.10.1
   permission_handler: ^12.0.0+1
+  lit_relative_date_time: ^1.2.0
+  timeago: ^3.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

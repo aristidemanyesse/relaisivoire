@@ -14,6 +14,7 @@ import 'package:lpr/services/SessionService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ParametrePage extends StatefulWidget {
   const ParametrePage({super.key});
@@ -23,6 +24,25 @@ class ParametrePage extends StatefulWidget {
 }
 
 class _ParametrePageState extends State<ParametrePage> {
+  String number = "+33 612 00 00 00";
+  void call() async {
+    if (!await launchUrl(Uri.parse("tel:$number"))) {
+      throw 'Could not launch whatsapp ';
+    }
+  }
+
+  void whatsapp() async {
+    if (!await launchUrl(Uri.parse("https://wa.me/$number"))) {
+      throw 'Could not launch whatsapp ';
+    }
+  }
+
+  void telegram() async {
+    if (!await launchUrl(Uri.parse("https://t.me/+iKRQ2Nd7YDQyNjI0"))) {
+      throw 'Could not launch whatsapp ';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +82,7 @@ class _ParametrePageState extends State<ParametrePage> {
                   ParametreMenuItem(
                     icon: Icons.person,
                     title: "Mon Profil",
-                    subtitle: "Toutes mes activités",
+                    subtitle: "Mes informations personnelles",
                     ontap: () {
                       Get.to(ProfilPage());
                     },
@@ -70,8 +90,8 @@ class _ParametrePageState extends State<ParametrePage> {
                   Divider(),
                   ParametreMenuItem(
                     icon: Icons.history,
-                    title: "Historique",
-                    subtitle: "Toutes mes activités",
+                    title: "Mon historique",
+                    subtitle: "Tous les colis traités",
                     ontap: () {
                       Get.to(HistoriquePage());
                     },
@@ -79,7 +99,7 @@ class _ParametrePageState extends State<ParametrePage> {
                   ParametreMenuItem(
                     icon: Icons.search,
                     title: "Rechercher un point relais",
-                    subtitle: "Toutes mes activités",
+                    subtitle: "Nom, localisations, services...",
                     ontap: () {
                       Get.to(SearchLPR());
                     },
@@ -88,7 +108,7 @@ class _ParametrePageState extends State<ParametrePage> {
                   ParametreMenuItem(
                     icon: Icons.help,
                     title: "Assistance",
-                    subtitle: "Toutes mes activités",
+                    subtitle: "Vous avez un souci ?",
                     ontap: () {
                       showMaterialModalBottomSheet(
                         context: context,
@@ -100,17 +120,46 @@ class _ParametrePageState extends State<ParametrePage> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               ListTile(
-                                  title: Text('Appel téléphonique'),
-                                  leading: const Icon(Icons.phone),
-                                  onTap: () {}),
+                                  title: Text(
+                                    'Appel téléphonique',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Text(
+                                    '+33 612 00 00 00',
+                                  ),
+                                  leading: const Icon(Icons.phone, size: 30),
+                                  onTap: () {
+                                    call();
+                                  }),
                               ListTile(
-                                  title: Text('Assistance Whatsapp'),
-                                  leading: const Icon(Icons.whatshot),
-                                  onTap: () {}),
+                                  title: Text(
+                                    'Assistance Whatsapp',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Text('+33 612 00 00 00'),
+                                  leading: const Icon(Icons.whatshot, size: 30),
+                                  onTap: () {
+                                    whatsapp();
+                                  }),
                               ListTile(
-                                title: Text('Assistance Télégram'),
-                                leading: const Icon(Icons.telegram),
-                                onTap: () {},
+                                title: Text(
+                                  'Assistance Télégram',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text('+33 612 00 00 00'),
+                                leading: const Icon(Icons.telegram, size: 30),
+                                onTap: () {
+                                  telegram();
+                                },
                               ),
                             ],
                           ),

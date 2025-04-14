@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
@@ -104,6 +103,13 @@ class SyncService {
     await _syncGenericList<Colis>(
         endpoint:
             'api/colis/colis-for-client/?id=${controller.client.value!.uid}',
+        fromJson: (json) => Colis.fromJson(json),
+        box: store.box<Colis>(),
+        label: "Colis");
+
+    handleTypesController.historique.value = await _syncGenericList<Colis>(
+        endpoint:
+            'api/colis/historique-client/?id=${controller.client.value!.uid}',
         fromJson: (json) => Colis.fromJson(json),
         box: store.box<Colis>(),
         label: "Colis");

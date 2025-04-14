@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/controllers/HandleTypesController.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/Tip.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
 
@@ -12,12 +14,55 @@ class HistoriquePage extends StatefulWidget {
 }
 
 class _HistoriquePageState extends State<HistoriquePage> {
+  HandleTypesController handleTypesController = Get.find();
+  final TextEditingController _searchController = TextEditingController();
+  List<Colis> displayedList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    displayedList = handleTypesController.historique.value;
+
+    _searchController.addListener(() {
+      filterList(_searchController.text);
+    });
+  }
+
+  void filterList(String query) {
+    final filtered = handleTypesController.historique.value.where((colis) {
+      final lowerQuery = query.toLowerCase();
+      return colis.code.toLowerCase().contains(lowerQuery) ||
+          colis.receiverName.toLowerCase().contains(lowerQuery) ||
+          colis.receiverPhone.toLowerCase().contains(lowerQuery) ||
+          colis.receiverPhone.toLowerCase().contains(lowerQuery) ||
+          (colis.pointRelaisSender.target?.libelle
+                  .toLowerCase()
+                  .contains(lowerQuery) ??
+              false) ||
+          (colis.pointRelaisReceiver.target?.libelle
+                  .toLowerCase()
+                  .contains(lowerQuery) ??
+              false);
+    }).toList();
+
+    setState(() {
+      displayedList = filtered;
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Expanded(
           child: TextField(
+            controller: _searchController,
             style: TextStyle(fontSize: 15.0),
             scrollPadding:
                 const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
@@ -40,16 +85,6 @@ class _HistoriquePageState extends State<HistoriquePage> {
             ),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              size: 30,
-              color: MyColors.secondary,
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: SizedBox(
         height: Get.size.height,
@@ -65,6 +100,7 @@ class _HistoriquePageState extends State<HistoriquePage> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Tip(
                       text: "Envoyés",
@@ -72,10 +108,6 @@ class _HistoriquePageState extends State<HistoriquePage> {
                       checked: true,
                     ),
                     Tip(text: "Réçus", icon: Icons.local_shipping),
-                    Tip(
-                      text: "En cours",
-                      icon: Icons.refresh,
-                    ),
                     Tip(text: "Terminés", icon: Icons.check),
                   ],
                 ),
@@ -91,34 +123,13 @@ class _HistoriquePageState extends State<HistoriquePage> {
               flex: 10,
               child: SizedBox(
                 width: double.infinity,
-                child: ListView(children: [
-                  // ItemBloc(
-                  //   title: "Enveloppe / Porte-document",
-                  //   subtitle: "Boutique de Banbara - Port-bouët Abattoir",
-                  //   created: "il y a 2 min",
-                  //   received: false,
-                  // ),
-                  // ItemBloc(
-                  //     title: "Valise gros colis",
-                  //     subtitle: "Boutique Aly - Marcory Anoumabo",
-                  //     created: "il y a 1 heures",
-                  //     received: true),
-                  // ItemBloc(
-                  //     title: "Valise gros colis",
-                  //     subtitle: "Boutique Aly - Marcory Anoumabo",
-                  //     created: "il y a 1 heures",
-                  //     received: true),
-                  // ItemBloc(
-                  //     title: "Valise gros colis",
-                  //     subtitle: "Boutique Aly - Marcory Anoumabo",
-                  //     created: "il y a 1 heures",
-                  //     received: true),
-                  // ItemBloc(
-                  //     title: "Carton moyen",
-                  //     subtitle: "ANK Service - Port-bouët Vridi",
-                  //     created: "il y a 2 heures",
-                  //     received: false),
-                ]),
+                child: displayedList.isNotEmpty
+                    ? ListView(
+                        children: displayedList
+                            .map((colis) => ItemBloc(
+                                colis: colis, received: false, tag: ""))
+                            .toList())
+                    : Center(child: Text("Aucun colis pour le moment")),
               ),
             ),
             Container(

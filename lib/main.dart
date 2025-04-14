@@ -8,6 +8,7 @@ import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/Splashscreen.dart';
+import 'package:lit_relative_date_time/lit_relative_date_time.dart';
 import 'package:lpr/services/SessionService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         // darkTheme: AppTheme.darkTheme,
         // themeMode: ThemeMode.system,
+
         home: Obx(() {
           return SelectableRegion(
             selectionControls: materialTextSelectionControls,

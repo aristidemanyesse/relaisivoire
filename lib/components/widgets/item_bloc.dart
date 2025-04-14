@@ -3,19 +3,24 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/ColisPage.dart';
+import 'package:lit_relative_date_time/lit_relative_date_time.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class ItemBloc extends StatelessWidget {
   final Colis colis;
   final bool received;
+  final String? tag;
 
-  const ItemBloc({
+  ItemBloc({
     super.key,
     required this.colis,
     required this.received,
+    this.tag = "",
   });
 
   @override
   Widget build(BuildContext context) {
+    timeago.setLocaleMessages('fr', timeago.FrMessages());
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -54,8 +59,8 @@ class ItemBloc extends StatelessWidget {
                       ),
                       Text(
                         received
-                            ? colis.title()
-                            : colis.sender.target?.fullName() ?? "",
+                            ? colis.pointRelaisReceiver.target?.title() ?? ""
+                            : colis.title(),
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: (received
                                   ? MyColors.textprimary
@@ -63,7 +68,7 @@ class ItemBloc extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        colis.date_creation.toString(),
+                        timeago.format(colis.dateCreation!, locale: 'fr'),
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
