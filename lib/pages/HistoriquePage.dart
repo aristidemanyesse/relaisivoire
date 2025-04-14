@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/pages/Tip.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
 
 class HistoriquePage extends StatefulWidget {
   const HistoriquePage({super.key});

@@ -6,7 +6,6 @@ import 'package:lpr/models/ColisApp/TypeEmballage.dart';
 import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
 import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/services/StoreService.dart';
-import 'package:lpr/services/SyncService.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
@@ -8,10 +7,6 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
-import 'package:lpr/models/ColisApp/Colis.dart';
-import 'package:lpr/pages/ColisPage.dart';
-import 'package:lpr/pages/PleaseWait.dart';
-import 'package:lpr/pages/PleaseWait2.dart';
 
 class HandlePayementPopup extends StatefulWidget {
   const HandlePayementPopup({
@@ -31,7 +26,7 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
   bool show = false;
 
   final GeneralController generalController = Get.find();
-  CommandeProcessController _controller = Get.find();
+  final CommandeProcessController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,15 @@
 import 'package:lpr/objectbox.g.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 Store? _store;
 
 Future<Store> getStore() async {
-  if (_store != null) return _store!;
+  if (_store != null && !_store!.isClosed()) return _store!;
 
-  _store = await openStore(directory: 'relais-ivoire-db');
+  final dir = await getApplicationDocumentsDirectory();
+  _store = await openStore(directory: '${dir.path}/relais-ivoire-db');
+
   return _store!;
 }
 
