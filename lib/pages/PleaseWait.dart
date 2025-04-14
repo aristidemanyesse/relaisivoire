@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/pages/ColisPage.dart';
 
 class PleaseWait extends StatefulWidget {
   const PleaseWait({super.key});

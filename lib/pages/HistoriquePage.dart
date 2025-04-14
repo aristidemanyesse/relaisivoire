@@ -4,7 +4,6 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/Tip.dart';
-import 'package:lpr/components/widgets/item_bloc.dart';
 
 class HistoriquePage extends StatefulWidget {
   const HistoriquePage({super.key});

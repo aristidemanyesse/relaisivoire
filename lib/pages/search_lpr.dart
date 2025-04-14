@@ -2,18 +2,16 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/pages/distance_map.dart';
 import 'package:lpr/pages/map_button.dart';
 import 'package:lpr/services/LoactionService.dart';
 
 class SearchLPR extends StatefulWidget {
-  SearchLPR({
+  const SearchLPR({
     super.key,
   });
 
