@@ -124,4 +124,15 @@ class Colis {
 
   String getCode() =>
       "LPR - ${code.substring(0, 3)} ${code.substring(3, 6)} ${code.substring(6, 9)}";
+
+  Future<bool> annuler() async {
+    final store = await getStore();
+    final colisBox = store.box<Colis>();
+    final response = await ApiService.get("api/colis/annuler/?code=$code");
+    if (response["status"] && response["data"] != null) {
+      colisBox.remove(id);
+      return true;
+    }
+    return false;
+  }
 }

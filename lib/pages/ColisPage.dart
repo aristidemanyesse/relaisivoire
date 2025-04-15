@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
+import 'package:lpr/components/elements/main_button_icon.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/step_process.dart';
@@ -372,14 +373,43 @@ class _ColisPageState extends State<ColisPage> {
               ),
               SizedBox(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    MainButtonIcon(
+                        icon: Icons.close,
+                        color: MyColors.danger,
+                        onPressed: () {
+                          Get.dialog(
+                            ConfirmDialog(
+                              title: "Confirmation",
+                              message:
+                                  "Voulez-vous vraiment annuler cette commande de livraison de colis ?",
+                              testOk: "Oui, annuler",
+                              testCancel: "Non",
+                              functionOk: () async {
+                                Get.dialog(PleaseWait2());
+                                bool res = await widget.colis.annuler();
+                                if (res) {
+                                  Get.back();
+                                  Get.offAll(ListeColisPage());
+                                } else {
+                                  Get.back();
+                                  Get.snackbar("❌ Ooops",
+                                      "Une erreur est survenue, veuillez réessayer plus tard!");
+                                }
+                              },
+                              functionCancel: () {
+                                Get.back();
+                              },
+                            ),
+                          );
+                        }),
                     MainButtonInverse(
                         title: "Trouver un point relais",
                         icon: Icons.location_on_sharp,
                         onPressed: () {
                           Get.to(SearchPointRelais());
-                        })
+                        }),
                   ],
                 ),
               ),
@@ -391,7 +421,7 @@ class _ColisPageState extends State<ColisPage> {
                     // Get.to(SearchLPR());
                   }),
             SizedBox(
-              height: Tools.PADDING,
+              height: Tools.PADDING * 2,
             ),
           ],
         ),

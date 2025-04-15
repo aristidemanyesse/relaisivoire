@@ -191,7 +191,7 @@ class _CommanderPageState extends State<CommanderPage>
                 );
               }),
             ),
-            SizedBox(height: Tools.PADDING),
+            SizedBox(height: Tools.PADDING * 2),
           ],
         ),
       ),

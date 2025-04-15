@@ -85,16 +85,27 @@ class HistoriqueBloc extends StatelessWidget {
                           )
                         ],
                       ),
-                      Text(
-                        sent
-                            ? "Déposé chez ${colis.pointRelaisSender.target?.title()}"
-                            : "Reçu chez ${colis.pointRelaisReceiver.target?.title()}",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: (sent
-                                  ? MyColors.textprimary
-                                  : MyColors.textprimary),
+                      colis.status.target?.level == StatusColis.ANNULE
+                          ? Text(
+                              "Annulé",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(color: MyColors.danger),
+                            )
+                          : Text(
+                              sent
+                                  ? "Déposé chez ${colis.pointRelaisSender.target?.title()}"
+                                  : "Reçu chez ${colis.pointRelaisReceiver.target?.title()}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color: (sent
+                                        ? MyColors.textprimary
+                                        : MyColors.textprimary),
+                                  ),
                             ),
-                      ),
                       SizedBox(height: Tools.PADDING / 4),
                       Text(
                         formatDate(colis.dateCreation!),

@@ -28,6 +28,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
   LatLng? _userLocation;
   Set<Polyline> _polylines = {};
   Set<Marker> _markers = {};
+  List<Map<String, dynamic>> _directionsSteps = [];
 
   String? _durationText;
   String? _distanceText;
@@ -72,22 +73,53 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
     await _getDirections(userLatLng, prLatLng);
   }
 
+  String _cleanHtml(String html) {
+    return html
+        .replaceAll(RegExp(r'<[^>]*>'), '')
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&');
+  }
+
   Future<void> _getDirections(LatLng origin, LatLng destination) async {
-    final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=${LocationService.APIKEY}',
-    );
+    try {
+      final url = Uri.parse(
+        'https://maps.googleapis.com/maps/api/directions/json'
+        '?origin=${origin.latitude},${origin.longitude}'
+        '&destination=${destination.latitude},${destination.longitude}'
+        '&mode=driving'
+        '&key=${LocationService.APIKEY}',
+      );
 
-    final response = await http.get(url);
-    final data = json.decode(response.body);
+      final response = await http.get(url);
 
-    if (data['status'] == 'OK') {
-      final points = data['routes'][0]['overview_polyline']['points'];
-      final polylineCoords = _decodePolyline(points);
+      if (response.statusCode != 200) {
+        throw Exception("Google Directions API error: ${response.statusCode}");
+      }
+
+      final data = json.decode(response.body);
+
+      if (data['status'] != 'OK') {
+        throw Exception("Directions status: ${data['status']}");
+      }
+
+      final route = data['routes'][0];
+      final leg = route['legs'][0];
+
+      final polylineEncoded = route['overview_polyline']['points'];
+      final polylineCoords = _decodePolyline(polylineEncoded);
+
+      final steps = leg['steps'] as List<dynamic>;
+      final parsedSteps = steps.map((step) {
+        return {
+          'instruction': _cleanHtml(step['html_instructions']),
+          'distance': step['distance']['text'],
+        };
+      }).toList();
 
       setState(() {
-        final leg = data['routes'][0]['legs'][0];
-        _durationText = leg['duration']['text']; // ✅ Exemple: "13 min"
+        _durationText = leg['duration']['text'];
         _distanceText = leg['distance']['text'];
+        _directionsSteps = parsedSteps;
 
         _polylines = {
           Polyline(
@@ -99,7 +131,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
         };
       });
 
-      // Fit bounds
+      // Fit bounds on route
       final controller = await _controller.future;
       final bounds = LatLngBounds(
         southwest: LatLng(
@@ -119,7 +151,14 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
               : destination.longitude,
         ),
       );
+
       controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 80));
+    } catch (e) {
+      print("❌ Erreur dans _getDirections: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Erreur lors de la récupération de l’itinéraire")),
+      );
     }
   }
 
@@ -148,7 +187,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
       int dlng = (result & 1) != 0 ? ~(result >> 1) : result >> 1;
       lng += dlng;
 
-      points.add(LatLng(lat / 1E5, lng / 1E5));
+      points.add(LatLng(lat / 1e5, lng / 1e5));
     }
 
     return points;
@@ -316,6 +355,50 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
                       ),
                     ),
                   ),
+                if (_directionsSteps.isNotEmpty)
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 200,
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6,
+                            offset: Offset(0, -2),
+                          )
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          const Text("🗺️ Itinéraire détaillé",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                          const SizedBox(height: 8),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: _directionsSteps.length,
+                              itemBuilder: (context, index) {
+                                final step = _directionsSteps[index];
+                                return ListTile(
+                                  leading: const Icon(Icons.directions,
+                                      color: Colors.blue),
+                                  title: Text(step['instruction']!),
+                                  trailing: Text(step['distance']!),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
               ],
             ),
     );
