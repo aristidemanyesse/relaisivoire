@@ -53,7 +53,7 @@ class ConfirmDialog extends StatelessWidget {
                           const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                       child: Text(
                         message,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.justify,
                         style: Theme.of(context).textTheme.bodyLarge!,
                       ),
                     ),

@@ -5,23 +5,21 @@ import 'package:objectbox/objectbox.dart';
 
 @Entity()
 class CustomUser {
+  @Id(assignable: true)
   int id = 0;
-
-  @Index()
-  String uid;
 
   String? firstName;
   String? lastName;
 
   CustomUser({
-    this.uid = "",
-    this.firstName,
-    this.lastName,
+    this.id = 0,
+    this.firstName = "",
+    this.lastName = "",
   });
 
   factory CustomUser.fromJson(Map<String, dynamic> json) {
     return CustomUser(
-      uid: json['id'],
+      id: json['id'],
       firstName: json['first_name'],
       lastName: json['last_name'],
     );
@@ -32,6 +30,15 @@ class CustomUser {
         'firstName': firstName,
         'lastName': lastName,
       };
+
+  static Future<bool> ifUserExists(String username) async {
+    Map<String, dynamic> response = await ApiService.get(
+        'api/custom_users/search-by-username/?username=$username');
+    if (response["status"] && response["data"].length > 0) {
+      return true;
+    }
+    return false;
+  }
 
   static Future<bool> connexion(String username) async {
     Map<String, dynamic> response = await ApiService.post(
@@ -55,6 +62,26 @@ class CustomUser {
     Map<String, dynamic> response = await ApiService.post(
         'api/custom_users/verify-otp/', {"username": username, "otp": otp});
     if (response['status']) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<CustomUser?> update(String nom, String prenom) async {
+    Map<String, dynamic> response = await ApiService.patch(
+        'api/custom_users/$id/', {'first_name': nom, 'last_name': prenom});
+    if (response["status"] && response["data"] != null) {
+      CustomUser user = CustomUser.fromJson(response["data"]);
+      return user;
+    }
+    return null;
+  }
+
+  Future<bool> changeCredentials(String number) async {
+    Map<String, dynamic> response = await ApiService.post(
+        'api/custom_users/change-credentials/',
+        {'username': number, 'password': number});
+    if (response["status"] && response["data"] != null) {
       return true;
     }
     return false;

@@ -107,7 +107,7 @@ class _LoginNumberState extends State<LoginNumber> {
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Tools.PADDING * 3,
+                  horizontal: Tools.PADDING * 2.5,
                 ),
                 decoration: const BoxDecoration(
                     color: MyColors.secondary,

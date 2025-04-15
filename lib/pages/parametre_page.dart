@@ -5,8 +5,10 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/parametre_menu_item.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
+import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
+import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/pages/ProfilPage.dart';
 import 'package:lpr/pages/search_lpr.dart';
@@ -24,6 +26,8 @@ class ParametrePage extends StatefulWidget {
 }
 
 class _ParametrePageState extends State<ParametrePage> {
+  HandleTypesController controller = Get.find();
+
   String number = "+33 612 00 00 00";
   void call() async {
     if (!await launchUrl(Uri.parse("tel:$number"))) {
@@ -57,7 +61,7 @@ class _ParametrePageState extends State<ParametrePage> {
         ),
         leading: IconButton(
             onPressed: () {
-              Get.back();
+              Get.off(ListeColisPage());
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -101,7 +105,8 @@ class _ParametrePageState extends State<ParametrePage> {
                     title: "Rechercher un point relais",
                     subtitle: "Nom, localisations, services...",
                     ontap: () {
-                      Get.to(SearchLPR());
+                      Get.to(SearchLPR(
+                          pointsRelais: controller.listePointsRelais.value));
                     },
                   ),
                   Divider(),
@@ -140,7 +145,9 @@ class _ParametrePageState extends State<ParametrePage> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyLarge!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green),
                                   ),
                                   subtitle: Text('+33 612 00 00 00'),
                                   leading: const Icon(Icons.whatshot, size: 30),
@@ -153,10 +160,13 @@ class _ParametrePageState extends State<ParametrePage> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
-                                      .copyWith(fontWeight: FontWeight.bold),
+                                      .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blueAccent),
                                 ),
                                 subtitle: Text('+33 612 00 00 00'),
-                                leading: const Icon(Icons.telegram, size: 30),
+                                leading: const Icon(Icons.telegram,
+                                    color: Colors.blueAccent, size: 30),
                                 onTap: () {
                                   telegram();
                                 },
@@ -176,7 +186,7 @@ class _ParametrePageState extends State<ParametrePage> {
                       Get.dialog(ConfirmDialog(
                         title: "Déconnexion",
                         message:
-                            "Voulez-vous vraiment vous deconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
+                            "Voulez-vous vraiment vous déconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
                         testOk: "Déconnexion",
                         testCancel: "Non",
                         functionOk: () async {

@@ -28,7 +28,7 @@ class _OPTPageState extends State<OPTPage> {
   KeyBoardController keyBoardController = Get.find();
   String _otp = "";
 
-  int _counter = 60; // Durée du timer (secondes)
+  int _counter = 30; // Durée du timer (secondes)
   late Timer _timer;
   bool _isButtonDisabled = true;
 
@@ -46,7 +46,7 @@ class _OPTPageState extends State<OPTPage> {
 
   void _startTimer() {
     _isButtonDisabled = true;
-    _counter = 60;
+    _counter = 30;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_counter > 0) {
         setState(() {

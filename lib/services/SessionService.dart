@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/services/SyncService.dart';
@@ -27,8 +28,16 @@ class SessionService {
     if (clients.isNotEmpty) {
       Client client = clients.first;
       print("🔐 Client trouvé en local : ${client.contact}");
-      controller.connected.value = true;
+
+      final connected = await GeneralController.isConnected();
+      if (connected) {
+        await CustomUser.connexion(client.contact);
+        Client? test = await Client.searchByContact(client.contact);
+        client = test ?? client;
+      }
+
       controller.client.value = client;
+      controller.connected.value = true;
       return client;
     } else {
       print("🚫 Aucun client en local");

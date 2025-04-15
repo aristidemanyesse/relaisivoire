@@ -6,6 +6,7 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/step_process.dart';
 import 'package:lpr/components/widgets/step_recap.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
@@ -16,8 +17,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 class ColisPage extends StatefulWidget {
   final Colis colis;
-  final bool received;
-  const ColisPage({super.key, required this.colis, required this.received});
+  final bool sent;
+  const ColisPage({super.key, required this.colis, required this.sent});
 
   @override
   State<ColisPage> createState() => _ColisPageState();
@@ -25,6 +26,7 @@ class ColisPage extends StatefulWidget {
 
 class _ColisPageState extends State<ColisPage> {
   final PageController _controller = PageController();
+  HandleTypesController controller = Get.find();
 
   bool cutOff() {
     final maintenant = DateTime.now();
@@ -55,7 +57,7 @@ class _ColisPageState extends State<ColisPage> {
           ],
         ),
         actions: [
-          if (!widget.received)
+          if (!widget.sent)
             IconButton(
                 onPressed: () {
                   showMaterialModalBottomSheet(
@@ -246,7 +248,7 @@ class _ColisPageState extends State<ColisPage> {
                                           subtitle2:
                                               "${widget.colis.pointRelaisReceiver.target?.adresse()}",
                                         ),
-                                        if (!widget.received)
+                                        if (!widget.sent)
                                           StepRecap(
                                               title: "Total à payer au dépôt",
                                               subtitle:
@@ -263,7 +265,7 @@ class _ColisPageState extends State<ColisPage> {
                                     ),
                                   ),
                                 ),
-                                if (widget.received)
+                                if (widget.sent)
                                   SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -314,7 +316,7 @@ class _ColisPageState extends State<ColisPage> {
                               ],
                             ),
                           ),
-                          if (widget.received) ...{
+                          if (widget.sent) ...{
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -348,7 +350,7 @@ class _ColisPageState extends State<ColisPage> {
                 ],
               ),
             ),
-            if (!widget.received) ...{
+            if (!widget.sent) ...{
               SizedBox(
                 height: Tools.PADDING,
               ),
@@ -375,7 +377,9 @@ class _ColisPageState extends State<ColisPage> {
                         title: "Trouver un point relais",
                         icon: Icons.location_on_sharp,
                         onPressed: () {
-                          Get.to(SearchLPR());
+                          Get.to(SearchLPR(
+                              pointsRelais:
+                                  controller.listePointsRelais.value));
                         })
                   ],
                 ),
@@ -385,7 +389,7 @@ class _ColisPageState extends State<ColisPage> {
                   title: "Me guider vers le point relais",
                   icon: Icons.location_on_sharp,
                   onPressed: () {
-                    Get.to(SearchLPR());
+                    // Get.to(SearchLPR());
                   }),
             SizedBox(
               height: Tools.PADDING,

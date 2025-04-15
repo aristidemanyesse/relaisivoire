@@ -47,5 +47,11 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Nous avons besoin de votre position pour afficher les points relais.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>Nous avons besoin de votre position pour la livraison.</string>
+		<key>io.flutter.embedded_views_preview</key>
+		<true/>
 	</dict>
 </plist>

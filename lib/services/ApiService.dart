@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:lpr/controllers/GeneralController.dart';
 
 class ApiService {
-  static const BASE_URL = "http://192.168.1.6:8005/";
+  static const BASE_URL = "http://192.168.1.19:8005/";
 
   static Future<Map<String, dynamic>> post(
       String path, Map<String, dynamic> params) async {
@@ -22,6 +22,40 @@ class ApiService {
     final url = Uri.parse('$BASE_URL$path');
     final response =
         await http.post(url, headers: headers, body: json.encode(params));
+
+    final decoded = utf8.decode(response.bodyBytes); // 🔥 forcé en UTF-8
+    final Map<String, dynamic> data = json.decode(decoded);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return {
+        "status": !data.containsKey('error'),
+        "message": data.containsKey('error') ? data["error"] : "",
+        "data": data.containsKey('error') ? null : data,
+      };
+    } else {
+      print("❌ Erreur POST $path: ${response.statusCode} ${response.body}");
+      return {
+        "status": false,
+        "message": data["error"] ?? "Erreur inconnue",
+        "data": null,
+      };
+    }
+  }
+
+  static Future<Map<String, dynamic>> patch(
+      String path, Map<String, dynamic> params) async {
+    GeneralController controller = Get.find();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'charset': 'utf-8',
+    };
+    if (controller.token.value != "") {
+      headers['Authorization'] = 'Bearer ${controller.token.value}';
+    }
+
+    final url = Uri.parse('$BASE_URL$path');
+    final response =
+        await http.patch(url, headers: headers, body: json.encode(params));
 
     final decoded = utf8.decode(response.bodyBytes); // 🔥 forcé en UTF-8
     final Map<String, dynamic> data = json.decode(decoded);

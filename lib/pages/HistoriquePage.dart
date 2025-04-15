@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/historique_bloc.dart';
+import 'package:lpr/components/widgets/item_bloc.dart';
+import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/Tip.dart';
@@ -14,13 +17,17 @@ class HistoriquePage extends StatefulWidget {
 
 class _HistoriquePageState extends State<HistoriquePage> {
   HandleTypesController handleTypesController = Get.find();
+  ColisController colisController = Get.find();
+
   final TextEditingController _searchController = TextEditingController();
   List<Colis> displayedList = [];
+
+  String tip = "Tous";
 
   @override
   void initState() {
     super.initState();
-    displayedList = handleTypesController.historique.value;
+    displayedList = colisController.historique.value;
 
     _searchController.addListener(() {
       filterList(_searchController.text);
@@ -28,7 +35,7 @@ class _HistoriquePageState extends State<HistoriquePage> {
   }
 
   void filterList(String query) {
-    final filtered = handleTypesController.historique.value.where((colis) {
+    final filtered = colisController.historique.value.where((colis) {
       final lowerQuery = query.toLowerCase();
       return colis.code.toLowerCase().contains(lowerQuery) ||
           colis.receiverName.toLowerCase().contains(lowerQuery) ||
@@ -59,6 +66,14 @@ class _HistoriquePageState extends State<HistoriquePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
         title: Expanded(
           child: TextField(
             controller: _searchController,
@@ -89,6 +104,7 @@ class _HistoriquePageState extends State<HistoriquePage> {
         height: Get.size.height,
         width: Get.size.width,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: Tools.PADDING / 2,
@@ -102,12 +118,26 @@ class _HistoriquePageState extends State<HistoriquePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Tip(
-                      text: "Envoyés",
-                      icon: Icons.inventory_2,
-                      checked: true,
+                      text: "Tous",
+                      checked: tip == "Tous",
+                      onTap: () => setState(() {
+                        tip = "Tous";
+                      }),
                     ),
-                    Tip(text: "Réçus", icon: Icons.local_shipping),
-                    Tip(text: "Terminés", icon: Icons.check),
+                    Tip(
+                      text: "Déposés",
+                      checked: tip == "Déposés",
+                      onTap: () => setState(() {
+                        tip = "Déposés";
+                      }),
+                    ),
+                    Tip(
+                      text: "Récupérés",
+                      checked: tip == "Récupérés",
+                      onTap: () => setState(() {
+                        tip = "Récupérés";
+                      }),
+                    ),
                   ],
                 ),
               ),
@@ -125,10 +155,10 @@ class _HistoriquePageState extends State<HistoriquePage> {
                 child: displayedList.isNotEmpty
                     ? ListView(
                         children: displayedList
-                            .map((colis) => ItemBloc(
-                                colis: colis, received: false, tag: ""))
+                            .map((colis) =>
+                                HistoriqueBloc(colis: colis, tag: ""))
                             .toList())
-                    : Center(child: Text("Aucun colis pour le moment")),
+                    : Center(child: Text("Aucun historique pour le moment")),
               ),
             ),
             Container(

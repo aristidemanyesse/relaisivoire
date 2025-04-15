@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lpr/models/ClientApp/PalierClient.dart';
 import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/controllers/GeneralController.dart';
@@ -19,6 +20,7 @@ class Client {
 
   final typeClient = ToOne<TypeClient>();
   final user = ToOne<CustomUser>();
+  final palier = ToOne<PalierClient>();
 
   Client({
     this.uid = "",
@@ -35,13 +37,16 @@ class Client {
     );
 
     // // Liaison du user
-    // print(json['user'].runtimeType);
-    if (json['user'].runtimeType == Map) {
+    if (json['user'] != null) {
       client.user.target = CustomUser.fromJson(json['user']);
     }
     // Liaison du type client
     if (json['type_client'] != null) {
       client.typeClient.target = TypeClient.fromJson(json['type_client']);
+    }
+    // Liaison du type client
+    if (json['palier'] != null) {
+      client.palier.target = PalierClient.fromJson(json['palier']);
     }
 
     return client;
@@ -51,6 +56,7 @@ class Client {
         'contact': contact,
         'address': address,
         'type_client': typeClient.target?.toJson(),
+        'user': user.target?.toJson(),
       };
 
   // ✅ Méthode d'instance : mini résumé
@@ -76,21 +82,32 @@ class Client {
     }
   }
 
+  void update(String nom, String prenom) async {
+    user.target!.update(nom, prenom);
+    Client? client = await Client.searchByContact(contact);
+    if (client != null) {
+      GeneralController controller = Get.find();
+      controller.client.value = client;
+    }
+  }
+
+  Future<bool> updateContact(String number) async {
+    final res = await user.target!.changeCredentials(number);
+    if (res) {
+      Map<String, dynamic> response =
+          await ApiService.patch('api/clients/$uid/', {'contact': number});
+      if (response["status"] && response["data"] != null) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   // ✅ Méthode d'instance : affichage complet
   String fullName() =>
-      "${user.target?.firstName ?? contact} ${user.target?.lastName ?? ''}";
+      "${user.target?.firstName ?? ''} ${user.target?.lastName ?? ''}";
 
-  // // ✅ Statique : filtrer les clients par type
-  // static List<Client> filterByType(List<Client> clients, String typeName) {
-  //   return clients.where((c) => c.typeClient.target?.name == typeName).toList();
-  // }
-
-  // // ✅ Statique : chercher par nom
-  // static List<Client> searchByName(List<Client> clients, String query) {
-  //   final lower = query.toLowerCase();
-  //   return clients.where((c) {
-  //     return c.nom.toLowerCase().contains(lower) ||
-  //         c.prenoms.toLowerCase().contains(lower);
-  //   }).toList();
-  // }
+  // ✅ Méthode d'instance : affichage complet
+  String showContact() =>
+      "${contact.substring(0, 2)} ${contact.substring(2, 5)} ${contact.substring(5, 8)} ${contact.substring(8, 10)}";
 }

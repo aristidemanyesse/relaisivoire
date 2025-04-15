@@ -2,30 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
+import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/pages/ColisPage.dart';
 import 'package:lit_relative_date_time/lit_relative_date_time.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ItemBloc extends StatelessWidget {
   final Colis colis;
-  final bool received;
   final String? tag;
 
   ItemBloc({
     super.key,
     required this.colis,
-    required this.received,
     this.tag = "",
   });
 
   @override
   Widget build(BuildContext context) {
+    bool sent = colis.status.target!.level == StatusColis.LIVRAISON;
     timeago.setLocaleMessages('fr', timeago.FrMessages());
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Get.to(ColisPage(colis: colis, received: received),
+          Get.to(ColisPage(colis: colis, sent: sent),
               transition: Transition.topLevel);
         },
         child: Card(
@@ -53,16 +53,16 @@ class ItemBloc extends StatelessWidget {
                         colis.getCode(),
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: (received
+                            color: (sent
                                 ? MyColors.textprimary
                                 : MyColors.textprimary)),
                       ),
                       Text(
-                        received
+                        sent
                             ? colis.pointRelaisReceiver.target?.title() ?? ""
                             : colis.title(),
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: (received
+                              color: (sent
                                   ? MyColors.textprimary
                                   : MyColors.textprimary),
                             ),
@@ -73,7 +73,7 @@ class ItemBloc extends StatelessWidget {
                             .textTheme
                             .labelMedium!
                             .copyWith(
-                                color: (received
+                                color: (sent
                                     ? MyColors.textprimary
                                     : MyColors.textprimary)),
                       ),
@@ -82,9 +82,8 @@ class ItemBloc extends StatelessWidget {
                 ),
                 Center(
                   child: Icon(
-                      received ? Icons.inventory_2 : Icons.watch_later_outlined,
-                      color:
-                          received ? MyColors.success : MyColors.textprimary),
+                      sent ? Icons.inventory_2 : Icons.watch_later_outlined,
+                      color: sent ? MyColors.success : MyColors.textprimary),
                 ),
               ],
             ),

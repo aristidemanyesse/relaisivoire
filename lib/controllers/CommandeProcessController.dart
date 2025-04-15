@@ -54,11 +54,12 @@ class CommandeProcessController extends GetxController {
       Colis colis_ = await colis.save();
       onInit();
       await Future.delayed(const Duration(seconds: 5), () {
-        Get.offAll(ColisPage(colis: colis_, received: false));
+        Get.offAll(ColisPage(colis: colis_, sent: false));
       });
     } catch (e) {
       Get.back();
-      Get.snackbar("Ooups", "Une erreur est survenue");
+      Get.snackbar(
+          "Ooups !!!", "Une erreur est survenue, veuillez recommencer.");
     }
   }
 }

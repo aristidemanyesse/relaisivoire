@@ -9,6 +9,7 @@ import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/Splashscreen.dart';
 import 'package:lit_relative_date_time/lit_relative_date_time.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:lpr/services/SessionService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
@@ -16,10 +17,12 @@ import 'package:lpr/services/SyncService.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await initializeDateFormatting('fr_FR', null);
+
   Get.put(GeneralController());
   Get.put(KeyBoardController());
-  Get.put(ColisController());
   Get.put(HandleTypesController());
+  Get.put(ColisController());
   Get.put(CommandeProcessController());
 
   final store = await getStore();

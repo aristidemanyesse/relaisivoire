@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/pages/ChangeInfosPage.dart';
+import 'package:lpr/pages/ChangeNumberPage.dart';
+import 'package:lpr/pages/parametre_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -12,10 +16,20 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
+  GeneralController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Get.off(ParametrePage(), transition: Transition.rightToLeft);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
         actions: [
           IconButton(
               onPressed: () {
@@ -31,16 +45,15 @@ class _ProfilPageState extends State<ProfilPage> {
                         ListTile(
                             title: Text('Changer mes informations'),
                             leading: const Icon(Icons.person),
-                            onTap: () {}),
+                            onTap: () {
+                              Get.dialog(const ChangeInfosPage());
+                            }),
                         ListTile(
                             title: Text('Changer de numéro de téléphone'),
                             leading: const Icon(Icons.phone),
-                            onTap: () {}),
-                        ListTile(
-                          title: Text('Changer ma photo'),
-                          leading: const Icon(Icons.photo),
-                          onTap: () {},
-                        ),
+                            onTap: () {
+                              Get.dialog(ChangeNumberPage());
+                            }),
                       ],
                     ),
                   ),
@@ -136,17 +149,26 @@ class _ProfilPageState extends State<ProfilPage> {
                     Text("Bonjour,",
                         style: Theme.of(context).textTheme.bodyLarge!),
                     SizedBox(height: Tools.PADDING / 2),
-                    Text(
-                      "Jacques Amessan",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
+                    Obx(() {
+                      return Text(
+                        controller.client.value!.fullName(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      );
+                    }),
                     SizedBox(height: Tools.PADDING / 3),
-                    Text("+225 07 582 258 52",
-                        style: Theme.of(context).textTheme.titleSmall!),
+                    Obx(() {
+                      return Text(
+                          "+225 ${controller.client.value!.showContact()}",
+                          style: Theme.of(context).textTheme.titleSmall!);
+                    }),
+                    SizedBox(height: Tools.PADDING / 3),
+                    Text(
+                        " ${controller.client.value!.typeClient.target?.libelle}",
+                        style: Theme.of(context).textTheme.bodySmall!),
                   ],
                 ),
                 Spacer(
@@ -162,23 +184,30 @@ class _ProfilPageState extends State<ProfilPage> {
                       borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [
-                      Text("Niveau 4",
-                          style: Theme.of(context).textTheme.bodySmall!),
-                      Text(
-                        "Pigeon voyageur",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: Tools.PADDING / 3),
-                      Text(
-                          "Vous êtes de ceux qui aiment envoyer des colis, partout dans le monde, et tout le temps...",
-                          textAlign: TextAlign.center,
+                      Obx(() {
+                        return Text(
+                            "Niveau ${controller.client.value!.palier.target?.level}",
+                            style: Theme.of(context).textTheme.bodySmall!);
+                      }),
+                      Obx(() {
+                        return Text(
+                          " ${controller.client.value!.palier.target?.libelle}",
                           style: Theme.of(context)
                               .textTheme
-                              .bodyMedium!
-                              .copyWith(fontStyle: FontStyle.italic)),
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        );
+                      }),
+                      SizedBox(height: Tools.PADDING / 3),
+                      Obx(() {
+                        return Text(
+                            " ${controller.client.value!.palier.target?.description}",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(fontStyle: FontStyle.italic));
+                      }),
                     ],
                   ),
                 ),
