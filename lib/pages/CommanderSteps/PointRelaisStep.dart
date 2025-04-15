@@ -141,10 +141,7 @@ class _Commander5State extends State<Commander5> {
             child: SingleChildScrollView(
               child: Column(
                   children: displayedList.map((pointRelais) {
-                return PontRelaisBloc(
-                  pointRelais: pointRelais,
-                  received: false,
-                );
+                return PontRelaisBloc(pointRelais: pointRelais);
               }).toList()),
             ),
           ),

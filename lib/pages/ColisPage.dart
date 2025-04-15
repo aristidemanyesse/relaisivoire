@@ -10,8 +10,9 @@ import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
+import 'package:lpr/pages/SearchPointRelais.dart';
 import 'package:lpr/pages/open_q_r_code.dart';
-import 'package:lpr/pages/search_lpr.dart';
+import 'package:lpr/pages/ItineraireMapPage.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -377,9 +378,7 @@ class _ColisPageState extends State<ColisPage> {
                         title: "Trouver un point relais",
                         icon: Icons.location_on_sharp,
                         onPressed: () {
-                          Get.to(SearchLPR(
-                              pointsRelais:
-                                  controller.listePointsRelais.value));
+                          Get.to(SearchPointRelais());
                         })
                   ],
                 ),

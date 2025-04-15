@@ -7,11 +7,14 @@ import 'package:lpr/components/widgets/ScheduleItem.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
+import 'package:lpr/pages/ItineraireMapPage.dart';
 
 class PointRelaisDetailPopup extends StatelessWidget {
   final PointRelais pointRelais;
+  final bool map;
 
-  PointRelaisDetailPopup({super.key, required this.pointRelais});
+  PointRelaisDetailPopup(
+      {super.key, required this.pointRelais, this.map = false});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -68,45 +71,46 @@ class PointRelaisDetailPopup extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.all(Tools.PADDING),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
                 children: [
-                  Icon(
-                    Icons.location_on_sharp,
-                    size: 80,
-                    color: MyColors.primary,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.location_on_sharp,
+                        size: 50,
+                        color: MyColors.primary,
+                      ),
+                      SizedBox(width: Tools.PADDING / 2),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(pointRelais.libelle,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            Text(pointRelais.adresse(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.italic)),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: Tools.PADDING / 2),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(pointRelais.libelle,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        Text(pointRelais.adresse(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.italic)),
-                        SizedBox(height: Tools.PADDING / 2),
-                        Text(pointRelais.description ?? "",
-                            textAlign: TextAlign.justify,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
+                  SizedBox(height: Tools.PADDING / 2),
+                  Text(pointRelais.description ?? "",
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -121,15 +125,24 @@ class PointRelaisDetailPopup extends StatelessWidget {
               ),
             ),
             Spacer(),
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 3),
-                child: MainButtonInverse(
-                    title: "Choisir ce point relais ",
-                    icon: Icons.check,
-                    onPressed: () {
-                      _controller.pointRelais.value = pointRelais;
-                      Get.back();
-                    })),
+            map
+                ? Container(
+                    margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 3),
+                    child: MainButtonInverse(
+                        title: "Localiser sur la carte  ",
+                        icon: Icons.map,
+                        onPressed: () {
+                          Get.to(ItineraireMapPage(pointRelais: pointRelais));
+                        }))
+                : Container(
+                    margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 3),
+                    child: MainButtonInverse(
+                        title: "Choisir ce point relais ",
+                        icon: Icons.check,
+                        onPressed: () {
+                          _controller.pointRelais.value = pointRelais;
+                          Get.back();
+                        })),
             Spacer(),
             SizedBox(height: 20, child: const Wave()),
           ],

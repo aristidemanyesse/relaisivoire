@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
+  static const APIKEY = "AIzaSyBMmWvPPlLQ4axlvp2kVMM3Xu1XQPlYpm4";
   static Future<Position?> getCurrentPosition() async {
     bool serviceEnabled;
     LocationPermission permission;

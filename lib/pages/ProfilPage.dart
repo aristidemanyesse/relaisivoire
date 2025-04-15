@@ -24,7 +24,7 @@ class _ProfilPageState extends State<ProfilPage> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Get.off(ParametrePage(), transition: Transition.rightToLeft);
+              Get.off(ParametrePage());
             },
             icon: Icon(
               Icons.arrow_back,

@@ -111,7 +111,7 @@ class HistoriqueBloc extends StatelessWidget {
                 ),
                 Center(
                   child: Icon(sent ? Icons.delivery_dining : Icons.inventory_2,
-                      color: sent ? MyColors.textprimary : MyColors.success),
+                      color: sent ? MyColors.textprimary : MyColors.primary),
                 ),
               ],
             ),

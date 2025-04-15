@@ -8,10 +8,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PontRelaisBloc extends StatelessWidget {
   final PointRelais pointRelais;
-  final bool received;
-
-  PontRelaisBloc(
-      {super.key, required this.pointRelais, required this.received});
+  final bool map;
+  PontRelaisBloc({super.key, required this.pointRelais, this.map = false});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -31,8 +29,8 @@ class PontRelaisBloc extends StatelessWidget {
                   showMaterialModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
-                    builder: (context) =>
-                        PointRelaisDetailPopup(pointRelais: pointRelais),
+                    builder: (context) => PointRelaisDetailPopup(
+                        pointRelais: pointRelais, map: map),
                   );
                 },
                 child: Container(
