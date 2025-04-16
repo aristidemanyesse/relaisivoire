@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:lpr/controllers/GeneralController.dart';
 
 class ApiService {
-  static const BASE_URL = "http://192.168.1.19:8005/";
+  static const BASE_URL = "http://192.168.1.5:8005/";
 
   static Future<Map<String, dynamic>> post(
       String path, Map<String, dynamic> params) async {

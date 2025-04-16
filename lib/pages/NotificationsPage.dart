@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/NotificationItem.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/controllers/NotificationClientController.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -12,13 +14,17 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
+  NotificationClientController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications (22)",
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: MyColors.secondary, fontWeight: FontWeight.bold)),
+        title: Obx(() {
+          return Text("Notifications (${controller.notReads.value.length})",
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: MyColors.secondary, fontWeight: FontWeight.bold));
+        }),
       ),
       body: SizedBox(
         height: Get.size.height,
@@ -33,15 +39,13 @@ class _NotificationsPageState extends State<NotificationsPage> {
               flex: 10,
               child: SizedBox(
                 width: double.infinity,
-                child: ListView(
-                    children: List.generate(18, (index) {
-                  return NotificationItem(
-                    title: "Enveloppe / Porte-document",
-                    subtitle: "Boutique de Banbara - Port-bouët Abattoir",
-                    created: "il y a 2 min",
-                    received: false,
-                  );
-                })),
+                child: Obx(() {
+                  return ListView(
+                      children:
+                          controller.notifications.value.map((notification) {
+                    return NotificationItem(notification: notification);
+                  }).toList());
+                }),
               ),
             ),
             Container(

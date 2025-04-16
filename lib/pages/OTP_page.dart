@@ -116,6 +116,7 @@ class _OPTPageState extends State<OPTPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: Tools.PADDING * 2),
                     Text(
                       "Vérification OTP",
                       style: Theme.of(context)

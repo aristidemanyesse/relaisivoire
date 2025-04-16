@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
+import 'package:lpr/controllers/NotificationClientController.dart';
+import 'package:lpr/models/ClientApp/NotificationClient.dart';
 import 'package:lpr/models/ClientApp/TypeClient.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
@@ -50,6 +52,7 @@ class SyncService {
     GeneralController controller = Get.find();
     HandleTypesController handleTypesController = Get.find();
     ColisController colisController = Get.find();
+    NotificationClientController notificationClientController = Get.find();
 
     handleTypesController.listeTypeColis.value =
         await syncGenericList<TypeColis>(
@@ -122,6 +125,14 @@ class SyncService {
             fromJson: (json) => PointRelais.fromJson(json),
             box: store.box<PointRelais>(),
             label: "PointRelais");
+
+    notificationClientController.notifications.value =
+        await syncGenericList<NotificationClient>(
+            endpoint:
+                'api/notifications/search/?id=${controller.client.value!.uid}',
+            fromJson: (json) => NotificationClient.fromJson(json),
+            box: store.box<NotificationClient>(),
+            label: "NotificationClient");
 
     print("✅ Tous les types de base sont synchronisés.");
   }

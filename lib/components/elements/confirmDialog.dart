@@ -7,7 +7,7 @@ class ConfirmDialog extends StatelessWidget {
   final String title;
   final String message;
   final String testOk;
-  final String testCancel;
+  final String? testCancel;
   final Function functionOk;
   final Function functionCancel;
 
@@ -65,7 +65,9 @@ class ConfirmDialog extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: testCancel != null
+                        ? MainAxisAlignment.spaceBetween
+                        : MainAxisAlignment.center,
                     children: [
                       Container(
                           alignment: Alignment.center,
@@ -79,7 +81,8 @@ class ConfirmDialog extends StatelessWidget {
                               onPressed: () {
                                 functionOk();
                               })),
-                      Container(
+                      if (testCancel != null)
+                        Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
@@ -89,9 +92,10 @@ class ConfirmDialog extends StatelessWidget {
                             onPressed: () {
                               functionCancel();
                             },
-                            title: testCancel,
+                            title: "${testCancel}",
                             icon: Icons.close,
-                          ))
+                          ),
+                        )
                     ],
                   ),
                 ),

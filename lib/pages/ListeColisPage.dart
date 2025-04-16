@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/AnimatedNotificationIcon.dart';
 import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
+import 'package:lpr/controllers/NotificationClientController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
@@ -28,6 +30,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
   GeneralController controller = Get.find();
   HandleTypesController handleTypesController = Get.find();
   ColisController colisController = Get.find();
+  NotificationClientController notificationsController = Get.find();
 
   @override
   void initState() {
@@ -70,11 +73,11 @@ class _ListeColisPageState extends State<ListeColisPage> {
                 },
                 icon: const Icon(Icons.search)),
             SizedBox(width: Tools.PADDING / 3),
-            IconButton(
-                onPressed: () {
-                  Get.to(const NotificationsPage());
-                },
-                icon: const Icon(Icons.notifications)),
+            AnimatedNotificationIcon(
+              count: notificationsController.notReads.value.length,
+              onTap: () => Get.to(const NotificationsPage()),
+            ),
+            SizedBox(width: Tools.PADDING / 2),
           ],
         ),
         body: Container(

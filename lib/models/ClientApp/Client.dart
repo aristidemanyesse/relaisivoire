@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lpr/models/ClientApp/NotificationClient.dart';
 import 'package:lpr/models/ClientApp/PalierClient.dart';
 import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/ApiService.dart';
@@ -21,6 +22,7 @@ class Client {
   final typeClient = ToOne<TypeClient>();
   final user = ToOne<CustomUser>();
   final palier = ToOne<PalierClient>();
+  final notifications = ToMany<NotificationClient>();
 
   Client({
     this.uid = "",
@@ -47,6 +49,12 @@ class Client {
     // Liaison du type client
     if (json['palier'] != null) {
       client.palier.target = PalierClient.fromJson(json['palier']);
+    }
+
+    if (json['notifications'] != null) {
+      final List notifications = json['notifications'];
+      client.notifications
+          .addAll(notifications.map((e) => NotificationClient.fromJson(e)));
     }
 
     return client;

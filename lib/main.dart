@@ -6,6 +6,7 @@ import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
+import 'package:lpr/controllers/NotificationClientController.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/Splashscreen.dart';
 import 'package:lit_relative_date_time/lit_relative_date_time.dart';
@@ -23,6 +24,7 @@ void main() async {
   Get.put(KeyBoardController());
   Get.put(HandleTypesController());
   Get.put(ColisController());
+  Get.put(NotificationClientController());
   Get.put(CommandeProcessController());
 
   final store = await getStore();

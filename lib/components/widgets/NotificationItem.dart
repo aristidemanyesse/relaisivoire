@@ -1,30 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/models/ClientApp/NotificationClient.dart';
 
 class NotificationItem extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String created;
-  final bool received;
+  final NotificationClient notification;
 
-  const NotificationItem({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.created,
-    required this.received,
-  });
+  const NotificationItem({super.key, required this.notification});
+
+  String formatDate(DateTime? date) {
+    if (date == null) return "";
+    return DateFormat('dd MMMM yyyy à HH:mm', 'fr_FR').format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
         onTap: () {
-          // Get.to(
-          //     ColisPage(
-          //       received: received,
-          //     ),
-          //     transition: Transition.topLevel);
+          Get.dialog(
+            ConfirmDialog(
+              title: notification.title,
+              message: notification.message,
+              testOk: "Ok, j'ai compris !",
+              testCancel: null,
+              functionOk: () async {
+                bool res = await notification.readIt();
+                if (res) {
+                  Get.back();
+                }
+              },
+              functionCancel: () {
+                Get.back();
+              },
+            ),
+          );
         },
         child: Card(
           margin: EdgeInsets.zero,
@@ -47,30 +59,32 @@ class NotificationItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        title,
+                        notification.title,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: (received
-                                ? MyColors.primary
+                            fontWeight: FontWeight.bold,
+                            color: (notification.read
+                                ? MyColors.bleunuit
                                 : MyColors.primary)),
                       ),
                       Text(
-                        subtitle,
+                        notification.message,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: (received
-                                  ? MyColors.primary
+                              color: (notification.read
+                                  ? MyColors.bleunuit
                                   : MyColors.primary),
                             ),
                       ),
+                      SizedBox(height: Tools.PADDING / 4),
                       Text(
-                        created,
+                        formatDate(notification.date_creation),
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
                             .copyWith(
                                 fontWeight: FontWeight.w300,
-                                color: (received
-                                    ? MyColors.primary
+                                color: (notification.read
+                                    ? MyColors.bleunuit
                                     : MyColors.primary)),
                       ),
                     ],

@@ -79,6 +79,7 @@ class _LoginNumberState extends State<LoginNumber> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: Tools.PADDING / 2),
                       Text(
                         "CONNEXION",
                         style: Theme.of(context)

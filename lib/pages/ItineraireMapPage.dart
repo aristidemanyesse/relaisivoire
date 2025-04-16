@@ -29,6 +29,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
   Set<Polyline> _polylines = {};
   Set<Marker> _markers = {};
   List<Map<String, dynamic>> _directionsSteps = [];
+  bool _mapCreated = false;
 
   String? _durationText;
   String? _distanceText;
@@ -97,6 +98,21 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
       }
 
       final data = json.decode(response.body);
+
+      if (data['status'] == 'ZERO_RESULTS') {
+        setState(() {
+          _durationText = null;
+          _distanceText = null;
+          _directionsSteps = [];
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+                  "Aucun itinéraire trouvé entre vous et ce point relais")),
+        );
+        return;
+      }
 
       if (data['status'] != 'OK') {
         throw Exception("Directions status: ${data['status']}");
@@ -290,8 +306,12 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
                   myLocationButtonEnabled: false,
                   markers: _markers,
                   polylines: _polylines,
-                  onMapCreated: (controller) =>
-                      _controller.complete(controller),
+                  onMapCreated: (GoogleMapController controller) {
+                    if (!_mapCreated) {
+                      _controller.complete(controller);
+                      _mapCreated = true;
+                    }
+                  },
                 ),
                 Positioned(
                   bottom: Tools.PADDING * 2,

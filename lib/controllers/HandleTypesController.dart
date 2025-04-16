@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lpr/models/ClientApp/NotificationClient.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
@@ -14,6 +15,7 @@ class HandleTypesController extends GetxController {
   Rx<List<TypeDestinataire>> listeTypeDestinataires =
       Rx<List<TypeDestinataire>>([]);
   Rx<List<PointRelais>> listePointsRelais = Rx<List<PointRelais>>([]);
+  Rx<List<NotificationClient>> notifications = Rx<List<NotificationClient>>([]);
 
   @override
   void onInit() {

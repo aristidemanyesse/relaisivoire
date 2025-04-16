@@ -16,6 +16,8 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'models/AdministrationApp/CustomUser.dart';
 import 'models/ClientApp/Client.dart';
+import 'models/ClientApp/NotificationClient.dart';
+import 'models/ClientApp/PalierClient.dart';
 import 'models/ClientApp/TypeClient.dart';
 import 'models/ColisApp/Colis.dart';
 import 'models/ColisApp/StatusColis.dart';
@@ -33,169 +35,181 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 4721431471128414278),
+      id: const obx_int.IdUid(1, 5518771513760433252),
       name: 'Client',
-      lastPropertyId: const obx_int.IdUid(7, 6982971854070826653),
+      lastPropertyId: const obx_int.IdUid(8, 5218986931365160862),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6043243835465266715),
+            id: const obx_int.IdUid(1, 9186364488723110502),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 989075556229341832),
+            id: const obx_int.IdUid(2, 2875610646821227067),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(1, 2370089394767631057)),
+            indexId: const obx_int.IdUid(1, 5245307889289555106)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 3688382711679426163),
+            id: const obx_int.IdUid(3, 3660305949257334503),
             name: 'contact',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 4256878170152396401),
+            id: const obx_int.IdUid(4, 108084052903366684),
             name: 'address',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 3447739266578787643),
+            id: const obx_int.IdUid(5, 3002779939758054398),
             name: 'active',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 5716007533763238370),
+            id: const obx_int.IdUid(6, 4346612026937696375),
             name: 'typeClientId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(2, 2111193803077463787),
+            indexId: const obx_int.IdUid(2, 8967728281504295153),
             relationTarget: 'TypeClient'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 6982971854070826653),
+            id: const obx_int.IdUid(7, 7032582005422917576),
             name: 'userId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(3, 953989425773746468),
-            relationTarget: 'CustomUser')
+            indexId: const obx_int.IdUid(3, 2336354479783538388),
+            relationTarget: 'CustomUser'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 5218986931365160862),
+            name: 'palierId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(4, 4003714850913850968),
+            relationTarget: 'PalierClient')
       ],
-      relations: <obx_int.ModelRelation>[],
+      relations: <obx_int.ModelRelation>[
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(1, 4362593878124396942),
+            name: 'notifications',
+            targetId: const obx_int.IdUid(5, 1951383446368822470))
+      ],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(2, 553909608184755708),
+      id: const obx_int.IdUid(2, 3543005446155189019),
       name: 'Colis',
-      lastPropertyId: const obx_int.IdUid(19, 3093492318003301981),
+      lastPropertyId: const obx_int.IdUid(19, 8411599506013840631),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6381334791049763235),
+            id: const obx_int.IdUid(1, 8661980573674310907),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 1459009063704953094),
+            id: const obx_int.IdUid(2, 938160887724095996),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(4, 4804658713748036424)),
+            indexId: const obx_int.IdUid(5, 3445501522734864135)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 2797058269775564889),
+            id: const obx_int.IdUid(3, 5729826661462420546),
             name: 'code',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 128986907007694823),
+            id: const obx_int.IdUid(4, 2490487003591671175),
             name: 'receiverName',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 7496099983540685076),
+            id: const obx_int.IdUid(5, 8129364307271409881),
             name: 'receiverPhone',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 6310005666047797379),
+            id: const obx_int.IdUid(6, 4819391443040149680),
             name: 'total',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 2033990689415622688),
+            id: const obx_int.IdUid(7, 1232551263455015295),
             name: 'senderId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(5, 3299831063414277957),
+            indexId: const obx_int.IdUid(6, 4291832831043614495),
             relationTarget: 'Client'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 71855575795140492),
+            id: const obx_int.IdUid(8, 3640045915888110745),
             name: 'receiverId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(6, 799993630667375202),
+            indexId: const obx_int.IdUid(7, 2222931194962019945),
             relationTarget: 'Client'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 2182848375526986310),
+            id: const obx_int.IdUid(9, 6766421742162155855),
             name: 'pointRelaisSenderId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(7, 295170408108840181),
+            indexId: const obx_int.IdUid(8, 2726959951927083560),
             relationTarget: 'PointRelais'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 307236839153848720),
+            id: const obx_int.IdUid(10, 6122331589877278671),
             name: 'pointRelaisReceiverId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(8, 6428209988390870343),
+            indexId: const obx_int.IdUid(9, 4542294666478747493),
             relationTarget: 'PointRelais'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 7814041185599256437),
+            id: const obx_int.IdUid(11, 6301148791039575650),
             name: 'typeColisId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(9, 6620364395183363591),
+            indexId: const obx_int.IdUid(10, 6776622867264763626),
             relationTarget: 'TypeColis'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 7952843797094712506),
+            id: const obx_int.IdUid(12, 3894922596764913500),
             name: 'typeEmballageId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(10, 5480066071372414504),
+            indexId: const obx_int.IdUid(11, 5937384142616592552),
             relationTarget: 'TypeEmballage'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 4531705171083579134),
+            id: const obx_int.IdUid(13, 8041217857504485802),
             name: 'typeDestinataireId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(11, 3618171776489380685),
+            indexId: const obx_int.IdUid(12, 8801557170822615330),
             relationTarget: 'TypeDestinataire'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 4840026746405838350),
+            id: const obx_int.IdUid(14, 2071480972610544286),
             name: 'statusId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(12, 5552461805079837722),
+            indexId: const obx_int.IdUid(13, 2807872355433489923),
             relationTarget: 'StatusColis'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(15, 3005487978491512750),
+            id: const obx_int.IdUid(15, 7778899611050487091),
             name: 'dateCreation',
             type: 10,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(16, 2947309330015120876),
+            id: const obx_int.IdUid(16, 437991993152677718),
             name: 'depotDate',
             type: 10,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(17, 6959423010374133914),
+            id: const obx_int.IdUid(17, 7982282030157446035),
             name: 'recuperationDate',
             type: 10,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(18, 723667936126461737),
+            id: const obx_int.IdUid(18, 3506877785330752144),
             name: 'livraisonDate',
             type: 10,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(19, 3093492318003301981),
+            id: const obx_int.IdUid(19, 8411599506013840631),
             name: 'retraitDate',
             type: 10,
             flags: 0)
@@ -203,24 +217,24 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(3, 5035577118533419016),
+      id: const obx_int.IdUid(3, 4992535986533297587),
       name: 'Commune',
-      lastPropertyId: const obx_int.IdUid(3, 7268126988972641246),
+      lastPropertyId: const obx_int.IdUid(3, 1502124290931998554),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6157756334423457019),
+            id: const obx_int.IdUid(1, 7980700817362763664),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 1769952284392140085),
+            id: const obx_int.IdUid(2, 3078064505712908328),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(13, 6846730826984236165)),
+            indexId: const obx_int.IdUid(14, 7101812368353549488)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 7268126988972641246),
+            id: const obx_int.IdUid(3, 1502124290931998554),
             name: 'libelle',
             type: 9,
             flags: 0)
@@ -228,23 +242,23 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(4, 8418584024633772263),
+      id: const obx_int.IdUid(4, 3437007084483648727),
       name: 'CustomUser',
-      lastPropertyId: const obx_int.IdUid(4, 1777308265182776357),
+      lastPropertyId: const obx_int.IdUid(3, 8697899709503104142),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 4845016821636504669),
+            id: const obx_int.IdUid(1, 1598687141462235503),
             name: 'id',
             type: 6,
             flags: 129),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 5595060975362164057),
+            id: const obx_int.IdUid(2, 7073403030105897970),
             name: 'firstName',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 1777308265182776357),
+            id: const obx_int.IdUid(3, 8697899709503104142),
             name: 'lastName',
             type: 9,
             flags: 0)
@@ -252,144 +266,224 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(5, 7414892366663077985),
-      name: 'PointRelais',
-      lastPropertyId: const obx_int.IdUid(9, 6005213174252232264),
+      id: const obx_int.IdUid(5, 1951383446368822470),
+      name: 'NotificationClient',
+      lastPropertyId: const obx_int.IdUid(7, 3921310296109265394),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 8183360679664598808),
+            id: const obx_int.IdUid(1, 5351889466850277692),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 4206447504669873357),
+            id: const obx_int.IdUid(2, 4369461125528308041),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(15, 8772668370075556180)),
+            indexId: const obx_int.IdUid(15, 4280499006352540613)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 477021923602172826),
+            id: const obx_int.IdUid(3, 4787714140432165502),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 2234512909278112095),
+            name: 'read',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 7539174481721758238),
+            name: 'message',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 3917335003876633041),
+            name: 'priority',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 3921310296109265394),
+            name: 'date_creation',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(6, 25261470569710999),
+      name: 'PalierClient',
+      lastPropertyId: const obx_int.IdUid(5, 281757582351663685),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 2639933439217612760),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 3782462349004564333),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(16, 7902688073560596718)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 5279717264357062291),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 2882029766255662837),
-            name: 'address',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 6491888401221511617),
+            id: const obx_int.IdUid(4, 971439013872996953),
             name: 'description',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 107744009895272865),
-            name: 'latitude',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 8276164739228310298),
-            name: 'longitude',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 6549607941342348716),
-            name: 'typeId',
-            type: 11,
-            flags: 520,
-            indexId: const obx_int.IdUid(16, 7806018647490230916),
-            relationTarget: 'TypePointRelais'),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 6005213174252232264),
-            name: 'communeId',
-            type: 11,
-            flags: 520,
-            indexId: const obx_int.IdUid(17, 8637798324417607768),
-            relationTarget: 'Commune')
+            id: const obx_int.IdUid(5, 281757582351663685),
+            name: 'level',
+            type: 6,
+            flags: 0)
       ],
-      relations: <obx_int.ModelRelation>[
-        obx_int.ModelRelation(
-            id: const obx_int.IdUid(1, 8027319072131125910),
-            name: 'services',
-            targetId: const obx_int.IdUid(13, 6875664215020968538)),
-        obx_int.ModelRelation(
-            id: const obx_int.IdUid(2, 8920152381114644102),
-            name: 'schedules',
-            targetId: const obx_int.IdUid(6, 6107841104044359834))
-      ],
+      relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(6, 6107841104044359834),
-      name: 'Schedule',
-      lastPropertyId: const obx_int.IdUid(5, 5363701079899673462),
+      id: const obx_int.IdUid(7, 6970987695869343513),
+      name: 'PointRelais',
+      lastPropertyId: const obx_int.IdUid(9, 4818371208172813927),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 7133213770600059371),
+            id: const obx_int.IdUid(1, 6539481632965241056),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 3653233779091154056),
+            id: const obx_int.IdUid(2, 1702320748304105824),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(18, 8527917064166039693)),
+            indexId: const obx_int.IdUid(17, 271197234340355534)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 3016360836014220518),
+            id: const obx_int.IdUid(3, 3801996390814348445),
+            name: 'libelle',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 9120317290868995219),
+            name: 'address',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 1880384771155734665),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 4218858410819805397),
+            name: 'latitude',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 5931861662624371425),
+            name: 'longitude',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 9060572880269633279),
+            name: 'typeId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(18, 1469981824518002391),
+            relationTarget: 'TypePointRelais'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 4818371208172813927),
+            name: 'communeId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(19, 5165418151463275286),
+            relationTarget: 'Commune')
+      ],
+      relations: <obx_int.ModelRelation>[
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(2, 193642714595025303),
+            name: 'services',
+            targetId: const obx_int.IdUid(15, 5172060657342811275)),
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(3, 2517163978363044878),
+            name: 'schedules',
+            targetId: const obx_int.IdUid(8, 2963682808090904853))
+      ],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(8, 2963682808090904853),
+      name: 'Schedule',
+      lastPropertyId: const obx_int.IdUid(5, 2370905921784491829),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 7018933445435719359),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 3817702474835878543),
+            name: 'uid',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(20, 5947405641441282949)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 2852929405550632496),
             name: 'level_day',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 4763436233632623634),
+            id: const obx_int.IdUid(4, 7308239954928171679),
             name: 'available',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 5363701079899673462),
+            id: const obx_int.IdUid(5, 2370905921784491829),
             name: 'point_relaisId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(19, 679355071463970888),
+            indexId: const obx_int.IdUid(21, 1264718184553367279),
             relationTarget: 'PointRelais')
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(7, 3091782836706585062),
+      id: const obx_int.IdUid(9, 8439786241858360762),
       name: 'StatusColis',
-      lastPropertyId: const obx_int.IdUid(6, 9000879277382204113),
+      lastPropertyId: const obx_int.IdUid(6, 5548855459900953752),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 1620721844396669491),
+            id: const obx_int.IdUid(1, 5107058979102204299),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 1964593375672164506),
+            id: const obx_int.IdUid(2, 3968829971953422838),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(20, 5311432973260866783)),
+            indexId: const obx_int.IdUid(22, 3843760215456606924)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 8427354242433955739),
+            id: const obx_int.IdUid(3, 903947182572976791),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 3912186942365474927),
+            id: const obx_int.IdUid(4, 7395840806617215544),
             name: 'description',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 4222605074898123768),
+            id: const obx_int.IdUid(5, 458472111317189195),
             name: 'color',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 9000879277382204113),
+            id: const obx_int.IdUid(6, 5548855459900953752),
             name: 'level',
             type: 6,
             flags: 0)
@@ -397,29 +491,29 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(8, 8911871289356573162),
+      id: const obx_int.IdUid(10, 3089692671208744379),
       name: 'TypeClient',
-      lastPropertyId: const obx_int.IdUid(4, 7784178730143040707),
+      lastPropertyId: const obx_int.IdUid(4, 7251628959274605606),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 9217588733563159132),
+            id: const obx_int.IdUid(1, 4918872237823965691),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6423704070909484885),
+            id: const obx_int.IdUid(2, 8566433462815727569),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(21, 5677963743287531905)),
+            indexId: const obx_int.IdUid(23, 1590839508952707524)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 5408320678786603377),
+            id: const obx_int.IdUid(3, 4759817217067453952),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 7784178730143040707),
+            id: const obx_int.IdUid(4, 7251628959274605606),
             name: 'level',
             type: 6,
             flags: 0)
@@ -427,103 +521,103 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(9, 546951544980843557),
+      id: const obx_int.IdUid(11, 7072311278531203013),
       name: 'TypeColis',
-      lastPropertyId: const obx_int.IdUid(11, 7228896036152813023),
+      lastPropertyId: const obx_int.IdUid(11, 7325081203132247470),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 5712803988189871976),
+            id: const obx_int.IdUid(1, 2988644549531870771),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 514560305900353188),
+            id: const obx_int.IdUid(2, 4873311037540481756),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(22, 2900331907244974340)),
+            indexId: const obx_int.IdUid(24, 4364206024413008605)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 711971372046634659),
+            id: const obx_int.IdUid(3, 3844992426791797646),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 5918174103478459485),
+            id: const obx_int.IdUid(4, 1292697485738997695),
             name: 'level',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 4755118681941109914),
+            id: const obx_int.IdUid(5, 1897535432980255144),
             name: 'icone',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 2940432341308723136),
+            id: const obx_int.IdUid(6, 3494015666377326949),
             name: 'description',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 5307982953358648172),
+            id: const obx_int.IdUid(7, 8998903113228638593),
             name: 'poids_min',
             type: 8,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 6674848283647341600),
+            id: const obx_int.IdUid(8, 7994600289133079365),
             name: 'poids_max',
             type: 8,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 144021082773160898),
+            id: const obx_int.IdUid(9, 968426915803892449),
             name: 'price',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 146051800347293643),
+            id: const obx_int.IdUid(10, 5560959173062560501),
             name: 'emballageId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(23, 3338425478040202579),
+            indexId: const obx_int.IdUid(25, 2411599155623618619),
             relationTarget: 'TypeEmballage'),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 7228896036152813023),
+            id: const obx_int.IdUid(11, 7325081203132247470),
             name: 'vehiculeId',
             type: 11,
             flags: 520,
-            indexId: const obx_int.IdUid(24, 6538917802460479739),
+            indexId: const obx_int.IdUid(26, 900745232223966810),
             relationTarget: 'TypeVehicule')
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(10, 410810462574419385),
+      id: const obx_int.IdUid(12, 7883760003877131682),
       name: 'TypeDestinataire',
-      lastPropertyId: const obx_int.IdUid(5, 5920905474668876022),
+      lastPropertyId: const obx_int.IdUid(5, 929596019534864895),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6696264707932052495),
+            id: const obx_int.IdUid(1, 4097401318073434771),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 4922717476864584925),
+            id: const obx_int.IdUid(2, 7773413216020354872),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(25, 6368989476941924440)),
+            indexId: const obx_int.IdUid(27, 1411798440803324629)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 3902950775046091100),
+            id: const obx_int.IdUid(3, 8673003740915386777),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 6403137921449755499),
+            id: const obx_int.IdUid(4, 4916146294514257567),
             name: 'description',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 5920905474668876022),
+            id: const obx_int.IdUid(5, 929596019534864895),
             name: 'level',
             type: 6,
             flags: 0)
@@ -531,34 +625,34 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(11, 1527065250441925732),
+      id: const obx_int.IdUid(13, 6291509022590950744),
       name: 'TypeEmballage',
-      lastPropertyId: const obx_int.IdUid(5, 1666097711662397213),
+      lastPropertyId: const obx_int.IdUid(5, 8294897350387810440),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 2049366128577749307),
+            id: const obx_int.IdUid(1, 6052891580703704615),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 1610830765819392784),
+            id: const obx_int.IdUid(2, 4887823237696537257),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(26, 3633848795931172958)),
+            indexId: const obx_int.IdUid(28, 8628644023611341212)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 6817476989132826960),
+            id: const obx_int.IdUid(3, 3205198230620173017),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 7947861680051413837),
+            id: const obx_int.IdUid(4, 8504604742699137845),
             name: 'price',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 1666097711662397213),
+            id: const obx_int.IdUid(5, 8294897350387810440),
             name: 'level',
             type: 6,
             flags: 0)
@@ -566,24 +660,24 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(12, 8333451743500689618),
+      id: const obx_int.IdUid(14, 8631890454663572794),
       name: 'TypePointRelais',
-      lastPropertyId: const obx_int.IdUid(3, 4683038411620768194),
+      lastPropertyId: const obx_int.IdUid(3, 3677105239584672192),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 794083751796581184),
+            id: const obx_int.IdUid(1, 1422123930174755942),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 5607567450994015431),
+            id: const obx_int.IdUid(2, 3692334326746180256),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(27, 5518002572035149682)),
+            indexId: const obx_int.IdUid(29, 3738412890561809686)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 4683038411620768194),
+            id: const obx_int.IdUid(3, 3677105239584672192),
             name: 'libelle',
             type: 9,
             flags: 0)
@@ -591,24 +685,24 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(13, 6875664215020968538),
+      id: const obx_int.IdUid(15, 5172060657342811275),
       name: 'TypeService',
-      lastPropertyId: const obx_int.IdUid(3, 5707242218961324196),
+      lastPropertyId: const obx_int.IdUid(3, 2368085543694315926),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 7156422634134894598),
+            id: const obx_int.IdUid(1, 6401604663223468196),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 4408929577050277002),
+            id: const obx_int.IdUid(2, 7865217358164780980),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(28, 3071371138929771680)),
+            indexId: const obx_int.IdUid(30, 362561778898777772)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 5707242218961324196),
+            id: const obx_int.IdUid(3, 2368085543694315926),
             name: 'libelle',
             type: 9,
             flags: 0)
@@ -616,34 +710,34 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(14, 7769129789684716093),
+      id: const obx_int.IdUid(16, 7330747115985110482),
       name: 'TypeVehicule',
-      lastPropertyId: const obx_int.IdUid(5, 4870176126589874638),
+      lastPropertyId: const obx_int.IdUid(5, 489780662833049686),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 2848435643045619508),
+            id: const obx_int.IdUid(1, 3208100503313732416),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 3235132092469467393),
+            id: const obx_int.IdUid(2, 8191078175999151866),
             name: 'uid',
             type: 9,
             flags: 2048,
-            indexId: const obx_int.IdUid(29, 5595622615468194486)),
+            indexId: const obx_int.IdUid(31, 7633977393871195353)),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 4245286225461512391),
+            id: const obx_int.IdUid(3, 3323057709637294836),
             name: 'libelle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 1283009468644382716),
+            id: const obx_int.IdUid(4, 7340424179110944503),
             name: 'icone',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 4870176126589874638),
+            id: const obx_int.IdUid(5, 489780662833049686),
             name: 'level',
             type: 6,
             flags: 0)
@@ -687,13 +781,13 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(14, 7769129789684716093),
-      lastIndexId: const obx_int.IdUid(29, 5595622615468194486),
-      lastRelationId: const obx_int.IdUid(2, 8920152381114644102),
+      lastEntityId: const obx_int.IdUid(16, 7330747115985110482),
+      lastIndexId: const obx_int.IdUid(31, 7633977393871195353),
+      lastRelationId: const obx_int.IdUid(3, 2517163978363044878),
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [834491364811918451],
-      retiredPropertyUids: const [9072266589675690143],
+      retiredIndexUids: const [],
+      retiredPropertyUids: const [],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -702,8 +796,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
   final bindings = <Type, obx_int.EntityDefinition>{
     Client: obx_int.EntityDefinition<Client>(
         model: _entities[0],
-        toOneRelations: (Client object) => [object.typeClient, object.user],
-        toManyRelations: (Client object) => {},
+        toOneRelations: (Client object) =>
+            [object.typeClient, object.user, object.palier],
+        toManyRelations: (Client object) => {
+              obx_int.RelInfo<Client>.toMany(1, object.id): object.notifications
+            },
         getId: (Client object) => object.id,
         setId: (Client object, int id) {
           object.id = id;
@@ -713,7 +810,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final contactOffset = fbb.writeString(object.contact);
           final addressOffset =
               object.address == null ? null : fbb.writeString(object.address!);
-          fbb.startTable(8);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, contactOffset);
@@ -721,6 +818,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addBool(4, object.active);
           fbb.addInt64(5, object.typeClient.targetId);
           fbb.addInt64(6, object.user.targetId);
+          fbb.addInt64(7, object.palier.targetId);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -747,6 +845,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.user.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
           object.user.attach(store);
+          object.palier.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          object.palier.attach(store);
+          obx_int.InternalToManyAccess.setRelInfo<Client>(object.notifications,
+              store, obx_int.RelInfo<Client>.toMany(1, object.id));
           return object;
         }),
     Colis: obx_int.EntityDefinition<Colis>(
@@ -919,10 +1022,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final lastNameOffset = object.lastName == null
               ? null
               : fbb.writeString(object.lastName!);
-          fbb.startTable(5);
+          fbb.startTable(4);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(2, firstNameOffset);
-          fbb.addOffset(3, lastNameOffset);
+          fbb.addOffset(1, firstNameOffset);
+          fbb.addOffset(2, lastNameOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -932,21 +1035,115 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final firstNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 8);
+              .vTableGetNullable(buffer, rootOffset, 6);
           final lastNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 10);
+              .vTableGetNullable(buffer, rootOffset, 8);
           final object = CustomUser(
               id: idParam, firstName: firstNameParam, lastName: lastNameParam);
 
           return object;
         }),
-    PointRelais: obx_int.EntityDefinition<PointRelais>(
+    NotificationClient: obx_int.EntityDefinition<NotificationClient>(
         model: _entities[4],
+        toOneRelations: (NotificationClient object) => [],
+        toManyRelations: (NotificationClient object) => {},
+        getId: (NotificationClient object) => object.id,
+        setId: (NotificationClient object, int id) {
+          object.id = id;
+        },
+        objectToFB: (NotificationClient object, fb.Builder fbb) {
+          final uidOffset = fbb.writeString(object.uid);
+          final titleOffset = fbb.writeString(object.title);
+          final messageOffset = fbb.writeString(object.message);
+          fbb.startTable(8);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, uidOffset);
+          fbb.addOffset(2, titleOffset);
+          fbb.addBool(3, object.read);
+          fbb.addOffset(4, messageOffset);
+          fbb.addBool(5, object.priority);
+          fbb.addInt64(6, object.date_creation?.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final date_creationValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final titleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final readParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final messageParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final priorityParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
+          final date_creationParam = date_creationValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(date_creationValue);
+          final object = NotificationClient(
+              uid: uidParam,
+              title: titleParam,
+              read: readParam,
+              message: messageParam,
+              priority: priorityParam,
+              date_creation: date_creationParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    PalierClient: obx_int.EntityDefinition<PalierClient>(
+        model: _entities[5],
+        toOneRelations: (PalierClient object) => [],
+        toManyRelations: (PalierClient object) => {},
+        getId: (PalierClient object) => object.id,
+        setId: (PalierClient object, int id) {
+          object.id = id;
+        },
+        objectToFB: (PalierClient object, fb.Builder fbb) {
+          final uidOffset = fbb.writeString(object.uid);
+          final libelleOffset = fbb.writeString(object.libelle);
+          final descriptionOffset = fbb.writeString(object.description);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, uidOffset);
+          fbb.addOffset(2, libelleOffset);
+          fbb.addOffset(3, descriptionOffset);
+          fbb.addInt64(4, object.level);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final uidParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final libelleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 10, '');
+          final levelParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final object = PalierClient(
+              uid: uidParam,
+              libelle: libelleParam,
+              description: descriptionParam,
+              level: levelParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    PointRelais: obx_int.EntityDefinition<PointRelais>(
+        model: _entities[6],
         toOneRelations: (PointRelais object) => [object.type, object.commune],
         toManyRelations: (PointRelais object) => {
-              obx_int.RelInfo<PointRelais>.toMany(1, object.id):
-                  object.services,
               obx_int.RelInfo<PointRelais>.toMany(2, object.id):
+                  object.services,
+              obx_int.RelInfo<PointRelais>.toMany(3, object.id):
                   object.schedules
             },
         getId: (PointRelais object) => object.id,
@@ -1007,13 +1204,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
           object.commune.attach(store);
           obx_int.InternalToManyAccess.setRelInfo<PointRelais>(object.services,
-              store, obx_int.RelInfo<PointRelais>.toMany(1, object.id));
-          obx_int.InternalToManyAccess.setRelInfo<PointRelais>(object.schedules,
               store, obx_int.RelInfo<PointRelais>.toMany(2, object.id));
+          obx_int.InternalToManyAccess.setRelInfo<PointRelais>(object.schedules,
+              store, obx_int.RelInfo<PointRelais>.toMany(3, object.id));
           return object;
         }),
     Schedule: obx_int.EntityDefinition<Schedule>(
-        model: _entities[5],
+        model: _entities[7],
         toOneRelations: (Schedule object) => [object.point_relais],
         toManyRelations: (Schedule object) => {},
         getId: (Schedule object) => object.id,
@@ -1051,7 +1248,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     StatusColis: obx_int.EntityDefinition<StatusColis>(
-        model: _entities[6],
+        model: _entities[8],
         toOneRelations: (StatusColis object) => [],
         toManyRelations: (StatusColis object) => {},
         getId: (StatusColis object) => object.id,
@@ -1098,7 +1295,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypeClient: obx_int.EntityDefinition<TypeClient>(
-        model: _entities[7],
+        model: _entities[9],
         toOneRelations: (TypeClient object) => [],
         toManyRelations: (TypeClient object) => {},
         getId: (TypeClient object) => object.id,
@@ -1132,7 +1329,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypeColis: obx_int.EntityDefinition<TypeColis>(
-        model: _entities[8],
+        model: _entities[10],
         toOneRelations: (TypeColis object) =>
             [object.emballage, object.vehicule],
         toManyRelations: (TypeColis object) => {},
@@ -1199,7 +1396,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypeDestinataire: obx_int.EntityDefinition<TypeDestinataire>(
-        model: _entities[9],
+        model: _entities[11],
         toOneRelations: (TypeDestinataire object) => [],
         toManyRelations: (TypeDestinataire object) => {},
         getId: (TypeDestinataire object) => object.id,
@@ -1243,7 +1440,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypeEmballage: obx_int.EntityDefinition<TypeEmballage>(
-        model: _entities[10],
+        model: _entities[12],
         toOneRelations: (TypeEmballage object) => [],
         toManyRelations: (TypeEmballage object) => {},
         getId: (TypeEmballage object) => object.id,
@@ -1283,7 +1480,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypePointRelais: obx_int.EntityDefinition<TypePointRelais>(
-        model: _entities[11],
+        model: _entities[13],
         toOneRelations: (TypePointRelais object) => [],
         toManyRelations: (TypePointRelais object) => {},
         getId: (TypePointRelais object) => object.id,
@@ -1313,7 +1510,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypeService: obx_int.EntityDefinition<TypeService>(
-        model: _entities[12],
+        model: _entities[14],
         toOneRelations: (TypeService object) => [],
         toManyRelations: (TypeService object) => {},
         getId: (TypeService object) => object.id,
@@ -1343,7 +1540,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           return object;
         }),
     TypeVehicule: obx_int.EntityDefinition<TypeVehicule>(
-        model: _entities[13],
+        model: _entities[15],
         toOneRelations: (TypeVehicule object) => [],
         toManyRelations: (TypeVehicule object) => {},
         getId: (TypeVehicule object) => object.id,
@@ -1417,6 +1614,15 @@ class Client_ {
   /// See [Client.user].
   static final user =
       obx.QueryRelationToOne<Client, CustomUser>(_entities[0].properties[6]);
+
+  /// See [Client.palier].
+  static final palier =
+      obx.QueryRelationToOne<Client, PalierClient>(_entities[0].properties[7]);
+
+  /// see [Client.notifications]
+  static final notifications =
+      obx.QueryRelationToMany<Client, NotificationClient>(
+          _entities[0].relations[0]);
 }
 
 /// [Colis] entity fields to define ObjectBox queries.
@@ -1527,264 +1733,318 @@ class CustomUser_ {
       obx.QueryStringProperty<CustomUser>(_entities[3].properties[2]);
 }
 
+/// [NotificationClient] entity fields to define ObjectBox queries.
+class NotificationClient_ {
+  /// See [NotificationClient.id].
+  static final id =
+      obx.QueryIntegerProperty<NotificationClient>(_entities[4].properties[0]);
+
+  /// See [NotificationClient.uid].
+  static final uid =
+      obx.QueryStringProperty<NotificationClient>(_entities[4].properties[1]);
+
+  /// See [NotificationClient.title].
+  static final title =
+      obx.QueryStringProperty<NotificationClient>(_entities[4].properties[2]);
+
+  /// See [NotificationClient.read].
+  static final read =
+      obx.QueryBooleanProperty<NotificationClient>(_entities[4].properties[3]);
+
+  /// See [NotificationClient.message].
+  static final message =
+      obx.QueryStringProperty<NotificationClient>(_entities[4].properties[4]);
+
+  /// See [NotificationClient.priority].
+  static final priority =
+      obx.QueryBooleanProperty<NotificationClient>(_entities[4].properties[5]);
+
+  /// See [NotificationClient.date_creation].
+  static final date_creation =
+      obx.QueryDateProperty<NotificationClient>(_entities[4].properties[6]);
+}
+
+/// [PalierClient] entity fields to define ObjectBox queries.
+class PalierClient_ {
+  /// See [PalierClient.id].
+  static final id =
+      obx.QueryIntegerProperty<PalierClient>(_entities[5].properties[0]);
+
+  /// See [PalierClient.uid].
+  static final uid =
+      obx.QueryStringProperty<PalierClient>(_entities[5].properties[1]);
+
+  /// See [PalierClient.libelle].
+  static final libelle =
+      obx.QueryStringProperty<PalierClient>(_entities[5].properties[2]);
+
+  /// See [PalierClient.description].
+  static final description =
+      obx.QueryStringProperty<PalierClient>(_entities[5].properties[3]);
+
+  /// See [PalierClient.level].
+  static final level =
+      obx.QueryIntegerProperty<PalierClient>(_entities[5].properties[4]);
+}
+
 /// [PointRelais] entity fields to define ObjectBox queries.
 class PointRelais_ {
   /// See [PointRelais.id].
   static final id =
-      obx.QueryIntegerProperty<PointRelais>(_entities[4].properties[0]);
+      obx.QueryIntegerProperty<PointRelais>(_entities[6].properties[0]);
 
   /// See [PointRelais.uid].
   static final uid =
-      obx.QueryStringProperty<PointRelais>(_entities[4].properties[1]);
+      obx.QueryStringProperty<PointRelais>(_entities[6].properties[1]);
 
   /// See [PointRelais.libelle].
   static final libelle =
-      obx.QueryStringProperty<PointRelais>(_entities[4].properties[2]);
+      obx.QueryStringProperty<PointRelais>(_entities[6].properties[2]);
 
   /// See [PointRelais.address].
   static final address =
-      obx.QueryStringProperty<PointRelais>(_entities[4].properties[3]);
+      obx.QueryStringProperty<PointRelais>(_entities[6].properties[3]);
 
   /// See [PointRelais.description].
   static final description =
-      obx.QueryStringProperty<PointRelais>(_entities[4].properties[4]);
+      obx.QueryStringProperty<PointRelais>(_entities[6].properties[4]);
 
   /// See [PointRelais.latitude].
   static final latitude =
-      obx.QueryDoubleProperty<PointRelais>(_entities[4].properties[5]);
+      obx.QueryDoubleProperty<PointRelais>(_entities[6].properties[5]);
 
   /// See [PointRelais.longitude].
   static final longitude =
-      obx.QueryDoubleProperty<PointRelais>(_entities[4].properties[6]);
+      obx.QueryDoubleProperty<PointRelais>(_entities[6].properties[6]);
 
   /// See [PointRelais.type].
   static final type = obx.QueryRelationToOne<PointRelais, TypePointRelais>(
-      _entities[4].properties[7]);
+      _entities[6].properties[7]);
 
   /// See [PointRelais.commune].
   static final commune =
-      obx.QueryRelationToOne<PointRelais, Commune>(_entities[4].properties[8]);
+      obx.QueryRelationToOne<PointRelais, Commune>(_entities[6].properties[8]);
 
   /// see [PointRelais.services]
   static final services = obx.QueryRelationToMany<PointRelais, TypeService>(
-      _entities[4].relations[0]);
+      _entities[6].relations[0]);
 
   /// see [PointRelais.schedules]
   static final schedules =
-      obx.QueryRelationToMany<PointRelais, Schedule>(_entities[4].relations[1]);
+      obx.QueryRelationToMany<PointRelais, Schedule>(_entities[6].relations[1]);
 }
 
 /// [Schedule] entity fields to define ObjectBox queries.
 class Schedule_ {
   /// See [Schedule.id].
   static final id =
-      obx.QueryIntegerProperty<Schedule>(_entities[5].properties[0]);
+      obx.QueryIntegerProperty<Schedule>(_entities[7].properties[0]);
 
   /// See [Schedule.uid].
   static final uid =
-      obx.QueryStringProperty<Schedule>(_entities[5].properties[1]);
+      obx.QueryStringProperty<Schedule>(_entities[7].properties[1]);
 
   /// See [Schedule.level_day].
   static final level_day =
-      obx.QueryIntegerProperty<Schedule>(_entities[5].properties[2]);
+      obx.QueryIntegerProperty<Schedule>(_entities[7].properties[2]);
 
   /// See [Schedule.available].
   static final available =
-      obx.QueryBooleanProperty<Schedule>(_entities[5].properties[3]);
+      obx.QueryBooleanProperty<Schedule>(_entities[7].properties[3]);
 
   /// See [Schedule.point_relais].
   static final point_relais =
-      obx.QueryRelationToOne<Schedule, PointRelais>(_entities[5].properties[4]);
+      obx.QueryRelationToOne<Schedule, PointRelais>(_entities[7].properties[4]);
 }
 
 /// [StatusColis] entity fields to define ObjectBox queries.
 class StatusColis_ {
   /// See [StatusColis.id].
   static final id =
-      obx.QueryIntegerProperty<StatusColis>(_entities[6].properties[0]);
+      obx.QueryIntegerProperty<StatusColis>(_entities[8].properties[0]);
 
   /// See [StatusColis.uid].
   static final uid =
-      obx.QueryStringProperty<StatusColis>(_entities[6].properties[1]);
+      obx.QueryStringProperty<StatusColis>(_entities[8].properties[1]);
 
   /// See [StatusColis.libelle].
   static final libelle =
-      obx.QueryStringProperty<StatusColis>(_entities[6].properties[2]);
+      obx.QueryStringProperty<StatusColis>(_entities[8].properties[2]);
 
   /// See [StatusColis.description].
   static final description =
-      obx.QueryStringProperty<StatusColis>(_entities[6].properties[3]);
+      obx.QueryStringProperty<StatusColis>(_entities[8].properties[3]);
 
   /// See [StatusColis.color].
   static final color =
-      obx.QueryStringProperty<StatusColis>(_entities[6].properties[4]);
+      obx.QueryStringProperty<StatusColis>(_entities[8].properties[4]);
 
   /// See [StatusColis.level].
   static final level =
-      obx.QueryIntegerProperty<StatusColis>(_entities[6].properties[5]);
+      obx.QueryIntegerProperty<StatusColis>(_entities[8].properties[5]);
 }
 
 /// [TypeClient] entity fields to define ObjectBox queries.
 class TypeClient_ {
   /// See [TypeClient.id].
   static final id =
-      obx.QueryIntegerProperty<TypeClient>(_entities[7].properties[0]);
+      obx.QueryIntegerProperty<TypeClient>(_entities[9].properties[0]);
 
   /// See [TypeClient.uid].
   static final uid =
-      obx.QueryStringProperty<TypeClient>(_entities[7].properties[1]);
+      obx.QueryStringProperty<TypeClient>(_entities[9].properties[1]);
 
   /// See [TypeClient.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypeClient>(_entities[7].properties[2]);
+      obx.QueryStringProperty<TypeClient>(_entities[9].properties[2]);
 
   /// See [TypeClient.level].
   static final level =
-      obx.QueryIntegerProperty<TypeClient>(_entities[7].properties[3]);
+      obx.QueryIntegerProperty<TypeClient>(_entities[9].properties[3]);
 }
 
 /// [TypeColis] entity fields to define ObjectBox queries.
 class TypeColis_ {
   /// See [TypeColis.id].
   static final id =
-      obx.QueryIntegerProperty<TypeColis>(_entities[8].properties[0]);
+      obx.QueryIntegerProperty<TypeColis>(_entities[10].properties[0]);
 
   /// See [TypeColis.uid].
   static final uid =
-      obx.QueryStringProperty<TypeColis>(_entities[8].properties[1]);
+      obx.QueryStringProperty<TypeColis>(_entities[10].properties[1]);
 
   /// See [TypeColis.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypeColis>(_entities[8].properties[2]);
+      obx.QueryStringProperty<TypeColis>(_entities[10].properties[2]);
 
   /// See [TypeColis.level].
   static final level =
-      obx.QueryIntegerProperty<TypeColis>(_entities[8].properties[3]);
+      obx.QueryIntegerProperty<TypeColis>(_entities[10].properties[3]);
 
   /// See [TypeColis.icone].
   static final icone =
-      obx.QueryStringProperty<TypeColis>(_entities[8].properties[4]);
+      obx.QueryStringProperty<TypeColis>(_entities[10].properties[4]);
 
   /// See [TypeColis.description].
   static final description =
-      obx.QueryStringProperty<TypeColis>(_entities[8].properties[5]);
+      obx.QueryStringProperty<TypeColis>(_entities[10].properties[5]);
 
   /// See [TypeColis.poids_min].
   static final poids_min =
-      obx.QueryDoubleProperty<TypeColis>(_entities[8].properties[6]);
+      obx.QueryDoubleProperty<TypeColis>(_entities[10].properties[6]);
 
   /// See [TypeColis.poids_max].
   static final poids_max =
-      obx.QueryDoubleProperty<TypeColis>(_entities[8].properties[7]);
+      obx.QueryDoubleProperty<TypeColis>(_entities[10].properties[7]);
 
   /// See [TypeColis.price].
   static final price =
-      obx.QueryIntegerProperty<TypeColis>(_entities[8].properties[8]);
+      obx.QueryIntegerProperty<TypeColis>(_entities[10].properties[8]);
 
   /// See [TypeColis.emballage].
   static final emballage = obx.QueryRelationToOne<TypeColis, TypeEmballage>(
-      _entities[8].properties[9]);
+      _entities[10].properties[9]);
 
   /// See [TypeColis.vehicule].
   static final vehicule = obx.QueryRelationToOne<TypeColis, TypeVehicule>(
-      _entities[8].properties[10]);
+      _entities[10].properties[10]);
 }
 
 /// [TypeDestinataire] entity fields to define ObjectBox queries.
 class TypeDestinataire_ {
   /// See [TypeDestinataire.id].
   static final id =
-      obx.QueryIntegerProperty<TypeDestinataire>(_entities[9].properties[0]);
+      obx.QueryIntegerProperty<TypeDestinataire>(_entities[11].properties[0]);
 
   /// See [TypeDestinataire.uid].
   static final uid =
-      obx.QueryStringProperty<TypeDestinataire>(_entities[9].properties[1]);
+      obx.QueryStringProperty<TypeDestinataire>(_entities[11].properties[1]);
 
   /// See [TypeDestinataire.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypeDestinataire>(_entities[9].properties[2]);
+      obx.QueryStringProperty<TypeDestinataire>(_entities[11].properties[2]);
 
   /// See [TypeDestinataire.description].
   static final description =
-      obx.QueryStringProperty<TypeDestinataire>(_entities[9].properties[3]);
+      obx.QueryStringProperty<TypeDestinataire>(_entities[11].properties[3]);
 
   /// See [TypeDestinataire.level].
   static final level =
-      obx.QueryIntegerProperty<TypeDestinataire>(_entities[9].properties[4]);
+      obx.QueryIntegerProperty<TypeDestinataire>(_entities[11].properties[4]);
 }
 
 /// [TypeEmballage] entity fields to define ObjectBox queries.
 class TypeEmballage_ {
   /// See [TypeEmballage.id].
   static final id =
-      obx.QueryIntegerProperty<TypeEmballage>(_entities[10].properties[0]);
+      obx.QueryIntegerProperty<TypeEmballage>(_entities[12].properties[0]);
 
   /// See [TypeEmballage.uid].
   static final uid =
-      obx.QueryStringProperty<TypeEmballage>(_entities[10].properties[1]);
+      obx.QueryStringProperty<TypeEmballage>(_entities[12].properties[1]);
 
   /// See [TypeEmballage.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypeEmballage>(_entities[10].properties[2]);
+      obx.QueryStringProperty<TypeEmballage>(_entities[12].properties[2]);
 
   /// See [TypeEmballage.price].
   static final price =
-      obx.QueryIntegerProperty<TypeEmballage>(_entities[10].properties[3]);
+      obx.QueryIntegerProperty<TypeEmballage>(_entities[12].properties[3]);
 
   /// See [TypeEmballage.level].
   static final level =
-      obx.QueryIntegerProperty<TypeEmballage>(_entities[10].properties[4]);
+      obx.QueryIntegerProperty<TypeEmballage>(_entities[12].properties[4]);
 }
 
 /// [TypePointRelais] entity fields to define ObjectBox queries.
 class TypePointRelais_ {
   /// See [TypePointRelais.id].
   static final id =
-      obx.QueryIntegerProperty<TypePointRelais>(_entities[11].properties[0]);
+      obx.QueryIntegerProperty<TypePointRelais>(_entities[13].properties[0]);
 
   /// See [TypePointRelais.uid].
   static final uid =
-      obx.QueryStringProperty<TypePointRelais>(_entities[11].properties[1]);
+      obx.QueryStringProperty<TypePointRelais>(_entities[13].properties[1]);
 
   /// See [TypePointRelais.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypePointRelais>(_entities[11].properties[2]);
+      obx.QueryStringProperty<TypePointRelais>(_entities[13].properties[2]);
 }
 
 /// [TypeService] entity fields to define ObjectBox queries.
 class TypeService_ {
   /// See [TypeService.id].
   static final id =
-      obx.QueryIntegerProperty<TypeService>(_entities[12].properties[0]);
+      obx.QueryIntegerProperty<TypeService>(_entities[14].properties[0]);
 
   /// See [TypeService.uid].
   static final uid =
-      obx.QueryStringProperty<TypeService>(_entities[12].properties[1]);
+      obx.QueryStringProperty<TypeService>(_entities[14].properties[1]);
 
   /// See [TypeService.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypeService>(_entities[12].properties[2]);
+      obx.QueryStringProperty<TypeService>(_entities[14].properties[2]);
 }
 
 /// [TypeVehicule] entity fields to define ObjectBox queries.
 class TypeVehicule_ {
   /// See [TypeVehicule.id].
   static final id =
-      obx.QueryIntegerProperty<TypeVehicule>(_entities[13].properties[0]);
+      obx.QueryIntegerProperty<TypeVehicule>(_entities[15].properties[0]);
 
   /// See [TypeVehicule.uid].
   static final uid =
-      obx.QueryStringProperty<TypeVehicule>(_entities[13].properties[1]);
+      obx.QueryStringProperty<TypeVehicule>(_entities[15].properties[1]);
 
   /// See [TypeVehicule.libelle].
   static final libelle =
-      obx.QueryStringProperty<TypeVehicule>(_entities[13].properties[2]);
+      obx.QueryStringProperty<TypeVehicule>(_entities[15].properties[2]);
 
   /// See [TypeVehicule.icone].
   static final icone =
-      obx.QueryStringProperty<TypeVehicule>(_entities[13].properties[3]);
+      obx.QueryStringProperty<TypeVehicule>(_entities[15].properties[3]);
 
   /// See [TypeVehicule.level].
   static final level =
-      obx.QueryIntegerProperty<TypeVehicule>(_entities[13].properties[4]);
+      obx.QueryIntegerProperty<TypeVehicule>(_entities[15].properties[4]);
 }

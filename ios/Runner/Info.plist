@@ -52,6 +52,9 @@
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>Nous avons besoin de votre position pour la livraison.</string>
 		<key>io.flutter.embedded_views_preview</key>
+		<key>NSLocalNetworkUsageDescription</key>
+		<string>Permet à l'application de communiquer via le réseau local pour les fonctionnalités de debug.</string>
+
 		<true/>
 	</dict>
 </plist>
