@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592709019519",
+    "project_id": "relais-ivoire",
+    "storage_bucket": "relais-ivoire.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592709019519:android:9b78f29eeeaff51efa9c4a",
+        "android_client_info": {
+          "package_name": "com.example.lpr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT_DIyxL0lr2ysUw0wgSng7bKiTym2dfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:geolocator_android/geolocator_android.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'package:lpr/services/LoactionService.dart';
@@ -11,6 +11,7 @@ import 'package:lpr/services/SyncService.dart';
 class GeneralController extends GetxController {
   RxBool connected = false.obs;
   RxBool confirmCGU = false.obs;
+  RxString fcmToken = "".obs;
   RxString token = "".obs;
   RxString refreshToken = "".obs;
   Rx<CustomUser?> utilisateur = Rx<CustomUser?>(null);
@@ -18,11 +19,9 @@ class GeneralController extends GetxController {
   Rx<Position?> position = Rx<Position?>(null);
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
-    LocationService.getCurrentPosition().then((value) {
-      position.value = value;
-    });
+    getFCMToken();
   }
 
   @override
@@ -41,6 +40,17 @@ class GeneralController extends GetxController {
           await syncService.syncAllData();
         }
       }
+    });
+  }
+
+  void getFCMToken() async {
+    FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+      print("APNs Token: $apnsToken");
+    });
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    print("🔑 Token FCM: $fcmToken");
+    LocationService.getCurrentPosition().then((value) {
+      position.value = value;
     });
   }
 

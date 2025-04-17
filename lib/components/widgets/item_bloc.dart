@@ -4,14 +4,13 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/pages/ColisPage.dart';
-import 'package:lit_relative_date_time/lit_relative_date_time.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ItemBloc extends StatelessWidget {
   final Colis colis;
   final String? tag;
 
-  ItemBloc({
+  const ItemBloc({
     super.key,
     required this.colis,
     this.tag = "",

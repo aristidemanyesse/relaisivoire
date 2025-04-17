@@ -92,7 +92,7 @@ class ConfirmDialog extends StatelessWidget {
                             onPressed: () {
                               functionCancel();
                             },
-                            title: "${testCancel}",
+                            title: "$testCancel",
                             icon: Icons.close,
                           ),
                         )

@@ -8,8 +8,8 @@ import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/pages/FormulaireContactDestinataire.dart';
 
-class Commander4 extends StatelessWidget {
-  Commander4({
+class TypeDestinataireStep extends StatelessWidget {
+  TypeDestinataireStep({
     super.key,
   });
 

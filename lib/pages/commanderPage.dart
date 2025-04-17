@@ -28,11 +28,11 @@ class _CommanderPageState extends State<CommanderPage>
   int _currentPageIndex = 0;
 
   List<Widget> pages = [
-    Commander1(),
+    TypeColisStep(),
     Commander3(),
-    Commander4(),
-    Commander5(),
-    Commander6(),
+    TypeDestinataireStep(),
+    PointRelaisStep(),
+    RecapitulatifStep(),
   ];
 
   bool checkstep() {

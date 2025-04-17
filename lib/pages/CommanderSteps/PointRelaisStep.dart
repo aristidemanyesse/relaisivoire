@@ -6,16 +6,16 @@ import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
 
-class Commander5 extends StatefulWidget {
-  const Commander5({
+class PointRelaisStep extends StatefulWidget {
+  const PointRelaisStep({
     super.key,
   });
 
   @override
-  State<Commander5> createState() => _Commander5State();
+  State<PointRelaisStep> createState() => _PointRelaisStepState();
 }
 
-class _Commander5State extends State<Commander5> {
+class _PointRelaisStepState extends State<PointRelaisStep> {
   HandleTypesController handleTypesController = Get.find();
   final TextEditingController _searchController = TextEditingController();
   List<PointRelais> displayedList = [];

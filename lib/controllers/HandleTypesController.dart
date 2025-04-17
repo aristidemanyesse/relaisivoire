@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:lpr/models/ClientApp/NotificationClient.dart';
-import 'package:lpr/models/ColisApp/Colis.dart';
-import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
 import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
 import 'package:lpr/models/ColisApp/TypeEmballage.dart';

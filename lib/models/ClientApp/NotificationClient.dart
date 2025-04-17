@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:lpr/controllers/GeneralController.dart';
-import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/NotificationClientController.dart';
 import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/services/StoreService.dart';

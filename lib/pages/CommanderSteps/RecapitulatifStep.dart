@@ -6,16 +6,16 @@ import 'package:lpr/components/widgets/step_recap.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 
-class Commander6 extends StatefulWidget {
-  const Commander6({
+class RecapitulatifStep extends StatefulWidget {
+  const RecapitulatifStep({
     super.key,
   });
 
   @override
-  State<Commander6> createState() => _Commander6State();
+  State<RecapitulatifStep> createState() => _RecapitulatifStepState();
 }
 
-class _Commander6State extends State<Commander6> {
+class _RecapitulatifStepState extends State<RecapitulatifStep> {
   @override
   void initState() {
     super.initState();

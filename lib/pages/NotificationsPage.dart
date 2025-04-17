@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/NotificationItem.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
-import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/NotificationClientController.dart';
 
 class NotificationsPage extends StatefulWidget {

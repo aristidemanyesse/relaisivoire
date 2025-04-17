@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:lpr/pages/ProfilPage.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ChangeInfosPage extends StatefulWidget {
   const ChangeInfosPage({super.key});
@@ -19,8 +16,8 @@ class ChangeInfosPage extends StatefulWidget {
 class _ChangeInfosPageState extends State<ChangeInfosPage> {
   GeneralController controller = Get.find();
 
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _prenomController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _prenomController = TextEditingController();
 
   @override
   void initState() {

@@ -12,7 +12,6 @@ import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/pages/ProfilPage.dart';
 import 'package:lpr/pages/SearchPointRelais.dart';
-import 'package:lpr/pages/ItineraireMapPage.dart';
 import 'package:lpr/services/SessionService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';

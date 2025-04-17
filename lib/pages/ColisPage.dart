@@ -13,7 +13,6 @@ import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:lpr/pages/SearchPointRelais.dart';
 import 'package:lpr/pages/open_q_r_code.dart';
-import 'package:lpr/pages/ItineraireMapPage.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 

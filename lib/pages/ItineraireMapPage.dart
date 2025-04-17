@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
-import 'package:lpr/pages/distance_map.dart';
 import 'package:lpr/pages/map_button.dart';
 import 'package:lpr/services/LoactionService.dart';
 
@@ -27,7 +25,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
   final Completer<GoogleMapController> _controller = Completer();
   LatLng? _userLocation;
   Set<Polyline> _polylines = {};
-  Set<Marker> _markers = {};
+  final Set<Marker> _markers = {};
   List<Map<String, dynamic>> _directionsSteps = [];
   bool _mapCreated = false;
 
@@ -46,7 +44,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
 
   Future<void> _initPosition() async {
     final position = await LocationService.getCurrentPosition();
-    _currentPosition = LatLng(position!.latitude, position!.longitude);
+    _currentPosition = LatLng(position!.latitude, position.longitude);
     setState(() => _userLocation = _currentPosition);
 
     _loadMapElements(_currentPosition!);
@@ -243,7 +241,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
   Future<void> _locateMe() async {
     try {
       final position = await LocationService.getCurrentPosition();
-      final LatLng current = LatLng(position!.latitude, position!.longitude);
+      final LatLng current = LatLng(position!.latitude, position.longitude);
 
       final controller = await _controller.future;
       setState(() {
@@ -283,7 +281,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${widget.pointRelais.libelle}",
+              widget.pointRelais.libelle,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: MyColors.secondary, fontWeight: FontWeight.bold),
             ),

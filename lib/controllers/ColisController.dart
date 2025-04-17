@@ -4,11 +4,6 @@ import 'package:get/get.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
-import 'package:lpr/models/ColisApp/TypeColis.dart';
-import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
-import 'package:lpr/models/ColisApp/TypeEmballage.dart';
-import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
-import 'package:lpr/models/ZoneApp/Commune.dart';
 import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
@@ -24,7 +19,7 @@ class ColisController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    Timer _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+    Timer timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       reload();
     });
 

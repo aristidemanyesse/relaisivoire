@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
@@ -8,8 +7,8 @@ import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/pages/ProhibedPage.dart';
 
-class Commander1 extends StatelessWidget {
-  Commander1({
+class TypeColisStep extends StatelessWidget {
+  TypeColisStep({
     super.key,
   });
 
