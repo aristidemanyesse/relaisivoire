@@ -7,7 +7,7 @@ import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
 
-class NotificationClientController extends GetxController {
+class NotificationController extends GetxController {
   Rx<List<NotificationClient>> notifications = Rx<List<NotificationClient>>([]);
   Rx<List<NotificationClient>> notReads = Rx<List<NotificationClient>>([]);
 

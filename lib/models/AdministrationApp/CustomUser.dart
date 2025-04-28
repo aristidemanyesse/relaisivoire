@@ -10,11 +10,13 @@ class CustomUser {
 
   String? firstName;
   String? lastName;
+  String? fcmtoken;
 
   CustomUser({
     this.id = 0,
     this.firstName = "",
     this.lastName = "",
+    this.fcmtoken = "",
   });
 
   factory CustomUser.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class CustomUser {
       id: json['id'],
       firstName: json['first_name'],
       lastName: json['last_name'],
+      fcmtoken: json['fcm_token'],
     );
   }
 
@@ -29,6 +32,7 @@ class CustomUser {
         'id': id,
         'firstName': firstName,
         'lastName': lastName,
+        'fcm_token': fcmtoken,
       };
 
   static Future<bool> ifUserExists(String username) async {

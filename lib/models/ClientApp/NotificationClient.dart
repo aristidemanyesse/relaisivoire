@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lpr/controllers/GeneralController.dart';
-import 'package:lpr/controllers/NotificationClientController.dart';
+import 'package:lpr/controllers/NotificationController.dart';
 import 'package:lpr/services/ApiService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:objectbox/objectbox.dart';
@@ -55,7 +55,7 @@ class NotificationClient {
       notificationBox.put(this);
       final connected = await GeneralController.isConnected();
       if (connected) {
-        NotificationClientController notificationClientController = Get.find();
+        NotificationController notificationClientController = Get.find();
         notificationClientController.reload();
       }
 

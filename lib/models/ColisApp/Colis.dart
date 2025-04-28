@@ -27,8 +27,10 @@ class Colis {
   final typeEmballage = ToOne<TypeEmballage>();
   final typeDestinataire = ToOne<TypeDestinataire>();
   final status = ToOne<StatusColis>();
-  DateTime? dateCreation;
 
+  bool sold = false;
+  bool start_to_payement = false;
+  DateTime? dateCreation;
   DateTime? depotDate;
   DateTime? recuperationDate;
   DateTime? livraisonDate;
@@ -41,6 +43,8 @@ class Colis {
       this.receiverName = "",
       this.receiverPhone = "",
       this.total = 0,
+      this.sold = false,
+      this.start_to_payement = false,
       this.depotDate,
       this.recuperationDate,
       this.livraisonDate,
@@ -55,6 +59,8 @@ class Colis {
       receiverName: json['receiver_name'],
       receiverPhone: json['receiver_phone'],
       total: json['total'] ?? 0,
+      sold: json['sold'] ?? false,
+      start_to_payement: json['start_to_payement'] ?? false,
       dateCreation: DateTime.tryParse(json['date_creation'] ?? ""),
       depotDate: DateTime.tryParse(json['depot_date'] ?? ""),
       recuperationDate: DateTime.tryParse(json['recuperation_date'] ?? ""),
@@ -102,6 +108,8 @@ class Colis {
         'sender': sender.target?.uid ?? "",
         'receiver': receiver.target?.uid ?? "",
         'total': total,
+        'sold': sold,
+        'start_to_payement': start_to_payement,
         'point_relais_sender': pointRelaisSender.target?.uid,
         'point_relais_receiver': pointRelaisReceiver.target?.uid,
         'type_colis': typeColis.target?.uid,

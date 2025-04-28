@@ -98,7 +98,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 3543005446155189019),
       name: 'Colis',
-      lastPropertyId: const obx_int.IdUid(19, 8411599506013840631),
+      lastPropertyId: const obx_int.IdUid(21, 7792046605721729129),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -212,6 +212,16 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(19, 8411599506013840631),
             name: 'retraitDate',
             type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(20, 3313579533878786326),
+            name: 'sold',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(21, 7792046605721729129),
+            name: 'start_to_payement',
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -244,7 +254,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(4, 3437007084483648727),
       name: 'CustomUser',
-      lastPropertyId: const obx_int.IdUid(3, 8697899709503104142),
+      lastPropertyId: const obx_int.IdUid(4, 1178120999567415230),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -260,6 +270,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(3, 8697899709503104142),
             name: 'lastName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 1178120999567415230),
+            name: 'fcmtoken',
             type: 9,
             flags: 0)
       ],
@@ -874,7 +889,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final codeOffset = fbb.writeString(object.code);
           final receiverNameOffset = fbb.writeString(object.receiverName);
           final receiverPhoneOffset = fbb.writeString(object.receiverPhone);
-          fbb.startTable(20);
+          fbb.startTable(22);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, codeOffset);
@@ -894,6 +909,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(16, object.recuperationDate?.millisecondsSinceEpoch);
           fbb.addInt64(17, object.livraisonDate?.millisecondsSinceEpoch);
           fbb.addInt64(18, object.retraitDate?.millisecondsSinceEpoch);
+          fbb.addBool(19, object.sold);
+          fbb.addBool(20, object.start_to_payement);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -924,6 +941,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 12, '');
           final totalParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0);
+          final soldParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 42, false);
+          final start_to_payementParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 44, false);
           final depotDateParam = depotDateValue == null
               ? null
               : DateTime.fromMillisecondsSinceEpoch(depotDateValue);
@@ -946,6 +967,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               receiverName: receiverNameParam,
               receiverPhone: receiverPhoneParam,
               total: totalParam,
+              sold: soldParam,
+              start_to_payement: start_to_payementParam,
               depotDate: depotDateParam,
               recuperationDate: recuperationDateParam,
               livraisonDate: livraisonDateParam,
@@ -1022,10 +1045,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final lastNameOffset = object.lastName == null
               ? null
               : fbb.writeString(object.lastName!);
-          fbb.startTable(4);
+          final fcmtokenOffset = object.fcmtoken == null
+              ? null
+              : fbb.writeString(object.fcmtoken!);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, firstNameOffset);
           fbb.addOffset(2, lastNameOffset);
+          fbb.addOffset(3, fcmtokenOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -1038,8 +1065,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGetNullable(buffer, rootOffset, 6);
           final lastNameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 8);
+          final fcmtokenParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 10);
           final object = CustomUser(
-              id: idParam, firstName: firstNameParam, lastName: lastNameParam);
+              id: idParam,
+              firstName: firstNameParam,
+              lastName: lastNameParam,
+              fcmtoken: fcmtokenParam);
 
           return object;
         }),
@@ -1701,6 +1733,14 @@ class Colis_ {
   /// See [Colis.retraitDate].
   static final retraitDate =
       obx.QueryDateProperty<Colis>(_entities[1].properties[18]);
+
+  /// See [Colis.sold].
+  static final sold =
+      obx.QueryBooleanProperty<Colis>(_entities[1].properties[19]);
+
+  /// See [Colis.start_to_payement].
+  static final start_to_payement =
+      obx.QueryBooleanProperty<Colis>(_entities[1].properties[20]);
 }
 
 /// [Commune] entity fields to define ObjectBox queries.
@@ -1731,6 +1771,10 @@ class CustomUser_ {
   /// See [CustomUser.lastName].
   static final lastName =
       obx.QueryStringProperty<CustomUser>(_entities[3].properties[2]);
+
+  /// See [CustomUser.fcmtoken].
+  static final fcmtoken =
+      obx.QueryStringProperty<CustomUser>(_entities[3].properties[3]);
 }
 
 /// [NotificationClient] entity fields to define ObjectBox queries.

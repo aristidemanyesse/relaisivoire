@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
-import 'package:lpr/controllers/NotificationClientController.dart';
+import 'package:lpr/controllers/NotificationController.dart';
 import 'package:lpr/models/ClientApp/NotificationClient.dart';
 import 'package:lpr/models/ClientApp/TypeClient.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
@@ -52,7 +52,7 @@ class SyncService {
     GeneralController controller = Get.find();
     HandleTypesController handleTypesController = Get.find();
     ColisController colisController = Get.find();
-    NotificationClientController notificationClientController = Get.find();
+    NotificationController notificationClientController = Get.find();
 
     handleTypesController.listeTypeColis.value =
         await syncGenericList<TypeColis>(

@@ -9,7 +9,7 @@ import 'package:lpr/components/widgets/AnimatedNotificationIcon.dart';
 import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
-import 'package:lpr/controllers/NotificationClientController.dart';
+import 'package:lpr/controllers/NotificationController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/NotificationsPage.dart';
@@ -29,7 +29,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
   GeneralController controller = Get.find();
   HandleTypesController handleTypesController = Get.find();
   ColisController colisController = Get.find();
-  NotificationClientController notificationsController = Get.find();
+  NotificationController notificationsController = Get.find();
 
   @override
   void initState() {

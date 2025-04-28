@@ -223,7 +223,7 @@ class _ColisPageState extends State<ColisPage> {
                                         StepRecap(
                                             title: "Poids du colis",
                                             subtitle:
-                                                "entre ${widget.colis.typeColis.target?.poids_min} et ${widget.colis.typeColis.target?.poids_max} Kg"),
+                                                "entre ${widget.colis.typeColis.target?.poids_min} Kg et ${widget.colis.typeColis.target?.poids_max} Kg"),
                                         StepRecap(
                                             title: "Niveau d'emballage",
                                             subtitle: widget.colis.typeEmballage
