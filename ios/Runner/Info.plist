@@ -57,6 +57,10 @@
 		<string>Permet à l'application de communiquer via le réseau local pour les fonctionnalités de debug.</string>
 		<key>FirebaseAppDelegateProxyEnabled</key>
 		<false/>
+		<key>io.flutter.embedded_views_preview</key>
+		<true/>
+		<key>GMSApiKey</key>
+		<string>AIzaSyBMmWvPPlLQ4axlvp2kVMM3Xu1XQPlYpm4</string>
 
 		<key>NSAppTransportSecurity</key>
 		<dict>

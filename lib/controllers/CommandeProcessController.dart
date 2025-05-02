@@ -19,6 +19,14 @@ class CommandeProcessController extends GetxController {
 
   @override
   void onInit() {
+    typeColis.value = null;
+    typeEmballage.value = null;
+    typeDestinataire.value = null;
+    pointRelais.value = null;
+    nomDestinataire.value = "";
+    contactDestinataire.value = "";
+    price.value = 0;
+
     ever(typeColis, (_) {
       price.value = calculPrice();
     });

@@ -112,8 +112,10 @@ class Client {
   }
 
   // ✅ Méthode d'instance : affichage complet
-  String fullName() =>
-      "${user.target?.firstName ?? ''} ${user.target?.lastName ?? ''}";
+  String fullName() {
+    final name = "${user.target?.firstName} ${user.target?.lastName}";
+    return name == " " ? showContact() : name;
+  }
 
   // ✅ Méthode d'instance : affichage complet
   String showContact() =>

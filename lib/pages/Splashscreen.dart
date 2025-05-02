@@ -165,16 +165,10 @@ class _SplashscreenState extends State<Splashscreen>
                                       transition: Transition.rightToLeft,
                                     );
                                   } else {
-                                    Get.snackbar(
-                                      "Vous devez accepter les CGU",
-                                      "Veuillez accepter les CGU avant de continuer",
-                                      icon: Icon(
-                                        Icons.warning,
-                                        color: MyColors.danger,
-                                      ),
-                                      colorText: MyColors.danger,
-                                      duration: const Duration(seconds: 3),
-                                    );
+                                    Tools.showErrorToast(
+                                        title: "Vous devez accepter les CGU",
+                                        message:
+                                            "Veuillez accepter les CGU avant de continuer");
                                   }
                                 },
                               ).animate().fadeIn(duration: 1000.ms);

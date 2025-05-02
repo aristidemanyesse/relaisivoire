@@ -33,7 +33,7 @@ class ScheduleItem extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
-              schedule.time(),
+              schedule.getTime(),
               style: Theme.of(context).textTheme.bodySmall,
             )
           ],

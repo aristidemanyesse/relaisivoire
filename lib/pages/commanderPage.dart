@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/confirmDialog.dart';
 import 'package:lpr/components/elements/main_button.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/HandlePayementPopup.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/controllers/GeneralController.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/CommanderSteps/TypeColisStep.dart';
 import 'package:lpr/pages/CommanderSteps/TypeEmballageStep.dart';
 import 'package:lpr/pages/CommanderSteps/TypeDestinataireStep.dart';
 import 'package:lpr/pages/CommanderSteps/PointRelaisStep.dart';
 import 'package:lpr/pages/CommanderSteps/RecapitulatifStep.dart';
+import 'package:lpr/pages/ListeColisPage.dart';
+import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CommanderPage extends StatefulWidget {
@@ -54,7 +59,28 @@ class _CommanderPageState extends State<CommanderPage>
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Get.back();
+              if (_currentPageIndex > 0) {
+                _pageController.previousPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeOut);
+              } else {
+                Get.dialog(
+                  ConfirmDialog(
+                    title: "😩😟 Hhmmm !",
+                    message:
+                        "En quittant cette page, vous allez perdre le processus de commande.",
+                    testOk: "Oui",
+                    testCancel: "Non, je reste",
+                    functionOk: () {
+                      _controller.onInit();
+                      Get.off(ListeColisPage());
+                    },
+                    functionCancel: () {
+                      Get.back();
+                    },
+                  ),
+                );
+              }
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -167,14 +193,15 @@ class _CommanderPageState extends State<CommanderPage>
                           }),
                     if (_currentPageIndex == pages.length - 1)
                       MainButtonInverse(
-                        title: "Payer pour confirmer",
+                        title: "Valider la relais",
                         icon: Icons.check,
                         onPressed: () {
-                          showMaterialModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => HandlePayementPopup(),
-                          );
+                          _controller.create();
+                          // showMaterialModalBottomSheet(
+                          //   context: context,
+                          //   backgroundColor: Colors.transparent,
+                          //   builder: (context) => HandlePayementPopup(),
+                          // );
                         },
                       ).animate().fadeIn(duration: 1000.ms)
                     else if (checkstep())

@@ -26,6 +26,8 @@ class _FormulaireContactDestinataireState
   void initState() {
     // TODO: implement initState
     super.initState();
+    _nameController.text = _controller.nomDestinataire.value;
+    _contactController.text = _controller.contactDestinataire.value;
   }
 
   void getContact() async {
@@ -34,6 +36,9 @@ class _FormulaireContactDestinataireState
       setState(() {
         _nameController.text = contact?.displayName ?? "";
         _contactController.text = contact?.phones.first.normalizedNumber ?? "";
+
+        _controller.nomDestinataire.value = _nameController.text;
+        _controller.contactDestinataire.value = _contactController.text;
       });
     }
   }

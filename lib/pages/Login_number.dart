@@ -107,17 +107,13 @@ class _LoginNumberState extends State<LoginNumber> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Tools.PADDING * 2.5,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: Tools.PADDING * 3),
                 decoration: const BoxDecoration(
                     color: MyColors.secondary,
                     border: Border(top: BorderSide.none)),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: Tools.PADDING,
-                    ),
                     const Spacer(),
                     Obx(() {
                       _number = keyBoardController.value.value;

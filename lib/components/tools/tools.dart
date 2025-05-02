@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Tools {
   static const double PADDING = 20;
+
+  static void showErrorToast({String title = "Erreur", String message = ""}) {
+    Get.snackbar(title, message,
+        icon: Icon(Icons.error, size: 40, color: MyColors.secondary),
+        backgroundColor: Colors.red,
+        colorText: Colors.white);
+  }
 }
 
 class MyColors {

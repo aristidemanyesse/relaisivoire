@@ -23,7 +23,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        height: 550,
+        height: 600,
         color: MyColors.secondary,
         width: double.infinity,
         child: Column(
@@ -116,9 +116,11 @@ class PointRelaisDetailPopup extends StatelessWidget {
             ),
             Spacer(),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                runSpacing: Tools.PADDING,
+                spacing: Tools.PADDING * 1.5,
                 children: pointRelais.schedules.map((schedule) {
                   return ScheduleItem(schedule: schedule);
                 }).toList(),

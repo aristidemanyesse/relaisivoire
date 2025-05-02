@@ -114,6 +114,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
                               .bodyLarge!
                               .copyWith(color: MyColors.secondary),
                         ),
+                        SizedBox(height: Tools.PADDING / 2),
                         Obx(() {
                           Client client = controller.client.value!;
                           return Text(
@@ -152,27 +153,23 @@ class _ListeColisPageState extends State<ListeColisPage> {
                         ));
                 }),
               ),
-              Container(
-                color: MyColors.secondary,
-                height: Get.height / 10,
+              Row(
+                children: [
+                  Spacer(),
+                  MainButtonInverse(
+                    onPressed: () async {
+                      Get.to(const CommanderPage());
+                    },
+                    title: "Nouveau colis",
+                    icon: Icons.add,
+                  ),
+                  Spacer(),
+                ],
               ),
+              SizedBox(height: Tools.PADDING * 2),
             ],
           ),
         ),
-        floatingActionButton: Row(
-          children: [
-            Spacer(),
-            MainButtonInverse(
-              onPressed: () async {
-                Get.to(const CommanderPage());
-              },
-              title: "Nouveau colis",
-              icon: Icons.add,
-            ),
-            Spacer(),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

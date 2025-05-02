@@ -3,6 +3,7 @@ import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
 import 'package:objectbox/objectbox.dart';
 
 TimeOfDay parseTimeOfDay(String timeString) {
+  if (timeString == "") return TimeOfDay(hour: 0, minute: 0);
   final parts = timeString.split(":");
   return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
 }
@@ -16,8 +17,8 @@ class Schedule {
 
   int level_day;
   bool available;
-  TimeOfDay? start_hour;
-  TimeOfDay? end_hour;
+  String? startHour;
+  String? endHour;
 
   final point_relais = ToOne<PointRelais>();
 
@@ -25,8 +26,8 @@ class Schedule {
     this.uid = "",
     required this.level_day,
     this.available = true,
-    this.start_hour,
-    this.end_hour,
+    this.startHour,
+    this.endHour,
   });
 
   factory Schedule.fromJson(Map<String, dynamic> json) {
@@ -34,19 +35,22 @@ class Schedule {
       uid: json['id'],
       level_day: json['level_day'],
       available: json['available'],
-      start_hour: parseTimeOfDay(json['start_hour'] ?? ""),
-      end_hour: parseTimeOfDay(json['end_hour'] ?? ""),
+      startHour: json['start_hour'],
+      endHour: json['end_hour'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'level_day': level_day,
         'available': available,
-        'start_hour': start_hour,
-        'end_hour': end_hour,
+        'startHour': startHour,
+        'endHour': endHour,
       };
 
-  String time() {
-    return "$start_hour - $end_hour";
+  String getTime() {
+    if (!available) return "Fermé";
+    final debut = parseTimeOfDay(startHour ?? "");
+    final fin = parseTimeOfDay(endHour ?? "");
+    return "${debut.hour}h${debut.minute > 9 ? "" : "0"}${debut.minute} - ${fin.hour}h${fin.minute > 9 ? "" : "0"}${fin.minute}";
   }
 }
