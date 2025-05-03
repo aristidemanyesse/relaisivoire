@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class OpenQRCode extends StatelessWidget {
-  const OpenQRCode({
-    super.key,
-  });
+  final Colis colis;
+
+  const OpenQRCode({super.key, required this.colis});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,6 @@ class OpenQRCode extends StatelessWidget {
             )),
         title: Text(
           "Scanner le QR code",
-          textAlign: TextAlign.center,
           style: Theme.of(context)
               .textTheme
               .titleLarge!
@@ -31,13 +32,16 @@ class OpenQRCode extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Spacer(
+              flex: 2,
+            ),
             Text(
-              "LPR - 458 965 230",
+              colis.getCode(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontWeight: FontWeight.bold, color: MyColors.primary),
             ),
-            SizedBox(height: Tools.PADDING * 2),
+            Spacer(),
             Hero(
               tag: "qr_code",
               child: ClipRRect(
@@ -45,20 +49,17 @@ class OpenQRCode extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(Tools.PADDING),
                   color: Colors.white,
-                  child: Image.asset(
-                    "assets/images/qrcode.png",
-                    fit: BoxFit.contain,
-                    height: Get.width * 0.75,
-                    width: Get.width * 0.75,
-                  ),
+                  child: QrImageView(
+                      data: colis.code, version: QrVersions.auto, size: 300),
                 ),
               ),
             ),
-            SizedBox(height: Tools.PADDING),
+            Spacer(flex: 2),
             Text(
                 "* Faites scaner le QR code par l'agent \ndans le point relais",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!),
+            Spacer(flex: 3),
           ],
         ),
       ),

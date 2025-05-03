@@ -1,4 +1,3 @@
-
 import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,10 +6,13 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
-import 'package:lpr/pages/PleaseWait2.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
+import 'package:lpr/services/ApiService.dart';
 
 class HandlePayementPopup extends StatefulWidget {
+  final Colis colis;
   const HandlePayementPopup({
+    required this.colis,
     super.key,
   });
 
@@ -49,41 +51,39 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                 title: "Valider le paiement",
                 icon: Icons.check,
                 onPressed: () async {
-                  int amount = 1000;
-                  if (amount < 100 || amount > 1500000) {
-                    // Mettre une alerte
+                  if (widget.colis.total < 100 ||
+                      widget.colis.total > 1500000) {
+                    Tools.showErrorToast(
+                        title: "❌ Erreur",
+                        message:
+                            "Le montant du colis doit être compris entre 100 et 1500000 FCFA");
                     return;
                   }
-
                   await Get.to(CinetPayCheckout(
-                    title: 'Payment Checkout',
+                    title: 'Payement relais ${widget.colis.getCode()}',
                     titleStyle: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
-                    titleBackgroundColor: Colors.green,
+                    titleBackgroundColor: MyColors.primary,
                     configData: <String, dynamic>{
-                      'apikey': 'API_KEY',
-                      'site_id': 2, //int.parse("YOUR_SITE_ID"),
-                      'notify_url': 'YOUR_NOTIFY_URL'
+                      'apikey': '73092911067edb3711819f3.83413847',
+                      'site_id': 105891282,
+                      'mode': 'PRODUCTION',
+                      'notify_url': ApiService.NOTIFY_PAYMENT_URL,
                     },
                     paymentData: <String, dynamic>{
-                      'transaction_id': "transactionId",
-                      'amount': amount.toString(),
+                      'transaction_id':
+                          DateTime.now().millisecondsSinceEpoch.toString(),
+                      'amount': widget.colis.total.toString(),
                       'currency': 'XOF',
                       'channels': 'ALL',
-                      'description': 'Payment test',
+                      'description':
+                          'Payement relais ${widget.colis.getCode()}',
+                      'metadata': widget.colis.uid,
                     },
                     waitResponse: (data) {
                       if (mounted) {
                         setState(() {
-                          response = data;
-                          print(response);
-                          icon = data['status'] == 'ACCEPTED'
-                              ? Icons.check_circle
-                              : Icons.mood_bad_rounded;
-                          color = data['status'] == 'ACCEPTED'
-                              ? Colors.green
-                              : Colors.redAccent;
-                          show = true;
+                          print(data);
                           Get.back();
                         });
                       }
@@ -92,19 +92,12 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                       if (mounted) {
                         setState(() {
                           response = data;
-                          message = response!['description'];
-                          print(response);
-                          icon = Icons.warning_rounded;
-                          color = Colors.yellowAccent;
-                          show = true;
+                          print(data);
                           Get.back();
                         });
                       }
                     },
                   ));
-                  Get.dialog(PleaseWait2());
-
-                  _controller.create();
                 },
               ),
             ),

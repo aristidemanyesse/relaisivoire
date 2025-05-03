@@ -15,6 +15,7 @@ import 'package:lpr/models/AdministrationApp/CustomUser.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/pages/PleaseWait2.dart';
+import 'package:otp_autofill/otp_autofill.dart';
 
 class OPTPage extends StatefulWidget {
   final String number;
@@ -27,15 +28,41 @@ class OPTPage extends StatefulWidget {
 class _OPTPageState extends State<OPTPage> {
   KeyBoardController keyBoardController = Get.find();
   String _otp = "";
+  String signature = "";
 
   int _counter = 30; // Durée du timer (secondes)
   late Timer _timer;
   bool _isButtonDisabled = true;
 
+  late OTPTextEditController controller;
+  final scaffoldKey = GlobalKey();
+  late OTPInteractor _otpInteractor;
+
   @override
   void initState() {
     super.initState();
-    _resendOtp();
+
+    _otpInteractor = OTPInteractor();
+    // Commence à écouter les SMS entrants
+    _otpInteractor.getAppSignature().then((signature) {
+      setState(() {
+        this.signature = signature ?? "";
+        _resendOtp(this.signature);
+      });
+    });
+
+    controller = OTPTextEditController(
+      codeLength: 6,
+      onCodeReceive: (code) {
+        print("Code OTP détecté : $code");
+      },
+    )..startListenUserConsent((code) {
+        final exp = RegExp(r'(\d{6})');
+        code = exp.stringMatch(code ?? '') ?? '';
+        keyBoardController.value.value = code;
+        checkOtp();
+        return code;
+      });
   }
 
   @override
@@ -61,9 +88,9 @@ class _OPTPageState extends State<OPTPage> {
     });
   }
 
-  void _resendOtp() {
+  void _resendOtp(String signature) {
     // Logique pour renvoyer l'OTP ici
-    CustomUser.genereOtp(widget.number);
+    CustomUser.genereOtp(widget.number, signature);
     _startTimer(); // Redémarrer le timer
   }
 
@@ -92,140 +119,146 @@ class _OPTPageState extends State<OPTPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         body: SizedBox(
-      height: Get.size.height,
-      width: Get.size.width,
-      child: Column(
-        children: [
-          Container(
-            height: 200,
-            padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-            width: Get.size.width,
-            decoration: const BoxDecoration(
-                color: MyColors.primary,
-                border: Border.symmetric(
-                    horizontal: BorderSide.none, vertical: BorderSide.none)),
-            child: Stack(
-              children: [
-                Opacity(
-                  opacity: 0.15,
-                  child: Image.asset("assets/images/pattern.png",
-                      fit: BoxFit.cover, width: Get.width),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          height: Get.size.height,
+          width: Get.size.width,
+          child: Column(
+            children: [
+              Container(
+                height: 200,
+                padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                width: Get.size.width,
+                decoration: const BoxDecoration(
+                    color: MyColors.primary,
+                    border: Border.symmetric(
+                        horizontal: BorderSide.none,
+                        vertical: BorderSide.none)),
+                child: Stack(
                   children: [
-                    const SizedBox(height: Tools.PADDING * 2),
-                    Text(
-                      "Vérification OTP",
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge!
-                          .copyWith(color: MyColors.secondary),
+                    Opacity(
+                      opacity: 0.15,
+                      child: Image.asset("assets/images/pattern.png",
+                          fit: BoxFit.cover, width: Get.width),
                     ),
-                    const SizedBox(height: Tools.PADDING / 3),
-                    Text(
-                      "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.number}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: MyColors.secondary, height: 2),
-                    ),
-                  ],
-                )
-                    .animate()
-                    .fadeIn(duration: 300.ms)
-                    .moveX(duration: 300.ms, begin: 1000.0, end: 0),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30, child: Wave()),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                horizontal: Tools.PADDING * 2,
-              ),
-              decoration: const BoxDecoration(
-                  color: MyColors.secondary,
-                  border: Border(top: BorderSide.none)),
-              child: Column(
-                children: [
-                  const SizedBox(height: Tools.PADDING / 3),
-                  const Spacer(),
-                  Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Tools.PADDING,
-                      ),
-                      child: Obx(() {
-                        _otp = keyBoardController.value.value;
-                        return MyInputNumber(nbPlaces: 4, value: _otp);
-                      })),
-                  const Spacer(),
-                  Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Tools.PADDING,
-                      ),
-                      child: KeyBoardNumberPad(limit: 4)),
-                  const Spacer(),
-                  if (_isButtonDisabled)
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Renvoyer le code dans ",
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        Text("$_counter s",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                      ],
-                    )
-                  else
-                    TextButton(
-                      onPressed: _isButtonDisabled ? null : _resendOtp,
-                      child: Text("Renvoyer le code OTP",
+                        const SizedBox(height: Tools.PADDING * 2),
+                        Text(
+                          "Vérification OTP",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .copyWith(color: MyColors.secondary),
+                        ),
+                        const SizedBox(height: Tools.PADDING / 3),
+                        Text(
+                          "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.number}",
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(fontWeight: FontWeight.bold)),
-                    ),
-                  const Spacer(),
-                  Obx(() {
-                    return Row(
-                      mainAxisAlignment:
-                          (keyBoardController.value.value.length == 4)
-                              ? MainAxisAlignment.spaceBetween
-                              : MainAxisAlignment.center,
-                      children: [
-                        MainButton(
-                            title: "Retour",
-                            forward: false,
-                            icon: Icons.chevron_left,
-                            onPressed: () {
-                              Get.back();
-                            }),
-                        if (keyBoardController.value.value.length == 4)
-                          MainButtonInverse(
-                              title: "Confirmer OTP",
-                              icon: Icons.check,
-                              onPressed: () {
-                                checkOtp();
-                              }),
+                              .copyWith(color: MyColors.secondary, height: 2),
+                        ),
                       ],
-                    );
-                  }),
-                  const Spacer(),
-                  SizedBox(
-                    height: Tools.PADDING,
-                  ),
-                ],
+                    )
+                        .animate()
+                        .fadeIn(duration: 300.ms)
+                        .moveX(duration: 300.ms, begin: 1000.0, end: 0),
+                  ],
+                ),
               ),
-            ),
+              const SizedBox(height: 30, child: Wave()),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Tools.PADDING * 2,
+                  ),
+                  decoration: const BoxDecoration(
+                      color: MyColors.secondary,
+                      border: Border(top: BorderSide.none)),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: Tools.PADDING / 3),
+                      const Spacer(),
+                      Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Tools.PADDING,
+                          ),
+                          child: Obx(() {
+                            _otp = keyBoardController.value.value;
+                            return MyInputNumber(nbPlaces: 6, value: _otp);
+                          })),
+                      const Spacer(),
+                      Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Tools.PADDING,
+                          ),
+                          child: KeyBoardNumberPad(limit: 6)),
+                      const Spacer(),
+                      if (_isButtonDisabled)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Renvoyer le code dans ",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                            Text("$_counter s",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                          ],
+                        )
+                      else
+                        TextButton(
+                          onPressed: _isButtonDisabled
+                              ? null
+                              : () {
+                                  _resendOtp(signature);
+                                },
+                          child: Text("Renvoyer le code OTP",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(fontWeight: FontWeight.bold)),
+                        ),
+                      const Spacer(),
+                      Obx(() {
+                        return Row(
+                          mainAxisAlignment:
+                              (keyBoardController.value.value.length == 6)
+                                  ? MainAxisAlignment.spaceBetween
+                                  : MainAxisAlignment.center,
+                          children: [
+                            MainButton(
+                                title: "Retour",
+                                forward: false,
+                                icon: Icons.chevron_left,
+                                onPressed: () {
+                                  Get.back();
+                                }),
+                            if (keyBoardController.value.value.length == 6)
+                              MainButtonInverse(
+                                  title: "Confirmer OTP",
+                                  icon: Icons.check,
+                                  onPressed: () {
+                                    checkOtp();
+                                  }),
+                          ],
+                        );
+                      }),
+                      const Spacer(),
+                      SizedBox(
+                        height: Tools.PADDING,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }

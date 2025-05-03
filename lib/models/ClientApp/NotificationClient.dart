@@ -30,7 +30,7 @@ class NotificationClient {
   factory NotificationClient.fromJson(Map<String, dynamic> json) {
     return NotificationClient(
       uid: json['id'],
-      title: json['title'],
+      title: json['title'] ?? "",
       read: json['read'],
       message: json['message'],
       priority: json['priority'],

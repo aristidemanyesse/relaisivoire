@@ -134,7 +134,8 @@ class PointRelaisDetailPopup extends StatelessWidget {
                         title: "Localiser sur la carte  ",
                         icon: Icons.map,
                         onPressed: () {
-                          Get.to(ItineraireMapPage(pointRelais: pointRelais));
+                          Get.to(ItineraireMapPage(
+                              listePointsRelais: [pointRelais]));
                         }))
                 : Container(
                     margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 3),

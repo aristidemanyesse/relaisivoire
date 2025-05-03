@@ -72,10 +72,12 @@ class _ListeColisPageState extends State<ListeColisPage> {
                 },
                 icon: const Icon(Icons.search)),
             SizedBox(width: Tools.PADDING / 3),
-            AnimatedNotificationIcon(
-              count: notificationsController.notReads.value.length,
-              onTap: () => Get.to(const NotificationsPage()),
-            ),
+            Obx(() {
+              return AnimatedNotificationIcon(
+                count: notificationsController.notReads.value.length,
+                onTap: () => Get.to(const NotificationsPage()),
+              );
+            }),
             SizedBox(width: Tools.PADDING / 2),
           ],
         ),

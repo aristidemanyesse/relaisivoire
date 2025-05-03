@@ -10,7 +10,7 @@ class LocationService {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       print("❌ GPS désactivé !");
-      return null;
+      return Geolocator.getLastKnownPosition(forceAndroidLocationManager: true);
     }
 
     // 🔐 Vérifie les permissions
@@ -19,13 +19,15 @@ class LocationService {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         print("❌ Permission refusée !");
-        return null;
+        return Geolocator.getLastKnownPosition(
+          forceAndroidLocationManager: true,
+        );
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       print("❌ Permission refusée définitivement !");
-      return null;
+      return Geolocator.getLastKnownPosition(forceAndroidLocationManager: true);
     }
 
     // ✅ Tout est bon, récupère la position

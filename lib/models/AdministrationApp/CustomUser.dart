@@ -57,7 +57,7 @@ class CustomUser {
   }
 
   // ✅ Méthode d'instance : mini résumé
-  static void genereOtp(String username) async {
+  static void genereOtp(String username, String signature) async {
     ApiService.post('api/custom_users/genere-otp/', {});
   }
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
-import 'package:lpr/components/elements/main_button_icon.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/HandlePayementPopup.dart';
 import 'package:lpr/components/widgets/step_process.dart';
 import 'package:lpr/components/widgets/step_recap.dart';
 import 'package:lpr/components/widgets/wave.dart';
@@ -70,21 +70,21 @@ class _ColisPageState extends State<ColisPage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ListTile(
-                              title: Text(
-                                'Voir le réçu de payement',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      color: MyColors.textprimary,
-                                    ),
-                              ),
-                              leading: const Icon(
-                                Icons.receipt_long,
-                                color: MyColors.textprimary,
-                              ),
-                              onTap: () {}),
+                          // ListTile(
+                          //     title: Text(
+                          //       'Voir le réçu de payement',
+                          //       style: Theme.of(context)
+                          //           .textTheme
+                          //           .bodyLarge!
+                          //           .copyWith(
+                          //             color: MyColors.textprimary,
+                          //           ),
+                          //     ),
+                          //     leading: const Icon(
+                          //       Icons.receipt_long,
+                          //       color: MyColors.textprimary,
+                          //     ),
+                          //     onTap: () {}),
                           ListTile(
                               title: Text(
                                 'Supprimer le colis',
@@ -100,24 +100,30 @@ class _ColisPageState extends State<ColisPage> {
                                 color: MyColors.danger,
                               ),
                               onTap: () {
-                                Get.dialog(ConfirmDialog(
-                                    functionOk: () {
+                                Get.dialog(
+                                  ConfirmDialog(
+                                    title: "Confirmation",
+                                    message:
+                                        "Voulez-vous vraiment annuler cette commande de livraison de colis ?",
+                                    testOk: "Oui, annuler",
+                                    testCancel: "Non",
+                                    functionOk: () async {
                                       Get.dialog(PleaseWait2());
-                                      Future.delayed(Duration(seconds: 5), () {
+                                      bool res = await widget.colis.annuler();
+                                      if (res) {
                                         Get.back();
-                                        Get.offAll(
-                                          const ListeColisPage(),
-                                        );
-                                      });
+                                        Get.offAll(ListeColisPage());
+                                      } else {
+                                        Get.back();
+                                        Get.snackbar("❌ Ooops",
+                                            "Une erreur est survenue, veuillez réessayer plus tard!");
+                                      }
                                     },
                                     functionCancel: () {
                                       Get.back();
                                     },
-                                    testOk: "Confirmer",
-                                    testCancel: "Annuler",
-                                    title: "Confirmation",
-                                    message:
-                                        "Vous êtes sur le point de supprimer votre colis. Voulez-vous continuer ?"));
+                                  ),
+                                );
                               }),
                         ],
                       ),
@@ -167,7 +173,9 @@ class _ColisPageState extends State<ColisPage> {
                                     child: Material(
                                       child: InkWell(
                                         onTap: () {
-                                          Get.to(const OpenQRCode());
+                                          Get.to(OpenQRCode(
+                                            colis: widget.colis,
+                                          ));
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.all(
@@ -372,34 +380,16 @@ class _ColisPageState extends State<ColisPage> {
               ),
               SizedBox(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    MainButtonIcon(
-                        icon: Icons.close,
-                        color: MyColors.danger,
-                        onPressed: () {
-                          Get.dialog(
-                            ConfirmDialog(
-                              title: "Confirmation",
-                              message:
-                                  "Voulez-vous vraiment annuler cette commande de livraison de colis ?",
-                              testOk: "Oui, annuler",
-                              testCancel: "Non",
-                              functionOk: () async {
-                                Get.dialog(PleaseWait2());
-                                bool res = await widget.colis.annuler();
-                                if (res) {
-                                  Get.back();
-                                  Get.offAll(ListeColisPage());
-                                } else {
-                                  Get.back();
-                                  Get.snackbar("❌ Ooops",
-                                      "Une erreur est survenue, veuillez réessayer plus tard!");
-                                }
-                              },
-                              functionCancel: () {
-                                Get.back();
-                              },
+                    GestureDetector(
+                        child: Text("knkgnk"),
+                        onTap: () {
+                          showMaterialModalBottomSheet(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => HandlePayementPopup(
+                              colis: widget.colis,
                             ),
                           );
                         }),

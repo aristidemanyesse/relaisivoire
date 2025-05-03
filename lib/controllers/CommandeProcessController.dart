@@ -59,6 +59,8 @@ class CommandeProcessController extends GetxController {
       colis.typeColis.target = typeColis.value;
       colis.typeEmballage.target = typeEmballage.value;
       colis.typeDestinataire.target = typeDestinataire.value;
+      colis.receiverName = nomDestinataire.value;
+      colis.receiverPhone = contactDestinataire.value;
       Colis colis_ = await colis.save();
       onInit();
       await Future.delayed(const Duration(seconds: 5), () {

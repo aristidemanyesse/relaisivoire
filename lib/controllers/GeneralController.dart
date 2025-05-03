@@ -21,7 +21,7 @@ class GeneralController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    getFCMToken();
+    position.value = await LocationService.getCurrentPosition();
   }
 
   @override
