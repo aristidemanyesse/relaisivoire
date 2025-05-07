@@ -98,7 +98,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 3543005446155189019),
       name: 'Colis',
-      lastPropertyId: const obx_int.IdUid(21, 7792046605721729129),
+      lastPropertyId: const obx_int.IdUid(22, 5931844170898409852),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -219,8 +219,8 @@ final _entities = <obx_int.ModelEntity>[
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(21, 7792046605721729129),
-            name: 'start_to_payement',
+            id: const obx_int.IdUid(22, 5931844170898409852),
+            name: 'startToPayement',
             type: 1,
             flags: 0)
       ],
@@ -431,7 +431,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(8, 2963682808090904853),
       name: 'Schedule',
-      lastPropertyId: const obx_int.IdUid(5, 2370905921784491829),
+      lastPropertyId: const obx_int.IdUid(7, 1406712626477052109),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -461,7 +461,17 @@ final _entities = <obx_int.ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const obx_int.IdUid(21, 1264718184553367279),
-            relationTarget: 'PointRelais')
+            relationTarget: 'PointRelais'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 7998669130440192038),
+            name: 'startHour',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 1406712626477052109),
+            name: 'endHour',
+            type: 9,
+            flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
@@ -802,7 +812,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [7792046605721729129],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -889,7 +899,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final codeOffset = fbb.writeString(object.code);
           final receiverNameOffset = fbb.writeString(object.receiverName);
           final receiverPhoneOffset = fbb.writeString(object.receiverPhone);
-          fbb.startTable(22);
+          fbb.startTable(23);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addOffset(2, codeOffset);
@@ -910,7 +920,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(17, object.livraisonDate?.millisecondsSinceEpoch);
           fbb.addInt64(18, object.retraitDate?.millisecondsSinceEpoch);
           fbb.addBool(19, object.sold);
-          fbb.addBool(20, object.start_to_payement);
+          fbb.addBool(21, object.startToPayement);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -943,8 +953,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0);
           final soldParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 42, false);
-          final start_to_payementParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 44, false);
+          final startToPayementParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 46, false);
           final depotDateParam = depotDateValue == null
               ? null
               : DateTime.fromMillisecondsSinceEpoch(depotDateValue);
@@ -968,7 +978,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               receiverPhone: receiverPhoneParam,
               total: totalParam,
               sold: soldParam,
-              start_to_payement: start_to_payementParam,
+              startToPayement: startToPayementParam,
               depotDate: depotDateParam,
               recuperationDate: recuperationDateParam,
               livraisonDate: livraisonDateParam,
@@ -1251,12 +1261,19 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Schedule object, fb.Builder fbb) {
           final uidOffset = fbb.writeString(object.uid);
-          fbb.startTable(6);
+          final startHourOffset = object.startHour == null
+              ? null
+              : fbb.writeString(object.startHour!);
+          final endHourOffset =
+              object.endHour == null ? null : fbb.writeString(object.endHour!);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, uidOffset);
           fbb.addInt64(2, object.level_day);
           fbb.addBool(3, object.available);
           fbb.addInt64(4, object.point_relais.targetId);
+          fbb.addOffset(5, startHourOffset);
+          fbb.addOffset(6, endHourOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -1269,10 +1286,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
           final availableParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final startHourParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 14);
+          final endHourParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 16);
           final object = Schedule(
               uid: uidParam,
               level_day: level_dayParam,
-              available: availableParam)
+              available: availableParam,
+              startHour: startHourParam,
+              endHour: endHourParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           object.point_relais.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
@@ -1738,8 +1761,8 @@ class Colis_ {
   static final sold =
       obx.QueryBooleanProperty<Colis>(_entities[1].properties[19]);
 
-  /// See [Colis.start_to_payement].
-  static final start_to_payement =
+  /// See [Colis.startToPayement].
+  static final startToPayement =
       obx.QueryBooleanProperty<Colis>(_entities[1].properties[20]);
 }
 
@@ -1899,6 +1922,14 @@ class Schedule_ {
   /// See [Schedule.point_relais].
   static final point_relais =
       obx.QueryRelationToOne<Schedule, PointRelais>(_entities[7].properties[4]);
+
+  /// See [Schedule.startHour].
+  static final startHour =
+      obx.QueryStringProperty<Schedule>(_entities[7].properties[5]);
+
+  /// See [Schedule.endHour].
+  static final endHour =
+      obx.QueryStringProperty<Schedule>(_entities[7].properties[6]);
 }
 
 /// [StatusColis] entity fields to define ObjectBox queries.

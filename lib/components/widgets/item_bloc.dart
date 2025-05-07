@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/components/widgets/HandlePayementPopup.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/pages/ColisPage.dart';
+import 'package:lpr/pages/PleaseWait.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class ItemBloc extends StatelessWidget {
+class ItemBloc extends StatefulWidget {
   final Colis colis;
   final String? tag;
 
@@ -17,14 +21,36 @@ class ItemBloc extends StatelessWidget {
   });
 
   @override
+  State<ItemBloc> createState() => _ItemBlocState();
+}
+
+class _ItemBlocState extends State<ItemBloc> {
+  IconData icon = Icons.cancel;
+  bool sent = false;
+
+  @override
+  void initState() {
+    sent = widget.colis.status.target!.level == StatusColis.LIVRAISON;
+    if (widget.colis.status.target!.level == StatusColis.EN_ATTENTE) {
+      icon = Icons.watch_later_outlined;
+    } else if (widget.colis.status.target!.level == StatusColis.DEPOSE) {
+      icon = Icons.inventory_2;
+    } else if (widget.colis.status.target!.level == StatusColis.ASSIGNATION) {
+      icon = Icons.bike_scooter;
+    } else if (widget.colis.status.target!.level == StatusColis.LIVRAISON) {
+      icon = Icons.shopping_bag_outlined;
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool sent = colis.status.target!.level == StatusColis.LIVRAISON;
     timeago.setLocaleMessages('fr', timeago.FrMessages());
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Get.to(ColisPage(colis: colis, sent: sent),
+          Get.to(ColisPage(colis: widget.colis, sent: sent),
               transition: Transition.topLevel);
         },
         child: Card(
@@ -49,7 +75,7 @@ class ItemBloc extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        colis.getCode(),
+                        widget.colis.getCode(),
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: (sent
@@ -58,8 +84,10 @@ class ItemBloc extends StatelessWidget {
                       ),
                       Text(
                         sent
-                            ? colis.pointRelaisReceiver.target?.title() ?? ""
-                            : colis.title(),
+                            ? widget.colis.pointRelaisReceiver.target
+                                    ?.title() ??
+                                ""
+                            : widget.colis.title(),
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: (sent
                                   ? MyColors.textprimary
@@ -67,7 +95,8 @@ class ItemBloc extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        timeago.format(colis.dateCreation!, locale: 'fr'),
+                        timeago.format(widget.colis.dateCreation!,
+                            locale: 'fr'),
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
@@ -80,8 +109,7 @@ class ItemBloc extends StatelessWidget {
                   ),
                 ),
                 Center(
-                  child: Icon(
-                      sent ? Icons.inventory_2 : Icons.watch_later_outlined,
+                  child: Icon(icon,
                       color: sent ? MyColors.success : MyColors.textprimary),
                 ),
               ],

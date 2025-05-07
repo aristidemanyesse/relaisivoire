@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
@@ -29,7 +31,7 @@ class Colis {
   final status = ToOne<StatusColis>();
 
   bool sold = false;
-  bool start_to_payement = false;
+  bool startToPayement = false;
   DateTime? dateCreation;
   DateTime? depotDate;
   DateTime? recuperationDate;
@@ -44,7 +46,7 @@ class Colis {
       this.receiverPhone = "",
       this.total = 0,
       this.sold = false,
-      this.start_to_payement = false,
+      this.startToPayement = false,
       this.depotDate,
       this.recuperationDate,
       this.livraisonDate,
@@ -56,11 +58,11 @@ class Colis {
     final colis = Colis(
       uid: json['id'],
       code: json['code'],
-      receiverName: json['receiver_name'],
-      receiverPhone: json['receiver_phone'],
+      receiverName: json['receiver_name'] ?? "",
+      receiverPhone: json['receiver_phone'] ?? "",
       total: json['total'] ?? 0,
       sold: json['sold'] ?? false,
-      start_to_payement: json['start_to_payement'] ?? false,
+      startToPayement: json['start_to_payment'] ?? false,
       dateCreation: DateTime.tryParse(json['date_creation'] ?? ""),
       depotDate: DateTime.tryParse(json['depot_date'] ?? ""),
       recuperationDate: DateTime.tryParse(json['recuperation_date'] ?? ""),
@@ -109,7 +111,7 @@ class Colis {
         'receiver': receiver.target?.uid ?? "",
         'total': total,
         'sold': sold,
-        'start_to_payement': start_to_payement,
+        'start_to_payment': startToPayement,
         'point_relais_sender': pointRelaisSender.target?.uid,
         'point_relais_receiver': pointRelaisReceiver.target?.uid,
         'type_colis': typeColis.target?.uid,
@@ -121,10 +123,6 @@ class Colis {
     final data = await ApiService.post('api/colis/', toJson());
     final datas = await ApiService.get("api/colis/${data['data']["id"]}/");
     final colis = Colis.fromJson(datas['data']);
-
-    final store = await getStore();
-    final colisBox = store.box<Colis>();
-    colisBox.put(colis);
     return colis;
   }
 
@@ -140,6 +138,15 @@ class Colis {
     if (response["status"] && response["data"] != null) {
       colisBox.remove(id);
       return true;
+    }
+    return false;
+  }
+
+  Future<bool> checkStartPayement() async {
+    final response = await ApiService.get("api/colis/search/?code=$code");
+    if (response["status"] && response["data"] != null) {
+      final colis = Colis.fromJson(response["data"]);
+      return colis.startToPayement;
     }
     return false;
   }

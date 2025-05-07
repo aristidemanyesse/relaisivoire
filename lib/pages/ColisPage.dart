@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/confirmDialog.dart';
@@ -28,6 +30,37 @@ class ColisPage extends StatefulWidget {
 class _ColisPageState extends State<ColisPage> {
   final PageController _controller = PageController();
   HandleTypesController controller = Get.find();
+
+  Timer? _timer;
+  void startCheck() {
+    _timer?.cancel(); // 🔁 stoppe un ancien timer s’il existe
+    _timer = Timer.periodic(Duration(seconds: 3), (Timer t) async {
+      print("timer");
+      bool res = await widget.colis.checkStartPayement();
+      if (res) {
+        _timer?.cancel();
+        // lancer le payement
+        Get.bottomSheet(
+            HandlePayementPopup(
+              colis: widget.colis,
+            ),
+            isDismissible: false,
+            enableDrag: true);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startCheck();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   bool cutOff() {
     final maintenant = DateTime.now();
@@ -382,17 +415,6 @@ class _ColisPageState extends State<ColisPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                        child: Text("knkgnk"),
-                        onTap: () {
-                          showMaterialModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => HandlePayementPopup(
-                              colis: widget.colis,
-                            ),
-                          );
-                        }),
                     MainButtonInverse(
                         title: "Trouver un point relais",
                         icon: Icons.location_on_sharp,

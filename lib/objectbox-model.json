@@ -71,7 +71,7 @@
     },
     {
       "id": "2:3543005446155189019",
-      "lastPropertyId": "21:7792046605721729129",
+      "lastPropertyId": "22:5931844170898409852",
       "name": "Colis",
       "properties": [
         {
@@ -202,8 +202,8 @@
           "type": 1
         },
         {
-          "id": "21:7792046605721729129",
-          "name": "start_to_payement",
+          "id": "22:5931844170898409852",
+          "name": "startToPayement",
           "type": 1
         }
       ],
@@ -421,7 +421,7 @@
     },
     {
       "id": "8:2963682808090904853",
-      "lastPropertyId": "5:2370905921784491829",
+      "lastPropertyId": "7:1406712626477052109",
       "name": "Schedule",
       "properties": [
         {
@@ -454,6 +454,16 @@
           "flags": 520,
           "indexId": "21:1264718184553367279",
           "relationTarget": "PointRelais"
+        },
+        {
+          "id": "6:7998669130440192038",
+          "name": "startHour",
+          "type": 9
+        },
+        {
+          "id": "7:1406712626477052109",
+          "name": "endHour",
+          "type": 9
         }
       ],
       "relations": []
@@ -771,7 +781,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    7792046605721729129
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
