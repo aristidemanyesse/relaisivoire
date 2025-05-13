@@ -10,6 +10,7 @@ import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
+import 'package:lpr/pages/ColisPage.dart';
 import 'package:lpr/services/ApiService.dart';
 
 class HandlePayementPopup extends StatefulWidget {
@@ -126,10 +127,13 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                                     "Voulez-vous vraiment annuler ce paiement ?",
                                 testOk: "Oui, annuler",
                                 testCancel: "Non",
-                                functionOk: () {},
-                                functionCancel: () {
+                                functionOk: () {
                                   widget.colis.startToPayement = false;
-                                  widget.colis.save();
+                                  widget.colis.stopPayement();
+                                  Get.offAll(ColisPage(
+                                      colis: widget.colis, sent: true));
+                                },
+                                functionCancel: () {
                                   Get.back();
                                 }));
                           },
@@ -155,8 +159,8 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                               titleBackgroundColor: MyColors.primary,
                               configData: <String, dynamic>{
-                                'apikey': '73092911067edb3711819f3.83413847',
-                                'site_id': 105891282,
+                                'apikey': '188112719167d1898b793959.56072634',
+                                'site_id': 105889732,
                                 'mode': 'PRODUCTION',
                                 'notify_url': ApiService.NOTIFY_PAYMENT_URL,
                               },
@@ -171,20 +175,11 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                                     'Payement relais ${widget.colis.getCode()}',
                                 'metadata': widget.colis.uid,
                               },
-                              waitResponse: (data) {
-                                if (mounted) {
-                                  setState(() {
-                                    Get.back();
-                                  });
-                                }
+                              waitResponse: (response) {
+                                print(response);
                               },
-                              onError: (data) {
-                                if (mounted) {
-                                  setState(() {
-                                    response = data;
-                                    Get.back();
-                                  });
-                                }
+                              onError: (response) {
+                                print(response);
                               },
                             ));
                           },

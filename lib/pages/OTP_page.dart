@@ -44,10 +44,10 @@ class _OPTPageState extends State<OPTPage> {
 
     _otpInteractor = OTPInteractor();
     // Commence à écouter les SMS entrants
-    _otpInteractor.getAppSignature().then((signature) {
+    _otpInteractor.getAppSignature().then((value) {
       setState(() {
-        this.signature = signature ?? "";
-        _resendOtp(this.signature);
+        signature = value ?? "";
+        _resendOtp(signature);
       });
     });
 
@@ -103,6 +103,7 @@ class _OPTPageState extends State<OPTPage> {
       if (client != null) {
         GeneralController controller = Get.find();
         controller.client.value = client;
+        client.user.target!.update({'fcmtoken': controller.fcmToken.value});
         Get.off(const ListeColisPage());
       } else {
         Get.back();

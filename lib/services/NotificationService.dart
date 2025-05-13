@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
@@ -24,6 +25,23 @@ class NotificationService {
   }
 
   Future<void> initNotification() async {
+    AwesomeNotifications().initialize(
+      null, // Icône de notification par défaut pour Android
+      [
+        NotificationChannel(
+            channelKey: 'RelaisIvoire_channel_id',
+            channelName: 'RelaisIvoire Channel',
+            channelDescription: 'RelaisIvoire Notification channel',
+            defaultColor: Colors.white,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max,
+            onlyAlertOnce: true,
+            enableVibration: true,
+            playSound: true,
+            soundSource: "resource://raw/notification")
+      ],
+    );
+
     AndroidInitializationSettings initializationSettingsAndroid =
         const AndroidInitializationSettings('ic_launcher');
 
@@ -41,23 +59,6 @@ class NotificationService {
         onDidReceiveNotificationResponse:
             (NotificationResponse notificationResponse) async {});
 
-    AwesomeNotifications().initialize(
-      null, // Icône de notification par défaut pour Android
-      [
-        NotificationChannel(
-            channelKey: 'ipi_channel_id',
-            channelName: 'iPi Channel',
-            channelDescription: 'iPi Pro Notification channel',
-            defaultColor: MyColors.primary,
-            ledColor: MyColors.primary,
-            importance: NotificationImportance.Max,
-            playSound: true,
-            onlyAlertOnce: true,
-            enableVibration: true,
-            soundSource: "resource://raw/custom_notification_sound")
-      ],
-    );
-
     AwesomeNotifications().setListeners(
       onActionReceivedMethod: NotificationService.onActionReceivedMethod,
       //   onNotificationCreatedMethod:
@@ -69,20 +70,21 @@ class NotificationService {
     );
   }
 
-  Future showSimpleNotification(
-      {int id = 0, String? title, String? message, String? payLoad}) async {
-    var random = Random();
-    AwesomeNotifications().createNotification(
-      content: NotificationContent(
-        id: random.nextInt(1000),
-        channelKey: 'ipi_channel_id',
-        title: title,
-        body: message,
-        payload: {"payload": payLoad},
-        notificationLayout: NotificationLayout.Default,
-      ),
-    );
-  }
+  // Future showSimpleNotification(
+  //     {int id = 0, String? title, String? message, String? payLoad}) async {
+  //   var random = Random();
+  //   AwesomeNotifications().createNotification(
+  //     content: NotificationContent(
+  //       id: random.nextInt(1000),
+  //       channelKey: 'RelaisIvoire_channel_id',
+  //       title: title,
+  //       body: message,
+  //       payload: {"payload": payLoad},
+  //       notificationLayout: NotificationLayout.Default,
+  //       largeIcon: 'resource://mipmap/ic_launcher',
+  //     ),
+  //   );
+  // }
 
   Future showNotification(
       {int id = 0, String? title, String? message, String? payLoad}) async {
@@ -90,7 +92,7 @@ class NotificationService {
     AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: random.nextInt(1000),
-          channelKey: 'ipi_channel_id',
+          channelKey: 'RelaisIvoire_channel_id',
           title: title,
           body: message,
           payload: {"payload": payLoad},

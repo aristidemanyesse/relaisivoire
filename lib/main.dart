@@ -1,3 +1,6 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/AppTheme.dart';
@@ -7,9 +10,12 @@ import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/controllers/NotificationController.dart';
+import 'package:lpr/firebase_options.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
 import 'package:lpr/pages/Splashscreen.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:lpr/services/FirebaseService.dart';
+import 'package:lpr/services/NotificationService.dart';
 import 'package:lpr/services/SessionService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
@@ -17,13 +23,13 @@ import 'package:lpr/services/SyncService.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // FirebaseService();
-  // FirebaseMessaging.onBackgroundMessage(
-  //     FirebaseService.firebaseMessagingBackgroundHandler);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseService();
+  FirebaseMessaging.onBackgroundMessage(
+      FirebaseService.firebaseMessagingBackgroundHandler);
 
-  // NotificationService().initNotification();
-  // NotificationService.requestPermissions();
+  NotificationService().initNotification();
+  NotificationService.requestPermissions();
 
   await initializeDateFormatting('fr_FR', null);
   Get.put(GeneralController());

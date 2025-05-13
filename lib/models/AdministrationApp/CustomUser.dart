@@ -58,7 +58,7 @@ class CustomUser {
 
   // ✅ Méthode d'instance : mini résumé
   static void genereOtp(String username, String signature) async {
-    ApiService.post('api/custom_users/genere-otp/', {});
+    ApiService.post('api/custom_users/genere-otp/', {"signature": signature});
   }
 
   // ✅ Méthode d'instance : mini résumé
@@ -71,9 +71,9 @@ class CustomUser {
     return false;
   }
 
-  Future<CustomUser?> update(String nom, String prenom) async {
-    Map<String, dynamic> response = await ApiService.patch(
-        'api/custom_users/$id/', {'first_name': nom, 'last_name': prenom});
+  Future<CustomUser?> update(Map<String, dynamic> variables) async {
+    Map<String, dynamic> response =
+        await ApiService.patch('api/custom_users/$id/', variables);
     if (response["status"] && response["data"] != null) {
       CustomUser user = CustomUser.fromJson(response["data"]);
       return user;

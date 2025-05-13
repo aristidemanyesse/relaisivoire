@@ -142,12 +142,19 @@ class Colis {
     return false;
   }
 
-  Future<bool> checkStartPayement() async {
+  Future<List<dynamic>> checkStartPayement() async {
     final response = await ApiService.get("api/colis/search/?code=$code");
     if (response["status"] && response["data"] != null) {
       final colis = Colis.fromJson(response["data"]);
-      return colis.startToPayement;
+      return [colis.startToPayement, colis];
     }
-    return false;
+    return [false, null];
+  }
+
+  Future<bool> stopPayement() async {
+    final variables = {'code': code};
+    final response =
+        await ApiService.post('api/colis/stop-payement/', variables);
+    return (response["status"] && response["data"] != null);
   }
 }

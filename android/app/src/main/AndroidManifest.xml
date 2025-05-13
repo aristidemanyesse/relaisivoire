@@ -1,26 +1,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>   
 
 
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <application android:label="Le Point Relais" android:name="${applicationName}" android:icon="@mipmap/launcher_icon" android:usesCleartextTraffic="true">
+    <application android:label="Relais'Ivoire" android:name="${applicationName}" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
 
-        <receiver android:name="com.example.otp_autofill.OTPReceiver"
-            android:exported="true">
+        <receiver android:name="com.example.otp_autofill.OTPReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
+
+        <!-- For Awesome Notifications -->
+        <receiver android:name="me.carda.awesome_notifications.notifications.receivers.ActionReceiver" android:exported="true"/>
+        <receiver android:name="me.carda.awesome_notifications.notifications.receivers.DismissedReceiver" android:exported="true"/>
+        <receiver android:name="me.carda.awesome_notifications.notifications.receivers.NotificationReceiver" android:exported="true"/>
 
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBMmWvPPlLQ4axlvp2kVMM3Xu1XQPlYpm4"/>
 
@@ -31,8 +36,10 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme"/>
 
-            <meta-data android:name="firebase_messaging_auto_init_enabled" android:value="false" />
-            <meta-data android:name="firebase_analytics_collection_enabled" android:value="false" />
+            <!-- For Firebase -->
+            <meta-data android:name="firebase_messaging_auto_init_enabled" android:value="false"/>
+            <meta-data android:name="firebase_analytics_collection_enabled" android:value="false"/>
+            <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="high_importance_channel"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

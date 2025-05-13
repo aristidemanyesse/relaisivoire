@@ -91,7 +91,7 @@ class Client {
   }
 
   void update(String nom, String prenom) async {
-    user.target!.update(nom, prenom);
+    user.target!.update({'first_name': nom, 'last_name': prenom});
     Client? client = await Client.searchByContact(contact);
     if (client != null) {
       GeneralController controller = Get.find();

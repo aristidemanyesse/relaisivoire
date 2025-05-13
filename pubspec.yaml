@@ -47,7 +47,6 @@ dependencies:
   blur: ^4.0.0
   flutter_contacts: ^1.1.9+2
   flutter_native_splash: ^2.4.4
-  flutter_launcher_icons: ^0.14.3
   objectbox: ^4.1.0
   objectbox_flutter_libs: ^4.1.0
   objectbox_generator: ^4.1.0
@@ -61,7 +60,7 @@ dependencies:
   permission_handler: ^12.0.0+1
   lit_relative_date_time: ^1.2.0
   timeago: ^3.7.0
-  intl: ^0.19.0
+  intl: ^0.20.2
   intl_translation: ^0.20.1
   firebase_core: ^3.13.0
   firebase_messaging: ^15.2.5
@@ -70,7 +69,11 @@ dependencies:
   path_provider: any
   otp_autofill: ^4.1.0
   flutter_compass: ^0.8.1
-  # awesome_notifications: ^0.10.0
+  awesome_notifications: ^0.10.0
+  awesome_notifications_core: ^0.10.1
+  awesome_notifications_fcm: ^0.10.1
+  rename_app: ^1.6.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -82,6 +85,25 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   build_runner: ^2.4.13
+  flutter_launcher_icons: "^0.14.3"
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icons/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/icons/logo.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  windows:
+    generate: true
+    image_path: "assets/icons/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

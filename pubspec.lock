@@ -62,6 +62,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.12.0"
+  awesome_notifications:
+    dependency: "direct main"
+    description:
+      name: awesome_notifications
+      sha256: "0d5fa4457f2ba4e536adc3ef6af709cdcecf4a05a1f3035981e9afa2f899b2a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
+  awesome_notifications_core:
+    dependency: "direct main"
+    description:
+      name: awesome_notifications_core
+      sha256: f8a227159f70e30d0f4c1d8996cf7e3865fec7c9030df752dfa51d177dc08b38
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
+  awesome_notifications_fcm:
+    dependency: "direct main"
+    description:
+      name: awesome_notifications_fcm
+      sha256: "77c23d452bb40eae06c1bf00ca259a8b9d88f1c6a1e8433fdc3fd94100289b7d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
   blur:
     dependency: "direct main"
     description:
@@ -326,6 +350,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.22.0"
+  firebase_crashlytics:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics
+      sha256: f3fa4a17c2f061b16b2e3ac7aaed889ae954b8952d0fd3e0009a9870cde7bbd2
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.5"
+  firebase_crashlytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics_platform_interface
+      sha256: cedfbe39927711c0e56fc38bfecbd89e17816b21698a3d88d63298c530ed375c
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.5"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -460,7 +500,7 @@ packages:
     source: hosted
     version: "0.6.0"
   flutter_launcher_icons:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_launcher_icons
       sha256: bfa04787c85d80ecb3f8777bde5fc10c3de809240c48fa061a2c2bf15ea5211c
@@ -737,10 +777,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.20.2"
   intl_translation:
     dependency: "direct main"
     description:
@@ -1117,6 +1157,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  rename_app:
+    dependency: "direct main"
+    description:
+      name: rename_app
+      sha256: "4fc964397592fc4a01e7ccb156b6e5288cb04e1c82317c02390f6726bde78b88"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.3"
   sanitize_html:
     dependency: transitive
     description:
@@ -1222,10 +1270,10 @@ packages:
     dependency: "direct main"
     description:
       name: timeago
-      sha256: "054cedf68706bb142839ba0ae6b135f6b68039f0b8301cbe8784ae653d5ff8de"
+      sha256: b05159406a97e1cbb2b9ee4faa9fb096fe0e2dfcd8b08fcd2a00553450d3422e
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.0"
+    version: "3.7.1"
   timezone:
     dependency: transitive
     description:

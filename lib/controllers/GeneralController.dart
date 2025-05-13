@@ -21,6 +21,7 @@ class GeneralController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
+    getFCMToken();
     position.value = await LocationService.getCurrentPosition();
   }
 
@@ -46,12 +47,10 @@ class GeneralController extends GetxController {
   void getFCMToken() async {
     FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
       print("APNs Token: $apnsToken");
+      // fcmToken.value = apnsToken ?? "";
     });
-    final fcmToken = await FirebaseMessaging.instance.getToken();
+    fcmToken.value = await FirebaseMessaging.instance.getToken() ?? "";
     print("🔑 Token FCM: $fcmToken");
-    LocationService.getCurrentPosition().then((value) {
-      position.value = value;
-    });
   }
 
   void deconnexion() {
@@ -61,6 +60,7 @@ class GeneralController extends GetxController {
     client.value = null;
     token.value = "";
     refreshToken.value = "";
+    client.value?.user.target!.update({'fcmtoken': ""});
     onInit();
   }
 

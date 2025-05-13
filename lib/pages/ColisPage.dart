@@ -36,13 +36,13 @@ class _ColisPageState extends State<ColisPage> {
     _timer?.cancel(); // 🔁 stoppe un ancien timer s’il existe
     _timer = Timer.periodic(Duration(seconds: 3), (Timer t) async {
       print("timer");
-      bool res = await widget.colis.checkStartPayement();
-      if (res) {
+      dynamic res = await widget.colis.checkStartPayement();
+      if (res[0]) {
         _timer?.cancel();
         // lancer le payement
         Get.bottomSheet(
             HandlePayementPopup(
-              colis: widget.colis,
+              colis: res[1],
             ),
             isDismissible: false,
             enableDrag: true);
