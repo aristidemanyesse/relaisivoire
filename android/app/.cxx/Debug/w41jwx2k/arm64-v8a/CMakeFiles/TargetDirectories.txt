@@ -1,0 +1,2 @@
+/Users/aristidemanyesse/Documents/Personal/ArchitectureLPR/lpr/android/app/.cxx/Debug/w41jwx2k/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/aristidemanyesse/Documents/Personal/ArchitectureLPR/lpr/android/app/.cxx/Debug/w41jwx2k/arm64-v8a/CMakeFiles/rebuild_cache.dir

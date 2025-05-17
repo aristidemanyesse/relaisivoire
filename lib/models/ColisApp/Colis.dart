@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
@@ -140,6 +138,15 @@ class Colis {
       return true;
     }
     return false;
+  }
+
+  static Future<Colis?> searchByCode(String code) async {
+    final response = await ApiService.get("api/colis/search/?code=$code");
+    if (response["status"] && response["data"] != null) {
+      final colis = Colis.fromJson(response["data"]);
+      return colis;
+    }
+    return null;
   }
 
   Future<List<dynamic>> checkStartPayement() async {

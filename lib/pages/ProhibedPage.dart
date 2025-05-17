@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
+
+class ProduitProhibe {
+  final String nom;
+  final String motif;
+
+  ProduitProhibe({required this.nom, required this.motif});
+}
 
 class ProhibedPage extends StatefulWidget {
   const ProhibedPage({super.key});
@@ -15,6 +23,47 @@ class _ProhibedPageState extends State<ProhibedPage>
   final PageController _pageController = PageController();
   final int _currentPageIndex = 0;
 
+  final List<ProduitProhibe> produitsProhibes = [
+    ProduitProhibe(nom: "Armes", motif: "Interdit par la loi"),
+    ProduitProhibe(nom: "Drogues", motif: "Produits illégaux"),
+    ProduitProhibe(
+        nom: "Contrefaçons", motif: "Propriété intellectuelle violée"),
+    ProduitProhibe(nom: "Produits explosifs", motif: "Risques de sécurité"),
+    ProduitProhibe(
+        nom: "Substances chimiques", motif: "Non autorisées au transport"),
+    ProduitProhibe(
+        nom: "Espèces protégées", motif: "Interdites à l’import/export"),
+    ProduitProhibe(
+        nom: "Médicaments sans ordonnance", motif: "Vente réglementée"),
+    ProduitProhibe(nom: "Liquides inflammables", motif: "Transport dangereux"),
+    ProduitProhibe(nom: "Gaz comprimés", motif: "Risque d’explosion"),
+    ProduitProhibe(
+        nom: "Batteries lithium non conformes", motif: "Risque incendie"),
+    ProduitProhibe(nom: "Alcool > 70%", motif: "Réglementation spécifique"),
+    ProduitProhibe(
+        nom: "Denrées périssables", motif: "Durée de conservation trop courte"),
+    ProduitProhibe(
+        nom: "Produits surgelés", motif: "Chaîne du froid non garantie"),
+    ProduitProhibe(
+        nom: "Produits frais non emballés", motif: "Hygiène non assurée"),
+    ProduitProhibe(nom: "Objets en verre", motif: "Risque de casse"),
+    ProduitProhibe(
+        nom: "Objets fragiles non protégés",
+        motif: "Casse possible pendant le transport"),
+    ProduitProhibe(
+        nom: "Bijoux de grande valeur",
+        motif: "Responsabilité limitée en cas de perte"),
+    ProduitProhibe(
+        nom: "Espèces en liquide",
+        motif: "Transport interdit pour des raisons légales"),
+    ProduitProhibe(nom: "Animaux vivants", motif: "Transport non autorisé"),
+    ProduitProhibe(
+        nom: "Cendres funéraires", motif: "Nécessite autorisation spécifique"),
+    ProduitProhibe(
+        nom: "Produits corrosifs",
+        motif: "Peuvent endommager les autres colis"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,69 +75,12 @@ class _ProhibedPageState extends State<ProhibedPage>
             icon: const Icon(
               Icons.arrow_back,
             )),
-        title: Container(
-          padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
-          decoration: const BoxDecoration(
-            color: MyColors.primary,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.vertical_split_sharp,
-                    size: 20,
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.check,
-                    size: 20,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 10,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: MyColors.secondary.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      if (_currentPageIndex > 0)
-                        Expanded(
-                          flex: _currentPageIndex,
-                          child: Container(
-                            height: 9,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: MyColors.secondary, width: 0.5),
-                              color: MyColors.primary.withOpacity(0.9),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                        ).animate().moveX(duration: 400.ms),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Icon(
-                        Icons.inventory,
-                        size: 20,
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
+        title: Text(
+          "Produits Prohibés",
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(color: MyColors.secondary, fontWeight: FontWeight.bold),
         ),
       ),
       body: Container(
@@ -100,20 +92,28 @@ class _ProhibedPageState extends State<ProhibedPage>
           children: [
             Expanded(
               child: ListView.builder(
-                // Let the ListView know how many items it needs to build.
-                itemCount: 100,
-                // Provide a builder function. This is where the magic happens.
-                // Convert each item into a widget based on the type of item it is.
+                itemCount: produitsProhibes.length,
                 itemBuilder: (context, index) {
+                  final produit = produitsProhibes[index];
                   return ListTile(
-                    title: Text("Hello"),
-                    subtitle: Text("Hello"),
+                    leading: const Icon(Icons.block, color: Colors.red),
+                    title: Text(
+                      produit.nom,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(produit.motif),
                   );
                 },
               ),
             ),
             SizedBox(height: Tools.PADDING),
-            SizedBox(height: Tools.PADDING),
+            MainButtonInverse(
+                title: "Ok, compris",
+                icon: Icons.chevron_left,
+                onPressed: () {
+                  Get.back();
+                }),
+            SizedBox(height: Tools.PADDING * 2),
           ],
         ),
       ),

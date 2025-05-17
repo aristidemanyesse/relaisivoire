@@ -1,13 +1,10 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/widgets/HandlePayementPopup.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/pages/ColisPage.dart';
-import 'package:lpr/pages/PleaseWait.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ItemBloc extends StatefulWidget {
@@ -50,7 +47,7 @@ class _ItemBlocState extends State<ItemBloc> {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Get.to(ColisPage(colis: widget.colis, sent: sent),
+          Get.to(ColisPage(colis: widget.colis),
               transition: Transition.topLevel);
         },
         child: Card(

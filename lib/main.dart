@@ -44,16 +44,22 @@ void main() async {
   final session = SessionService(syncService: sync);
   await session.restoreOrAuthenticate();
 
-  runApp(const MyApp());
+  // Vérifie si l'app a été lancée via une notification
+  ReceivedAction? initialAction = await AwesomeNotifications()
+      .getInitialNotificationAction(removeFromActionEvents: false);
+
+  runApp(MyApp(initialAction: initialAction));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ReceivedAction? initialAction;
+  const MyApp({super.key, this.initialAction});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     GeneralController controller = Get.find();
+    print("🔔 Notification initiale : $initialAction");
     return GetMaterialApp(
         title: "Relais'Ivoire",
         theme: AppTheme.lightTheme,

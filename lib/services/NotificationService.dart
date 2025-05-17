@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
+import 'package:lpr/models/ColisApp/Colis.dart';
+import 'package:lpr/pages/ColisPage.dart';
 
 class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -87,7 +89,10 @@ class NotificationService {
   // }
 
   Future showNotification(
-      {int id = 0, String? title, String? message, String? payLoad}) async {
+      {int id = 0,
+      String? title,
+      String? message,
+      Map<String, String>? payLoad}) async {
     var random = Random();
     AwesomeNotifications().createNotification(
         content: NotificationContent(
@@ -95,7 +100,7 @@ class NotificationService {
           channelKey: 'RelaisIvoire_channel_id',
           title: title,
           body: message,
-          payload: {"payload": payLoad},
+          payload: payLoad,
           wakeUpScreen: true,
           autoDismissible: false,
           backgroundColor: MyColors.primary,
@@ -114,26 +119,63 @@ class NotificationService {
             actionType: ActionType.DismissAction,
           ),
         ]);
+
+    AwesomeNotifications().setListeners(
+      onActionReceivedMethod: (ReceivedAction receivedAction) async {
+        await NotificationService.onActionReceivedMethod(receivedAction);
+      },
+      onNotificationCreatedMethod:
+          (ReceivedNotification receivedNotification) async {
+        NotificationService.onNotificationCreatedMethod(receivedNotification);
+      },
+      onNotificationDisplayedMethod:
+          (ReceivedNotification receivedNotification) async {
+        NotificationService.onNotificationDisplayedMethod(receivedNotification);
+      },
+      onDismissActionReceivedMethod: (ReceivedAction receivedAction) async {
+        NotificationService.onDismissActionReceivedMethod(receivedAction);
+      },
+    );
   }
 
+  /// Use this method to detect when a new notification or a schedule is created
+  @pragma("vm:entry-point")
+  static Future<void> onNotificationCreatedMethod(
+      ReceivedNotification receivedNotification) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect every time that a new notification is displayed
+  @pragma("vm:entry-point")
+  static Future<void> onNotificationDisplayedMethod(
+      ReceivedNotification receivedNotification) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect if the user dismissed a notification
+  @pragma("vm:entry-point")
+  static Future<void> onDismissActionReceivedMethod(
+      ReceivedAction receivedAction) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect when the user taps on a notification or action button
   @pragma("vm:entry-point")
   static Future<void> onActionReceivedMethod(
-      ReceivedNotification received) async {
-    String id = received.payload!["payload"]!;
-    // if (id == "") {
-    //   Get.to(const HomeScreen());
-    // } else {
-    //   DemandeController controller = Get.find();
-    //   controller.getData();
-    //   Demande? demande =
-    //       controller.demandes.firstWhereOrNull((item) => item.id == id);
-    //   if (demande != null) {
-    //     Get.to(DetailDemande(
-    //       demande: demande,
-    //     ));
-    //   } else {
-    //     Get.to(const HomeScreen());
-    //   }
-    // }
+      ReceivedAction receivedAction) async {
+    Map<String, dynamic>? payload = receivedAction.payload;
+    final action = payload!['action'];
+    print("🔔 Notification action received, $payload");
+    if (action == "colis") {
+      final code = payload['code'];
+      Colis? colis = await Colis.searchByCode(code);
+      if (colis != null) {
+        Get.to(ColisPage(colis: colis));
+      }
+    }
+
+    // MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil('/notification-page',
+    //         (route) => (route.settings.name != '/notification-page') || route.isFirst,
+    //     arguments: receivedAction);
   }
 }

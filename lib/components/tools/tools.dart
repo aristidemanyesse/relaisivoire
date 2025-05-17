@@ -21,5 +21,5 @@ class MyColors {
   static const Color secondary = Color.fromARGB(255, 241, 240, 246);
   static const Color danger = Color(0xFFCE6A6B);
   static const Color bleunuit = Color(0xFF212E53);
-  static const Color success = Color.fromARGB(255, 8, 71, 34);
+  static const Color success = Color.fromARGB(255, 9, 176, 76);
 }

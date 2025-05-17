@@ -31,13 +31,12 @@ class FirebaseService {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {
-        // DemandeController controller = Get.find();
-        // controller.getData();
+        Map<String, String> payload =
+            message.data.map((key, value) => MapEntry(key, value.toString()));
         NotificationService().showNotification(
           title: '${message.notification!.title}',
           message: "${message.notification!.body}",
-          payLoad:
-              message.data.containsKey("id") ? "${message.data["id"]}" : "",
+          payLoad: payload,
         );
       }
     });
@@ -46,12 +45,12 @@ class FirebaseService {
   static Future<void> firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
     await Firebase.initializeApp();
-    // DemandeController controller = Get.find();
-    // controller.getData();
+    Map<String, String> payload =
+        message.data.map((key, value) => MapEntry(key, value.toString()));
     NotificationService().showNotification(
       title: '${message.notification!.title}',
       message: "${message.notification!.body}",
-      payLoad: message.data.containsKey("id") ? "${message.data["id"]}" : "",
+      payLoad: payload,
     );
   }
 }

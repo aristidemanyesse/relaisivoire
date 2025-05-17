@@ -7,7 +7,6 @@ import 'package:lpr/components/elements/main_button_icon.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/wave.dart';
-import 'package:lpr/controllers/CommandeProcessController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/pages/ColisPage.dart';
@@ -130,8 +129,7 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                                 functionOk: () {
                                   widget.colis.startToPayement = false;
                                   widget.colis.stopPayement();
-                                  Get.offAll(ColisPage(
-                                      colis: widget.colis, sent: true));
+                                  Get.offAll(ColisPage(colis: widget.colis));
                                 },
                                 functionCancel: () {
                                   Get.back();

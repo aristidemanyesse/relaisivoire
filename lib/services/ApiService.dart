@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:lpr/controllers/GeneralController.dart';
 
 class ApiService {
-  static const BASE_URL = "http://192.168.1.24:8005/";
+  static const BASE_URL = "http://192.168.1.4:8005/";
   static const NOTIFY_PAYMENT_URL =
       "${BASE_URL}api/payements/colis_payement_notify/";
 

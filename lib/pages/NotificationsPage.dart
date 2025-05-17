@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/NotificationItem.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
@@ -39,11 +40,32 @@ class _NotificationsPageState extends State<NotificationsPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: Obx(() {
-                  return ListView(
-                      children:
-                          controller.notifications.value.map((notification) {
-                    return NotificationItem(notification: notification);
-                  }).toList());
+                  return controller.notifications.value.isNotEmpty
+                      ? ListView(
+                          children: controller.notifications.value
+                              .map((notification) {
+                          return NotificationItem(notification: notification);
+                        }).toList())
+                      : Center(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Aucune notification pour le moment",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        color: MyColors.textprimary,
+                                        fontWeight: FontWeight.bold)),
+                            SizedBox(height: Tools.PADDING),
+                            MainButtonInverse(
+                                title: "Ok, compris",
+                                icon: Icons.chevron_left,
+                                onPressed: () {
+                                  Get.back();
+                                }),
+                          ],
+                        ));
                 }),
               ),
             ),

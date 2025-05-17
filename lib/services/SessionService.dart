@@ -14,8 +14,6 @@ class SessionService {
   void clearClientSession() {
     syncService.store.box<Client>().removeAll();
     syncService.store.box<Colis>().removeAll();
-    GeneralController controller = Get.find();
-    controller.deconnexion();
     print("🧹 Session client & colis nettoyée.");
   }
 

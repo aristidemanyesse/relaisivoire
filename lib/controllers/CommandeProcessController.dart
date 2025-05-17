@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
@@ -63,8 +64,10 @@ class CommandeProcessController extends GetxController {
       colis.receiverPhone = contactDestinataire.value;
       Colis colis_ = await colis.save();
       onInit();
+      ColisController colisController = Get.find();
+      colisController.reload();
       await Future.delayed(const Duration(seconds: 5), () {
-        Get.offAll(ColisPage(colis: colis_, sent: false));
+        Get.offAll(ColisPage(colis: colis_));
       });
     } catch (e) {
       Get.back();

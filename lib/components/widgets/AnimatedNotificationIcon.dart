@@ -87,7 +87,12 @@ class _AnimatedNotificationIconState extends State<AnimatedNotificationIcon>
             angle: _animation.value,
             child: Stack(
               children: [
-                const Icon(Icons.notifications, size: 30),
+                Icon(
+                  widget.count > 0
+                      ? Icons.notifications_active
+                      : Icons.notifications_none,
+                  size: 25,
+                ),
                 if (widget.count > 0)
                   Positioned(
                     right: 0,

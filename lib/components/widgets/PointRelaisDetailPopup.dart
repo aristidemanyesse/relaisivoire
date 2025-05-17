@@ -116,7 +116,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
             ),
             Spacer(),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+              margin: EdgeInsets.symmetric(horizontal: Tools.PADDING / 2),
               child: Wrap(
                 alignment: WrapAlignment.center,
                 runSpacing: Tools.PADDING,

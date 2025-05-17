@@ -17,7 +17,6 @@ import 'package:lpr/pages/commanderPage.dart';
 import 'package:lpr/pages/parametre_page.dart';
 import 'package:lpr/components/widgets/item_bloc.dart';
 import 'package:lpr/components/widgets/wave.dart';
-import 'package:lpr/services/NotificationService.dart';
 
 class ListeColisPage extends StatefulWidget {
   const ListeColisPage({super.key});

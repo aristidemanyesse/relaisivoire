@@ -34,8 +34,7 @@ class HistoriqueBloc extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Get.to(ColisPage(colis: colis, sent: sent),
-              transition: Transition.topLevel);
+          Get.to(ColisPage(colis: colis), transition: Transition.topLevel);
         },
         child: Card(
           margin: EdgeInsets.zero,

@@ -37,16 +37,6 @@ class StepProcess extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.bold),
               )),
             ),
-            SizedBox(
-              width: 16,
-              child: Center(
-                child: Container(
-                  height: 35,
-                  width: 3,
-                  color: MyColors.primary.withOpacity(0.7),
-                ),
-              ),
-            ),
           ],
         ),
         const SizedBox(

@@ -2,9 +2,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:geolocator_android/geolocator_android.dart';
 import 'package:get/get.dart';
+import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/models/ClientApp/Client.dart';
 import 'package:lpr/models/AdministrationApp/CustomUser.dart';
+import 'package:lpr/pages/Login_number.dart';
+import 'package:lpr/pages/PleaseWait2.dart';
 import 'package:lpr/services/LoactionService.dart';
+import 'package:lpr/services/SessionService.dart';
 import 'package:lpr/services/StoreService.dart';
 import 'package:lpr/services/SyncService.dart';
 
@@ -53,7 +57,8 @@ class GeneralController extends GetxController {
     print("🔑 Token FCM: $fcmToken");
   }
 
-  void deconnexion() {
+  void deconnexion() async {
+    Get.to(PleaseWait2());
     connected.value = false;
     confirmCGU.value = false;
     utilisateur.value = null;
@@ -62,6 +67,14 @@ class GeneralController extends GetxController {
     refreshToken.value = "";
     client.value?.user.target!.update({'fcmtoken': ""});
     onInit();
+
+    final store = await getStore();
+    final sync = SyncService(store: store);
+    final session = SessionService(syncService: sync);
+    session.clearClientSession();
+    KeyBoardController keyBoardController = Get.find();
+    keyBoardController.onInit();
+    Get.offAll(LoginNumber());
   }
 
   // ✅ Vérifie s'il y a du réseau

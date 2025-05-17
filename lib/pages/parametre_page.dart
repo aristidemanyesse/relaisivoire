@@ -5,16 +5,12 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/parametre_menu_item.dart';
 import 'package:lpr/components/widgets/wave.dart';
 import 'package:lpr/components/widgets/wave_inverse.dart';
+import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
-import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/pages/HistoriquePage.dart';
 import 'package:lpr/pages/ListeColisPage.dart';
-import 'package:lpr/pages/Login_number.dart';
 import 'package:lpr/pages/ProfilPage.dart';
 import 'package:lpr/pages/SearchPointRelais.dart';
-import 'package:lpr/services/SessionService.dart';
-import 'package:lpr/services/StoreService.dart';
-import 'package:lpr/services/SyncService.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,6 +23,7 @@ class ParametrePage extends StatefulWidget {
 
 class _ParametrePageState extends State<ParametrePage> {
   HandleTypesController controller = Get.find();
+  GeneralController generalController = Get.find();
 
   String number = "+33 612 00 00 00";
   void call() async {
@@ -185,17 +182,11 @@ class _ParametrePageState extends State<ParametrePage> {
                       Get.dialog(ConfirmDialog(
                         title: "Déconnexion",
                         message:
-                            "Voulez-vous vraiment vous déconnecter?\n Toutes vos données seront supprimées sur cet appareil.",
+                            "Voulez-vous vraiment vous déconnecter?\n Toutes vos données seront éffacées sur cet appareil.",
                         testOk: "Déconnexion",
                         testCancel: "Non",
                         functionOk: () async {
-                          final store = await getStore();
-                          final sync = SyncService(store: store);
-                          final session = SessionService(syncService: sync);
-                          session.clearClientSession();
-                          KeyBoardController keyBoardController = Get.find();
-                          keyBoardController.onInit();
-                          Get.offAll(LoginNumber());
+                          generalController.deconnexion();
                         },
                         functionCancel: () {
                           Get.back();
@@ -228,13 +219,12 @@ class _ParametrePageState extends State<ParametrePage> {
                           .textTheme
                           .bodyLarge!
                           .copyWith(color: MyColors.secondary)),
-                  SizedBox(height: Tools.PADDING / 3),
                   Text("Version 1.0.0.1502",
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
                           .copyWith(color: MyColors.secondary)),
-                  SizedBox(height: Tools.PADDING / 3),
+                  SizedBox(height: Tools.PADDING / 2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -242,7 +232,9 @@ class _ParametrePageState extends State<ParametrePage> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
-                              .copyWith(color: MyColors.secondary)),
+                              .copyWith(
+                                  color: MyColors.secondary,
+                                  fontWeight: FontWeight.bold)),
                       SizedBox(
                         width: Tools.PADDING,
                         child: Center(
@@ -253,12 +245,14 @@ class _ParametrePageState extends State<ParametrePage> {
                                     .copyWith(color: MyColors.secondary))),
                       ),
                       Text("Politique d'utilisation",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(color: MyColors.secondary)),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: MyColors.secondary,
+                                    fontWeight: FontWeight.bold,
+                                  )),
                     ],
                   ),
+                  SizedBox(height: Tools.PADDING * 1.5),
                 ],
               ),
             )

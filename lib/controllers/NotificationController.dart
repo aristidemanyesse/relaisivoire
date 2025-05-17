@@ -16,7 +16,7 @@ class NotificationController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    Timer timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+    Timer timer = Timer.periodic(const Duration(seconds: 30), (timer) {
       reload();
     });
 
