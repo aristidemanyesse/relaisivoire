@@ -218,8 +218,27 @@ class _ColisCardState extends State<ColisCard> {
                                 .textTheme
                                 .displayLarge!
                                 .copyWith(color: MyColors.bleunuit)),
-                        Text("Total à payer au dépôt",
-                            style: Theme.of(context).textTheme.bodyMedium!),
+                        if (!widget.colis.sold) ...{
+                          Text("Total à payer au dépôt",
+                              style: Theme.of(context).textTheme.bodyMedium!),
+                          Text("(peut changer après validation)",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: MyColors.danger)),
+                        } else ...{
+                          Text("déjà payé",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: MyColors.success)),
+                        }
                       ],
                     ),
                   ],

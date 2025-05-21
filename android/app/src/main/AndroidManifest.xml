@@ -14,7 +14,7 @@
 
 
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <application android:label="Relais'Ivoire" android:name="${applicationName}" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
+    <application android:label="Relais'Ivoir" android:name="${applicationName}" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
 
         <receiver android:name="com.example.otp_autofill.OTPReceiver" android:exported="true">
             <intent-filter>

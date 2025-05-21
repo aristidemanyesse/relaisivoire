@@ -1,199 +1,107 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
-import 'package:lpr/components/elements/main_button.dart';
-import 'package:lpr/components/elements/circle.dart';
-import 'package:lpr/components/widgets/IntroSteps/intro1.dart';
-import 'package:lpr/components/widgets/IntroSteps/intro2.dart';
-import 'package:lpr/components/widgets/IntroSteps/intro3.dart';
-import 'package:lpr/components/widgets/IntroSteps/intro4.dart';
-import 'package:lpr/controllers/GeneralController.dart';
-import 'package:lpr/pages/Login_number.dart';
-import 'package:lpr/components/widgets/wave_inverse.dart';
+import 'package:lpr/models/ClientApp/Client.dart';
+import 'package:lpr/pages/LandingPage.dart';
+import 'package:lpr/pages/ListeColisPage.dart';
+import 'package:lpr/services/SessionService.dart';
+import 'package:lpr/services/StoreService.dart';
+import 'package:lpr/services/SyncService.dart';
 
-class Splashscreen extends StatefulWidget {
-  const Splashscreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<Splashscreen> createState() => _SplashscreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen>
+class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  int _currentPageIndex = 0;
-  final PageController _pageController = PageController();
-  GeneralController controller = Get.find();
+  late AnimationController _controller;
+  late Animation<double> _fadeIn;
 
-  List<Widget> pages = [
-    const Intro1(),
-    const Intro2(),
-    const Intro3(),
-    Intro4(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
+
+    _fadeIn = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _controller.forward();
+
+    start();
+  }
+
+  void start() async {
+    final store = await getStore();
+    final sync = SyncService(store: store);
+    final session = SessionService(syncService: sync);
+    Client? client = await session.restoreOrAuthenticate();
+    if (client == null) {
+      Get.off(() => LandingPage());
+    } else {
+      await sync.syncAllData();
+      Get.off(() => ListeColisPage());
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: SizedBox(
-        height: Get.size.height,
-        width: Get.size.width,
-        child: Column(
-          children: [
-            const SizedBox(height: Tools.PADDING),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: FadeTransition(
+          opacity: _fadeIn,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Spacer(),
+              Image.asset(
+                'assets/images/logo.png', // 🔁 ton logo
+                width: 120,
+                height: 120,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Livrez. Partout. Facilement.",
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: MyColors.primary,
+                    ),
+              ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Relais'Ivoire",
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ],
-                  )
-                      .animate()
-                      .fadeIn(duration: 400.ms)
-                      .moveY(duration: 400.ms, begin: -25.0, end: 0),
-                  Spacer(),
-                  if (_currentPageIndex < pages.length - 1)
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _currentPageIndex = pages.length - 1;
-                          _pageController.jumpToPage(_currentPageIndex);
-                        });
-                      },
-                      child: Text(
-                        "Passer",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: MyColors.primary),
-                      ),
-                    )
+                  Text(
+                    "Chargement des données...",
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+                  ),
                 ],
               ),
-            ),
-            Expanded(
-              flex: 5,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                width: Get.size.width,
-                decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      center: Alignment.center,
-                      radius: 0.5,
-                      colors: [
-                        Colors.white.withOpacity(0.15),
-                        MyColors.secondary, // Couleur extérieure (beige)
-                      ],
-                      stops: const [
-                        0.3,
-                        1.0
-                      ], // Arrête les proportions de chaque couleur
-                    ),
-                    border: const Border.symmetric(
-                        horizontal: BorderSide.none,
-                        vertical: BorderSide.none)),
-                child: SizedBox(
-                  height: Get.size.height * 3 / 4,
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (int index) {
-                      setState(() {
-                        _currentPageIndex = index;
-                      });
-                    },
-                    children: pages,
-                  ),
+              const SizedBox(height: Tools.PADDING),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                child: LinearProgressIndicator(
+                  value: null,
+                  backgroundColor: Colors.white,
+                  color: MyColors.primary,
                 ),
               ),
-            ),
-            const SizedBox(height: Tools.PADDING / 2),
-            SizedBox(height: 20, child: WaveInverse()),
-            Expanded(
-              flex: 1,
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: MyColors.primary,
-                    border: Border(top: BorderSide.none)),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Opacity(
-                      opacity: 0.15,
-                      child: Image.asset("assets/images/pattern.png",
-                          fit: BoxFit.cover, width: Get.width),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Tools.PADDING * 2),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(
-                          pages.length,
-                          (index) {
-                            if (index != _currentPageIndex) {
-                              return GestureDetector(
-                                onTap: () {
-                                  _pageController.jumpToPage(index);
-                                  setState(() {
-                                    _currentPageIndex = index;
-                                  });
-                                },
-                                child: const Circle(),
-                              );
-                            } else if (_currentPageIndex == pages.length - 1) {
-                              return MainButton(
-                                title: "Commencer",
-                                icon: Icons.check,
-                                onPressed: () {
-                                  if (controller.confirmCGU.value) {
-                                    Get.off(
-                                      const LoginNumber(),
-                                      duration:
-                                          const Duration(milliseconds: 700),
-                                      curve: Curves.easeOut,
-                                      transition: Transition.rightToLeft,
-                                    );
-                                  } else {
-                                    Tools.showErrorToast(
-                                        title: "Vous devez accepter les CGU",
-                                        message:
-                                            "Veuillez accepter les CGU avant de continuer");
-                                  }
-                                },
-                              ).animate().fadeIn(duration: 1000.ms);
-                            } else {
-                              return MainButton(
-                                title: "Suivant",
-                                onPressed: () {
-                                  _pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                              ).animate().fadeIn(duration: 1000.ms);
-                            }
-                          },
-                        ).toList(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+              SizedBox(height: Tools.PADDING * 3),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

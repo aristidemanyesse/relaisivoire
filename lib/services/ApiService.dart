@@ -5,7 +5,8 @@ import 'dart:convert';
 import 'package:lpr/controllers/GeneralController.dart';
 
 class ApiService {
-  static const BASE_URL = "http://192.168.1.4:8005/";
+  static const BASE_URL = "https://back.admin.relais-ivoir.com/";
+  // static const BASE_URL = "http://192.168.1.21:8005/";
   static const NOTIFY_PAYMENT_URL =
       "${BASE_URL}api/payements/colis_payement_notify/";
 
@@ -106,6 +107,7 @@ class ApiService {
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'charset': 'utf-8',
     };
     if (controller.token.value != "") {
       headers['Authorization'] = 'Bearer ${controller.token.value}';

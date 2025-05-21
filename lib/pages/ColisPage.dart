@@ -37,18 +37,18 @@ class _ColisPageState extends State<ColisPage> {
   Timer? _timer;
   void startCheck() {
     _timer?.cancel(); // 🔁 stoppe un ancien timer s’il existe
-    _timer = Timer.periodic(Duration(seconds: 3), (Timer t) async {
-      print("timer");
+    _timer = Timer.periodic(Duration(seconds: 7), (Timer t) async {
       dynamic res = await widget.colis.checkStartPayement();
       if (res[0]) {
         _timer?.cancel();
+        print('timer cancelled');
         // lancer le payement
         Get.bottomSheet(
             HandlePayementPopup(
               colis: res[1],
             ),
             isDismissible: false,
-            enableDrag: true);
+            enableDrag: false);
       }
     });
   }
@@ -85,17 +85,15 @@ class _ColisPageState extends State<ColisPage> {
             icon: const Icon(
               Icons.arrow_back,
             )),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.colis.getCode(),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: MyColors.secondary, fontWeight: FontWeight.bold),
-            ),
-          ],
+        title: Text(
+          widget.colis.getCode(),
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: MyColors.secondary, fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
         actions: [
           if (forMe)
             IconButton(
@@ -275,7 +273,7 @@ class _ColisPageState extends State<ColisPage> {
                   ],
                 ),
               ),
-            } else
+            } else if (!forMe)
               MainButtonInverse(
                   title: "Me guider vers le point relais",
                   icon: Icons.location_on_sharp,

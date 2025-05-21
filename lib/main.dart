@@ -11,14 +11,10 @@ import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/KeyBoardController.dart';
 import 'package:lpr/controllers/NotificationController.dart';
 import 'package:lpr/firebase_options.dart';
-import 'package:lpr/pages/ListeColisPage.dart';
-import 'package:lpr/pages/Splashscreen.dart';
+import 'package:lpr/pages/SplashScreen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:lpr/services/FirebaseService.dart';
 import 'package:lpr/services/NotificationService.dart';
-import 'package:lpr/services/SessionService.dart';
-import 'package:lpr/services/StoreService.dart';
-import 'package:lpr/services/SyncService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,11 +34,6 @@ void main() async {
   Get.put(ColisController());
   Get.put(NotificationController());
   Get.put(CommandeProcessController());
-
-  final store = await getStore();
-  final sync = SyncService(store: store);
-  final session = SessionService(syncService: sync);
-  await session.restoreOrAuthenticate();
 
   // Vérifie si l'app a été lancée via une notification
   ReceivedAction? initialAction = await AwesomeNotifications()
@@ -66,14 +57,13 @@ class MyApp extends StatelessWidget {
         // darkTheme: AppTheme.darkTheme,
         // themeMode: ThemeMode.system,
 
-        home: Obx(() {
-          return SelectableRegion(
-            selectionControls: materialTextSelectionControls,
-            focusNode: FocusNode(),
-            child: controller.connected.value
-                ? const ListeColisPage()
-                : const Splashscreen(),
-          );
-        }));
+        home: SelectableRegion(
+          selectionControls: materialTextSelectionControls,
+          focusNode: FocusNode(),
+          child: SplashScreen(),
+          // child: controller.connected.value
+          //     ? const ListeColisPage()
+          //     : const Splashscreen(),
+        ));
   }
 }

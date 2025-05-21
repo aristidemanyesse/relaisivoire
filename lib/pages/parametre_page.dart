@@ -252,7 +252,7 @@ class _ParametrePageState extends State<ParametrePage> {
                                   )),
                     ],
                   ),
-                  SizedBox(height: Tools.PADDING * 1.5),
+                  SizedBox(height: Tools.PADDING),
                 ],
               ),
             )

@@ -90,20 +90,20 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/icons/logo.png"
+  image_path: "assets/images/logo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/icons/logo.png"
+    image_path: "assets/images/logo.png"
     background_color: "#ffffff"
     theme_color: "#ffffff"
   windows:
     generate: true
-    image_path: "assets/icons/logo.png"
+    image_path: "assets/images/logo.png"
     icon_size: 48 # min:48, max:256, default: 48
   macos:
     generate: true
-    image_path: "assets/icons/logo.png"
+    image_path: "assets/images/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -120,7 +120,6 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
-    - assets/icons/
     - assets/lotties/
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -150,24 +149,18 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  color: "#FFFFFF"
-  # image: assets/icons/logo.png
-  # branding: assets/branding-production.png
-  # branding_bottom_padding: 24
-  color_dark: "#FFFFFF"
-  # image_dark: assets/icons/logo.png
-  # branding_dark: assets/branding-production.png
-
-  android_12:
-    image: assets/icons/logo.png
-    icon_background_color: "#ffffff"
-    image_dark: assets/icons/logo.png
-    icon_background_color_dark: "#FFFFFF"
-
+  color: "#ffffff"
+  image: assets/images/logo.png
+  color_dark: "#000000"
+  image_dark: assets/images/logo.png
+  android_gravity: center
+  ios_content_mode: center
+  android: true
+  ios: true
   web: false
 
 
 # dart run flutter_native_splash:create
-# dart run rename_app:main all="Relais'Ivoire"
+# dart run rename_app:main all="Relais'Ivoir"
 # dart run flutter_launcher_icons:generate
 # dart run flutter_launcher_icons:main

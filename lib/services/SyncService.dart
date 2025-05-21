@@ -4,16 +4,11 @@ import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/controllers/NotificationController.dart';
 import 'package:lpr/models/ClientApp/NotificationClient.dart';
-import 'package:lpr/models/ClientApp/TypeClient.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
-import 'package:lpr/models/ColisApp/StatusColis.dart';
 import 'package:lpr/models/ColisApp/TypeColis.dart';
 import 'package:lpr/models/ColisApp/TypeDestinataire.dart';
 import 'package:lpr/models/ColisApp/TypeEmballage.dart';
 import 'package:lpr/models/PointRelaisApp/PointRelais.dart';
-import 'package:lpr/models/PointRelaisApp/TypePointRelais.dart';
-import 'package:lpr/models/PointRelaisApp/TypeService.dart';
-import 'package:lpr/models/ZoneApp/Commune.dart';
 import 'package:lpr/objectbox.g.dart';
 import 'package:lpr/services/ApiService.dart';
 
@@ -75,35 +70,35 @@ class SyncService {
             box: store.box<TypeDestinataire>(),
             label: "TypeDestinataire");
 
-    await syncGenericList<StatusColis>(
-        endpoint: 'api/status_colis/',
-        fromJson: (json) => StatusColis.fromJson(json),
-        box: store.box<StatusColis>(),
-        label: "StatusColis");
+    // await syncGenericList<StatusColis>(
+    //     endpoint: 'api/status_colis/',
+    //     fromJson: (json) => StatusColis.fromJson(json),
+    //     box: store.box<StatusColis>(),
+    //     label: "StatusColis");
 
-    await syncGenericList<TypeClient>(
-        endpoint: 'api/type_clients/',
-        fromJson: (json) => TypeClient.fromJson(json),
-        box: store.box<TypeClient>(),
-        label: "TypeClient");
+    // await syncGenericList<TypeClient>(
+    //     endpoint: 'api/type_clients/',
+    //     fromJson: (json) => TypeClient.fromJson(json),
+    //     box: store.box<TypeClient>(),
+    //     label: "TypeClient");
 
-    await syncGenericList<TypePointRelais>(
-        endpoint: 'api/type_points_relais/',
-        fromJson: (json) => TypePointRelais.fromJson(json),
-        box: store.box<TypePointRelais>(),
-        label: "TypePointRelais");
+    // await syncGenericList<TypePointRelais>(
+    //     endpoint: 'api/type_points_relais/',
+    //     fromJson: (json) => TypePointRelais.fromJson(json),
+    //     box: store.box<TypePointRelais>(),
+    //     label: "TypePointRelais");
 
-    await syncGenericList<Commune>(
-        endpoint: 'api/communes/',
-        fromJson: (json) => Commune.fromJson(json),
-        box: store.box<Commune>(),
-        label: "Commune");
+    // await syncGenericList<Commune>(
+    //     endpoint: 'api/communes/',
+    //     fromJson: (json) => Commune.fromJson(json),
+    //     box: store.box<Commune>(),
+    //     label: "Commune");
 
-    await syncGenericList<TypeService>(
-        endpoint: 'api/type_services/',
-        fromJson: (json) => TypeService.fromJson(json),
-        box: store.box<TypeService>(),
-        label: "TypeService");
+    // await syncGenericList<TypeService>(
+    //     endpoint: 'api/type_services/',
+    //     fromJson: (json) => TypeService.fromJson(json),
+    //     box: store.box<TypeService>(),
+    //     label: "TypeService");
 
     colisController.colis.value = await syncGenericList<Colis>(
         endpoint:
