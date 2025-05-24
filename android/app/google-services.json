@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:592709019519:android:9b78f29eeeaff51efa9c4a",
+        "mobilesdk_app_id": "1:592709019519:android:83601f7680e14bdffa9c4a",
         "android_client_info": {
-          "package_name": "com.example.lpr"
+          "package_name": "com.relaisivoir.app"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:592709019519:android:0143da34c8b76adbfa9c4a",
+        "mobilesdk_app_id": "1:592709019519:android:dd4ae26089561581fa9c4a",
         "android_client_info": {
-          "package_name": "com.example.lprpro"
+          "package_name": "com.relaisivoir.deli"
         }
       },
       "oauth_client": [],
@@ -45,9 +45,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:592709019519:android:9f8bdd2caf83e9d1fa9c4a",
+        "mobilesdk_app_id": "1:592709019519:android:302e7cfffd617a53fa9c4a",
         "android_client_info": {
-          "package_name": "com.exmaple.lprdeli"
+          "package_name": "com.relaisivoir.pro"
         }
       },
       "oauth_client": [],

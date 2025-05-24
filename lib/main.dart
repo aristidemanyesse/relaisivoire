@@ -52,11 +52,9 @@ class MyApp extends StatelessWidget {
     GeneralController controller = Get.find();
     print("🔔 Notification initiale : $initialAction");
     return GetMaterialApp(
-        title: "Relais'Ivoire",
+        debugShowCheckedModeBanner: false,
+        title: "Relais'Ivoir",
         theme: AppTheme.lightTheme,
-        // darkTheme: AppTheme.darkTheme,
-        // themeMode: ThemeMode.system,
-
         home: SelectableRegion(
           selectionControls: materialTextSelectionControls,
           focusNode: FocusNode(),
