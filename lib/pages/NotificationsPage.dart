@@ -20,6 +20,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Obx(() {
           return Text("Notifications (${controller.notReads.value.length})",
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -60,7 +61,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                             SizedBox(height: Tools.PADDING),
                             MainButtonInverse(
                                 title: "Ok, compris",
-                                icon: Icons.chevron_left,
+                                icon: Icons.done_all,
                                 onPressed: () {
                                   Get.back();
                                 }),

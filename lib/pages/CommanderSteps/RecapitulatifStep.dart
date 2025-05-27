@@ -107,12 +107,15 @@ class _RecapitulatifStepState extends State<RecapitulatifStep> {
                 subtitle2: "${_controller.pointRelais.value?.adresse()}",
               ),
               StepRecap(
-                  title: "Total à payer au dépôt",
-                  subtitle: "${_controller.price.value} Fcfa"),
+                title: "Total à payer au dépôt",
+                subtitle: "${_controller.price.value} Fcfa",
+                subtitle2:
+                    "* Ce montant est estimé, le montant final sera calculé au dépôt du colis",
+              ),
               Spacer(),
               if (!cutOff())
                 Text(
-                    " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
+                    " * Si vous déposez le colis avant 10h30, il sera disponible pour recuperation avant 16h30",
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme

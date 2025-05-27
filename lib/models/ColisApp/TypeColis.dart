@@ -1,6 +1,7 @@
 import 'package:lpr/models/ColisApp/TypeEmballage.dart';
 import 'package:lpr/models/LivraisonApp/TypeVehicule.dart';
 import 'package:objectbox/objectbox.dart';
+import 'dart:convert' show utf8;
 
 @Entity()
 class TypeColis {
@@ -50,7 +51,6 @@ class TypeColis {
     if (json['vehicule'] != null) {
       type.vehicule.target = TypeVehicule.fromJson(json['vehicule']);
     }
-
     return type;
   }
 

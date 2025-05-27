@@ -35,7 +35,7 @@ class Intro1 extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
+                "Renseignes les informations concernant ton colis",
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),

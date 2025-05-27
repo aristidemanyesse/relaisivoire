@@ -23,7 +23,7 @@ class PointRelaisDetailPopup extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        height: 600,
+        height: 650,
         color: MyColors.secondary,
         width: double.infinity,
         child: Column(
@@ -77,11 +77,11 @@ class PointRelaisDetailPopup extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
-                        Icons.location_on_sharp,
-                        size: 50,
+                        Icons.storefront,
+                        size: 60,
                         color: MyColors.primary,
                       ),
-                      SizedBox(width: Tools.PADDING / 2),
+                      SizedBox(width: Tools.PADDING),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

@@ -52,7 +52,7 @@ class _LandingPageState extends State<LandingPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Relais'Ivoire",
+                        "Relais'Ivoir",
                         style: Theme.of(context).textTheme.displayLarge,
                       ),
                     ],

@@ -70,6 +70,7 @@ class CommandeProcessController extends GetxController {
         Get.offAll(ColisPage(colis: colis_));
       });
     } catch (e) {
+      print("Error creating colis: $e");
       Get.back();
       Get.snackbar(
           "Ooups !!!", "Une erreur est survenue, veuillez recommencer.");

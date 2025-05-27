@@ -95,16 +95,16 @@ class TypeColisStep extends StatelessWidget {
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                   color: MyColors.danger.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(5)),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    Icons.delete_forever_outlined,
-                    size: 15,
+                    Icons.warning_amber_outlined,
+                    size: 20,
                     color: MyColors.danger,
                   ),
                   Text(" Voir la liste des produits prohibés ",

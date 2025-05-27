@@ -25,7 +25,7 @@ class Intro2 extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             Text(
-              "Dépose ton colis ...",
+              "Dépose-le...",
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class Intro2 extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
+                "Déposes ton colis dans le point Relais'Ivoir de ton choix.",
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),

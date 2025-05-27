@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
@@ -23,6 +22,7 @@ class ItemBloc extends StatefulWidget {
 
 class _ItemBlocState extends State<ItemBloc> {
   IconData icon = Icons.cancel;
+  Color color = Colors.grey;
   bool sent = false;
 
   @override
@@ -30,12 +30,19 @@ class _ItemBlocState extends State<ItemBloc> {
     sent = widget.colis.status.target!.level == StatusColis.LIVRAISON;
     if (widget.colis.status.target!.level == StatusColis.EN_ATTENTE) {
       icon = Icons.watch_later_outlined;
+      color = Colors.grey;
     } else if (widget.colis.status.target!.level == StatusColis.DEPOSE) {
       icon = Icons.inventory_2;
+      color = MyColors.primary;
     } else if (widget.colis.status.target!.level == StatusColis.ASSIGNATION) {
-      icon = Icons.bike_scooter;
+      icon = Icons.pedal_bike;
+      color = MyColors.textprimary;
     } else if (widget.colis.status.target!.level == StatusColis.LIVRAISON) {
-      icon = Icons.shopping_bag_outlined;
+      icon = Icons.storefront;
+      color = MyColors.textprimary;
+    } else if (widget.colis.status.target!.level == StatusColis.RETRAIT) {
+      icon = Icons.done_all;
+      color = MyColors.success;
     }
     super.initState();
   }
@@ -105,10 +112,27 @@ class _ItemBlocState extends State<ItemBloc> {
                     ],
                   ),
                 ),
-                Center(
-                  child: Icon(icon,
-                      color: sent ? MyColors.success : MyColors.textprimary),
-                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(widget.colis.status.target?.libelle ?? "...",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                    ),
+                    SizedBox(height: Tools.PADDING / 3),
+                    Icon(icon, color: color)
+                  ],
+                )
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:objectbox/objectbox.dart';
+import 'dart:convert' show utf8;
 
 @Entity()
 class StatusColis {
@@ -28,13 +29,14 @@ class StatusColis {
   });
 
   factory StatusColis.fromJson(Map<String, dynamic> json) {
-    return StatusColis(
+    StatusColis status = StatusColis(
       uid: json['id'],
       libelle: json['libelle'],
       level: json['level'],
       description: json['description'],
       color: json['color'],
     );
+    return status;
   }
 
   Map<String, dynamic> toJson() => {

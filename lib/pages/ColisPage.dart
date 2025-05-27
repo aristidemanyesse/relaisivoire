@@ -7,6 +7,7 @@ import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/widgets/HandlePayementPopup.dart';
 import 'package:lpr/components/widgets/wave.dart';
+import 'package:lpr/controllers/ColisController.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/controllers/HandleTypesController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
@@ -31,7 +32,8 @@ class _ColisPageState extends State<ColisPage> {
   final PageController _controller = PageController();
   HandleTypesController controller = Get.find();
   GeneralController generalController = Get.find();
-  bool isWaiting = true;
+  ColisController colisController = Get.find();
+  bool en_attente = true;
   bool forMe = false;
 
   Timer? _timer;
@@ -41,7 +43,6 @@ class _ColisPageState extends State<ColisPage> {
       dynamic res = await widget.colis.checkStartPayement();
       if (res[0]) {
         _timer?.cancel();
-        print('timer cancelled');
         // lancer le payement
         Get.bottomSheet(
             HandlePayementPopup(
@@ -58,7 +59,7 @@ class _ColisPageState extends State<ColisPage> {
     super.initState();
     forMe = widget.colis.sender.target?.contact ==
         generalController.client.value?.contact;
-    isWaiting = widget.colis.status.target!.level == StatusColis.EN_ATTENTE;
+    en_attente = widget.colis.status.target!.level == StatusColis.EN_ATTENTE;
     startCheck();
   }
 
@@ -143,13 +144,13 @@ class _ColisPageState extends State<ColisPage> {
                                     title: "Confirmation",
                                     message:
                                         "Voulez-vous vraiment annuler cette commande de livraison de colis ?",
-                                    testOk: "Oui, annuler",
+                                    testOk: "Oui, supprimer",
                                     testCancel: "Non",
                                     functionOk: () async {
                                       Get.dialog(PleaseWait2());
                                       bool res = await widget.colis.annuler();
                                       if (res) {
-                                        Get.back();
+                                        colisController.reload();
                                         Get.offAll(ListeColisPage());
                                       } else {
                                         Get.back();
@@ -245,21 +246,23 @@ class _ColisPageState extends State<ColisPage> {
             SizedBox(
               height: Tools.PADDING * 2,
             ),
-            if (isWaiting && !cutOff()) ...{
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                child: Text(
-                  " * Si vous déposez le colis avant 11h30, il sera disponible pour recuperation avant 16h30",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(fontStyle: FontStyle.italic),
+            if (en_attente) ...{
+              if (!cutOff()) ...{
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                  child: Text(
+                    " * Si vous déposez le colis avant 10h30, il sera disponible pour recuperation avant 16h30",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: Tools.PADDING,
-              ),
+                SizedBox(
+                  height: Tools.PADDING,
+                ),
+              },
               SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

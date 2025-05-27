@@ -1,4 +1,5 @@
 import 'package:objectbox/objectbox.dart';
+import 'dart:convert' show utf8;
 
 @Entity()
 class TypeVehicule {

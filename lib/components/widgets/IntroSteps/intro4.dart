@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/controllers/GeneralController.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Intro4 extends StatelessWidget {
   GeneralController controller = Get.find();
@@ -38,7 +39,7 @@ class Intro4 extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
+                "Ton colis t'attend, récupère le sans stress ni pression.",
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
@@ -71,15 +72,15 @@ class Intro4 extends StatelessWidget {
                   Text("Je confirme que j'ai lu et j'accepte les ",
                       style: Theme.of(context).textTheme.bodyMedium),
                   GestureDetector(
-                      child: Text("conditions générales",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(fontWeight: FontWeight.bold))),
-                  Text(" et la ",
-                      style: Theme.of(context).textTheme.bodyMedium),
-                  GestureDetector(
-                      child: Text("politique d'utilisation",
+                      onTap: () {
+                        launchUrl(
+                          Uri.parse(
+                              "https://www.relais-ivoir.com/app/privacy/"),
+                          mode: LaunchMode.externalApplication,
+                        );
+                      },
+                      child: Text(
+                          "conditions générales et la politique d'utilisation",
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!

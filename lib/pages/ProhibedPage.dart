@@ -67,6 +67,7 @@ class _ProhibedPageState extends State<ProhibedPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: MyColors.danger,
         leading: IconButton(
             onPressed: () {
               Get.back();
@@ -75,12 +76,13 @@ class _ProhibedPageState extends State<ProhibedPage>
               Icons.arrow_back,
             )),
         title: Text(
-          "Produits Prohibés",
+          "Liste des produits prohibés",
           style: Theme.of(context)
               .textTheme
               .titleMedium!
-              .copyWith(color: MyColors.secondary, fontWeight: FontWeight.bold),
+              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
       ),
       body: Container(
         height: Get.size.height,
@@ -90,29 +92,33 @@ class _ProhibedPageState extends State<ProhibedPage>
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemCount: produitsProhibes.length,
-                itemBuilder: (context, index) {
-                  final produit = produitsProhibes[index];
-                  return ListTile(
-                    leading: const Icon(Icons.block, color: Colors.red),
-                    title: Text(
-                      produit.nom,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(produit.motif),
-                  );
-                },
+              child: ListView(
+                children: ListTile.divideTiles(
+                    context: context,
+                    tiles: produitsProhibes.map((produit) {
+                      return ListTile(
+                        leading: const Icon(Icons.block,
+                            size: 30, color: Colors.red),
+                        title: Text(
+                          produit.nom,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(produit.motif),
+                      );
+                    })).toList(),
               ),
             ),
             SizedBox(height: Tools.PADDING),
             MainButtonInverse(
-                title: "Ok, compris",
-                icon: Icons.chevron_left,
+                title: "Ok, j'ai compris!",
+                icon: Icons.check,
                 onPressed: () {
                   Get.back();
                 }),
-            SizedBox(height: Tools.PADDING * 2),
+            SizedBox(height: Tools.PADDING),
           ],
         ),
       ),

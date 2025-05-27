@@ -480,6 +480,7 @@ class _ItineraireMapPageState extends State<ItineraireMapPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.primary,
+        centerTitle: true,
         title: Text(
           "Mon itinéraire de course",
           style: Theme.of(context).textTheme.titleMedium!.copyWith(

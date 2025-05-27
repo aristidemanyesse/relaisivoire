@@ -4,6 +4,7 @@ import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/controllers/GeneralController.dart';
 import 'package:lpr/models/ColisApp/Colis.dart';
 import 'package:lpr/models/ColisApp/StatusColis.dart';
+import 'package:intl/intl.dart';
 
 class ColisCard extends StatefulWidget {
   final Colis colis;
@@ -31,9 +32,9 @@ class _ColisCardState extends State<ColisCard> {
     } else if (widget.colis.status.target!.level == StatusColis.DEPOSE) {
       color = MyColors.primary;
     } else if (widget.colis.status.target!.level == StatusColis.ASSIGNATION) {
-      color = Colors.orange;
+      color = MyColors.textprimary;
     } else if (widget.colis.status.target!.level == StatusColis.LIVRAISON) {
-      color = MyColors.bleunuit;
+      color = MyColors.textprimary;
     } else if (widget.colis.status.target!.level == StatusColis.RETRAIT) {
       color = MyColors.success;
     }
@@ -59,9 +60,9 @@ class _ColisCardState extends State<ColisCard> {
                 children: [
                   Text(
                     "${widget.colis.typeColis.target?.icone}",
-                    style: TextStyle(fontSize: 50),
+                    style: TextStyle(fontSize: 60),
                   ),
-                  const SizedBox(width: Tools.PADDING / 2),
+                  const SizedBox(width: Tools.PADDING),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -75,7 +76,7 @@ class _ColisCardState extends State<ColisCard> {
                       Text(
                           "entre ${widget.colis.typeColis.target?.poids_min} Kg et ${widget.colis.typeColis.target?.poids_max} Kg",
                           style: Theme.of(context).textTheme.bodyLarge),
-                      SizedBox(height: Tools.PADDING / 2),
+                      SizedBox(height: Tools.PADDING / 4),
                       Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: Tools.PADDING / 2,
@@ -92,7 +93,14 @@ class _ColisCardState extends State<ColisCard> {
                                 .copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white)),
-                      )
+                      ),
+                      SizedBox(height: Tools.PADDING / 4),
+                      Text(
+                          widget.colis.dateCreation != null
+                              ? DateFormat('EEEE dd MMMM yyyy à HH:mm', 'fr')
+                                  .format(widget.colis.dateCreation!)
+                              : 'Date inconnue',
+                          style: Theme.of(context).textTheme.bodySmall),
                     ],
                   )
                 ],

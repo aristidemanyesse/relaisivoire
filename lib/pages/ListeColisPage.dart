@@ -155,6 +155,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
                         ));
                 }),
               ),
+              SizedBox(height: Tools.PADDING),
               Row(
                 children: [
                   Spacer(),
@@ -168,7 +169,7 @@ class _ListeColisPageState extends State<ListeColisPage> {
                   Spacer(),
                 ],
               ),
-              SizedBox(height: Tools.PADDING * 2),
+              SizedBox(height: Tools.PADDING),
             ],
           ),
         ),

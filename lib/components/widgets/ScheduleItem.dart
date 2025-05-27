@@ -37,8 +37,7 @@ class ScheduleItem extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             )
           ],
-        ),
-        Container(height: 20, width: 1, color: Colors.grey),
+        )
       ],
     );
   }

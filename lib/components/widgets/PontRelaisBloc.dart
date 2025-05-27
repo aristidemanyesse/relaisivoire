@@ -48,14 +48,13 @@ class PontRelaisBloc extends StatelessWidget {
                           color: MyColors.primary.withOpacity(0.6))),
                   width: double.infinity,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(
-                        child: Icon(Icons.location_on_sharp,
-                            size: 35,
-                            color: _controller.pointRelais.value == pointRelais
-                                ? MyColors.secondary
-                                : MyColors.primary),
-                      ),
+                      Icon(Icons.storefront_outlined,
+                          size: 40,
+                          color: _controller.pointRelais.value == pointRelais
+                              ? MyColors.secondary
+                              : MyColors.textprimary),
                       SizedBox(width: Tools.PADDING / 2),
                       Expanded(
                         child: Column(
@@ -69,11 +68,11 @@ class PontRelaisBloc extends StatelessWidget {
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.bold,
                                       color: _controller.pointRelais.value ==
                                               pointRelais
                                           ? MyColors.secondary
-                                          : MyColors.primary),
+                                          : MyColors.textprimary),
                             ),
                             Text(
                               pointRelais.adresse(),
@@ -84,7 +83,7 @@ class PontRelaisBloc extends StatelessWidget {
                                       color: _controller.pointRelais.value ==
                                               pointRelais
                                           ? MyColors.secondary
-                                          : MyColors.primary),
+                                          : Colors.black),
                             ),
                           ],
                         ),

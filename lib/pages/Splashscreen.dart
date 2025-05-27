@@ -71,13 +71,13 @@ class _SplashScreenState extends State<SplashScreen>
                 width: 120,
                 height: 120,
               ),
-              const SizedBox(height: 10),
-              Text(
-                "Livrez. Partout. Facilement.",
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: MyColors.primary,
-                    ),
-              ),
+              // const SizedBox(height: 10),
+              // Text(
+              //   "Livrez. Partout. Facilement.",
+              //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              //         color: MyColors.primary,
+              //       ),
+              // ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -64,7 +64,7 @@ class StepRecap extends StatelessWidget {
                 Text(subtitle,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyLarge!
+                        .titleSmall!
                         .copyWith(fontWeight: FontWeight.bold)),
                 if (subtitle2 != null)
                   Text(subtitle2 ?? "",

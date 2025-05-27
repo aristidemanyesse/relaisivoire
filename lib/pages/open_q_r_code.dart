@@ -20,6 +20,7 @@ class OpenQRCode extends StatelessWidget {
             icon: const Icon(
               Icons.arrow_back,
             )),
+        centerTitle: true,
         title: Text(
           "Scanner le QR code",
           style: Theme.of(context)

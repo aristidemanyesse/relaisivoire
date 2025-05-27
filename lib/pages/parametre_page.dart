@@ -214,7 +214,7 @@ class _ParametrePageState extends State<ParametrePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: Tools.PADDING / 3),
-                  Text("Le Point Relais",
+                  Text("Relais'Ivoir",
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
@@ -228,28 +228,20 @@ class _ParametrePageState extends State<ParametrePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Conditons générales",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                  color: MyColors.secondary,
-                                  fontWeight: FontWeight.bold)),
-                      SizedBox(
-                        width: Tools.PADDING,
-                        child: Center(
-                            child: Text("|",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(color: MyColors.secondary))),
-                      ),
-                      Text("Politique d'utilisation",
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      GestureDetector(
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              "https://www.relais-ivoir.com/app/privacy/"));
+                        },
+                        child: Text(
+                            "Conditons générales | Politique d'utilisation",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
                                     color: MyColors.secondary,
-                                    fontWeight: FontWeight.bold,
-                                  )),
+                                    fontWeight: FontWeight.bold)),
+                      ),
                     ],
                   ),
                   SizedBox(height: Tools.PADDING),
