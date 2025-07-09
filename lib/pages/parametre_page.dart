@@ -25,15 +25,17 @@ class _ParametrePageState extends State<ParametrePage> {
   HandleTypesController controller = Get.find();
   GeneralController generalController = Get.find();
 
-  String number = "+33 612 00 00 00";
+  String number = "+225 05 45 46 75 03";
   void call() async {
-    if (!await launchUrl(Uri.parse("tel:$number"))) {
+    String number_ = number.replaceAll(" ", "");
+    if (!await launchUrl(Uri.parse("tel:$number_"))) {
       throw 'Could not launch whatsapp ';
     }
   }
 
   void whatsapp() async {
-    if (!await launchUrl(Uri.parse("https://wa.me/$number"))) {
+    String number_ = number.replaceAll(" ", "");
+    if (!await launchUrl(Uri.parse("https://wa.me/$number_"))) {
       throw 'Could not launch whatsapp ';
     }
   }
@@ -129,7 +131,7 @@ class _ParametrePageState extends State<ParametrePage> {
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: Text(
-                                    '+33 612 00 00 00',
+                                    number,
                                   ),
                                   leading: const Icon(Icons.phone, size: 30),
                                   onTap: () {
@@ -145,7 +147,7 @@ class _ParametrePageState extends State<ParametrePage> {
                                             fontWeight: FontWeight.bold,
                                             color: Colors.green),
                                   ),
-                                  subtitle: Text('+33 612 00 00 00'),
+                                  subtitle: Text(number),
                                   leading: const Icon(Icons.whatshot, size: 30),
                                   onTap: () {
                                     whatsapp();
@@ -160,7 +162,7 @@ class _ParametrePageState extends State<ParametrePage> {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.blueAccent),
                                 ),
-                                subtitle: Text('+33 612 00 00 00'),
+                                subtitle: Text(number),
                                 leading: const Icon(Icons.telegram,
                                     color: Colors.blueAccent, size: 30),
                                 onTap: () {

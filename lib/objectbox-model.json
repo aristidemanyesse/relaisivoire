@@ -71,7 +71,7 @@
     },
     {
       "id": "2:3543005446155189019",
-      "lastPropertyId": "22:5931844170898409852",
+      "lastPropertyId": "23:1931896030666739202",
       "name": "Colis",
       "properties": [
         {
@@ -205,6 +205,11 @@
           "id": "22:5931844170898409852",
           "name": "startToPayement",
           "type": 1
+        },
+        {
+          "id": "23:1931896030666739202",
+          "name": "tax",
+          "type": 6
         }
       ],
       "relations": []
@@ -771,10 +776,54 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "17:2245373676778400017",
+      "lastPropertyId": "6:8619847920771664955",
+      "name": "Payement",
+      "properties": [
+        {
+          "id": "1:8019725322044019270",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7130348484903628985",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "32:4836449319707649417"
+        },
+        {
+          "id": "3:3187111593233764187",
+          "name": "amount",
+          "type": 9
+        },
+        {
+          "id": "4:1795925647358747953",
+          "name": "transactionId",
+          "type": 9
+        },
+        {
+          "id": "5:9160323560417797936",
+          "name": "status",
+          "type": 1
+        },
+        {
+          "id": "6:8619847920771664955",
+          "name": "colisId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "33:178062921797425074",
+          "relationTarget": "Colis"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "16:7330747115985110482",
-  "lastIndexId": "31:7633977393871195353",
+  "lastEntityId": "17:2245373676778400017",
+  "lastIndexId": "33:178062921797425074",
   "lastRelationId": "3:2517163978363044878",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

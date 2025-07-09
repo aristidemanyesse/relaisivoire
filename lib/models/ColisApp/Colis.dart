@@ -19,6 +19,7 @@ class Colis {
   String receiverName;
   String receiverPhone;
   int total;
+  int tax;
   final sender = ToOne<Client>();
   final receiver = ToOne<Client>();
   final pointRelaisSender = ToOne<PointRelais>();
@@ -43,6 +44,7 @@ class Colis {
       this.receiverName = "",
       this.receiverPhone = "",
       this.total = 0,
+      this.tax = 0,
       this.sold = false,
       this.startToPayement = false,
       this.depotDate,
@@ -59,6 +61,7 @@ class Colis {
       receiverName: json['receiver_name'] ?? "",
       receiverPhone: json['receiver_phone'] ?? "",
       total: json['total'] ?? 0,
+      tax: json['tax'] ?? 0,
       sold: json['sold'] ?? false,
       startToPayement: json['start_to_payment'] ?? false,
       dateCreation: DateTime.tryParse(json['date_creation'] ?? ""),
@@ -108,6 +111,7 @@ class Colis {
         'sender': sender.target?.uid ?? "",
         'receiver': receiver.target?.uid ?? "",
         'total': total,
+        'tax': tax,
         'sold': sold,
         'start_to_payment': startToPayement,
         'point_relais_sender': pointRelaisSender.target?.uid,
