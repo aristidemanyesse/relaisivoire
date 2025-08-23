@@ -71,7 +71,7 @@ class Client {
   static Future<bool> inscription(String contact) async {
     GeneralController controller = Get.find();
     Map<String, dynamic> response =
-        await ApiService.post('api/clients/', {'user': 1, 'contact': contact});
+        await ApiService.post('api/clients/', {'contact': contact});
     if (response["status"] && response["data"] != null) {
       CustomUser.connexion(contact);
       return true;
@@ -100,7 +100,7 @@ class Client {
   }
 
   Future<bool> updateContact(String number) async {
-    final res = await user.target!.changeCredentials(number);
+    final res = await user.target!.changeCredentials(number, number);
     if (res) {
       Map<String, dynamic> response =
           await ApiService.patch('api/clients/$uid/', {'contact': number});

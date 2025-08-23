@@ -26,12 +26,12 @@ class ColisController extends GetxController {
     ever(colis, (value) {
       listeAttentes.value = value
           .where(
-              (colis) => colis.status.target!.level == StatusColis.EN_ATTENTE)
+              (colis) => colis.status.target?.level == StatusColis.EN_ATTENTE)
           .toList();
 
       listeEnCours.value = value
           .where(
-              (colis) => colis.status.target!.level != StatusColis.EN_ATTENTE)
+              (colis) => colis.status.target?.level != StatusColis.EN_ATTENTE)
           .toList();
     });
   }

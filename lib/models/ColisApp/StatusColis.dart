@@ -7,8 +7,9 @@ class StatusColis {
   static const EN_ATTENTE = 2;
   static const DEPOSE = 3;
   static const ASSIGNATION = 4;
-  static const LIVRAISON = 5;
-  static const RETRAIT = 6;
+  static const RECUPERATION = 5;
+  static const LIVRAISON = 6;
+  static const RETRAIT = 7;
 
   int id = 0;
 

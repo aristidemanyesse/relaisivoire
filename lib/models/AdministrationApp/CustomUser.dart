@@ -81,10 +81,10 @@ class CustomUser {
     return null;
   }
 
-  Future<bool> changeCredentials(String number) async {
+  Future<bool> changeCredentials(String username, String password) async {
     Map<String, dynamic> response = await ApiService.post(
         'api/custom_users/change-credentials/',
-        {'username': number, 'password': number});
+        {'username': username, 'password': password});
     if (response["status"] && response["data"] != null) {
       return true;
     }

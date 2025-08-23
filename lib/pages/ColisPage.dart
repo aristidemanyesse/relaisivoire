@@ -29,7 +29,6 @@ class ColisPage extends StatefulWidget {
 }
 
 class _ColisPageState extends State<ColisPage> {
-  final PageController _controller = PageController();
   HandleTypesController controller = Get.find();
   GeneralController generalController = Get.find();
   ColisController colisController = Get.find();
@@ -37,19 +36,25 @@ class _ColisPageState extends State<ColisPage> {
   bool forMe = false;
 
   Timer? _timer;
+  bool openned = false;
   void startCheck() {
     _timer?.cancel(); // 🔁 stoppe un ancien timer s’il existe
     _timer = Timer.periodic(Duration(seconds: 7), (Timer t) async {
       dynamic res = await widget.colis.checkStartPayement();
       if (res[0]) {
-        _timer?.cancel();
-        // lancer le payement
+        openned = true;
         Get.bottomSheet(
             HandlePayementPopup(
               colis: res[1],
             ),
             isDismissible: false,
             enableDrag: false);
+      } else {
+        if (openned) {
+          _timer?.cancel();
+          Get.back();
+          Get.off(() => ColisPage(colis: widget.colis));
+        }
       }
     });
   }

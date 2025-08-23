@@ -1,0 +1,66 @@
+sequenceDiagram
+autonumber
+actor Client as Client (AA)
+participant AppC as App Client
+participant API as Serveur / API
+participant PRo as PR Dépôt
+participant AppPRo as App PR (Dépôt)
+participant Pay as Service Paiement
+participant Disp as Dispatching
+actor Livreur as Livreur
+participant AppL as App Livreur
+participant PRf as PR Final
+participant AppPRf as App PR (Final)
+participant Notif as Service Notifications
+
+
+Client ->> AppC: Connexion / Création de compte
+AppC ->> API: Authentification
+API -->> AppC: Jeton / Session
+
+
+Client ->> AppC: Créer un envoi (infos colis, PR final,<br/>contact de récupération optionnel)
+AppC ->> API: POST /shipments {payload}
+API -->> AppC: 201 Created (shipmentId, state=DECLARED)
+
+
+Client ->> PRo: Se présente pour déposer
+AppPRo ->> API: Lookup shipment (shipmentId / code)
+API -->> AppPRo: Détails de l’envoi
+AppPRo ->> API: Générer QR colis
+API -->> AppPRo: QR signé (pid)
+PRo ->> AppPRo: Vérification colis
+AppPRo ->> Pay: Initier paiement (pid, montant)
+Pay -->> AppC: Demande de validation (push/in-app)
+Client ->> AppC: Valide paiement
+AppC ->> Pay: Confirmation
+Pay ->> API: webhook payment.confirmed(pid)
+API -->> AppPRo: OK prise en charge (state=AT_ORIGIN_PR)
+API ->> Notif: shipment.status.changed(AT_ORIGIN_PR)
+
+Disp ->> API: Assigner un livreur
+API -->> AppL: Mission (PRo -> PRf, pid)
+Livreur ->> AppL: Arrivée PRo (scan QR)
+AppL ->> API: POST /shipments/{pid}/pickup {geo, ts}
+API -->> AppL: OK (state=IN_TRANSIT)
+API ->> Notif: shipment.status.changed(IN_TRANSIT)
+
+Livreur ->> AppL: Arrivée PRf (scan QR)
+AppL ->> API: POST /shipments/{pid}/dropoff {geo, ts}
+API -->> AppL: OK (state=AT_DEST_PR)
+AppPRf ->> API: POST /shipments/{pid}/ready
+API -->> AppPRf: OK (state=READY_FOR_PICKUP)
+API ->> Notif: "Colis disponible au PR final"
+
+Client ->> PRf: Vient retirer le colis
+PRf ->> AppPRf: Scanner QR / code retrait
+alt Contact de récupération défini
+  AppPRf ->> API: Vérifier identité contact (OTP/PIN + doc)
+  API -->> AppPRf: OK
+else Pas de contact défini
+  AppPRf ->> API: Vérifier identité du client (OTP/PIN + doc)
+  API -->> AppPRf: OK
+end
+AppPRf ->> API: POST /shipments/{pid}/deliver
+API -->> AppPRf: OK (state=DELIVERED)
+API ->> Notif: Confirmation de livraison

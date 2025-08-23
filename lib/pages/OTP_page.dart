@@ -156,7 +156,7 @@ class _OPTPageState extends State<OPTPage> {
                         ),
                         const SizedBox(height: Tools.PADDING / 3),
                         Text(
-                          "Nous vous avons envoyé un code par SMS sur \n+222 ${widget.number}",
+                          "Nous vous avons envoyé un code par SMS sur \n+225 ${widget.number}",
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
