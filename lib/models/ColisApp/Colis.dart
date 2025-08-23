@@ -157,7 +157,7 @@ class Colis {
     final response = await ApiService.get("api/colis/search/?code=$code");
     if (response["status"] && response["data"] != null) {
       final colis = Colis.fromJson(response["data"]);
-      return [colis.startToPayement, colis];
+      return [colis.startToPayement && !colis.sold, colis];
     }
     return [false, null];
   }
