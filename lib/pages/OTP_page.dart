@@ -170,7 +170,7 @@ class _OPTPageState extends State<OPTPage> {
                           ),
                           const SizedBox(height: Tools.PADDING / 3),
                           Text(
-                            "Entrez le code envoyé au ${widget.number}",
+                            "Entrez le code réçu au ${widget.number}",
                             style: Theme.of(context).textTheme.bodyLarge!
                                 .copyWith(color: MyColors.secondary, height: 2),
                           ),
