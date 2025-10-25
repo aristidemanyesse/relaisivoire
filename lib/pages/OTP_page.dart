@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -50,12 +50,14 @@ class _OPTPageState extends State<OPTPage> {
 
     _otpInteractor = OTPInteractor();
     // Commence à écouter les SMS entrants
-    _otpInteractor.getAppSignature().then((value) {
-      setState(() {
-        signature = value ?? "";
-        _resendOtp(signature);
+    if (Platform.isAndroid) {
+      _otpInteractor.getAppSignature().then((signature) {
+        _resendOtp(signature ?? "");
       });
-    });
+    } else {
+      // iOS : pas besoin de signature
+      _resendOtp("");
+    }
 
     controller =
         OTPTextEditController(

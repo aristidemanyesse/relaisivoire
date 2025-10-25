@@ -60,51 +60,54 @@ class _ColisCardState extends State<ColisCard> {
                     style: TextStyle(fontSize: 60),
                   ),
                   const SizedBox(width: Tools.PADDING),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${widget.colis.typeColis.target?.libelle}",
-                        style: Theme.of(context).textTheme.titleMedium!
-                            .copyWith(
-                              color: MyColors.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      Text(
-                        "entre ${widget.colis.typeColis.target?.poids_min} Kg et ${widget.colis.typeColis.target?.poids_max} Kg",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      SizedBox(height: Tools.PADDING / 4),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: Tools.PADDING / 2,
-                          vertical: Tools.PADDING / 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          widget.colis.status.target?.description ?? "...",
-                          style: Theme.of(context).textTheme.bodyMedium!
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${widget.colis.typeColis.target?.libelle}",
+                          style: Theme.of(context).textTheme.titleMedium!
                               .copyWith(
+                                color: MyColors.primary,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
                               ),
                         ),
-                      ),
-                      SizedBox(height: Tools.PADDING / 4),
-                      Text(
-                        widget.colis.dateCreation != null
-                            ? DateFormat(
-                                'EEEE dd MMMM yyyy à HH:mm',
-                                'fr',
-                              ).format(widget.colis.dateCreation!)
-                            : 'Date inconnue',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
+                        Text(
+                          "entre ${widget.colis.typeColis.target?.poids_min} Kg et ${widget.colis.typeColis.target?.poids_max} Kg",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        SizedBox(height: Tools.PADDING / 4),
+                        Text(
+                          widget.colis.dateCreation != null
+                              ? DateFormat(
+                                  'EEEE dd MMMM yyyy à HH:mm',
+                                  'fr',
+                                ).format(widget.colis.dateCreation!)
+                              : 'Date inconnue',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        SizedBox(height: Tools.PADDING / 4),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: Tools.PADDING / 3,
+                            vertical: Tools.PADDING / 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            widget.colis.status.target?.description ?? "...",
+                            style: Theme.of(context).textTheme.bodySmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 11,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

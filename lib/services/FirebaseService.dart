@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
+import 'package:relaisivoire/controllers/GeneralController.dart';
 // import 'package:relaisivoire/services/NotificationService.dart';
 
 class FirebaseService {
@@ -28,6 +30,17 @@ class FirebaseService {
     } else {
       print('User declined or has not accepted permission');
     }
+
+    // ✅ Récupérer le token FCM (sur iOS inclut le token APNS)
+    GeneralController controller = Get.find();
+    controller.fcmToken.value = await messaging.getToken() ?? '';
+    print('FCM / APNS token: ${controller.fcmToken.value}');
+
+    // Écoute la mise à jour du token
+    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
+      controller.fcmToken.value = newToken;
+      print('Token mis à jour : ${controller.fcmToken.value}');
+    });
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {

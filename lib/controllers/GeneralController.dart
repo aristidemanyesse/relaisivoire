@@ -11,6 +11,7 @@ import 'package:relaisivoire/services/LoactionService.dart';
 import 'package:relaisivoire/services/SessionService.dart';
 import 'package:relaisivoire/services/StoreService.dart';
 import 'package:relaisivoire/services/SyncService.dart';
+import 'dart:io';
 
 class GeneralController extends GetxController {
   RxBool connected = false.obs;
@@ -25,7 +26,6 @@ class GeneralController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    getFCMToken();
     position.value = await LocationService.getCurrentPosition();
   }
 
@@ -46,15 +46,6 @@ class GeneralController extends GetxController {
         }
       }
     });
-  }
-
-  void getFCMToken() async {
-    FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
-      print("APNs Token: $apnsToken");
-      // fcmToken.value = apnsToken ?? "";
-    });
-    fcmToken.value = await FirebaseMessaging.instance.getToken() ?? "";
-    print("🔑 Token FCM: $fcmToken");
   }
 
   void deconnexion() async {

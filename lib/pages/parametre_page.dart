@@ -198,8 +198,8 @@ class _ParametrePageState extends State<ParametrePage> {
               ),
             ),
             Spacer(),
-            Center(child: Image.asset("assets/images/logo.png", height: 120)),
-            Spacer(),
+            // Center(child: Image.asset("assets/images/logo.png", height: 120)),
+            // Spacer(),
             SizedBox(height: 20, child: const WaveInverse()),
             Container(
               color: MyColors.primary,
