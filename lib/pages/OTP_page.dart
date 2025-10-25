@@ -241,7 +241,10 @@ class _OPTPageState extends State<OPTPage> {
                     const Spacer(),
                     Obx(() {
                       return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment:
+                            keyBoardController.value.value.length == 6
+                            ? MainAxisAlignment.spaceBetween
+                            : MainAxisAlignment.center,
                         children: [
                           MainButton(
                             title: "Retour",
@@ -258,44 +261,11 @@ class _OPTPageState extends State<OPTPage> {
                               onPressed: () {
                                 checkOtp();
                               },
-                            )
-                          else
-                            Container(
-                              child: _isButtonDisabled
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Renvoyez dans ",
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.bodyLarge,
-                                        ),
-                                        Text(
-                                          "$_counter s",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                      ],
-                                    )
-                                  : MainButtonIcon(
-                                      icon: Icons.refresh,
-                                      onPressed: () {
-                                        _resendOtp(signature);
-                                      },
-                                    ),
                             ),
                         ],
                       );
                     }),
-                    SizedBox(height: Tools.PADDING),
+                    const Spacer(),
                   ],
                 ),
               ),

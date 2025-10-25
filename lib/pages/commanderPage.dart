@@ -75,8 +75,8 @@ class _CommanderPageState extends State<CommanderPage>
                     title: "😩😟 Hhmmm !",
                     message:
                         "En quittant cette page, vous allez perdre le processus de validation du relais.",
-                    testOk: "Oui",
-                    testCancel: "Non, je reste",
+                    testOk: "Quitter",
+                    testCancel: "Je reste",
                     functionOk: () {
                       _controller.onInit();
                       Get.off(ListeColisPage());
