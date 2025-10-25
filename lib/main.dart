@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ import 'package:lpr/firebase_options.dart';
 import 'package:lpr/pages/SplashScreen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:lpr/services/FirebaseService.dart';
-import 'package:lpr/services/NotificationService.dart';
+// import 'package:lpr/services/NotificationService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +23,8 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(
       FirebaseService.firebaseMessagingBackgroundHandler);
 
-  NotificationService().initNotification();
-  NotificationService.requestPermissions();
+  // NotificationService().initNotification();
+  // NotificationService.requestPermissions();
 
   await initializeDateFormatting('fr_FR', null);
   Get.put(GeneralController());
@@ -36,21 +35,21 @@ void main() async {
   Get.put(CommandeProcessController());
 
   // Vérifie si l'app a été lancée via une notification
-  ReceivedAction? initialAction = await AwesomeNotifications()
-      .getInitialNotificationAction(removeFromActionEvents: false);
+  // ReceivedAction? initialAction = await AwesomeNotifications()
+  //     .getInitialNotificationAction(removeFromActionEvents: false);
 
-  runApp(MyApp(initialAction: initialAction));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final ReceivedAction? initialAction;
-  const MyApp({super.key, this.initialAction});
+  // final ReceivedAction? initialAction;
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     GeneralController controller = Get.find();
-    print("🔔 Notification initiale : $initialAction");
+    // print("🔔 Notification initiale : $initialAction");
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Relais'Ivoir",
