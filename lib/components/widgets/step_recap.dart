@@ -24,9 +24,6 @@ class StepRecap extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 5,
-              ),
               Container(
                 height: 16,
                 width: 16,

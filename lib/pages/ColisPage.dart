@@ -51,9 +51,10 @@ class _ColisPageState extends State<ColisPage> {
       } else {
         if (openned) {
           Colis.searchByCode(widget.colis.code).then((value) {
-            colis = value;
-            Get.off(ColisPage(colis: colis!));
+            Get.off(ColisPage(colis: value!));
           });
+          _timer?.cancel();
+          Get.back();
         }
       }
     });
@@ -268,20 +269,20 @@ class _ColisPageState extends State<ColisPage> {
                 SizedBox(
                   height: Tools.PADDING,
                 ),
-              },
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MainButtonInverse(
-                        title: "Trouver un point relais",
-                        icon: Icons.location_on_sharp,
-                        onPressed: () {
-                          Get.to(SearchPointRelais());
-                        }),
-                  ],
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MainButtonInverse(
+                          title: "Trouver un point relais",
+                          icon: Icons.location_on_sharp,
+                          onPressed: () {
+                            Get.to(SearchPointRelais());
+                          }),
+                    ],
+                  ),
                 ),
-              ),
+              },
             } else if (!forMe)
               MainButtonInverse(
                   title: "Me guider vers le point relais",

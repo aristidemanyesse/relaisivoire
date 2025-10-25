@@ -37,6 +37,7 @@ class EmballageBloc extends StatelessWidget {
                 _controller.typeEmballage.value = typeEmballage;
               },
               child: Container(
+                constraints: BoxConstraints(minHeight: 65),
                 padding: const EdgeInsets.symmetric(
                   horizontal: Tools.PADDING / 2,
                   vertical: Tools.PADDING / 4,
@@ -48,7 +49,6 @@ class EmballageBloc extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(width: 0.5)),
                 width: double.infinity,
-                height: 65,
                 child: Row(
                   children: [
                     Icon(icon,
@@ -62,6 +62,7 @@ class EmballageBloc extends StatelessWidget {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(title,
                               style: Theme.of(context)

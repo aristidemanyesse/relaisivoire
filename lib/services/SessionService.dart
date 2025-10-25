@@ -29,9 +29,14 @@ class SessionService {
 
       final connected = await GeneralController.isConnected();
       if (connected) {
-        await CustomUser.connexion(client.contact);
-        Client? test = await Client.searchByContact(client.contact);
-        client = test ?? client;
+        bool test = await CustomUser.connexion(client.contact);
+        if (!test) {
+          print("🚫 Client non authentifié : ${client.contact}");
+          controller.connected.value = false;
+          return null;
+        }
+        Client? client_ = await Client.searchByContact(client.contact);
+        client = client_ ?? client;
       }
 
       controller.client.value = client;

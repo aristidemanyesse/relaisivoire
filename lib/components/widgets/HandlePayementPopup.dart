@@ -138,7 +138,7 @@ class _HandlePayementPopupState extends State<HandlePayementPopup> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("${widget.colis.total - widget.colis.tax} Fcfa",
+                      Text("${widget.colis.total} Fcfa",
                           style: Theme.of(context)
                               .textTheme
                               .titleLarge!

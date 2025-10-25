@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get/get.dart';
+import 'package:lpr/components/elements/confirmDialog.dart';
+import 'package:lpr/components/elements/main_button_icon_inverse.dart';
+import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/controllers/CommandeProcessController.dart';
+import 'package:lpr/controllers/HandleTypesController.dart';
 
 class FormulaireContactDestinataire extends StatefulWidget {
   const FormulaireContactDestinataire({
@@ -20,6 +26,7 @@ class _FormulaireContactDestinataireState
   final TextEditingController _contactController =
       TextEditingController(text: "");
 
+  final HandleTypesController handleTypesController = Get.find();
   final CommandeProcessController _controller = Get.find();
 
   @override
@@ -30,128 +37,125 @@ class _FormulaireContactDestinataireState
     _contactController.text = _controller.contactDestinataire.value;
   }
 
-  void getContact() async {
-    if (await FlutterContacts.requestPermission()) {
-      final contact = await FlutterContacts.openExternalPick();
-      setState(() {
-        _nameController.text = contact?.displayName ?? "";
-        _contactController.text = contact?.phones.first.normalizedNumber ?? "";
-
-        _controller.nomDestinataire.value = _nameController.text;
-        _controller.contactDestinataire.value = _contactController.text;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: Tools.PADDING,
-      ),
+    return Dialog(
+      backgroundColor: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                  onPressed: () {
-                    getContact();
-                  },
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.contact_phone,
-                        color: MyColors.primary,
-                        size: 40,
-                      ),
-                      const SizedBox(
-                        width: Tools.PADDING / 2,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Choisir parmis mes",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          Text("contacts téléphoniques",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium),
-                        ],
-                      ),
-                    ],
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: Tools.PADDING,
+          Container(
+            color: MyColors.primary,
+            height: 50,
+            alignment: Alignment.center,
+            child: Text("Renseigner le destinataire",
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(color: Colors.white)),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: Tools.PADDING * 3),
-            child: Row(
-              children: [
-                Expanded(child: Divider()),
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
-                    child: Text("Ou")),
-                Expanded(child: Divider()),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: Tools.PADDING,
-          ),
-          TextField(
-              controller: _nameController,
-              onChanged: (value) => _controller.nomDestinataire.value = value,
-              decoration: InputDecoration(
-                hintText: "Nom du destinataire...",
-                hintStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.transparent, // Fond transparent
-                prefixIcon: Icon(Icons.person, color: MyColors.primary),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15), // Bords arrondis
-                  borderSide: BorderSide(
-                      color: MyColors.primary, width: 1.5), // Contour
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                  borderSide: BorderSide(color: MyColors.primary, width: 2),
-                ),
-              ),
-              style: Theme.of(context).textTheme.labelLarge!),
-          const SizedBox(
-            height: Tools.PADDING * 1.5,
-          ),
-          TextField(
-              controller: _contactController,
-              onChanged: (value) =>
-                  _controller.contactDestinataire.value = value,
-              decoration: InputDecoration(
-                hintText: "Contact du destinataire...",
-                hintStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.transparent, // Fond transparent
-                prefixIcon: Icon(Icons.phone, color: MyColors.primary),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15), // Bords arrondis
-                  borderSide: BorderSide(
-                      color: MyColors.primary, width: 1.5), // Contour
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                  borderSide: BorderSide(color: MyColors.primary, width: 2),
-                ),
-              ),
-              style: Theme.of(context).textTheme.labelLarge!),
+              padding: EdgeInsets.all(Tools.PADDING / 1.5),
+              child: Column(
+                children: [
+                  TextField(
+                      controller: _nameController,
+                      onChanged: (value) =>
+                          _controller.nomDestinataire.value = value,
+                      decoration: InputDecoration(
+                        hintText: "Nom du destinataire...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        filled: true,
+                        fillColor: Colors.transparent, // Fond transparent
+                        prefixIcon: Icon(Icons.person, color: MyColors.primary),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(15), // Bords arrondis
+                          borderSide: BorderSide(
+                              color: MyColors.primary, width: 1.5), // Contour
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide:
+                              BorderSide(color: MyColors.primary, width: 2),
+                        ),
+                      ),
+                      style: Theme.of(context).textTheme.bodyLarge!),
+                  const SizedBox(
+                    height: Tools.PADDING,
+                  ),
+                  TextField(
+                      controller: _contactController,
+                      onChanged: (value) =>
+                          _controller.contactDestinataire.value = value,
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(10),
+                      ],
+                      decoration: InputDecoration(
+                        hintText: "Contact du destinataire...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        filled: true,
+                        fillColor: Colors.transparent, // Fond transparent
+                        prefixIcon: Icon(Icons.phone, color: MyColors.primary),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: Tools.PADDING / 1.5),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(15), // Bords arrondis
+                          borderSide: BorderSide(
+                              color: MyColors.primary, width: 1.5), // Contour
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide:
+                              BorderSide(color: MyColors.primary, width: 2),
+                        ),
+                      ),
+                      style: Theme.of(context).textTheme.bodyLarge!),
+                  const SizedBox(
+                    height: Tools.PADDING,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MainButtonInverse(
+                        title: "Valider",
+                        onPressed: () {
+                          if (_contactController.text.isEmpty ||
+                              _nameController.text.isEmpty) {
+                            Tools.showErrorToast(
+                                title: "Ooops",
+                                message:
+                                    "Vous devez renseigner le nom et le contact");
+                            return;
+                          }
+                          _controller.nomDestinataire.value =
+                              _nameController.text;
+                          _controller.contactDestinataire.value =
+                              _contactController.text;
+
+                          _controller.typeDestinataire.value =
+                              handleTypesController.listeTypeDestinataires.value
+                                  .firstWhere((element) => element.level == 3);
+                          Get.back();
+                        },
+                      ).animate().fadeIn(duration: 1000.ms),
+                      MainButtonIconInverse(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icons.close,
+                      ),
+                    ],
+                  )
+                ],
+              )),
         ],
       ),
     );

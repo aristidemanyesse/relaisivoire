@@ -37,7 +37,11 @@ class GeneralController extends GetxController {
       if (value != null) {
         final store = await getStore();
         SyncService syncService = SyncService(store: store);
-        await CustomUser.connexion(value.contact);
+        bool test = await CustomUser.connexion(value.contact);
+        if (!test) {
+          print("🚫 Erreur lors du changement de client");
+          deconnexion();
+        }
         SyncService.putIfNotNull(syncService.store.box<Client>(), value);
         final connected = await GeneralController.isConnected();
         if (connected) {

@@ -15,44 +15,40 @@ class KeyBoardNumberPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 430,
-      padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: Tools.PADDING * 1.5,
-          mainAxisSpacing: Tools.PADDING,
-          childAspectRatio: 1.0,
-        ),
-        itemCount: 12,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 10) {
-            return KeyboardButton(
-              text: "0",
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: Tools.PADDING * 1.5,
+        mainAxisSpacing: Tools.PADDING,
+        childAspectRatio: 1.0,
+      ),
+      itemCount: 12,
+      itemBuilder: (BuildContext context, int index) {
+        if (index == 10) {
+          return KeyboardButton(
+            text: "0",
+            limit: limit,
+            controller: keyBoardController,
+          );
+        } else if (index == 9) {
+          return Container();
+        } else if (index == 11) {
+          return IconButton(
+            icon: const Icon(
+              Icons.backspace,
+              color: MyColors.textprimary,
+            ),
+            onPressed: () {
+              keyBoardController.remove();
+            },
+          );
+        } else {
+          return KeyboardButton(
               limit: limit,
               controller: keyBoardController,
-            );
-          } else if (index == 9) {
-            return Container();
-          } else if (index == 11) {
-            return IconButton(
-              icon: const Icon(
-                Icons.backspace,
-                color: MyColors.textprimary,
-              ),
-              onPressed: () {
-                keyBoardController.remove();
-              },
-            );
-          } else {
-            return KeyboardButton(
-                limit: limit,
-                controller: keyBoardController,
-                text: "${index + 1}");
-          }
-        },
-      ),
+              text: "${index + 1}");
+        }
+      },
     );
   }
 }

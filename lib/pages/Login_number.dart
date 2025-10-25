@@ -107,23 +107,29 @@ class _LoginNumberState extends State<LoginNumber> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: Tools.PADDING * 3),
+                padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
                 decoration: const BoxDecoration(
                     color: MyColors.secondary,
                     border: Border(top: BorderSide.none)),
                 child: Column(
                   children: [
-                    const Spacer(),
+                    SizedBox(height: Tools.PADDING * 2),
                     Obx(() {
                       _number = keyBoardController.value.value;
                       return MyInputNumber(nbPlaces: 10, value: _number);
                     }),
-                    const Spacer(),
-                    KeyBoardNumberPad(
-                      limit: 10,
+                    Expanded(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Tools.PADDING),
+                        child: KeyBoardNumberPad(
+                          limit: 10,
+                        ),
+                      ),
                     ),
-                    const Spacer(),
+                    SizedBox(
+                      height: Tools.PADDING,
+                    ),
                     Obx(() {
                       return (keyBoardController.value.value.length == 10)
                           ? MainButtonInverse(
@@ -154,7 +160,6 @@ class _LoginNumberState extends State<LoginNumber> {
                               })
                           : Container();
                     }),
-                    const Spacer(),
                     SizedBox(
                       height: Tools.PADDING,
                     ),

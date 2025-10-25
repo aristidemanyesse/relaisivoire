@@ -26,8 +26,8 @@ class _RecapitulatifStepState extends State<RecapitulatifStep> {
 
   bool cutOff() {
     final maintenant = DateTime.now();
-    return maintenant.hour > 11 ||
-        (maintenant.hour == 11 && maintenant.minute >= 30);
+    return maintenant.hour > 20 ||
+        (maintenant.hour == 20 && maintenant.minute >= 30);
   }
 
   @override
@@ -72,59 +72,59 @@ class _RecapitulatifStepState extends State<RecapitulatifStep> {
               ],
             )),
         const SizedBox(height: 20, child: Wave()),
-        Spacer(),
-        Container(
-          height: 500,
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(
-            horizontal: Tools.PADDING * 2,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Spacer(),
-              StepRecap(
-                  title: "Type de colis",
-                  subtitle:
-                      "${_controller.typeColis.value?.libelle} ${_controller.typeColis.value?.icone}"),
-              StepRecap(
-                  title: "Poids du colis",
-                  subtitle:
-                      "entre ${_controller.typeColis.value?.poids_min} et ${_controller.typeColis.value?.poids_max} Kg"),
-              StepRecap(
-                  title: "Niveau d'emballage",
-                  subtitle: _controller.typeEmballage.value?.level == 1
-                      ? "Oui bien emballé"
-                      : "Non, c'est juste le colis"),
-              StepRecap(
-                  title: "Coordonnées du destinataire",
-                  subtitle: _controller.typeDestinataire.value?.level == 1
-                      ? "Moi-même (${generalController.client.value?.contact})"
-                      : "${_controller.nomDestinataire.value} - ${_controller.contactDestinataire.value}"),
-              StepRecap(
-                title: "Lieu de Rétrait du colis",
-                subtitle: "${_controller.pointRelais.value?.libelle}",
-                subtitle2: "${_controller.pointRelais.value?.adresse()}",
-              ),
-              StepRecap(
-                title: "Total à payer au dépôt",
-                subtitle: "${_controller.price.value} Fcfa",
-                subtitle2:
-                    "* Ce montant est estimé, le montant final sera calculé au dépôt du colis",
-              ),
-              Spacer(),
-              if (!cutOff())
-                Text(
-                    " * Si vous déposez le colis avant 10h30, il sera disponible pour recuperation avant 16h30",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontStyle: FontStyle.italic))
-            ],
+        SizedBox(height: Tools.PADDING),
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            padding:
+                const EdgeInsets.symmetric(horizontal: Tools.PADDING * 1.5),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                StepRecap(
+                    title: "Type de colis",
+                    subtitle:
+                        "${_controller.typeColis.value?.libelle} ${_controller.typeColis.value?.icone}"),
+                StepRecap(
+                    title: "Poids du colis",
+                    subtitle:
+                        "entre ${_controller.typeColis.value?.poids_min} et ${_controller.typeColis.value?.poids_max} Kg"),
+                StepRecap(
+                    title: "Niveau d'emballage",
+                    subtitle: _controller.typeEmballage.value?.level == 1
+                        ? "Oui bien emballé"
+                        : "Non, c'est juste le colis"),
+                StepRecap(
+                    title: "Coordonnées du destinataire",
+                    subtitle: _controller.typeDestinataire.value?.level == 1
+                        ? "Moi-même (${generalController.client.value?.contact})"
+                        : "${_controller.nomDestinataire.value} - ${_controller.contactDestinataire.value}"),
+                StepRecap(
+                  title: "Lieu de Rétrait du colis",
+                  subtitle: "${_controller.pointRelais.value?.libelle}",
+                  subtitle2: "${_controller.pointRelais.value?.adresse()}",
+                ),
+                StepRecap(
+                  title: "Total à payer au dépôt",
+                  subtitle: "${_controller.price.value} Fcfa",
+                  subtitle2:
+                      "* Ce montant est estimé, le montant final sera calculé au dépôt du colis",
+                ),
+              ],
+            ),
           ),
         ),
-        Spacer(),
+        if (!cutOff())
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+            child: Text(
+                " * Si vous déposez le colis avant 10h30, il sera disponible pour recuperation avant 16h30",
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(fontStyle: FontStyle.italic)),
+          ),
       ],
     );
   }

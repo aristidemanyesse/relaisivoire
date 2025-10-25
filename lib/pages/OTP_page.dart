@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/elements/main_button.dart';
+import 'package:lpr/components/elements/main_button_icon.dart';
 import 'package:lpr/components/elements/main_button_inverse.dart';
 import 'package:lpr/components/tools/tools.dart';
 import 'package:lpr/components/elements/KeyBoardNumberPad.dart';
@@ -157,10 +158,10 @@ class _OPTPageState extends State<OPTPage> {
                         const SizedBox(height: Tools.PADDING / 3),
                         Text(
                           "Nous vous avons envoyé un code par SMS sur \n+225 ${widget.number}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: MyColors.secondary, height: 2),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: MyColors.secondary,
+                                  ),
                         ),
                       ],
                     )
@@ -174,16 +175,13 @@ class _OPTPageState extends State<OPTPage> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Tools.PADDING * 2,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
                   decoration: const BoxDecoration(
                       color: MyColors.secondary,
                       border: Border(top: BorderSide.none)),
                   child: Column(
                     children: [
-                      const SizedBox(height: Tools.PADDING / 3),
-                      const Spacer(),
+                      const SizedBox(height: Tools.PADDING),
                       Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: Tools.PADDING,
@@ -192,46 +190,16 @@ class _OPTPageState extends State<OPTPage> {
                             _otp = keyBoardController.value.value;
                             return MyInputNumber(nbPlaces: 6, value: _otp);
                           })),
-                      const Spacer(),
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Tools.PADDING,
-                          ),
-                          child: KeyBoardNumberPad(limit: 6)),
-                      const Spacer(),
-                      if (_isButtonDisabled)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Renvoyer le code dans ",
-                                style: Theme.of(context).textTheme.bodyLarge),
-                            Text("$_counter s",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                          ],
-                        )
-                      else
-                        TextButton(
-                          onPressed: _isButtonDisabled
-                              ? null
-                              : () {
-                                  _resendOtp(signature);
-                                },
-                          child: Text("Renvoyer le code OTP",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(fontWeight: FontWeight.bold)),
-                        ),
-                      const Spacer(),
+                      const SizedBox(height: Tools.PADDING),
+                      Expanded(
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Tools.PADDING * 1.5),
+                              child: KeyBoardNumberPad(limit: 6))),
+                      const SizedBox(height: Tools.PADDING),
                       Obx(() {
                         return Row(
-                          mainAxisAlignment:
-                              (keyBoardController.value.value.length == 6)
-                                  ? MainAxisAlignment.spaceBetween
-                                  : MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MainButton(
                                 title: "Retour",
@@ -246,11 +214,38 @@ class _OPTPageState extends State<OPTPage> {
                                   icon: Icons.check,
                                   onPressed: () {
                                     checkOtp();
-                                  }),
+                                  })
+                            else
+                              Container(
+                                child: _isButtonDisabled
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text("Renvoyez dans ",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge),
+                                          Text("$_counter s",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                        ],
+                                      )
+                                    : MainButtonIcon(
+                                        icon: Icons.refresh,
+                                        onPressed: () {
+                                          _resendOtp(signature);
+                                        }),
+                              )
                           ],
                         );
                       }),
-                      const Spacer(),
                       SizedBox(
                         height: Tools.PADDING,
                       ),

@@ -69,7 +69,10 @@ class SyncService {
             fromJson: (json) => TypeDestinataire.fromJson(json),
             box: store.box<TypeDestinataire>(),
             label: "TypeDestinataire");
-
+    handleTypesController.listeTypeDestinataires.value.add(TypeDestinataire(
+        libelle: "Saisir le contact",
+        description: "Saisir les infos du destinataire",
+        level: 3));
     // await syncGenericList<StatusColis>(
     //     endpoint: 'api/status_colis/',
     //     fromJson: (json) => StatusColis.fromJson(json),

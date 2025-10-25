@@ -41,7 +41,8 @@ class _CommanderPageState extends State<CommanderPage>
     bool c = (_currentPageIndex == 2 &&
             _controller.typeDestinataire.value?.level == 1) ||
         (_currentPageIndex == 2 &&
-            _controller.typeDestinataire.value?.level == 2 &&
+            (_controller.typeDestinataire.value?.level == 2 ||
+                _controller.typeDestinataire.value?.level == 3) &&
             _controller.contactDestinataire.value != "" &&
             _controller.nomDestinataire.value != "");
     bool d = (_controller.pointRelais.value != null && _currentPageIndex == 3);
@@ -188,7 +189,7 @@ class _CommanderPageState extends State<CommanderPage>
                           }),
                     if (_currentPageIndex == pages.length - 1)
                       MainButtonInverse(
-                        title: "Valider la relais",
+                        title: "Valider le colis",
                         icon: Icons.check,
                         onPressed: () {
                           _controller.create();
@@ -208,7 +209,7 @@ class _CommanderPageState extends State<CommanderPage>
                 );
               }),
             ),
-            SizedBox(height: Tools.PADDING * 2),
+            SizedBox(height: Tools.PADDING),
           ],
         ),
       ),

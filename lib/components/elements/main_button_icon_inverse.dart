@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lpr/components/tools/tools.dart';
 
-class MainButtonIcon extends StatelessWidget {
+class MainButtonIconInverse extends StatelessWidget {
   final IconData? icon;
   final Function onPressed;
   final Color color;
 
-  const MainButtonIcon({
+  const MainButtonIconInverse({
     super.key,
     required this.onPressed,
     this.icon = Icons.chevron_right,
-    this.color = MyColors.primary,
+    this.color = Colors.white,
   });
 
   @override
@@ -28,7 +28,7 @@ class MainButtonIcon extends StatelessWidget {
             padding: const EdgeInsets.all(Tools.PADDING / 2),
             decoration: BoxDecoration(color: color, boxShadow: [
               BoxShadow(
-                color: color.withOpacity(0.5),
+                color: Colors.grey,
                 blurRadius: 30,
                 offset: const Offset(0, 5),
               ),
@@ -36,7 +36,7 @@ class MainButtonIcon extends StatelessWidget {
             child: Icon(
               icon,
               size: 24,
-              color: MyColors.secondary,
+              color: MyColors.primary,
             ).animate().fade(duration: 500.ms).scale(),
           ),
         ),
