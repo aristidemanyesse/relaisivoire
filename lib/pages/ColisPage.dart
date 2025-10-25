@@ -32,27 +32,32 @@ class _ColisPageState extends State<ColisPage> {
   HandleTypesController controller = Get.find();
   GeneralController generalController = Get.find();
   ColisController colisController = Get.find();
-  bool en_attente = true;
+  Colis? colis;
+  bool enAttente = true;
   bool forMe = false;
 
   Timer? _timer;
   bool openned = false;
-  void startCheck() {
+  void startCheck() async {
     _timer?.cancel(); // 🔁 stoppe un ancien timer s’il existe
     _timer = Timer.periodic(Duration(seconds: 7), (Timer t) async {
       dynamic res = await widget.colis.checkStartPayement();
       if (res[0]) {
-        openned = true;
-        Get.bottomSheet(
-          HandlePayementPopup(colis: res[1]),
-          isDismissible: false,
-          enableDrag: false,
-        );
+        if (!openned) {
+          openned = true;
+          Get.bottomSheet(
+            HandlePayementPopup(colis: res[1]),
+            isDismissible: false,
+            enableDrag: false,
+          );
+        }
       } else {
         if (openned) {
+          Colis.searchByCode(widget.colis.code).then((value) {
+            Get.off(ColisPage(colis: value!));
+          });
           _timer?.cancel();
           Get.back();
-          Get.off(() => ColisPage(colis: widget.colis));
         }
       }
     });
@@ -64,7 +69,7 @@ class _ColisPageState extends State<ColisPage> {
     forMe =
         widget.colis.sender.target?.contact ==
         generalController.client.value?.contact;
-    en_attente = widget.colis.status.target!.level == StatusColis.EN_ATTENTE;
+    enAttente = widget.colis.status.target!.level == StatusColis.EN_ATTENTE;
     startCheck();
   }
 
@@ -82,6 +87,7 @@ class _ColisPageState extends State<ColisPage> {
 
   @override
   Widget build(BuildContext context) {
+    colis = widget.colis;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -112,7 +118,7 @@ class _ColisPageState extends State<ColisPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (forMe && widget.colis.sold)
+                        if (forMe && colis!.sold)
                           ListTile(
                             title: Text(
                               'Voir le réçu de payement',
@@ -145,7 +151,7 @@ class _ColisPageState extends State<ColisPage> {
                                 testCancel: "Non",
                                 functionOk: () async {
                                   Get.dialog(PleaseWait2());
-                                  bool res = await widget.colis.annuler();
+                                  bool res = await colis!.annuler();
                                   if (res) {
                                     colisController.reload();
                                     Get.offAll(ListeColisPage());
@@ -213,14 +219,14 @@ class _ColisPageState extends State<ColisPage> {
                                 child: Material(
                                   child: InkWell(
                                     onTap: () {
-                                      Get.to(OpenQRCode(colis: widget.colis));
+                                      Get.to(OpenQRCode(colis: colis!));
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(
                                         Tools.PADDING / 5,
                                       ),
                                       child: QrImageView(
-                                        data: widget.colis.code,
+                                        data: colis!.code,
                                         version: QrVersions.auto,
                                       ),
                                     ),
@@ -245,9 +251,9 @@ class _ColisPageState extends State<ColisPage> {
             ),
             const SizedBox(height: 30, child: Wave()),
             SizedBox(height: Tools.PADDING),
-            ColisCard(colis: widget.colis),
+            ColisCard(colis: colis!),
             SizedBox(height: Tools.PADDING * 2),
-            if (en_attente) ...{
+            if (enAttente) ...{
               if (!cutOff()) ...{
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: Tools.PADDING),
@@ -260,21 +266,21 @@ class _ColisPageState extends State<ColisPage> {
                   ),
                 ),
                 SizedBox(height: Tools.PADDING),
-              },
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MainButtonInverse(
-                      title: "Trouver un point relais",
-                      icon: Icons.location_on_sharp,
-                      onPressed: () {
-                        Get.to(SearchPointRelais());
-                      },
-                    ),
-                  ],
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MainButtonInverse(
+                        title: "Trouver un point relais",
+                        icon: Icons.location_on_sharp,
+                        onPressed: () {
+                          Get.to(SearchPointRelais());
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              },
             } else if (!forMe)
               MainButtonInverse(
                 title: "Me guider vers le point relais",

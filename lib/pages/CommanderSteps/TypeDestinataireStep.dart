@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get/get.dart';
+import 'package:relaisivoire/components/elements/main_button_inverse.dart';
 import 'package:relaisivoire/components/tools/tools.dart';
 import 'package:relaisivoire/components/widgets/TypeDestinataireBloc.dart';
 import 'package:relaisivoire/components/widgets/wave.dart';
@@ -8,11 +10,52 @@ import 'package:relaisivoire/controllers/CommandeProcessController.dart';
 import 'package:relaisivoire/controllers/HandleTypesController.dart';
 import 'package:relaisivoire/pages/FormulaireContactDestinataire.dart';
 
-class TypeDestinataireStep extends StatelessWidget {
+class TypeDestinataireStep extends StatefulWidget {
   TypeDestinataireStep({super.key});
 
+  @override
+  State<TypeDestinataireStep> createState() => _TypeDestinataireStepState();
+}
+
+class _TypeDestinataireStepState extends State<TypeDestinataireStep> {
   final CommandeProcessController _controller = Get.find();
+  final TextEditingController _nameController = TextEditingController(text: "");
+  final TextEditingController _contactController = TextEditingController(
+    text: "",
+  );
+
   final HandleTypesController handleTypesController = Get.find();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void pickContact() async {
+    if (await FlutterContacts.requestPermission()) {
+      final contact = await FlutterContacts.openExternalPick();
+      setState(() {
+        _nameController.text = contact?.displayName ?? "";
+        _contactController.text = contact?.phones.first.normalizedNumber ?? "";
+
+        if (contact != null) {
+          _controller.nomDestinataire.value = contact.displayName;
+          _controller.contactDestinataire.value =
+              contact.phones.first.normalizedNumber;
+
+          _controller.typeDestinataire.value = handleTypesController
+              .listeTypeDestinataires
+              .value
+              .firstWhere((element) => element.level == 2);
+        }
+      });
+    }
+  }
+
+  void getContact() async {
+    Get.dialog(FormulaireContactDestinataire(), barrierDismissible: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,44 +106,44 @@ class TypeDestinataireStep extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20, child: Wave()),
-        SizedBox(height: Tools.PADDING),
         Spacer(),
         Container(
-          height: 250,
           width: double.infinity,
+          height: Get.height * 0.4,
           padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             children: handleTypesController.listeTypeDestinataires.value.map((
               typeDestinataire,
             ) {
-              return TypeDestinataireBloc(type: typeDestinataire);
+              return GestureDetector(
+                onTap: () {
+                  if (typeDestinataire.level == 2) {
+                    pickContact();
+                  } else if (typeDestinataire.level == 3) {
+                    getContact();
+                  }
+                },
+                child: TypeDestinataireBloc(
+                  isCalled: typeDestinataire.level != 1,
+                  type: typeDestinataire,
+                ),
+              );
             }).toList(),
           ),
         ),
         Spacer(),
         Obx(() {
-          return Visibility(
-                visible: _controller.typeDestinataire.value?.level == 2,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Divider(),
-                    SizedBox(child: FormulaireContactDestinataire()),
-                  ],
-                ),
-              )
-              .animate()
-              .fadeIn(duration: 400.ms)
-              .moveY(duration: 400.ms, begin: -25.0, end: 0);
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(_controller.nomDestinataire.value),
+              Text(_controller.contactDestinataire.value),
+            ],
+          );
         }),
-        Obx(() {
-          return _controller.typeDestinataire.value?.level == 2
-              ? Spacer()
-              : Container();
-        }),
-        const SizedBox(height: Tools.PADDING),
+        Spacer(),
       ],
     );
   }

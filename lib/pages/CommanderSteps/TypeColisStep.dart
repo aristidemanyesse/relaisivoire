@@ -62,55 +62,69 @@ class TypeColisStep extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20, child: Wave()),
-        const SizedBox(height: Tools.PADDING),
+        SizedBox(height: Tools.PADDING),
         Expanded(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-            child: Obx(() {
-              return GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: Tools.PADDING * 1.5,
-                  crossAxisSpacing: Tools.PADDING,
-                ),
-                children: handleTypesController.listeTypeColis.value.map((
-                  typeColis,
-                ) {
-                  return TypeColisItem(type: typeColis);
-                }).toList(),
-              );
-            }),
+            child: GridView(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: Tools.PADDING,
+                crossAxisSpacing: Tools.PADDING,
+              ),
+              children: handleTypesController.listeTypeColis.value.map((
+                typeColis,
+              ) {
+                return TypeColisItem(type: typeColis);
+              }).toList(),
+            ),
           ),
         ),
+        const SizedBox(height: Tools.PADDING),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                " * Veuillez choisir le format le plus adapté à votre colis au risque que votre colis ne soit accepté par le point relais.",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: MyColors.danger,
-                  fontStyle: FontStyle.italic,
-                ),
+          child: Text(
+            " * Veuillez choisir le format le plus adapté à votre colis au risque que votre colis ne soit accepté par le point relais.",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: MyColors.danger,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
+        const SizedBox(height: Tools.PADDING / 2),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              Get.to(ProhibedPage());
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: MyColors.danger.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(5),
               ),
-              SizedBox(height: Tools.PADDING / 4),
-              GestureDetector(
-                onTap: () {
-                  Get.to(ProhibedPage());
-                },
-                child: Text(
-                  " * Voir la liste des produits prohibés",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.warning_amber_outlined,
+                    size: 20,
                     color: MyColors.danger,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
                   ),
-                ),
+                  Text(
+                    " Voir la liste des produits prohibés ",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: MyColors.danger,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ],

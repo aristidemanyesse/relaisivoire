@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relaisivoire/components/elements/main_button.dart';
+import 'package:relaisivoire/components/elements/main_button_icon_inverse.dart';
 import 'package:relaisivoire/components/elements/main_button_inverse.dart';
 import 'package:relaisivoire/components/tools/tools.dart';
 
@@ -89,11 +90,10 @@ class ConfirmDialog extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.transparent,
                         ),
-                        child: MainButton(
+                        child: MainButtonIconInverse(
                           onPressed: () {
                             functionCancel();
                           },
-                          title: "$testCancel",
                           icon: Icons.close,
                         ),
                       ),

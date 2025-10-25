@@ -6,8 +6,8 @@ import 'package:relaisivoire/models/ColisApp/TypeDestinataire.dart';
 
 class TypeDestinataireBloc extends StatelessWidget {
   final TypeDestinataire type;
-
-  TypeDestinataireBloc({super.key, required this.type});
+  final bool isCalled;
+  TypeDestinataireBloc({super.key, required this.type, this.isCalled = false});
 
   final CommandeProcessController _controller = Get.find();
 
@@ -20,9 +20,11 @@ class TypeDestinataireBloc extends StatelessWidget {
         color: Colors.transparent,
         child: Obx(() {
           return InkWell(
-            onTap: () {
-              _controller.typeDestinataire.value = type;
-            },
+            onTap: isCalled
+                ? null
+                : () {
+                    _controller.typeDestinataire.value = type;
+                  },
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: Tools.PADDING / 2,

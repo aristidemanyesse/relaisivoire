@@ -37,6 +37,7 @@ class EmballageBloc extends StatelessWidget {
                 _controller.typeEmballage.value = typeEmballage;
               },
               child: Container(
+                constraints: BoxConstraints(minHeight: 65),
                 padding: const EdgeInsets.symmetric(
                   horizontal: Tools.PADDING / 2,
                   vertical: Tools.PADDING / 2,
@@ -65,6 +66,7 @@ class EmballageBloc extends StatelessWidget {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             title,
