@@ -70,6 +70,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '592709019519',
     projectId: 'relais-ivoire',
     storageBucket: 'relais-ivoire.firebasestorage.app',
-    iosBundleId: 'com.example.lpr',
+    iosBundleId: 'com.relaisivoir.lpr',
   );
 }

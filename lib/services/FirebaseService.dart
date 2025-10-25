@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:lpr/services/NotificationService.dart';
+// import 'package:lpr/services/NotificationService.dart';
 
 class FirebaseService {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -33,11 +33,11 @@ class FirebaseService {
       if (message.notification != null) {
         Map<String, String> payload =
             message.data.map((key, value) => MapEntry(key, value.toString()));
-        NotificationService().showNotification(
-          title: '${message.notification!.title}',
-          message: "${message.notification!.body}",
-          payLoad: payload,
-        );
+        // NotificationService().showNotification(
+        //   title: '${message.notification!.title}',
+        //   message: "${message.notification!.body}",
+        //   payLoad: payload,
+        // );
       }
     });
   }
@@ -47,10 +47,10 @@ class FirebaseService {
     await Firebase.initializeApp();
     Map<String, String> payload =
         message.data.map((key, value) => MapEntry(key, value.toString()));
-    NotificationService().showNotification(
-      title: '${message.notification!.title}',
-      message: "${message.notification!.body}",
-      payLoad: payload,
-    );
+    // NotificationService().showNotification(
+    //   title: '${message.notification!.title}',
+    //   message: "${message.notification!.body}",
+    //   payLoad: payload,
+    // );
   }
 }

@@ -79,4 +79,4 @@
 #############################################
 # ✅ GÉNÉRÉ AUTOMATIQUEMENT
 #############################################
--keep class com.example.lprdeli.** { *; }  # Ton package Java
+-keep class com.relaisivoir.lprdeli.** { *; }  # Ton package Java

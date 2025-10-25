@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.lpr</string>
+	<string>com.relaisivoir.app</string>
 	<key>PROJECT_ID</key>
 	<string>relais-ivoire</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:592709019519:ios:5c0326b74a34ee9dfa9c4a</string>
+	<string>1:592709019519:ios:7061fb43627d0efafa9c4a</string>
 </dict>
 </plist>
