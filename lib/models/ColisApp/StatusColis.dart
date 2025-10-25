@@ -1,0 +1,49 @@
+import 'package:objectbox/objectbox.dart';
+import 'dart:convert' show utf8;
+
+@Entity()
+class StatusColis {
+  static const ANNULE = 1;
+  static const EN_ATTENTE = 2;
+  static const DEPOSE = 3;
+  static const ASSIGNATION = 4;
+  static const RECUPERATION = 5;
+  static const LIVRAISON = 6;
+  static const RETRAIT = 7;
+
+  int id = 0;
+
+  @Index()
+  String uid;
+
+  String libelle;
+  String description = "";
+  String color = "";
+  int level;
+
+  StatusColis({
+    this.uid = "",
+    required this.libelle,
+    required this.level,
+    this.description = "",
+    this.color = "",
+  });
+
+  factory StatusColis.fromJson(Map<String, dynamic> json) {
+    StatusColis status = StatusColis(
+      uid: json['id'],
+      libelle: json['libelle'],
+      level: json['level'],
+      description: json['description'],
+      color: json['color'],
+    );
+    return status;
+  }
+
+  Map<String, dynamic> toJson() => {
+        'libelle': libelle,
+        'level': level,
+        'description': description,
+        'color': color,
+      };
+}

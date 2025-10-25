@@ -1,0 +1,838 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5518771513760433252",
+      "lastPropertyId": "8:5218986931365160862",
+      "name": "Client",
+      "properties": [
+        {
+          "id": "1:9186364488723110502",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2875610646821227067",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "1:5245307889289555106"
+        },
+        {
+          "id": "3:3660305949257334503",
+          "name": "contact",
+          "type": 9
+        },
+        {
+          "id": "4:108084052903366684",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "5:3002779939758054398",
+          "name": "active",
+          "type": 1
+        },
+        {
+          "id": "6:4346612026937696375",
+          "name": "typeClientId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:8967728281504295153",
+          "relationTarget": "TypeClient"
+        },
+        {
+          "id": "7:7032582005422917576",
+          "name": "userId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "3:2336354479783538388",
+          "relationTarget": "CustomUser"
+        },
+        {
+          "id": "8:5218986931365160862",
+          "name": "palierId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:4003714850913850968",
+          "relationTarget": "PalierClient"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:4362593878124396942",
+          "name": "notifications",
+          "targetId": "5:1951383446368822470"
+        }
+      ]
+    },
+    {
+      "id": "2:3543005446155189019",
+      "lastPropertyId": "23:1931896030666739202",
+      "name": "Colis",
+      "properties": [
+        {
+          "id": "1:8661980573674310907",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:938160887724095996",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "5:3445501522734864135"
+        },
+        {
+          "id": "3:5729826661462420546",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "4:2490487003591671175",
+          "name": "receiverName",
+          "type": 9
+        },
+        {
+          "id": "5:8129364307271409881",
+          "name": "receiverPhone",
+          "type": 9
+        },
+        {
+          "id": "6:4819391443040149680",
+          "name": "total",
+          "type": 6
+        },
+        {
+          "id": "7:1232551263455015295",
+          "name": "senderId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "6:4291832831043614495",
+          "relationTarget": "Client"
+        },
+        {
+          "id": "8:3640045915888110745",
+          "name": "receiverId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "7:2222931194962019945",
+          "relationTarget": "Client"
+        },
+        {
+          "id": "9:6766421742162155855",
+          "name": "pointRelaisSenderId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "8:2726959951927083560",
+          "relationTarget": "PointRelais"
+        },
+        {
+          "id": "10:6122331589877278671",
+          "name": "pointRelaisReceiverId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "9:4542294666478747493",
+          "relationTarget": "PointRelais"
+        },
+        {
+          "id": "11:6301148791039575650",
+          "name": "typeColisId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "10:6776622867264763626",
+          "relationTarget": "TypeColis"
+        },
+        {
+          "id": "12:3894922596764913500",
+          "name": "typeEmballageId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "11:5937384142616592552",
+          "relationTarget": "TypeEmballage"
+        },
+        {
+          "id": "13:8041217857504485802",
+          "name": "typeDestinataireId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "12:8801557170822615330",
+          "relationTarget": "TypeDestinataire"
+        },
+        {
+          "id": "14:2071480972610544286",
+          "name": "statusId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "13:2807872355433489923",
+          "relationTarget": "StatusColis"
+        },
+        {
+          "id": "15:7778899611050487091",
+          "name": "dateCreation",
+          "type": 10
+        },
+        {
+          "id": "16:437991993152677718",
+          "name": "depotDate",
+          "type": 10
+        },
+        {
+          "id": "17:7982282030157446035",
+          "name": "recuperationDate",
+          "type": 10
+        },
+        {
+          "id": "18:3506877785330752144",
+          "name": "livraisonDate",
+          "type": 10
+        },
+        {
+          "id": "19:8411599506013840631",
+          "name": "retraitDate",
+          "type": 10
+        },
+        {
+          "id": "20:3313579533878786326",
+          "name": "sold",
+          "type": 1
+        },
+        {
+          "id": "22:5931844170898409852",
+          "name": "startToPayement",
+          "type": 1
+        },
+        {
+          "id": "23:1931896030666739202",
+          "name": "tax",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4992535986533297587",
+      "lastPropertyId": "3:1502124290931998554",
+      "name": "Commune",
+      "properties": [
+        {
+          "id": "1:7980700817362763664",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3078064505712908328",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "14:7101812368353549488"
+        },
+        {
+          "id": "3:1502124290931998554",
+          "name": "libelle",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:3437007084483648727",
+      "lastPropertyId": "4:1178120999567415230",
+      "name": "CustomUser",
+      "properties": [
+        {
+          "id": "1:1598687141462235503",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7073403030105897970",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "3:8697899709503104142",
+          "name": "lastName",
+          "type": 9
+        },
+        {
+          "id": "4:1178120999567415230",
+          "name": "fcmtoken",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:1951383446368822470",
+      "lastPropertyId": "7:3921310296109265394",
+      "name": "NotificationClient",
+      "properties": [
+        {
+          "id": "1:5351889466850277692",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4369461125528308041",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "15:4280499006352540613"
+        },
+        {
+          "id": "3:4787714140432165502",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:2234512909278112095",
+          "name": "read",
+          "type": 1
+        },
+        {
+          "id": "5:7539174481721758238",
+          "name": "message",
+          "type": 9
+        },
+        {
+          "id": "6:3917335003876633041",
+          "name": "priority",
+          "type": 1
+        },
+        {
+          "id": "7:3921310296109265394",
+          "name": "date_creation",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:25261470569710999",
+      "lastPropertyId": "5:281757582351663685",
+      "name": "PalierClient",
+      "properties": [
+        {
+          "id": "1:2639933439217612760",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3782462349004564333",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "16:7902688073560596718"
+        },
+        {
+          "id": "3:5279717264357062291",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:971439013872996953",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "5:281757582351663685",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:6970987695869343513",
+      "lastPropertyId": "9:4818371208172813927",
+      "name": "PointRelais",
+      "properties": [
+        {
+          "id": "1:6539481632965241056",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1702320748304105824",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "17:271197234340355534"
+        },
+        {
+          "id": "3:3801996390814348445",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:9120317290868995219",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "5:1880384771155734665",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "6:4218858410819805397",
+          "name": "latitude",
+          "type": 8
+        },
+        {
+          "id": "7:5931861662624371425",
+          "name": "longitude",
+          "type": 8
+        },
+        {
+          "id": "8:9060572880269633279",
+          "name": "typeId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "18:1469981824518002391",
+          "relationTarget": "TypePointRelais"
+        },
+        {
+          "id": "9:4818371208172813927",
+          "name": "communeId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "19:5165418151463275286",
+          "relationTarget": "Commune"
+        }
+      ],
+      "relations": [
+        {
+          "id": "2:193642714595025303",
+          "name": "services",
+          "targetId": "15:5172060657342811275"
+        },
+        {
+          "id": "3:2517163978363044878",
+          "name": "schedules",
+          "targetId": "8:2963682808090904853"
+        }
+      ]
+    },
+    {
+      "id": "8:2963682808090904853",
+      "lastPropertyId": "7:1406712626477052109",
+      "name": "Schedule",
+      "properties": [
+        {
+          "id": "1:7018933445435719359",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3817702474835878543",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "20:5947405641441282949"
+        },
+        {
+          "id": "3:2852929405550632496",
+          "name": "level_day",
+          "type": 6
+        },
+        {
+          "id": "4:7308239954928171679",
+          "name": "available",
+          "type": 1
+        },
+        {
+          "id": "5:2370905921784491829",
+          "name": "point_relaisId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "21:1264718184553367279",
+          "relationTarget": "PointRelais"
+        },
+        {
+          "id": "6:7998669130440192038",
+          "name": "startHour",
+          "type": 9
+        },
+        {
+          "id": "7:1406712626477052109",
+          "name": "endHour",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:8439786241858360762",
+      "lastPropertyId": "6:5548855459900953752",
+      "name": "StatusColis",
+      "properties": [
+        {
+          "id": "1:5107058979102204299",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3968829971953422838",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "22:3843760215456606924"
+        },
+        {
+          "id": "3:903947182572976791",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:7395840806617215544",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "5:458472111317189195",
+          "name": "color",
+          "type": 9
+        },
+        {
+          "id": "6:5548855459900953752",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:3089692671208744379",
+      "lastPropertyId": "4:7251628959274605606",
+      "name": "TypeClient",
+      "properties": [
+        {
+          "id": "1:4918872237823965691",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8566433462815727569",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "23:1590839508952707524"
+        },
+        {
+          "id": "3:4759817217067453952",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:7251628959274605606",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "11:7072311278531203013",
+      "lastPropertyId": "11:7325081203132247470",
+      "name": "TypeColis",
+      "properties": [
+        {
+          "id": "1:2988644549531870771",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4873311037540481756",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "24:4364206024413008605"
+        },
+        {
+          "id": "3:3844992426791797646",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:1292697485738997695",
+          "name": "level",
+          "type": 6
+        },
+        {
+          "id": "5:1897535432980255144",
+          "name": "icone",
+          "type": 9
+        },
+        {
+          "id": "6:3494015666377326949",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "7:8998903113228638593",
+          "name": "poids_min",
+          "type": 8
+        },
+        {
+          "id": "8:7994600289133079365",
+          "name": "poids_max",
+          "type": 8
+        },
+        {
+          "id": "9:968426915803892449",
+          "name": "price",
+          "type": 6
+        },
+        {
+          "id": "10:5560959173062560501",
+          "name": "emballageId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "25:2411599155623618619",
+          "relationTarget": "TypeEmballage"
+        },
+        {
+          "id": "11:7325081203132247470",
+          "name": "vehiculeId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "26:900745232223966810",
+          "relationTarget": "TypeVehicule"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "12:7883760003877131682",
+      "lastPropertyId": "5:929596019534864895",
+      "name": "TypeDestinataire",
+      "properties": [
+        {
+          "id": "1:4097401318073434771",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7773413216020354872",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "27:1411798440803324629"
+        },
+        {
+          "id": "3:8673003740915386777",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:4916146294514257567",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "5:929596019534864895",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "13:6291509022590950744",
+      "lastPropertyId": "5:8294897350387810440",
+      "name": "TypeEmballage",
+      "properties": [
+        {
+          "id": "1:6052891580703704615",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4887823237696537257",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "28:8628644023611341212"
+        },
+        {
+          "id": "3:3205198230620173017",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:8504604742699137845",
+          "name": "price",
+          "type": 6
+        },
+        {
+          "id": "5:8294897350387810440",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "14:8631890454663572794",
+      "lastPropertyId": "3:3677105239584672192",
+      "name": "TypePointRelais",
+      "properties": [
+        {
+          "id": "1:1422123930174755942",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3692334326746180256",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "29:3738412890561809686"
+        },
+        {
+          "id": "3:3677105239584672192",
+          "name": "libelle",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "15:5172060657342811275",
+      "lastPropertyId": "3:2368085543694315926",
+      "name": "TypeService",
+      "properties": [
+        {
+          "id": "1:6401604663223468196",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7865217358164780980",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "30:362561778898777772"
+        },
+        {
+          "id": "3:2368085543694315926",
+          "name": "libelle",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "16:7330747115985110482",
+      "lastPropertyId": "5:489780662833049686",
+      "name": "TypeVehicule",
+      "properties": [
+        {
+          "id": "1:3208100503313732416",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8191078175999151866",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "31:7633977393871195353"
+        },
+        {
+          "id": "3:3323057709637294836",
+          "name": "libelle",
+          "type": 9
+        },
+        {
+          "id": "4:7340424179110944503",
+          "name": "icone",
+          "type": 9
+        },
+        {
+          "id": "5:489780662833049686",
+          "name": "level",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "17:2245373676778400017",
+      "lastPropertyId": "6:8619847920771664955",
+      "name": "Payement",
+      "properties": [
+        {
+          "id": "1:8019725322044019270",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7130348484903628985",
+          "name": "uid",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "32:4836449319707649417"
+        },
+        {
+          "id": "3:3187111593233764187",
+          "name": "amount",
+          "type": 9
+        },
+        {
+          "id": "4:1795925647358747953",
+          "name": "transactionId",
+          "type": 9
+        },
+        {
+          "id": "5:9160323560417797936",
+          "name": "status",
+          "type": 1
+        },
+        {
+          "id": "6:8619847920771664955",
+          "name": "colisId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "33:178062921797425074",
+          "relationTarget": "Colis"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "17:2245373676778400017",
+  "lastIndexId": "33:178062921797425074",
+  "lastRelationId": "3:2517163978363044878",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    7792046605721729129
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

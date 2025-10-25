@@ -1,0 +1,41 @@
+import 'package:geolocator/geolocator.dart';
+
+class LocationService {
+  static const APIKEY = "AIzaSyBMmWvPPlLQ4axlvp2kVMM3Xu1XQPlYpm4";
+  static Future<Position?> getCurrentPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // 🔍 Vérifie si le service GPS est activé
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print("❌ GPS désactivé !");
+      return Geolocator.getLastKnownPosition(forceAndroidLocationManager: true);
+    }
+
+    // 🔐 Vérifie les permissions
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print("❌ Permission refusée !");
+        return Geolocator.getLastKnownPosition(
+          forceAndroidLocationManager: true,
+        );
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print("❌ Permission refusée définitivement !");
+      return Geolocator.getLastKnownPosition(forceAndroidLocationManager: true);
+    }
+
+    // ✅ Tout est bon, récupère la position
+    final LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 100,
+    );
+
+    return Geolocator.getCurrentPosition(locationSettings: locationSettings);
+  }
+}
