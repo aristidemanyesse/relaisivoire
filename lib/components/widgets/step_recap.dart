@@ -16,35 +16,17 @@ class StepRecap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: Tools.PADDING / 2),
+      margin: EdgeInsets.only(bottom: Tools.PADDING),
+      constraints: const BoxConstraints(minHeight: 30),
+      decoration: BoxDecoration(
+        border: Border(
+          left: BorderSide(color: MyColors.primary.withOpacity(0.5), width: 3),
+        ),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 16,
-                width: 16,
-                decoration: BoxDecoration(
-                  color: MyColors.primary.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-              SizedBox(
-                width: 16,
-                child: Center(
-                  child: Container(
-                    height: 45,
-                    width: 2,
-                    color: MyColors.primary.withOpacity(0.5),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(width: Tools.PADDING),
+          const SizedBox(width: Tools.PADDING / 2),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -56,13 +38,13 @@ class StepRecap extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(
                     context,
-                  ).textTheme.bodyMedium!.copyWith(fontStyle: FontStyle.italic),
+                  ).textTheme.bodySmall!.copyWith(fontStyle: FontStyle.italic),
                 ),
                 Text(
                   subtitle,
                   style: Theme.of(
                     context,
-                  ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
+                  ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
                 ),
                 if (subtitle2 != null)
                   Text(

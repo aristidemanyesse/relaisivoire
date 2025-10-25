@@ -1,4 +1,3 @@
-import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kkiapay_flutter_sdk/kkiapay_flutter_sdk.dart';

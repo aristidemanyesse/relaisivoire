@@ -58,8 +58,7 @@ class _RecapitulatifStepState extends State<RecapitulatifStep> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "On fait une dernière vérification",
-                    textAlign: TextAlign.center,
+                    "une dernière vérification...",
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: MyColors.secondary,
                       fontWeight: FontWeight.bold,
@@ -77,7 +76,7 @@ class _RecapitulatifStepState extends State<RecapitulatifStep> {
           ),
         ),
         const SizedBox(height: 20, child: Wave()),
-        SizedBox(height: Tools.PADDING),
+        SizedBox(height: Tools.PADDING * 2),
         Expanded(
           child: Container(
             width: double.infinity,
@@ -117,8 +116,7 @@ class _RecapitulatifStepState extends State<RecapitulatifStep> {
                 StepRecap(
                   title: "Total à payer au dépôt",
                   subtitle: "${_controller.price.value} Fcfa",
-                  subtitle2:
-                      "* Ce montant est estimé, le montant final sera calculé au dépôt du colis",
+                  subtitle2: "*Ce montant peut changer au dépôt du colis",
                 ),
               ],
             ),

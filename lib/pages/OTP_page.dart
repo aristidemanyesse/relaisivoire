@@ -75,12 +75,6 @@ class _OPTPageState extends State<OPTPage> {
         });
   }
 
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
   void _startTimer() {
     _isButtonDisabled = true;
     _counter = 30;
@@ -193,14 +187,17 @@ class _OPTPageState extends State<OPTPage> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Tools.PADDING * 2,
+                ),
                 decoration: const BoxDecoration(
                   color: MyColors.secondary,
                   border: Border(top: BorderSide.none),
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(height: Tools.PADDING),
+                    const SizedBox(height: Tools.PADDING / 3),
+                    const Spacer(),
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Tools.PADDING,
@@ -210,16 +207,38 @@ class _OPTPageState extends State<OPTPage> {
                         return MyInputNumber(nbPlaces: 6, value: _otp);
                       }),
                     ),
-                    const SizedBox(height: Tools.PADDING),
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: Tools.PADDING * 1.5,
+                    const Spacer(),
+                    KeyBoardNumberPad(limit: 6),
+                    const Spacer(),
+                    if (_isButtonDisabled)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Renvoyer le code dans ",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          Text(
+                            "$_counter s",
+                            style: Theme.of(context).textTheme.bodyLarge!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
+                    else
+                      TextButton(
+                        onPressed: _isButtonDisabled
+                            ? null
+                            : () {
+                                _resendOtp(signature);
+                              },
+                        child: Text(
+                          "Renvoyer le code OTP",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
-                        child: KeyBoardNumberPad(limit: 6),
                       ),
-                    ),
-                    const SizedBox(height: Tools.PADDING),
+                    const Spacer(),
                     Obx(() {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

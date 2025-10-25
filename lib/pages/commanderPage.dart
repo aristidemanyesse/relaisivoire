@@ -54,87 +54,95 @@ class _CommanderPageState extends State<CommanderPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            if (_currentPageIndex > 0) {
-              _pageController.previousPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeOut,
-              );
-            } else {
-              Get.dialog(
-                ConfirmDialog(
-                  title: "😩😟 Hhmmm !",
-                  message:
-                      "En quittant cette page, vous allez perdre le processus de validation du relais.",
-                  testOk: "Oui",
-                  testCancel: "Non, je reste",
-                  functionOk: () {
-                    _controller.onInit();
-                    Get.off(ListeColisPage());
-                  },
-                  functionCancel: () {
-                    Get.back();
-                  },
-                ),
-              );
-            }
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-        title: Container(
-          padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
-          decoration: const BoxDecoration(color: MyColors.primary),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.vertical_split_sharp, size: 20),
-                  Spacer(),
-                  Icon(Icons.check, size: 20),
-                ],
-              ),
-              SizedBox(height: 3),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 10,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: MyColors.secondary.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
+        leading: Container(),
+        actions: [
+          TextButton(
+            child: Text(
+              "Annuler",
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge!.copyWith(color: Colors.white),
+            ),
+            onPressed: () {
+              if (_currentPageIndex > 0) {
+                _pageController.previousPage(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                );
+              } else {
+                Get.dialog(
+                  ConfirmDialog(
+                    title: "😩😟 Hhmmm !",
+                    message:
+                        "En quittant cette page, vous allez perdre le processus de validation du relais.",
+                    testOk: "Oui",
+                    testCancel: "Non, je reste",
+                    functionOk: () {
+                      _controller.onInit();
+                      Get.off(ListeColisPage());
+                    },
+                    functionCancel: () {
+                      Get.back();
+                    },
                   ),
-                  Row(
-                    children: [
-                      if (_currentPageIndex > 0)
-                        Expanded(
-                          flex: _currentPageIndex,
-                          child: Container(
-                            height: 9,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: MyColors.secondary,
-                                width: 0.5,
-                              ),
-                              color: MyColors.primary.withOpacity(0.9),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                        ).animate().moveX(duration: 400.ms),
-                      SizedBox(width: 3),
-                      Icon(Icons.inventory, size: 20),
-                      if (_currentPageIndex != pages.length)
-                        Spacer(flex: pages.length - _currentPageIndex),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                );
+              }
+            },
           ),
-        ),
+        ],
+        // title: Container(
+        //   padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING * 2),
+        //   decoration: const BoxDecoration(color: MyColors.primary),
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Row(
+        //         children: [
+        //           Icon(Icons.vertical_split_sharp, size: 20),
+        //           Spacer(),
+        //           Icon(Icons.check, size: 20),
+        //         ],
+        //       ),
+        //       SizedBox(height: 3),
+        //       Stack(
+        //         alignment: Alignment.center,
+        //         children: [
+        //           Container(
+        //             height: 10,
+        //             width: double.infinity,
+        //             decoration: BoxDecoration(
+        //               color: MyColors.secondary.withOpacity(0.7),
+        //               borderRadius: BorderRadius.circular(100),
+        //             ),
+        //           ),
+        //           Row(
+        //             children: [
+        //               if (_currentPageIndex > 0)
+        //                 Expanded(
+        //                   flex: _currentPageIndex,
+        //                   child: Container(
+        //                     height: 9,
+        //                     decoration: BoxDecoration(
+        //                       border: Border.all(
+        //                         color: MyColors.secondary,
+        //                         width: 0.5,
+        //                       ),
+        //                       color: MyColors.primary.withOpacity(0.9),
+        //                       borderRadius: BorderRadius.circular(100),
+        //                     ),
+        //                   ),
+        //                 ).animate().moveX(duration: 400.ms),
+        //               SizedBox(width: 3),
+        //               Icon(Icons.inventory, size: 20),
+        //               if (_currentPageIndex != pages.length)
+        //                 Spacer(flex: pages.length - _currentPageIndex),
+        //             ],
+        //           ),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
       body: Container(
         height: Get.size.height,

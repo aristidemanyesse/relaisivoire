@@ -41,7 +41,6 @@ class TypeDestinataireBloc extends StatelessWidget {
                 ),
               ),
               width: double.infinity,
-              height: 65,
               child: Row(
                 children: [
                   Icon(
