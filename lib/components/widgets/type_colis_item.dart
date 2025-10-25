@@ -69,18 +69,18 @@ class TypeColisItem extends StatelessWidget {
                     ),
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: Tools.PADDING / 2),
                       Text(type.icone, style: TextStyle(fontSize: 50)),
                       Text(
                         type.libelle,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.bold,
+                          fontSize: 11,
                         ),
                       ),
+                      SizedBox(height: Tools.PADDING / 3),
                     ],
                   ),
                 ],

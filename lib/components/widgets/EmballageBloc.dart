@@ -39,17 +39,19 @@ class EmballageBloc extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: Tools.PADDING / 2,
-                  vertical: Tools.PADDING / 4,
+                  vertical: Tools.PADDING / 2,
                 ),
                 decoration: BoxDecoration(
                   color: _controller.typeEmballage.value == typeEmballage
                       ? MyColors.primary
                       : MyColors.secondary.withAlpha(200),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(width: 0.5),
+                  border: Border.all(
+                    width: 0.5,
+                    color: MyColors.primary.withOpacity(0.6),
+                  ),
                 ),
                 width: double.infinity,
-                height: 65,
                 child: Row(
                   children: [
                     Icon(

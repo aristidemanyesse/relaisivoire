@@ -1,5 +1,8 @@
 import Flutter
 import UIKit
+import GoogleMaps
+import Firebase
+import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -7,7 +10,16 @@ import UIKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+
+    GMSServices.provideAPIKey("AIzaSyBMmWvPPlLQ4axlvp2kVMM3Xu1XQPlYpm4")
     GeneratedPluginRegistrant.register(with: self)
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+
+   // Recevoir le device token pour APNS
+  override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+      Messaging.messaging().apnsToken = deviceToken
+  }
+  
 }

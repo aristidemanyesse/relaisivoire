@@ -66,7 +66,7 @@ class TypeDestinataireStep extends StatelessWidget {
         SizedBox(height: Tools.PADDING),
         Spacer(),
         Container(
-          height: 200,
+          height: 250,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: Tools.PADDING),
           child: Column(

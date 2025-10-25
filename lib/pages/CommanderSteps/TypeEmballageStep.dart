@@ -40,7 +40,7 @@ class Commander3 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Votre colis est-il bien emballé ?",
+                    "Le colis est-il bien emballé ?",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: MyColors.secondary,
@@ -79,7 +79,7 @@ class Commander3 extends StatelessWidget {
               EmballageBloc(
                 id: "2",
                 title: "Euuh, pas vraiment ...",
-                subtitle: "C'est pas vraiment emballé, juste le colis.",
+                subtitle: "Non pas emballé, juste le colis.",
                 icon: Icons.layers_outlined,
                 typeEmballage:
                     handleTypesController.listeTypeEmballages.value[1],
