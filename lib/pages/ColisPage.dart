@@ -252,7 +252,7 @@ class _ColisPageState extends State<ColisPage> {
             const SizedBox(height: 30, child: Wave()),
             SizedBox(height: Tools.PADDING),
             ColisCard(colis: colis!),
-            SizedBox(height: Tools.PADDING * 2),
+            SizedBox(height: Tools.PADDING),
             if (enAttente) ...{
               if (!cutOff()) ...{
                 Container(
@@ -266,21 +266,21 @@ class _ColisPageState extends State<ColisPage> {
                   ),
                 ),
                 SizedBox(height: Tools.PADDING),
-                SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      MainButtonInverse(
-                        title: "Trouver un point relais",
-                        icon: Icons.location_on_sharp,
-                        onPressed: () {
-                          Get.to(SearchPointRelais());
-                        },
-                      ),
-                    ],
-                  ),
-                ),
               },
+              SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MainButtonInverse(
+                      title: "Trouver un point relais",
+                      icon: Icons.location_on_sharp,
+                      onPressed: () {
+                        Get.to(SearchPointRelais());
+                      },
+                    ),
+                  ],
+                ),
+              ),
             } else if (!forMe)
               MainButtonInverse(
                 title: "Me guider vers le point relais",
@@ -289,7 +289,7 @@ class _ColisPageState extends State<ColisPage> {
                   // Get.to(SearchLPR());
                 },
               ),
-            SizedBox(height: Tools.PADDING * 2),
+            SizedBox(height: Tools.PADDING),
           ],
         ),
       ),

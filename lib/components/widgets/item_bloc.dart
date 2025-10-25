@@ -67,8 +67,8 @@ class _ItemBlocState extends State<ItemBloc> {
             decoration: BoxDecoration(
               color: MyColors.secondary.withAlpha(200),
               border: Border.all(
-                width: 0.5,
-                color: MyColors.textprimary.withOpacity(0.6),
+                width: 0.2,
+                color: MyColors.textprimary.withOpacity(0.3),
               ),
             ),
             width: double.infinity,
