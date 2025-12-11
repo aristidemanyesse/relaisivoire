@@ -74,6 +74,7 @@ class TypeColisItem extends StatelessWidget {
                       ),
                       Text(type.libelle,
                           textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!

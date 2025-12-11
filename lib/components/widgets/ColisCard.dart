@@ -79,18 +79,19 @@ class _ColisCardState extends State<ColisCard> {
                       SizedBox(height: Tools.PADDING / 4),
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: Tools.PADDING / 2,
+                            horizontal: Tools.PADDING / 4,
                             vertical: Tools.PADDING / 8),
                         decoration: BoxDecoration(
                           color: color,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                         child: Text(
                             widget.colis.status.target?.description ?? "...",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium!
+                                .bodySmall!
                                 .copyWith(
+                                    fontSize: 11,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white)),
                       ),

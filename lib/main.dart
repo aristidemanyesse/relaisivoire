@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lpr/components/tools/AppTheme.dart';
 import 'package:lpr/controllers/ColisController.dart';
@@ -33,6 +34,18 @@ void main() async {
   Get.put(ColisController());
   Get.put(NotificationController());
   Get.put(CommandeProcessController());
+
+  // ⚡ Activer l'affichage bord à bord
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+  // Définir les couleurs transparentes pour le bord à bord
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
 
   // Vérifie si l'app a été lancée via une notification
   // ReceivedAction? initialAction = await AwesomeNotifications()

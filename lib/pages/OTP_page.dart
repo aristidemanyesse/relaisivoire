@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -43,14 +44,14 @@ class _OPTPageState extends State<OPTPage> {
   void initState() {
     super.initState();
 
-    _otpInteractor = OTPInteractor();
-    // Commence à écouter les SMS entrants
-    _otpInteractor.getAppSignature().then((value) {
-      setState(() {
-        signature = value ?? "";
-        _resendOtp(signature);
+    if (Platform.isAndroid) {
+      _otpInteractor = OTPInteractor();
+      _otpInteractor.getAppSignature().then((value) {
+        _resendOtp(value ?? "");
       });
-    });
+    } else {
+      _resendOtp("");
+    }
 
     controller = OTPTextEditController(
       codeLength: 6,
@@ -210,7 +211,7 @@ class _OPTPageState extends State<OPTPage> {
                                 }),
                             if (keyBoardController.value.value.length == 6)
                               MainButtonInverse(
-                                  title: "Confirmer OTP",
+                                  title: "Confirmer",
                                   icon: Icons.check,
                                   onPressed: () {
                                     checkOtp();

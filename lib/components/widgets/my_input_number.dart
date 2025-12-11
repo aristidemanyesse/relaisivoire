@@ -13,11 +13,11 @@ class MyInputNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(
-          Icons.phone_android,
-          size: 30,
-        ),
-        const SizedBox(width: Tools.PADDING),
+        // const Icon(
+        //   Icons.phone_android,
+        //   size: 30,
+        // ),
+        // const SizedBox(width: Tools.PADDING / 2),
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -25,7 +25,7 @@ class MyInputNumber extends StatelessWidget {
               if (index <= value.length - 1) {
                 if (tab.contains(index)) {
                   return Container(
-                      padding: const EdgeInsets.only(left: Tools.PADDING / 2),
+                      padding: const EdgeInsets.only(left: Tools.PADDING / 4),
                       child: Text(value[index],
                           style: Theme.of(context).textTheme.displayLarge));
                 } else {
@@ -35,7 +35,7 @@ class MyInputNumber extends StatelessWidget {
               } else {
                 if (tab.contains(index)) {
                   return Container(
-                    padding: const EdgeInsets.only(left: Tools.PADDING / 2),
+                    padding: const EdgeInsets.only(left: Tools.PADDING / 4),
                     child: Text("_",
                         style: Theme.of(context).textTheme.displayLarge),
                   );

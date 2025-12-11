@@ -146,6 +146,7 @@ class _LoginNumberState extends State<LoginNumber> {
                                     functionOk: () async {
                                       bool response =
                                           await CustomUser.connexion(_number);
+                                      print(response);
                                       if (!response) {
                                         await Client.inscription(_number);
                                       }

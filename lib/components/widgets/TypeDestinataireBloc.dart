@@ -37,7 +37,7 @@ class TypeDestinataireBloc extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(width: 0.5)),
               width: double.infinity,
-              height: 65,
+              constraints: BoxConstraints(minHeight: 65),
               child: Row(
                 children: [
                   Icon(type.level == 1 ? Icons.person : Icons.person_2_outlined,
