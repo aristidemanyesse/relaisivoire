@@ -1,0 +1,2 @@
+/Users/aristidemanyesse/Documents/Personal/ArchitectureLPR/lpr/android/app/.cxx/RelWithDebInfo/3cs1t4a1/x86/CMakeFiles/edit_cache.dir
+/Users/aristidemanyesse/Documents/Personal/ArchitectureLPR/lpr/android/app/.cxx/RelWithDebInfo/3cs1t4a1/x86/CMakeFiles/rebuild_cache.dir
